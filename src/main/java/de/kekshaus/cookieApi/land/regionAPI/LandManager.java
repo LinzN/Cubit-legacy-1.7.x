@@ -25,7 +25,7 @@ public class LandManager {
 		this.plugin = plugin;
 	}
 
-	public boolean isRegion(World world, int valueX, int valueZ) {
+	public boolean isRegion(final World world, final int valueX, final int valueZ) {
 		List<String> types = getRegionTypes();
 		RegionManager manager = plugin.getWorldGuardPlugin().getRegionManager(world);
 
@@ -79,7 +79,7 @@ public class LandManager {
 		return list;
 	}
 
-	public String buildRegionName(String type, int valueX, int valueZ) {
+	public String buildRegionName(final String type, final int valueX, final int valueZ) {
 		return type.toLowerCase() + "_" + valueX + "_" + valueZ;
 	}
 }
