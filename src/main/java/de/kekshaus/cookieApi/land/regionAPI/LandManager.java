@@ -25,12 +25,12 @@ public class LandManager {
 		this.plugin = plugin;
 	}
 
-	public boolean isRegion(final World world, final int valueX, final int valueZ) {
-		List<String> types = getRegionTypes();
+	public boolean isLand(final World world, final int valueX, final int valueZ) {
+		List<String> types = getLandTypes();
 		RegionManager manager = plugin.getWorldGuardPlugin().getRegionManager(world);
 
 		for (String name : types) {
-			String regionName = buildRegionName(name, valueX, valueZ);
+			String regionName = buildLandName(name, valueX, valueZ);
 			if (manager.hasRegion(regionName)) {
 				return true;
 			}
@@ -38,12 +38,12 @@ public class LandManager {
 		return false;
 	}
 
-	public boolean newCubitLand(final Location loc, final Player player) {
+	public boolean newLand(final Location loc, final Player player) {
 		try {
 			int chunkX = loc.getChunk().getX();
 			int chunkZ = loc.getChunk().getZ();
 			World world = loc.getWorld();
-			String regionName = buildRegionName(world.getName(), chunkX, chunkZ);
+			String regionName = buildLandName(world.getName(), chunkX, chunkZ);
 			ProtectedRegion region = CookieRegion.newRegion(chunkX, chunkZ, world, player, regionName);
 			region = LockPacket.activateData(region);
 			region = MobPacket.activateData(region);
@@ -59,7 +59,7 @@ public class LandManager {
 
 	}
 
-	public boolean removeCubitLand(final ProtectedRegion region, final World world, final Player player) {
+	public boolean removeLand(final ProtectedRegion region, final World world, final Player player) {
 		try {
 			CookieRegion.removeRegion(region, world);
 			new SaveManager(null, world);
@@ -70,7 +70,7 @@ public class LandManager {
 		return true;
 	}
 
-	private List<String> getRegionTypes() {
+	private List<String> getLandTypes() {
 		List<String> list = new ArrayList<String>();
 		list.add("server");
 		for (World world : plugin.getServer().getWorlds()) {
@@ -79,7 +79,7 @@ public class LandManager {
 		return list;
 	}
 
-	public String buildRegionName(final String type, final int valueX, final int valueZ) {
+	public String buildLandName(final String type, final int valueX, final int valueZ) {
 		return type.toLowerCase() + "_" + valueX + "_" + valueZ;
 	}
 }
