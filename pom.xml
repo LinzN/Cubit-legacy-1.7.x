@@ -6,25 +6,78 @@
     <packaging>jar</packaging>
     <name>cookieApiLand</name>
 
-	<repositories>
+<repositories>
+  <repository>
+    <id>sk89q-snapshots</id>
+    <url>http://maven.sk89q.com/artifactory/repo</url>
+    <releases>
+      <enabled>true</enabled> <!-- releases enabled: this specific repository also hosts release versions -->
+    </releases>
+    <snapshots>
+      <enabled>true</enabled> <!-- snapshots enabled: we declare a SNAPSHOT repository because we need to download a SNAPSHOT dependency -->
+    </snapshots>
+  </repository>
       <repository>
         <id>spigot-repo</id>
         <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-      </repository>
-	</repositories>
-    <dependencies>
+    </repository>
+    <repository>
+	<id>vault-repo</id>
+	<url>http://nexus.theyeticave.net/content/repositories/pub_releases</url>
+</repository>
+</repositories>
+
+  <dependencies>
+<dependency>
+  <groupId>com.sk89q.worldedit</groupId>
+  <artifactId>worldedit-bukkit</artifactId>
+  <version>6.1.1-SNAPSHOT</version>
+  <exclusions>
+  	<exclusion>
+  		<artifactId>bukkit</artifactId>
+  		<groupId>org.bukkit</groupId>
+  	</exclusion>
+  	<exclusion>
+  		<artifactId>bukkit-classloader-check</artifactId>
+  		<groupId>org.sk89q.bukkit</groupId>
+  	</exclusion>
+  </exclusions>
+</dependency>
+    <dependency>
+        <groupId>com.sk89q</groupId>
+        <artifactId>worldguard</artifactId>
+        <version>6.1.1-SNAPSHOT</version>
+        <exclusions>
+        	<exclusion>
+        		<artifactId>bukkit</artifactId>
+        		<groupId>org.bukkit</groupId>
+        	</exclusion>
+        </exclusions>
+    </dependency>
     <!--Spigot API-->
-    	<dependency>
+    <dependency>
            <groupId>org.spigotmc</groupId>
            <artifactId>spigot-api</artifactId>
            <version>1.9.2-R0.1-SNAPSHOT</version>
-    	</dependency>
-        <dependency>
-        	<groupId>de.kekshaus</groupId>
-        	<artifactId>CookieSocket-Official</artifactId>
-        	<version>0.5.0</version>
-        </dependency>
-    </dependencies>
+    </dependency>
+    <!--Bukkit API-->
+	<dependency>
+		<groupId>net.milkbowl.vault</groupId>
+		<artifactId>VaultAPI</artifactId>
+		<version>1.6</version>
+		<exclusions>
+			<exclusion>
+				<artifactId>bukkit</artifactId>
+				<groupId>org.bukkit</groupId>
+			</exclusion>
+		</exclusions>
+	</dependency>
+	<dependency>
+		<groupId>de.cookieapi</groupId>
+		<artifactId>cookieApiBukkit</artifactId>
+		<version>1.1.2</version>
+	</dependency>
+  </dependencies>
     <build>
         <finalName>${project.name}</finalName>
         <resources>

@@ -1,43 +1,7 @@
-name: cookieApiBukkit
-main : de.kekshaus.cookieApi.bukkit.CookieApiBukkit
+name: cookieApiLand
+main : de.kekshaus.cookieApi.land.Landplugin
 version: ${project.version}.b${build.number}
-description: cookieApi for BungeeCord
+description: Landplugin
 author: Kekshaus
 load: POSTWORLD
-commands:
-  capi:
-    description: Suit command
-permissions:
-    cookieApi.team:
-        description: Alle User Permissions
-        children:
-            cookieApi.ban.team: true
-            cookieApi.home.team: true
-            cookieApi.warp.team: true
-            cookieApi.teleport.team: true
-            cookieApi.portal.team: true
-            cookieApi.chat.team: true
-            cookieApi.guild.team: true
-            cookieApi.bypass: true
-            cookieApi.ban.notifyinfo: true
-            cookieApi.api.command: true
-    cookieApi.user:
-        description: Alle User Permissions
-        children:
-            cookieApi.ban.user: true
-            cookieApi.home.user: true
-            cookieApi.warp.user: true
-            cookieApi.teleport.user: true
-            cookieApi.portal.user: true
-            cookieApi.chat.user: true
-            cookieApi.api.command:: true
-
-    cookieApi.bypass:
-        description: Bypass permission
-        default: op
-    cookieApi.ban.notifyinfo:
-        description: Baninfo permission
-        default: op
-    cookieApi.api.command:
-        description: Baninfo permission
-        default: op
+depend: [cookieApiBukkit]
