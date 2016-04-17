@@ -7,6 +7,7 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import de.kekshaus.cookieApi.land.blockAPI.BlockManager;
 import de.kekshaus.cookieApi.land.particleAPI.ParticleManager;
 import de.kekshaus.cookieApi.land.regionAPI.LandManager;
+import de.kekshaus.cookieApi.land.sqlAPI.SqlManager;
 
 public class Landplugin extends JavaPlugin {
 
@@ -15,16 +16,22 @@ public class Landplugin extends JavaPlugin {
 	private LandManager landMrg;
 	private BlockManager blockMrg;
 	private ParticleManager particleMrg;
+	private SqlManager sqlMrg;
 
 	public void onEnable() {
 		inst = this;
 		wgPl = WorldGuardPlugin.inst();
-		landMrg = new LandManager(this);
-		blockMrg = new BlockManager(this);
-		particleMrg = new ParticleManager(this);
+		setupManagers();
 	}
 
 	public void onDisable() {
+	}
+
+	private void setupManagers() {
+		sqlMrg = new SqlManager(this);
+		landMrg = new LandManager(this);
+		blockMrg = new BlockManager(this);
+		particleMrg = new ParticleManager(this);
 	}
 
 	public static Landplugin inst() {
@@ -41,6 +48,10 @@ public class Landplugin extends JavaPlugin {
 
 	public ParticleManager getParticleManager() {
 		return particleMrg;
+	}
+
+	public SqlManager getSqlManager() {
+		return sqlMrg;
 	}
 
 	public WorldGuardPlugin getWorldGuardPlugin() {

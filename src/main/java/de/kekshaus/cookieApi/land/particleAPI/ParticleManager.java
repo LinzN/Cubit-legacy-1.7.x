@@ -5,7 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import de.kekshaus.cookieApi.land.Landplugin;
-import de.kekshaus.cookieApi.land.particleAPI.chunk.SendParticle;
+import de.kekshaus.cookieApi.land.particleAPI.border.SendParticle;
 
 public class ParticleManager {
 
@@ -18,6 +18,16 @@ public class ParticleManager {
 	public boolean sendDefaultPaticle(Player player, Location loc) {
 		try {
 			new SendParticle(plugin, player, loc, null, Effect.FIREWORKS_SPARK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	public boolean sendCustomPaticle(Player player, Location loc, Effect primaryEffect, Effect secondaryEffect) {
+		try {
+			new SendParticle(plugin, player, loc, primaryEffect, secondaryEffect);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;

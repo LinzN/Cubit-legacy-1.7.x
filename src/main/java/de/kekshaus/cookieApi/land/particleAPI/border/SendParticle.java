@@ -1,4 +1,4 @@
-package de.kekshaus.cookieApi.land.particleAPI.chunk;
+package de.kekshaus.cookieApi.land.particleAPI.border;
 
 import java.util.ArrayList;
 
