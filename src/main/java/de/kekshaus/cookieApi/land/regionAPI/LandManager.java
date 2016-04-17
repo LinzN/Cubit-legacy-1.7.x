@@ -43,7 +43,7 @@ public class LandManager {
 			int chunkX = loc.getChunk().getX();
 			int chunkZ = loc.getChunk().getZ();
 			World world = loc.getWorld();
-			String regionName = "";
+			String regionName = buildRegionName(world.getName(), chunkX, chunkZ);
 			ProtectedRegion region = CookieRegion.newRegion(chunkX, chunkZ, world, player, regionName);
 			region = LockPacket.activateData(region);
 			region = MobPacket.activateData(region);
