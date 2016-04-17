@@ -22,6 +22,9 @@ public class Landplugin extends JavaPlugin {
 		inst = this;
 		wgPl = WorldGuardPlugin.inst();
 		setupManagers();
+		if (!sqlMrg.link()) {
+			this.setEnabled(false);
+		}
 	}
 
 	public void onDisable() {
