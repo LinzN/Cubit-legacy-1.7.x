@@ -1,0 +1,27 @@
+plugin:
+#Bungeecord Servername
+  servername: lobby
+  # Warmuptime in seconds
+  warmuptime: 2
+#Disabled worlds for /back
+  disabled-worlds: []
+  
+##########################################
+##############Database module#############
+##########################################
+
+  # MySQL-connection for homes.
+sql:
+  host: localhost
+  port: 3306
+  database: database
+  username: username
+  password: password
+  debugmode: false
+  
+p2p:
+  ip: 0.0.0.0
+  port: 2222
+  castport: 6789
+  castip: 224.0.0.1
+
