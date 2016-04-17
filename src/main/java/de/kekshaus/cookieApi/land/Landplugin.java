@@ -2,6 +2,7 @@ package de.kekshaus.cookieApi.land;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 import de.kekshaus.cookieApi.land.blockAPI.BlockManager;
@@ -13,6 +14,7 @@ public class Landplugin extends JavaPlugin {
 
 	private static Landplugin inst;
 	private WorldGuardPlugin wgPl;
+	private WorldEdit wePl;
 	private LandManager landMrg;
 	private BlockManager blockMrg;
 	private ParticleManager particleMrg;
@@ -21,6 +23,7 @@ public class Landplugin extends JavaPlugin {
 	public void onEnable() {
 		inst = this;
 		wgPl = WorldGuardPlugin.inst();
+		wePl = WorldEdit.getInstance();
 		setupManagers();
 		if (!sqlMrg.link()) {
 			this.setEnabled(false);
@@ -59,6 +62,10 @@ public class Landplugin extends JavaPlugin {
 
 	public WorldGuardPlugin getWorldGuardPlugin() {
 		return this.wgPl;
+	}
+
+	public WorldEdit getWorldEdit() {
+		return this.wePl;
 	}
 
 }
