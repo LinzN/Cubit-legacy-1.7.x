@@ -11,9 +11,8 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 public class MobPacket {
 
 	@SuppressWarnings("serial")
-	public static ProtectedRegion updateData(ProtectedRegion region) {
+	public static ProtectedRegion activateData(ProtectedRegion region) {
 		region.setFlag(DefaultFlag.MOB_DAMAGE, StateFlag.State.DENY);
-		region.setFlag(DefaultFlag.MOB_SPAWNING, StateFlag.State.ALLOW);
 		region.getFlags().put(DefaultFlag.DENY_SPAWN, new HashSet<EntityType>() {
 			{
 				add(EntityType.CREEPER);
@@ -30,6 +29,18 @@ public class MobPacket {
 				add(EntityType.WITCH);
 				add(EntityType.ENDERMITE);
 				add(EntityType.GUARDIAN);
+
+			}
+		});
+		return region;
+
+	}
+
+	@SuppressWarnings("serial")
+	public static ProtectedRegion deactivateData(ProtectedRegion region) {
+		region.setFlag(DefaultFlag.MOB_DAMAGE, StateFlag.State.ALLOW);
+		region.getFlags().put(DefaultFlag.DENY_SPAWN, new HashSet<EntityType>() {
+			{
 
 			}
 		});

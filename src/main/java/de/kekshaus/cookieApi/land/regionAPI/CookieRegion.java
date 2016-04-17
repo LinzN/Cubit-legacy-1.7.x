@@ -12,7 +12,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.kekshaus.cookieApi.land.Landplugin;
 
-public class NewRegion {
+public class CookieRegion {
 
 	public static ProtectedRegion newRegion(int chunkX, int chunkZ, World world, Player player, String regionName) {
 		final Vector min;

@@ -8,10 +8,18 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 public class LockPacket {
 
-	public static ProtectedRegion updateData(ProtectedRegion region) {
+	public static ProtectedRegion activateData(ProtectedRegion region) {
 		RegionGroupFlag groupFlag = DefaultFlag.USE.getRegionGroupFlag();
 		region.setFlag(groupFlag, RegionGroup.NON_MEMBERS);
 		region.setFlag(DefaultFlag.USE, StateFlag.State.DENY);
+		return region;
+
+	}
+
+	public static ProtectedRegion deactivateData(ProtectedRegion region) {
+		RegionGroupFlag groupFlag = DefaultFlag.USE.getRegionGroupFlag();
+		region.setFlag(groupFlag, RegionGroup.ALL);
+		region.setFlag(DefaultFlag.USE, StateFlag.State.ALLOW);
 		return region;
 
 	}
