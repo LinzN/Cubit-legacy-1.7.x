@@ -73,6 +73,7 @@ public class LandManager {
 	private List<String> getLandTypes() {
 		List<String> list = new ArrayList<String>();
 		list.add("server");
+		list.add("shop");
 		for (World world : plugin.getServer().getWorlds()) {
 			list.add(world.getName());
 		}
