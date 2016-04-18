@@ -6,14 +6,14 @@ import org.bukkit.entity.EntityType;
 
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag;
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import de.kekshaus.cookieApi.land.regionAPI.region.RegionData;
 
 public class MobPacket {
 
 	@SuppressWarnings("serial")
-	public static ProtectedRegion activateData(ProtectedRegion region) {
-		region.setFlag(DefaultFlag.MOB_DAMAGE, StateFlag.State.DENY);
-		region.getFlags().put(DefaultFlag.DENY_SPAWN, new HashSet<EntityType>() {
+	public static RegionData activateData(RegionData regionData) {
+		regionData.praseWGRegion().setFlag(DefaultFlag.MOB_DAMAGE, StateFlag.State.DENY);
+		regionData.praseWGRegion().getFlags().put(DefaultFlag.DENY_SPAWN, new HashSet<EntityType>() {
 			{
 				add(EntityType.CREEPER);
 				add(EntityType.ZOMBIE);
@@ -32,19 +32,19 @@ public class MobPacket {
 
 			}
 		});
-		return region;
+		return regionData;
 
 	}
 
 	@SuppressWarnings("serial")
-	public static ProtectedRegion deactivateData(ProtectedRegion region) {
-		region.setFlag(DefaultFlag.MOB_DAMAGE, StateFlag.State.ALLOW);
-		region.getFlags().put(DefaultFlag.DENY_SPAWN, new HashSet<EntityType>() {
+	public static RegionData deactivateData(RegionData regionData) {
+		regionData.praseWGRegion().setFlag(DefaultFlag.MOB_DAMAGE, StateFlag.State.ALLOW);
+		regionData.praseWGRegion().getFlags().put(DefaultFlag.DENY_SPAWN, new HashSet<EntityType>() {
 			{
 
 			}
 		});
-		return region;
+		return regionData;
 
 	}
 }

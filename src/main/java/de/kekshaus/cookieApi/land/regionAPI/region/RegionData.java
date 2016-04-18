@@ -1,44 +1,83 @@
 package de.kekshaus.cookieApi.land.regionAPI.region;
 
-import org.bukkit.World;
-import org.bukkit.entity.Player;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
-import com.sk89q.worldedit.Vector;
-import com.sk89q.worldedit.Vector2D;
-import com.sk89q.worldguard.LocalPlayer;
-import com.sk89q.worldguard.domains.DefaultDomain;
-import com.sk89q.worldguard.protection.managers.RegionManager;
-import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
+
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
+import de.kekshaus.cookieApi.guild.api.InternAPI;
+import de.kekshaus.cookieApi.guild.objects.Guild;
 import de.kekshaus.cookieApi.land.Landplugin;
 
 public class RegionData {
+	private String regionID;
+	private ProtectedRegion region;
+	private LandTypes type;
+	private String world;
+	private boolean newRegion = false;
 
-	public static ProtectedRegion newRegion(final int chunkX, final int chunkZ, final World world, final Player player,
-			final String regionName) {
-		final Vector min;
-		final Vector max;
-		final Vector2D min2D;
+	public RegionData(ProtectedRegion region, World world) {
+		this.regionID = region.getId();
+		this.type = LandTypes.getLandType(region.getId());
+		this.world = world.getName();
+		this.region = region;
 
-		min2D = new Vector2D(chunkX * 16, chunkZ * 16);
-		min = new Vector(min2D.getBlockX(), 0, min2D.getBlockZ());
-		max = min.add(15, world.getMaxHeight(), 15);
-
-		ProtectedRegion region = new ProtectedCuboidRegion(regionName, min.toBlockVector(), max.toBlockVector());
-		if (player != null) {
-			LocalPlayer localplayer = Landplugin.inst().getWorldGuardPlugin().wrapPlayer(player);
-			DefaultDomain domain = new DefaultDomain();
-			domain.addPlayer(localplayer);
-			region.setOwners(domain);
-		}
-		return region;
 	}
 
-	public static void removeRegion(ProtectedRegion region, World world) {
-		RegionManager manager = Landplugin.inst().getWorldGuardPlugin().getRegionManager(world);
-		manager.removeRegion(region.getId());
+	public ProtectedRegion praseWGRegion() {
+		if (newRegion) {
+			return this.region;
+		}
+		return Landplugin.inst().getWorldGuardPlugin().getRegionManager(Bukkit.getWorld(world)).getRegion(regionID);
+	}
 
+	public void setRegionState(boolean state) {
+		this.newRegion = state;
+	}
+
+	public Guild getGuild() {
+		Guild guild = InternAPI.getForceGuildPlayer(getOwnerUUID()).getGuild();
+		return guild;
+	}
+
+	public UUID getOwnerUUID() {
+		UUID playerUUID = null;
+		for (UUID uuid : Landplugin.inst().getWorldGuardPlugin().getRegionManager(Bukkit.getWorld(world))
+				.getRegion(regionID).getOwners().getUniqueIds()) {
+			playerUUID = uuid;
+		}
+		return playerUUID;
+	}
+
+	public String getOwnerName() {
+		String name = null;
+		for (UUID uuid : Landplugin.inst().getWorldGuardPlugin().getRegionManager(Bukkit.getWorld(world))
+				.getRegion(regionID).getMembers().getUniqueIds()) {
+			name = Bukkit.getServer().getOfflinePlayer(uuid).getName();
+		}
+		return name;
+	}
+
+	public Set<UUID> getMembersUUID() {
+		return Landplugin.inst().getWorldGuardPlugin().getRegionManager(Bukkit.getWorld(world)).getRegion(regionID)
+				.getMembers().getUniqueIds();
+	}
+
+	public Set<String> getMembersName() {
+		Set<String> list = new HashSet<String>();
+		for (UUID uuid : Landplugin.inst().getWorldGuardPlugin().getRegionManager(Bukkit.getWorld(world))
+				.getRegion(regionID).getMembers().getUniqueIds()) {
+			list.add(Bukkit.getServer().getOfflinePlayer(uuid).getName());
+		}
+		return list;
+	}
+
+	public LandTypes getLandType() {
+		return this.type;
 	}
 
 }

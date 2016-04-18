@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 
 import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.domains.DefaultDomain;
@@ -13,25 +14,30 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.kekshaus.cookieApi.land.Landplugin;
 
-public class RegionEntities {
+public class ManageRegionEntities {
 
-	public static List<ProtectedRegion> setOwner(List<ProtectedRegion> regionListe, World world, LocalPlayer lPlayer) {
+	public ManageRegionEntities() {
+
+	}
+
+	public List<RegionData> setOwner(List<RegionData> regionListe, World world, Player player) {
+		LocalPlayer lPlayer = Landplugin.inst().getWorldGuardPlugin().wrapPlayer(player);
 		DefaultDomain domain = new DefaultDomain();
 		domain.addPlayer(lPlayer);
 		if (regionListe.size() <= 30) {
 
-			for (ProtectedRegion region : regionListe) {
-				region.setOwners(domain);
+			for (RegionData region : regionListe) {
+				region.praseWGRegion().setOwners(domain);
 			}
 		} else {
 
 			int loops = regionListe.size() / 30 + 1;
 			for (int i = 0; i < loops; i++) {
-				List<ProtectedRegion> list = regionListe.subList(i * 30,
+				List<RegionData> list = regionListe.subList(i * 30,
 						30 * i + 29 >= regionListe.size() ? regionListe.size() : 30 * i + 29);
 
-				for (ProtectedRegion region : list) {
-					region.setOwners(domain);
+				for (RegionData region : list) {
+					region.praseWGRegion().setOwners(domain);
 				}
 			}
 
@@ -40,21 +46,22 @@ public class RegionEntities {
 
 	}
 
-	public static List<ProtectedRegion> addMember(List<ProtectedRegion> regionListe, World world, LocalPlayer lPlayer) {
+	public List<RegionData> addMember(List<RegionData> regionListe, World world, Player player) {
+		LocalPlayer lPlayer = Landplugin.inst().getWorldGuardPlugin().wrapPlayer(player);
 		if (regionListe.size() <= 30) {
 
-			for (ProtectedRegion region : regionListe) {
-				region.getMembers().addPlayer(lPlayer);
+			for (RegionData region : regionListe) {
+				region.praseWGRegion().getMembers().addPlayer(lPlayer);
 			}
 		} else {
 
 			int loops = regionListe.size() / 30 + 1;
 			for (int i = 0; i < loops; i++) {
-				List<ProtectedRegion> list = regionListe.subList(i * 30,
+				List<RegionData> list = regionListe.subList(i * 30,
 						30 * i + 29 >= regionListe.size() ? regionListe.size() : 30 * i + 29);
 
-				for (ProtectedRegion region : list) {
-					region.getMembers().addPlayer(lPlayer);
+				for (RegionData region : list) {
+					region.praseWGRegion().getMembers().addPlayer(lPlayer);
 				}
 			}
 
@@ -63,22 +70,22 @@ public class RegionEntities {
 
 	}
 
-	public static List<ProtectedRegion> removeMember(List<ProtectedRegion> regionListe, World world,
-			LocalPlayer lPlayer) {
+	public List<RegionData> removeMember(List<RegionData> regionListe, World world, Player player) {
+		LocalPlayer lPlayer = Landplugin.inst().getWorldGuardPlugin().wrapPlayer(player);
 		if (regionListe.size() <= 30) {
 
-			for (ProtectedRegion region : regionListe) {
-				region.getMembers().removePlayer(lPlayer);
+			for (RegionData region : regionListe) {
+				region.praseWGRegion().getMembers().removePlayer(lPlayer);
 			}
 		} else {
 
 			int loops = regionListe.size() / 30 + 1;
 			for (int i = 0; i < loops; i++) {
-				List<ProtectedRegion> list = regionListe.subList(i * 30,
+				List<RegionData> list = regionListe.subList(i * 30,
 						30 * i + 29 >= regionListe.size() ? regionListe.size() : 30 * i + 29);
 
-				for (ProtectedRegion region : list) {
-					region.getMembers().removePlayer(lPlayer);
+				for (RegionData region : list) {
+					region.praseWGRegion().getMembers().removePlayer(lPlayer);
 				}
 			}
 
@@ -87,21 +94,21 @@ public class RegionEntities {
 
 	}
 
-	public static List<ProtectedRegion> clearMember(List<ProtectedRegion> regionListe, World world) {
+	public List<RegionData> clearMember(List<RegionData> regionListe, World world) {
 		if (regionListe.size() <= 30) {
 
-			for (ProtectedRegion region : regionListe) {
-				region.getMembers().clear();
+			for (RegionData region : regionListe) {
+				region.praseWGRegion().getMembers().clear();
 			}
 		} else {
 
 			int loops = regionListe.size() / 30 + 1;
 			for (int i = 0; i < loops; i++) {
-				List<ProtectedRegion> list = regionListe.subList(i * 30,
+				List<RegionData> list = regionListe.subList(i * 30,
 						30 * i + 29 >= regionListe.size() ? regionListe.size() : 30 * i + 29);
 
-				for (ProtectedRegion region : list) {
-					region.getMembers().clear();
+				for (RegionData region : list) {
+					region.praseWGRegion().getMembers().clear();
 				}
 			}
 
@@ -110,7 +117,8 @@ public class RegionEntities {
 
 	}
 
-	public static List<ProtectedRegion> getAllLands(LocalPlayer lPlayer, World world) {
+	public List<ProtectedRegion> getAllLands(Player player, World world) {
+		LocalPlayer lPlayer = Landplugin.inst().getWorldGuardPlugin().wrapPlayer(player);
 		RegionManager rm = Landplugin.inst().getWorldGuardPlugin().getRegionManager(world);
 		List<ProtectedRegion> toReturn = new ArrayList<ProtectedRegion>();
 

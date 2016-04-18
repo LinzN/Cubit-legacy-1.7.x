@@ -24,7 +24,7 @@ public class SetupConnection {
 
 		try {
 			Connection connection = handler.getConnection();
-			String sql = "CREATE TABLE IF NOT EXISTS offerManager (Id int NOT NULL AUTO_INCREMENT, region_id text, uuid text, data bigint, PRIMARY KEY (Id));";
+			String sql = "CREATE TABLE IF NOT EXISTS offerManager (Id int NOT NULL AUTO_INCREMENT, regionID text, world text, uuid text, value double, PRIMARY KEY (Id));";
 			Statement action = connection.createStatement();
 			action.executeUpdate(sql);
 			action.close();
