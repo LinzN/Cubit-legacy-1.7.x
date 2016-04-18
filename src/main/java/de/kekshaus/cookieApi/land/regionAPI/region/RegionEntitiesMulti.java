@@ -12,7 +12,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.kekshaus.cookieApi.land.Landplugin;
 
-public class PerformMulti {
+public class RegionEntitiesMulti {
 
 	public void permformData(LocalPlayer lPlayer, List<ProtectedRegion> regionListe, World world) {
 		if (regionListe.size() <= 30) {
