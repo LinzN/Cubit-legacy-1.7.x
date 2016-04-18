@@ -1,4 +1,4 @@
-package de.kekshaus.cookieApi.land.regionAPI;
+package de.kekshaus.cookieApi.land.regionAPI.region;
 
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -15,20 +15,23 @@ import de.kekshaus.cookieApi.land.Landplugin;
 
 public class CookieRegion {
 
-	public static ProtectedRegion newRegion(int chunkX, int chunkZ, World world, Player player, String regionName) {
+	public static ProtectedRegion newRegion(final int chunkX, final int chunkZ, final World world, final Player player,
+			final String regionName) {
 		final Vector min;
 		final Vector max;
 		final Vector2D min2D;
-		final LocalPlayer localplayer = Landplugin.inst().getWorldGuardPlugin().wrapPlayer(player);
 
 		min2D = new Vector2D(chunkX * 16, chunkZ * 16);
 		min = new Vector(min2D.getBlockX(), 0, min2D.getBlockZ());
 		max = min.add(15, world.getMaxHeight(), 15);
 
 		ProtectedRegion region = new ProtectedCuboidRegion(regionName, min.toBlockVector(), max.toBlockVector());
-		DefaultDomain domain = new DefaultDomain();
-		domain.addPlayer(localplayer);
-		region.setOwners(domain);
+		if (player != null) {
+			LocalPlayer localplayer = Landplugin.inst().getWorldGuardPlugin().wrapPlayer(player);
+			DefaultDomain domain = new DefaultDomain();
+			domain.addPlayer(localplayer);
+			region.setOwners(domain);
+		}
 		return region;
 	}
 

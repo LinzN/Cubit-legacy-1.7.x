@@ -16,6 +16,8 @@ import de.kekshaus.cookieApi.land.regionAPI.flags.LockPacket;
 import de.kekshaus.cookieApi.land.regionAPI.flags.MobPacket;
 import de.kekshaus.cookieApi.land.regionAPI.flags.PvPPacket;
 import de.kekshaus.cookieApi.land.regionAPI.flags.TNTPacket;
+import de.kekshaus.cookieApi.land.regionAPI.region.CookieRegion;
+import de.kekshaus.cookieApi.land.regionAPI.region.LandTypes;
 
 public class LandManager {
 
@@ -26,7 +28,7 @@ public class LandManager {
 	}
 
 	public boolean isLand(final World world, final int valueX, final int valueZ) {
-		List<String> types = getLandTypes();
+		List<String> types = getAvailableNames();
 		RegionManager manager = plugin.getWorldGuardPlugin().getRegionManager(world);
 
 		for (String name : types) {
@@ -38,12 +40,54 @@ public class LandManager {
 		return false;
 	}
 
-	public boolean newLand(final Location loc, final Player player) {
+	public boolean newDefaultLand(final Location loc, final Player player) {
 		try {
 			int chunkX = loc.getChunk().getX();
 			int chunkZ = loc.getChunk().getZ();
 			World world = loc.getWorld();
 			String regionName = buildLandName(world.getName(), chunkX, chunkZ);
+			ProtectedRegion region = CookieRegion.newRegion(chunkX, chunkZ, world, player, regionName);
+			region = LockPacket.activateData(region);
+			region = MobPacket.activateData(region);
+			region = PvPPacket.activateData(region);
+			region = TNTPacket.activateData(region);
+			region = FirePacket.activateData(region);
+			new SaveManager(region, world);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+
+	}
+
+	public boolean newServerLand(final Location loc) {
+		try {
+			int chunkX = loc.getChunk().getX();
+			int chunkZ = loc.getChunk().getZ();
+			World world = loc.getWorld();
+			String regionName = buildLandName(LandTypes.SERVER.toString(), chunkX, chunkZ);
+			ProtectedRegion region = CookieRegion.newRegion(chunkX, chunkZ, world, null, regionName);
+			region = LockPacket.activateData(region);
+			region = MobPacket.activateData(region);
+			region = PvPPacket.activateData(region);
+			region = TNTPacket.activateData(region);
+			region = FirePacket.activateData(region);
+			new SaveManager(region, world);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+
+	}
+
+	public boolean newShopLand(final Location loc, final Player player) {
+		try {
+			int chunkX = loc.getChunk().getX();
+			int chunkZ = loc.getChunk().getZ();
+			World world = loc.getWorld();
+			String regionName = buildLandName(LandTypes.SHOP.toString(), chunkX, chunkZ);
 			ProtectedRegion region = CookieRegion.newRegion(chunkX, chunkZ, world, player, regionName);
 			region = LockPacket.activateData(region);
 			region = MobPacket.activateData(region);
@@ -70,10 +114,11 @@ public class LandManager {
 		return true;
 	}
 
-	private List<String> getLandTypes() {
+	private List<String> getAvailableNames() {
 		List<String> list = new ArrayList<String>();
-		list.add("server");
-		list.add("shop");
+		for (LandTypes type : LandTypes.values()) {
+			list.add(type.toString());
+		}
 		for (World world : plugin.getServer().getWorlds()) {
 			list.add(world.getName());
 		}
