@@ -13,7 +13,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.kekshaus.cookieApi.land.Landplugin;
 
-public class CookieRegion {
+public class RegionData {
 
 	public static ProtectedRegion newRegion(final int chunkX, final int chunkZ, final World world, final Player player,
 			final String regionName) {
@@ -39,15 +39,6 @@ public class CookieRegion {
 		RegionManager manager = Landplugin.inst().getWorldGuardPlugin().getRegionManager(world);
 		manager.removeRegion(region.getId());
 
-	}
-
-	public static ProtectedRegion updateOwner(ProtectedRegion region, World world, Player player) {
-		final LocalPlayer localplayer = Landplugin.inst().getWorldGuardPlugin().wrapPlayer(player);
-		region.getOwners().clear();
-		DefaultDomain domain = new DefaultDomain();
-		domain.addPlayer(localplayer);
-		region.setOwners(domain);
-		return region;
 	}
 
 }

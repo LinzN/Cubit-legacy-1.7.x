@@ -16,7 +16,7 @@ import de.kekshaus.cookieApi.land.regionAPI.flags.LockPacket;
 import de.kekshaus.cookieApi.land.regionAPI.flags.MobPacket;
 import de.kekshaus.cookieApi.land.regionAPI.flags.PvPPacket;
 import de.kekshaus.cookieApi.land.regionAPI.flags.TNTPacket;
-import de.kekshaus.cookieApi.land.regionAPI.region.CookieRegion;
+import de.kekshaus.cookieApi.land.regionAPI.region.RegionData;
 import de.kekshaus.cookieApi.land.regionAPI.region.LandTypes;
 
 public class LandManager {
@@ -46,7 +46,7 @@ public class LandManager {
 			int chunkZ = loc.getChunk().getZ();
 			World world = loc.getWorld();
 			String regionName = buildLandName(world.getName(), chunkX, chunkZ);
-			ProtectedRegion region = CookieRegion.newRegion(chunkX, chunkZ, world, player, regionName);
+			ProtectedRegion region = RegionData.newRegion(chunkX, chunkZ, world, player, regionName);
 			region = LockPacket.activateData(region);
 			region = MobPacket.activateData(region);
 			region = PvPPacket.activateData(region);
@@ -67,7 +67,7 @@ public class LandManager {
 			int chunkZ = loc.getChunk().getZ();
 			World world = loc.getWorld();
 			String regionName = buildLandName(LandTypes.SERVER.toString(), chunkX, chunkZ);
-			ProtectedRegion region = CookieRegion.newRegion(chunkX, chunkZ, world, null, regionName);
+			ProtectedRegion region = RegionData.newRegion(chunkX, chunkZ, world, null, regionName);
 			region = LockPacket.activateData(region);
 			region = MobPacket.activateData(region);
 			region = PvPPacket.activateData(region);
@@ -88,7 +88,7 @@ public class LandManager {
 			int chunkZ = loc.getChunk().getZ();
 			World world = loc.getWorld();
 			String regionName = buildLandName(LandTypes.SHOP.toString(), chunkX, chunkZ);
-			ProtectedRegion region = CookieRegion.newRegion(chunkX, chunkZ, world, player, regionName);
+			ProtectedRegion region = RegionData.newRegion(chunkX, chunkZ, world, player, regionName);
 			region = LockPacket.activateData(region);
 			region = MobPacket.activateData(region);
 			region = PvPPacket.activateData(region);
@@ -105,7 +105,7 @@ public class LandManager {
 
 	public boolean removeLand(final ProtectedRegion region, final World world, final Player player) {
 		try {
-			CookieRegion.removeRegion(region, world);
+			RegionData.removeRegion(region, world);
 			new SaveManager(null, world);
 		} catch (Exception e) {
 			e.printStackTrace();
