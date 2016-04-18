@@ -110,7 +110,7 @@ public class RegionEntities {
 
 	}
 
-	public static List<ProtectedRegion> getLandsOfPlayer(LocalPlayer lPlayer, World world) {
+	public static List<ProtectedRegion> getAllLands(LocalPlayer lPlayer, World world) {
 		RegionManager rm = Landplugin.inst().getWorldGuardPlugin().getRegionManager(world);
 		List<ProtectedRegion> toReturn = new ArrayList<ProtectedRegion>();
 
