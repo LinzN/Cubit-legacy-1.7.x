@@ -54,7 +54,21 @@ public class LandManager {
 		return false;
 	}
 
-	public boolean newDefaultLand(final Location loc, final Player player) {
+	public boolean createLand(final Location loc, final Player player, final LandTypes type) {
+		switch (type) {
+		case SERVER:
+			return serverLand(loc);
+		case SHOP:
+			return shopLand(loc, player);
+		case WORLD:
+			return defaultLand(loc, player);
+		default:
+			System.err.println("No valid LandType!");
+			return false;
+		}
+	}
+
+	private boolean defaultLand(final Location loc, final Player player) {
 		try {
 			int chunkX = loc.getChunk().getX();
 			int chunkZ = loc.getChunk().getZ();
@@ -76,7 +90,7 @@ public class LandManager {
 
 	}
 
-	public boolean newServerLand(final Location loc) {
+	private boolean serverLand(final Location loc) {
 		try {
 			int chunkX = loc.getChunk().getX();
 			int chunkZ = loc.getChunk().getZ();
@@ -98,7 +112,7 @@ public class LandManager {
 
 	}
 
-	public boolean newShopLand(final Location loc, final Player player) {
+	private boolean shopLand(final Location loc, final Player player) {
 		try {
 			int chunkX = loc.getChunk().getX();
 			int chunkZ = loc.getChunk().getZ();
