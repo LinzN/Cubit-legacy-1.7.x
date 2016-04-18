@@ -10,8 +10,12 @@ import de.kekshaus.cookieApi.land.regionAPI.region.RegionData;
 
 public class MobPacket {
 
+	public MobPacket() {
+
+	}
+
 	@SuppressWarnings("serial")
-	public static RegionData activateData(RegionData regionData) {
+	private RegionData activateData(RegionData regionData) {
 		regionData.praseWGRegion().setFlag(DefaultFlag.MOB_DAMAGE, StateFlag.State.DENY);
 		regionData.praseWGRegion().getFlags().put(DefaultFlag.DENY_SPAWN, new HashSet<EntityType>() {
 			{
@@ -37,7 +41,7 @@ public class MobPacket {
 	}
 
 	@SuppressWarnings("serial")
-	public static RegionData deactivateData(RegionData regionData) {
+	private RegionData deactivateData(RegionData regionData) {
 		regionData.praseWGRegion().setFlag(DefaultFlag.MOB_DAMAGE, StateFlag.State.ALLOW);
 		regionData.praseWGRegion().getFlags().put(DefaultFlag.DENY_SPAWN, new HashSet<EntityType>() {
 			{
@@ -46,5 +50,28 @@ public class MobPacket {
 		});
 		return regionData;
 
+	}
+
+	public boolean getState(RegionData regionData) {
+		if (regionData.praseWGRegion().getFlag(DefaultFlag.MOB_DAMAGE) == StateFlag.State.DENY) {
+			return true;
+		}
+		return false;
+	}
+
+	public RegionData switchState(RegionData regionData, boolean value) {
+		if (value) {
+			return activateData(regionData);
+		} else {
+			return deactivateData(regionData);
+		}
+	}
+
+	public RegionData switchState(RegionData regionData) {
+		if (getState(regionData)) {
+			return switchState(regionData, false);
+		} else {
+			return switchState(regionData, true);
+		}
 	}
 }
