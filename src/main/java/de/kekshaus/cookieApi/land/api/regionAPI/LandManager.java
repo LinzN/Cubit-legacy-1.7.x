@@ -8,6 +8,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 
 import com.sk89q.worldguard.protection.managers.RegionManager;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.kekshaus.cookieApi.land.Landplugin;
 import de.kekshaus.cookieApi.land.api.regionAPI.flags.FirePacket;
@@ -255,6 +256,24 @@ public class LandManager {
 			return false;
 		}
 		return true;
+	}
+
+	public RegionData praseRegionData(final World world, final int valueX, final int valueZ) {
+		RegionData regionData = new RegionData(getWGRegion(world, valueZ, valueZ), world);
+		return regionData;
+	}
+
+	private ProtectedRegion getWGRegion(final World world, final int valueX, final int valueZ) {
+		List<String> types = getAvailableNames();
+		RegionManager manager = plugin.getWorldGuardPlugin().getRegionManager(world);
+
+		for (String name : types) {
+			String regionName = buildLandName(name, valueX, valueZ);
+			if (manager.hasRegion(regionName)) {
+				return manager.getRegion(regionName);
+			}
+		}
+		return null;
 	}
 
 	private List<String> getAvailableNames() {

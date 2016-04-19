@@ -14,6 +14,8 @@ import com.google.common.collect.Maps;
 import de.kekshaus.cookieApi.land.Landplugin;
 import de.kekshaus.cookieApi.land.commandSuite.ILandCmd;
 import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.BuyLand;
+import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.HelpLand;
+import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.InfoLand;
 
 public class CommandLand implements CommandExecutor {
 
@@ -33,6 +35,7 @@ public class CommandLand implements CommandExecutor {
 			public void run() {
 				if (args.length == 0) {
 					// help site
+					getCmdMap().get("help").runCmd(sender, args);
 				} else if (getCmdMap().containsKey(args[0])) {
 					String command = args[0];
 					if (!getCmdMap().get(command).runCmd(sender, args)) {
@@ -54,6 +57,8 @@ public class CommandLand implements CommandExecutor {
 
 	public void loadCmd() {
 		try {
+			this.cmdMap.put("info", new InfoLand(this.plugin));
+			this.cmdMap.put("help", new HelpLand(this.plugin));
 			this.cmdMap.put("buy", new BuyLand(this.plugin));
 			this.isLoaded = true;
 		} catch (Exception e) {
