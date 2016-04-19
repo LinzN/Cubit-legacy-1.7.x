@@ -13,6 +13,7 @@ import com.google.common.collect.Maps;
 
 import de.kekshaus.cookieApi.land.Landplugin;
 import de.kekshaus.cookieApi.land.commandSuite.ILandCmd;
+import de.kekshaus.cookieApi.land.commandSuite.adminCommands.main.TestAdminCmd;
 
 public class CommandAdmin implements CommandExecutor {
 
@@ -53,7 +54,7 @@ public class CommandAdmin implements CommandExecutor {
 
 	public void loadCmd() {
 		try {
-			// this.cmdMap.put("testcmd", new TestCmd(this.plugin));
+			this.cmdMap.put("testcmd", new TestAdminCmd(this.plugin));
 			this.isLoaded = true;
 		} catch (Exception e) {
 			e.printStackTrace();
