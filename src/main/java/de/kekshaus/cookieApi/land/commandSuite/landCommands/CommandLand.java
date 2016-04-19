@@ -13,6 +13,7 @@ import com.google.common.collect.Maps;
 
 import de.kekshaus.cookieApi.land.Landplugin;
 import de.kekshaus.cookieApi.land.commandSuite.ILandCmd;
+import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.BuyLand;
 import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.TestLandCmd;
 
 public class CommandLand implements CommandExecutor {
@@ -55,6 +56,7 @@ public class CommandLand implements CommandExecutor {
 	public void loadCmd() {
 		try {
 			this.cmdMap.put("testcmd", new TestLandCmd(this.plugin));
+			this.cmdMap.put("buy", new BuyLand(this.plugin));
 			this.isLoaded = true;
 		} catch (Exception e) {
 			e.printStackTrace();

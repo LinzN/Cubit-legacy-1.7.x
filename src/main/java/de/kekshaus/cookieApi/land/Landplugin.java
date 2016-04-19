@@ -1,5 +1,6 @@
 package de.kekshaus.cookieApi.land;
 
+import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.sk89q.worldedit.WorldEdit;
@@ -33,6 +34,7 @@ public class Landplugin extends JavaPlugin {
 	}
 
 	public void onDisable() {
+		HandlerList.unregisterAll(Landplugin.inst());
 	}
 
 	private void setupManagers() {
