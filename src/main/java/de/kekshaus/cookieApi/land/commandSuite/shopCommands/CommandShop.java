@@ -36,10 +36,10 @@ public class CommandShop implements CommandExecutor {
 				} else if (getCmdMap().containsKey(args[0])) {
 					String command = args[0];
 					if (!getCmdMap().get(command).runCmd(sender, args)) {
-						// Command error
+						sender.sendMessage(plugin.getLanguageManager().errorCommand.replace("{command}", command));
 					}
 				} else {
-					// No valid command
+					sender.sendMessage(plugin.getLanguageManager().errorNoCommand.replace("{command}", "/shop help"));
 				}
 			}
 		});
