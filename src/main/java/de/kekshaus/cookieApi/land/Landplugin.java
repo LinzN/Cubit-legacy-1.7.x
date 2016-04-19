@@ -9,6 +9,7 @@ import de.kekshaus.cookieApi.land.api.blockAPI.BlockManager;
 import de.kekshaus.cookieApi.land.api.particleAPI.ParticleManager;
 import de.kekshaus.cookieApi.land.api.regionAPI.LandManager;
 import de.kekshaus.cookieApi.land.api.sqlAPI.SqlManager;
+import de.kekshaus.cookieApi.land.commandSuite.SetupCommands;
 
 public class Landplugin extends JavaPlugin {
 
@@ -28,6 +29,7 @@ public class Landplugin extends JavaPlugin {
 		if (!sqlMrg.link()) {
 			this.setEnabled(false);
 		}
+		new SetupCommands(this);
 	}
 
 	public void onDisable() {
@@ -38,6 +40,7 @@ public class Landplugin extends JavaPlugin {
 		landMrg = new LandManager(this);
 		blockMrg = new BlockManager(this);
 		particleMrg = new ParticleManager(this);
+
 	}
 
 	public static Landplugin inst() {

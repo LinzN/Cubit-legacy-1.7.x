@@ -5,3 +5,13 @@ description: Landplugin
 author: Kekshaus
 load: POSTWORLD
 depend: [cookieApiBukkit]
+
+commands:
+  land:
+    description: Land Command
+  shop:
+    description: Shop Command
+    aliases: [shops]
+  ladmin:
+    description: Admin Command
+    aliases: [sadmin, shopadmin, landadmin]
