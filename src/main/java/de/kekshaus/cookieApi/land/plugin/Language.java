@@ -1,8 +1,8 @@
-package de.kekshaus.cookieApi.land;
+package de.kekshaus.cookieApi.land.plugin;
 
-public class LanguageManager {
+public class Language {
 
-	public LanguageManager() {
+	public Language() {
 
 	}
 

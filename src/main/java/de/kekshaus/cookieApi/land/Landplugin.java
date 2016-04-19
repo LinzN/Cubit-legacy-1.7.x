@@ -12,6 +12,8 @@ import de.kekshaus.cookieApi.land.api.regionAPI.LandManager;
 import de.kekshaus.cookieApi.land.api.sqlAPI.SqlManager;
 import de.kekshaus.cookieApi.land.api.vaultAPI.VaultManager;
 import de.kekshaus.cookieApi.land.commandSuite.SetupCommands;
+import de.kekshaus.cookieApi.land.plugin.LandConfig;
+import de.kekshaus.cookieApi.land.plugin.Language;
 
 public class Landplugin extends JavaPlugin {
 
@@ -23,7 +25,8 @@ public class Landplugin extends JavaPlugin {
 	private ParticleManager particleMrg;
 	private VaultManager vaultMrg;
 	private SqlManager sqlMrg;
-	private LanguageManager langMrg;
+	private Language langMrg;
+	private LandConfig landConf;
 
 	public void onEnable() {
 		inst = this;
@@ -46,7 +49,8 @@ public class Landplugin extends JavaPlugin {
 		blockMrg = new BlockManager(this);
 		particleMrg = new ParticleManager(this);
 		vaultMrg = new VaultManager(this);
-		langMrg = new LanguageManager();
+		langMrg = new Language();
+		landConf = new LandConfig(this);
 
 	}
 
@@ -74,8 +78,12 @@ public class Landplugin extends JavaPlugin {
 		return this.vaultMrg;
 	}
 
-	public LanguageManager getLanguageManager() {
+	public Language getLanguageManager() {
 		return this.langMrg;
+	}
+
+	public LandConfig getLandConfig() {
+		return this.landConf;
 	}
 
 	public WorldGuardPlugin getWorldGuardPlugin() {
