@@ -34,8 +34,18 @@ public class VaultManager {
 	}
 
 	public boolean hasEnougToBuy(UUID playerUUID, double value) {
-		return this.ecoMrg.hasEnoughToBuy(playerUUID, value);
+		return this.ecoMrg.hasEnoughToBuy(playerUUID, Math.abs(value));
 
+	}
+
+	public boolean transferMoney(UUID senderUUID, UUID recieverUUID, double value) {
+		try {
+			ecoMrg.transferMoney(senderUUID, recieverUUID, Math.abs(value));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 }

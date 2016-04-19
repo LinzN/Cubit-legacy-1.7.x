@@ -20,10 +20,21 @@ public class EconomyManager {
 
 	public boolean hasEnoughToBuy(UUID playerUUID, double value) {
 		OfflinePlayer player = Bukkit.getOfflinePlayer(playerUUID);
-		if ((econ.getBalance(player) - value) > 0) {
-			return false;
+		if ((econ.getBalance(player) - value) >= 0) {
+			return true;
 		}
-		return true;
+		return false;
+	}
+
+	public void transferMoney(UUID senderUUID, UUID recieverUUID, double value) {
+		if (senderUUID != null) {
+			OfflinePlayer sender = Bukkit.getOfflinePlayer(senderUUID);
+			econ.withdrawPlayer(sender, value);
+		}
+		if (recieverUUID != null) {
+			OfflinePlayer reciever = Bukkit.getOfflinePlayer(recieverUUID);
+			econ.depositPlayer(reciever, value);
+		}
 	}
 
 }
