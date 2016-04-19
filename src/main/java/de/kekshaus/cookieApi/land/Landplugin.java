@@ -21,6 +21,7 @@ public class Landplugin extends JavaPlugin {
 	private BlockManager blockMrg;
 	private ParticleManager particleMrg;
 	private SqlManager sqlMrg;
+	private LanguageManager langMrg;
 
 	public void onEnable() {
 		inst = this;
@@ -42,6 +43,7 @@ public class Landplugin extends JavaPlugin {
 		landMrg = new LandManager(this);
 		blockMrg = new BlockManager(this);
 		particleMrg = new ParticleManager(this);
+		langMrg = new LanguageManager();
 
 	}
 
@@ -63,6 +65,10 @@ public class Landplugin extends JavaPlugin {
 
 	public SqlManager getSqlManager() {
 		return sqlMrg;
+	}
+
+	public LanguageManager getLanguageManager() {
+		return this.langMrg;
 	}
 
 	public WorldGuardPlugin getWorldGuardPlugin() {
