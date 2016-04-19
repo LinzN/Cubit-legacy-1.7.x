@@ -67,7 +67,8 @@ public class BuyLand implements ILandCmd {
 			return true;
 		}
 
-		if (!plugin.getParticleManager().sendCustomPaticle(player, loc, Effect.WITCH_MAGIC, Effect.FIREWORKS_SPARK)) {
+		if (!plugin.getParticleManager().sendCustomPaticle(player, loc, Effect.HAPPY_VILLAGER,
+				Effect.FIREWORKS_SPARK)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-PARTICLE"));
 			plugin.getLogger().warning(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-PARTICLE"));

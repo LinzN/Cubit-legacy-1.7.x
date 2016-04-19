@@ -52,11 +52,11 @@ public class SendParticle {
 	public void scheduleParticleTask(final Player p, final Location l, final Effect primaryEffect,
 			final Effect secondaryEffect) {
 		int loopValue = 0;
-		while (loopValue <= 3) {
+		while (loopValue <= 5) {
 			buildPaticleSpigot(p, l, primaryEffect, secondaryEffect, 1);
 			loopValue++;
 			try {
-				Thread.sleep(1500);
+				Thread.sleep(800);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
