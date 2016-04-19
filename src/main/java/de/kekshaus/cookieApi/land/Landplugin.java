@@ -5,10 +5,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
-import de.kekshaus.cookieApi.land.blockAPI.BlockManager;
-import de.kekshaus.cookieApi.land.particleAPI.ParticleManager;
-import de.kekshaus.cookieApi.land.regionAPI.LandManager;
-import de.kekshaus.cookieApi.land.sqlAPI.SqlManager;
+import de.kekshaus.cookieApi.land.api.blockAPI.BlockManager;
+import de.kekshaus.cookieApi.land.api.particleAPI.ParticleManager;
+import de.kekshaus.cookieApi.land.api.regionAPI.LandManager;
+import de.kekshaus.cookieApi.land.api.sqlAPI.SqlManager;
 
 public class Landplugin extends JavaPlugin {
 
