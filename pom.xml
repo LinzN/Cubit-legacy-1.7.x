@@ -75,12 +75,12 @@
 	<dependency>
 		<groupId>de.cookieapi</groupId>
 		<artifactId>cookieApiBukkit</artifactId>
-		<version>1.1.2</version>
+		<version>1</version>
 	</dependency>
 	<dependency>
 		<groupId>de.cookieapi</groupId>
 		<artifactId>cookieApiGuild</artifactId>
-		<version>1.2.0</version>
+		<version>1</version>
 	</dependency>
   </dependencies>
     <build>
@@ -117,7 +117,7 @@
       </plugin>
         </plugins>
     </build>
-    <version>0.0.2</version>
+    <version>1</version>
     <groupId>de.cookieapi</groupId>
     <dependencyManagement>
     	<dependencies>
