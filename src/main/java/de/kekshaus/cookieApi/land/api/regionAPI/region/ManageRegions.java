@@ -1,8 +1,10 @@
 package de.kekshaus.cookieApi.land.api.regionAPI.region;
 
-import org.bukkit.World;
-import org.bukkit.entity.Player;
+import java.util.UUID;
 
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.World;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.Vector2D;
 import com.sk89q.worldguard.LocalPlayer;
@@ -19,7 +21,7 @@ public class ManageRegions {
 
 	}
 
-	public RegionData newRegion(final int chunkX, final int chunkZ, final World world, final Player player,
+	public RegionData newRegion(final int chunkX, final int chunkZ, final World world, final UUID playerUUID,
 			final String regionName) {
 		final Vector min;
 		final Vector max;
@@ -29,9 +31,11 @@ public class ManageRegions {
 		min = new Vector(min2D.getBlockX(), 0, min2D.getBlockZ());
 		max = min.add(15, world.getMaxHeight(), 15);
 
+		OfflinePlayer player = Bukkit.getOfflinePlayer(playerUUID);
+
 		ProtectedRegion region = new ProtectedCuboidRegion(regionName, min.toBlockVector(), max.toBlockVector());
-		if (player != null) {
-			LocalPlayer localplayer = Landplugin.inst().getWorldGuardPlugin().wrapPlayer(player);
+		if (playerUUID != null) {
+			LocalPlayer localplayer = Landplugin.inst().getWorldGuardPlugin().wrapOfflinePlayer(player);
 			DefaultDomain domain = new DefaultDomain();
 			domain.addPlayer(localplayer);
 			region.setOwners(domain);

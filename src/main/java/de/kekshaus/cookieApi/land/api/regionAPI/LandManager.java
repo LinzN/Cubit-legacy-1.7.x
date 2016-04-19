@@ -2,10 +2,10 @@ package de.kekshaus.cookieApi.land.api.regionAPI;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.entity.Player;
 
 import com.sk89q.worldguard.protection.managers.RegionManager;
 
@@ -58,27 +58,27 @@ public class LandManager {
 		return false;
 	}
 
-	public boolean createLand(final Location loc, final Player player, final LandTypes type) {
+	public boolean createLand(final Location loc, final UUID playerUUID, final LandTypes type) {
 		switch (type) {
 		case SERVER:
 			return serverLand(loc);
 		case SHOP:
-			return shopLand(loc, player);
+			return shopLand(loc, playerUUID);
 		case WORLD:
-			return defaultLand(loc, player);
+			return defaultLand(loc, playerUUID);
 		default:
 			System.err.println("No valid LandType!");
 			return false;
 		}
 	}
 
-	private boolean defaultLand(final Location loc, final Player player) {
+	private boolean defaultLand(final Location loc, final UUID playerUUID) {
 		try {
 			int chunkX = loc.getChunk().getX();
 			int chunkZ = loc.getChunk().getZ();
 			World world = loc.getWorld();
 			String regionName = buildLandName(world.getName(), chunkX, chunkZ);
-			RegionData regionData = mReg.newRegion(chunkX, chunkZ, world, player, regionName);
+			RegionData regionData = mReg.newRegion(chunkX, chunkZ, world, playerUUID, regionName);
 			regionData.setRegionState(true);
 			regionData = this.lockPacket.switchState(regionData, true);
 			regionData = this.mobPacket.switchState(regionData, true);
@@ -116,13 +116,13 @@ public class LandManager {
 
 	}
 
-	private boolean shopLand(final Location loc, final Player player) {
+	private boolean shopLand(final Location loc, final UUID playerUUID) {
 		try {
 			int chunkX = loc.getChunk().getX();
 			int chunkZ = loc.getChunk().getZ();
 			World world = loc.getWorld();
 			String regionName = buildLandName(LandTypes.SHOP.toString(), chunkX, chunkZ);
-			RegionData regionData = mReg.newRegion(chunkX, chunkZ, world, player, regionName);
+			RegionData regionData = mReg.newRegion(chunkX, chunkZ, world, playerUUID, regionName);
 			regionData.setRegionState(true);
 			regionData = this.lockPacket.switchState(regionData, true);
 			regionData = this.mobPacket.switchState(regionData, true);
@@ -138,7 +138,7 @@ public class LandManager {
 
 	}
 
-	public boolean removeLand(final RegionData regionData, final World world, final Player player) {
+	public boolean removeLand(final RegionData regionData, final World world) {
 		try {
 			RegionData emptyRegionData = mReg.removeRegion(regionData, world);
 			saveMrg.save(emptyRegionData, world);
@@ -149,12 +149,12 @@ public class LandManager {
 		return true;
 	}
 
-	public boolean addMember(final RegionData regionData, final World world, final Player player) {
+	public boolean addMember(final RegionData regionData, final World world, final UUID playerUUID) {
 		try {
 
 			List<RegionData> list = new ArrayList<RegionData>();
 			list.add(regionData);
-			mRegE.addMember(list, world, player);
+			mRegE.addMember(list, world, playerUUID);
 			saveMrg.save(null, world);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -163,12 +163,12 @@ public class LandManager {
 		return true;
 	}
 
-	public boolean removeMember(final RegionData regionData, final World world, final Player player) {
+	public boolean removeMember(final RegionData regionData, final World world, final UUID playerUUID) {
 		try {
 
 			List<RegionData> list = new ArrayList<RegionData>();
 			list.add(regionData);
-			mRegE.removeMember(list, world, player);
+			mRegE.removeMember(list, world, playerUUID);
 			saveMrg.save(null, world);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -17,5 +17,6 @@ public class LanguageManager {
 
 	/* UnSuccess MSG */
 	public String buyIsAlreadyLand = "Dieses Grundstück {regionID} ist nicht mehr frei!";
+	public String notEnoughMoney = "Das kannst du dir leider nicht leisten. Kosten: {cost}!";
 
 }

@@ -40,7 +40,13 @@ public class BuyLand implements ILandCmd {
 			return true;
 		}
 
-		if (!plugin.getLandManager().createLand(loc, player, LandTypes.WORLD)) {
+		double testValue = 300D;
+		if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), testValue)) {
+			sender.sendMessage(plugin.getLanguageManager().notEnoughMoney.replace("{cost}", "" + testValue));
+			return true;
+		}
+
+		if (!plugin.getLandManager().createLand(loc, player.getUniqueId(), LandTypes.WORLD)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-REGION"));
 			plugin.getLogger().warning(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-REGION"));

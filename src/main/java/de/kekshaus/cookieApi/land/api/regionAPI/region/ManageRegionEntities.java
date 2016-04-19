@@ -3,9 +3,11 @@ package de.kekshaus.cookieApi.land.api.regionAPI.region;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
-import org.bukkit.entity.Player;
 
 import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.domains.DefaultDomain;
@@ -20,8 +22,9 @@ public class ManageRegionEntities {
 
 	}
 
-	public List<RegionData> setOwner(List<RegionData> regionListe, World world, Player player) {
-		LocalPlayer lPlayer = Landplugin.inst().getWorldGuardPlugin().wrapPlayer(player);
+	public List<RegionData> setOwner(List<RegionData> regionListe, World world, UUID playerUUID) {
+		OfflinePlayer player = Bukkit.getOfflinePlayer(playerUUID);
+		LocalPlayer lPlayer = Landplugin.inst().getWorldGuardPlugin().wrapOfflinePlayer(player);
 		DefaultDomain domain = new DefaultDomain();
 		domain.addPlayer(lPlayer);
 		if (regionListe.size() <= 30) {
@@ -46,8 +49,9 @@ public class ManageRegionEntities {
 
 	}
 
-	public List<RegionData> addMember(List<RegionData> regionListe, World world, Player player) {
-		LocalPlayer lPlayer = Landplugin.inst().getWorldGuardPlugin().wrapPlayer(player);
+	public List<RegionData> addMember(List<RegionData> regionListe, World world, UUID playerUUID) {
+		OfflinePlayer player = Bukkit.getOfflinePlayer(playerUUID);
+		LocalPlayer lPlayer = Landplugin.inst().getWorldGuardPlugin().wrapOfflinePlayer(player);
 		if (regionListe.size() <= 30) {
 
 			for (RegionData region : regionListe) {
@@ -70,8 +74,9 @@ public class ManageRegionEntities {
 
 	}
 
-	public List<RegionData> removeMember(List<RegionData> regionListe, World world, Player player) {
-		LocalPlayer lPlayer = Landplugin.inst().getWorldGuardPlugin().wrapPlayer(player);
+	public List<RegionData> removeMember(List<RegionData> regionListe, World world, UUID playerUUID) {
+		OfflinePlayer player = Bukkit.getOfflinePlayer(playerUUID);
+		LocalPlayer lPlayer = Landplugin.inst().getWorldGuardPlugin().wrapOfflinePlayer(player);
 		if (regionListe.size() <= 30) {
 
 			for (RegionData region : regionListe) {
@@ -117,8 +122,9 @@ public class ManageRegionEntities {
 
 	}
 
-	public List<ProtectedRegion> getAllLands(Player player, World world) {
-		LocalPlayer lPlayer = Landplugin.inst().getWorldGuardPlugin().wrapPlayer(player);
+	public List<ProtectedRegion> getAllLands(UUID playerUUID, World world) {
+		OfflinePlayer player = Bukkit.getOfflinePlayer(playerUUID);
+		LocalPlayer lPlayer = Landplugin.inst().getWorldGuardPlugin().wrapOfflinePlayer(player);
 		RegionManager rm = Landplugin.inst().getWorldGuardPlugin().getRegionManager(world);
 		List<ProtectedRegion> toReturn = new ArrayList<ProtectedRegion>();
 

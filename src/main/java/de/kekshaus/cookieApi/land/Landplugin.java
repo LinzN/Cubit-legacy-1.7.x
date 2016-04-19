@@ -10,6 +10,7 @@ import de.kekshaus.cookieApi.land.api.blockAPI.BlockManager;
 import de.kekshaus.cookieApi.land.api.particleAPI.ParticleManager;
 import de.kekshaus.cookieApi.land.api.regionAPI.LandManager;
 import de.kekshaus.cookieApi.land.api.sqlAPI.SqlManager;
+import de.kekshaus.cookieApi.land.api.vaultAPI.VaultManager;
 import de.kekshaus.cookieApi.land.commandSuite.SetupCommands;
 
 public class Landplugin extends JavaPlugin {
@@ -20,15 +21,16 @@ public class Landplugin extends JavaPlugin {
 	private LandManager landMrg;
 	private BlockManager blockMrg;
 	private ParticleManager particleMrg;
+	private VaultManager vaultMrg;
 	private SqlManager sqlMrg;
 	private LanguageManager langMrg;
 
 	public void onEnable() {
 		inst = this;
-		wgPl = WorldGuardPlugin.inst();
-		wePl = WorldEdit.getInstance();
+		this.wgPl = WorldGuardPlugin.inst();
+		this.wePl = WorldEdit.getInstance();
 		setupManagers();
-		if (!sqlMrg.link()) {
+		if (!this.sqlMrg.link()) {
 			this.setEnabled(false);
 		}
 		new SetupCommands(this);
@@ -43,6 +45,7 @@ public class Landplugin extends JavaPlugin {
 		landMrg = new LandManager(this);
 		blockMrg = new BlockManager(this);
 		particleMrg = new ParticleManager(this);
+		vaultMrg = new VaultManager(this);
 		langMrg = new LanguageManager();
 
 	}
@@ -52,19 +55,23 @@ public class Landplugin extends JavaPlugin {
 	}
 
 	public LandManager getLandManager() {
-		return landMrg;
+		return this.landMrg;
 	}
 
 	public BlockManager getBlockManager() {
-		return blockMrg;
+		return this.blockMrg;
 	}
 
 	public ParticleManager getParticleManager() {
-		return particleMrg;
+		return this.particleMrg;
 	}
 
 	public SqlManager getSqlManager() {
-		return sqlMrg;
+		return this.sqlMrg;
+	}
+
+	public VaultManager getVaultManager() {
+		return this.vaultMrg;
 	}
 
 	public LanguageManager getLanguageManager() {
