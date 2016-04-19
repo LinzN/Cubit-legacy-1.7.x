@@ -19,12 +19,14 @@ import de.kekshaus.cookieApi.land.api.regionAPI.region.LandTypes;
 import de.kekshaus.cookieApi.land.api.regionAPI.region.ManageRegionEntities;
 import de.kekshaus.cookieApi.land.api.regionAPI.region.ManageRegions;
 import de.kekshaus.cookieApi.land.api.regionAPI.region.RegionData;
+import de.kekshaus.cookieApi.land.api.regionAPI.region.SaveRegions;
 
 public class LandManager {
 
 	private Landplugin plugin;
 	private ManageRegions mReg;
 	private ManageRegionEntities mRegE;
+	private SaveRegions saveMrg;
 	private FirePacket firePacket;
 	private LockPacket lockPacket;
 	private MobPacket mobPacket;
@@ -35,6 +37,7 @@ public class LandManager {
 		this.plugin = plugin;
 		this.mReg = new ManageRegions();
 		this.mRegE = new ManageRegionEntities();
+		this.saveMrg = new SaveRegions();
 		this.firePacket = new FirePacket();
 		this.lockPacket = new LockPacket();
 		this.mobPacket = new MobPacket();
@@ -82,7 +85,7 @@ public class LandManager {
 			regionData = this.pvpPacket.switchState(regionData, true);
 			regionData = this.tntPacket.switchState(regionData, true);
 			regionData = this.firePacket.switchState(regionData, true);
-			new SaveManager(regionData, world);
+			saveMrg.save(regionData, world);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -104,7 +107,7 @@ public class LandManager {
 			regionData = this.pvpPacket.switchState(regionData, true);
 			regionData = this.tntPacket.switchState(regionData, true);
 			regionData = this.firePacket.switchState(regionData, true);
-			new SaveManager(regionData, world);
+			saveMrg.save(regionData, world);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -126,7 +129,7 @@ public class LandManager {
 			regionData = this.pvpPacket.switchState(regionData, true);
 			regionData = this.tntPacket.switchState(regionData, true);
 			regionData = this.firePacket.switchState(regionData, true);
-			new SaveManager(regionData, world);
+			saveMrg.save(regionData, world);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -138,7 +141,7 @@ public class LandManager {
 	public boolean removeLand(final RegionData regionData, final World world, final Player player) {
 		try {
 			RegionData emptyRegionData = mReg.removeRegion(regionData, world);
-			new SaveManager(emptyRegionData, world);
+			saveMrg.save(emptyRegionData, world);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -152,7 +155,7 @@ public class LandManager {
 			List<RegionData> list = new ArrayList<RegionData>();
 			list.add(regionData);
 			mRegE.addMember(list, world, player);
-			new SaveManager(null, world);
+			saveMrg.save(null, world);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -166,7 +169,7 @@ public class LandManager {
 			List<RegionData> list = new ArrayList<RegionData>();
 			list.add(regionData);
 			mRegE.removeMember(list, world, player);
-			new SaveManager(null, world);
+			saveMrg.save(null, world);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -182,7 +185,7 @@ public class LandManager {
 			} else {
 				this.firePacket.switchState(regionData, state);
 			}
-			new SaveManager(null, world);
+			saveMrg.save(null, world);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -198,7 +201,7 @@ public class LandManager {
 			} else {
 				this.lockPacket.switchState(regionData, state);
 			}
-			new SaveManager(null, world);
+			saveMrg.save(null, world);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -214,7 +217,7 @@ public class LandManager {
 			} else {
 				this.mobPacket.switchState(regionData, state);
 			}
-			new SaveManager(null, world);
+			saveMrg.save(null, world);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -230,7 +233,7 @@ public class LandManager {
 			} else {
 				this.pvpPacket.switchState(regionData, state);
 			}
-			new SaveManager(null, world);
+			saveMrg.save(null, world);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -246,7 +249,7 @@ public class LandManager {
 			} else {
 				this.tntPacket.switchState(regionData, state);
 			}
-			new SaveManager(null, world);
+			saveMrg.save(null, world);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
