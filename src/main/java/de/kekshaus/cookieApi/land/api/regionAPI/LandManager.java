@@ -210,7 +210,7 @@ public class LandManager {
 		return true;
 	}
 
-	public boolean switchMobPacket(final RegionData regionData, final World world, final boolean state,
+	public boolean switchMonsterPacket(final RegionData regionData, final World world, final boolean state,
 			final boolean random) {
 		try {
 			if (random) {
@@ -276,6 +276,46 @@ public class LandManager {
 
 	public String getColoredTNTState(RegionData regionData) {
 		return this.tntPacket.getStateColor(regionData) + this.tntPacket.getPacketName();
+	}
+
+	public String getLockName() {
+		return this.lockPacket.getPacketName();
+	}
+
+	public String getFireName() {
+		return this.firePacket.getPacketName();
+	}
+
+	public String getMonsterName() {
+		return this.monsterPacket.getPacketName();
+	}
+
+	public String getPvPName() {
+		return this.pvpPacket.getPacketName();
+	}
+
+	public String getTNTName() {
+		return this.tntPacket.getPacketName();
+	}
+
+	public boolean getLockState(RegionData regionData) {
+		return this.lockPacket.getState(regionData);
+	}
+
+	public boolean getFireState(RegionData regionData) {
+		return this.firePacket.getState(regionData);
+	}
+
+	public boolean getMonsterState(RegionData regionData) {
+		return this.monsterPacket.getState(regionData);
+	}
+
+	public boolean getPvPState(RegionData regionData) {
+		return this.pvpPacket.getState(regionData);
+	}
+
+	public boolean getTNTState(RegionData regionData) {
+		return this.tntPacket.getState(regionData);
 	}
 
 	public RegionData praseRegionData(final World world, final int valueX, final int valueZ) {

@@ -16,6 +16,11 @@ import de.kekshaus.cookieApi.land.commandSuite.ILandCmd;
 import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.BuyLand;
 import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.HelpLand;
 import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.InfoLand;
+import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.flags.FireLand;
+import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.flags.LockLand;
+import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.flags.MonsterLand;
+import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.flags.PvPLand;
+import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.flags.TNTLand;
 
 public class CommandLand implements CommandExecutor {
 
@@ -57,9 +62,17 @@ public class CommandLand implements CommandExecutor {
 
 	public void loadCmd() {
 		try {
+			/* GS Buy/Sell Commands */
 			this.cmdMap.put("info", new InfoLand(this.plugin));
 			this.cmdMap.put("help", new HelpLand(this.plugin));
 			this.cmdMap.put("buy", new BuyLand(this.plugin));
+
+			/* Protection Commands */
+			this.cmdMap.put("pvp", new PvPLand(this.plugin));
+			this.cmdMap.put("fire", new FireLand(this.plugin));
+			this.cmdMap.put("lock", new LockLand(this.plugin));
+			this.cmdMap.put("tnt", new TNTLand(this.plugin));
+			this.cmdMap.put("monster", new MonsterLand(this.plugin));
 			this.isLoaded = true;
 		} catch (Exception e) {
 			e.printStackTrace();

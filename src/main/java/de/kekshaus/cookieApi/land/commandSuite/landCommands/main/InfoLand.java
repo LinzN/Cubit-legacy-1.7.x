@@ -30,9 +30,12 @@ public class InfoLand implements ILandCmd {
 		/* Build and get all variables */
 		Player player = (Player) sender;
 
+		/* Permission Check */
 		if (!player.hasPermission(plugin.getPermNodes().infoLand)) {
+			sender.sendMessage(plugin.getLanguageManager().errorNoPermission);
 			return true;
 		}
+
 		final Location loc = player.getLocation();
 		final Chunk chunk = loc.getChunk();
 		RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
@@ -105,6 +108,7 @@ public class InfoLand implements ILandCmd {
 	}
 
 	private void noInfo(Player player, RegionData regionData, Location loc, Chunk chunk) {
+		/* Buy-able region */
 		double testValue = 300D;
 		final String regionID = plugin.getLandManager().buildLandName(loc.getWorld().getName(), chunk.getX(),
 				chunk.getZ());

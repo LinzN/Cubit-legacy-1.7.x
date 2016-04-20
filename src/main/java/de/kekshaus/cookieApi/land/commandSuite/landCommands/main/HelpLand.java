@@ -21,6 +21,14 @@ public class HelpLand implements ILandCmd {
 			sender.sendMessage(plugin.getLanguageManager().noConsoleMode);
 			return true;
 		}
+		/* Build and get all variables */
+		Player player = (Player) sender;
+
+		/* Permission Check */
+		if (!player.hasPermission(plugin.getPermNodes().helpLand)) {
+			sender.sendMessage(plugin.getLanguageManager().errorNoPermission);
+			return true;
+		}
 
 		if (args.length < 2) {
 		} else if (args[1].toString().equalsIgnoreCase("2")) {
