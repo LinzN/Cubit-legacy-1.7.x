@@ -11,7 +11,7 @@ public class Language {
 
 	/* Success MSG */
 	public String buySuccess = "§2Du hast das Grundstück §e{regionID}§2 gekauft!";
-	public String flagSwitchSuccess = "§2Das Schutz-System §9§l{flag}-Schutz §2wurde zu §9§l{value} §2gewechselt!";
+	public String flagSwitchSuccess = "§2Das System §9§l{flag}-Schutz §2wurde zu §9§l{value} §2gewechselt!";
 
 	/* UnSuccess MSG */
 	public String buyIsAlreadyLand = "§cDieses Grundstück §e{regionID}§c ist nicht mehr frei!";

@@ -11,6 +11,7 @@ import de.kekshaus.cookieApi.land.api.regionAPI.region.RegionData;
 
 public class PvPPacket implements IPacket {
 
+	@Override
 	public RegionData enablePacket(RegionData regionData) {
 		regionData.praseWGRegion().setFlag(DefaultFlag.PVP, StateFlag.State.DENY);
 		regionData.praseWGRegion().setFlag(DefaultFlag.POTION_SPLASH, StateFlag.State.DENY);
@@ -18,6 +19,7 @@ public class PvPPacket implements IPacket {
 
 	}
 
+	@Override
 	public RegionData disablePacket(RegionData regionData) {
 		regionData.praseWGRegion().setFlag(DefaultFlag.PVP, StateFlag.State.ALLOW);
 		regionData.praseWGRegion().setFlag(DefaultFlag.POTION_SPLASH, StateFlag.State.ALLOW);
@@ -25,6 +27,7 @@ public class PvPPacket implements IPacket {
 
 	}
 
+	@Override
 	public boolean getState(RegionData regionData) {
 		if (regionData.praseWGRegion().getFlag(DefaultFlag.PVP) == StateFlag.State.DENY) {
 			return true;
@@ -32,6 +35,7 @@ public class PvPPacket implements IPacket {
 		return false;
 	}
 
+	@Override
 	public ChatColor getStateColor(RegionData regionData) {
 		if (getState(regionData)) {
 			return ChatColor.GREEN;
@@ -39,6 +43,7 @@ public class PvPPacket implements IPacket {
 		return ChatColor.RED;
 	}
 
+	@Override
 	public RegionData switchState(RegionData regionData, boolean value, boolean save) {
 		RegionData newRegionData = regionData;
 		if (value) {
@@ -52,6 +57,7 @@ public class PvPPacket implements IPacket {
 		return newRegionData;
 	}
 
+	@Override
 	public RegionData switchState(RegionData regionData, boolean save) {
 		if (getState(regionData)) {
 			return switchState(regionData, false, save);

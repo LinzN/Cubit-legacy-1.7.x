@@ -32,7 +32,7 @@ public class FlagLand implements ILandCmd {
 		Player player = (Player) sender;
 
 		/* Permission Check */
-		if (!player.hasPermission(plugin.getPermNodes().lockLand)) {
+		if (!player.hasPermission(plugin.getPermNodes().flagLand + packet.getPacketName())) {
 			sender.sendMessage(plugin.getLanguageManager().errorNoPermission);
 			return true;
 		}
@@ -45,7 +45,7 @@ public class FlagLand implements ILandCmd {
 		if (args.length < 2) {
 		} else if (args[1].toString().equalsIgnoreCase("on")) {
 
-			packet.switchState(regionData, true);
+			packet.switchState(regionData, true, true);
 			String stateString = plugin.getLandManager().getStringState(packet.getState(regionData));
 			sender.sendMessage(plugin.getLanguageManager().flagSwitchSuccess.replace("{flag}", packet.getPacketName())
 					.replace("{value}", stateString));
@@ -53,7 +53,7 @@ public class FlagLand implements ILandCmd {
 			return true;
 		} else if (args[1].toString().equalsIgnoreCase("off")) {
 
-			packet.switchState(regionData, false);
+			packet.switchState(regionData, false, true);
 			String stateString = plugin.getLandManager().getStringState(packet.getState(regionData));
 			sender.sendMessage(plugin.getLanguageManager().flagSwitchSuccess.replace("{flag}", packet.getPacketName())
 					.replace("{value}", stateString));
