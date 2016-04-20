@@ -31,16 +31,24 @@ public class InfoLand implements ILandCmd {
 		Player player = (Player) sender;
 		final Location loc = player.getLocation();
 		final Chunk chunk = loc.getChunk();
-		final String regionID = plugin.getLandManager().buildLandName(loc.getWorld().getName(), chunk.getX(),
-				chunk.getZ());
-		double testValue = 300D;
+		RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 
 		sender.sendMessage(plugin.getLanguageManager().landHeader);
 		/* Check if this is a valid infoTask */
-		if (!plugin.getLandManager().isLand(loc.getWorld(), chunk.getX(), chunk.getZ())) {
-			sender.sendMessage(plugin.getLanguageManager().landInfoA1.replace("{cost}", "" + testValue)
-					.replace("{regionID}", regionID));
-			return true;
+
+		switch (regionData.getLandType()) {
+		case SERVER:
+			serverInfo(player, regionData);
+			break;
+		case SHOP:
+			shopInfo(player, regionData);
+			break;
+		case WORLD:
+			landInfo(player, regionData);
+			break;
+		default:
+			noInfo(player, regionData, loc, chunk);
+			break;
 		}
 
 		if (!plugin.getParticleManager().sendCustomPaticle(player, loc, Effect.HAPPY_VILLAGER,
@@ -51,20 +59,40 @@ public class InfoLand implements ILandCmd {
 			return true;
 		}
 
+		return true;
+	}
+
+	private void landInfo(Player player, RegionData regionData) {
 		/* Get RegionData Info */
-		RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 		Guild guild = regionData.getGuild();
 
-		sender.sendMessage(
+		player.sendMessage(
 				plugin.getLanguageManager().landInfoE1.replace("{regionID}", regionData.praseWGRegion().getId()));
 		if (guild != null) {
-			sender.sendMessage(plugin.getLanguageManager().landInfoE1A1.replace("{regionID}", guild.getGuildName()));
+			player.sendMessage(plugin.getLanguageManager().landInfoE1A1.replace("{regionID}", guild.getGuildName()));
 		}
-		sender.sendMessage(plugin.getLanguageManager().landInfoE2.replace("{owner}", regionData.getOwnerName()));
-		sender.sendMessage(plugin.getLanguageManager().landInfoE3);
-		sender.sendMessage(plugin.getLanguageManager().landInfoE4.replace("{time}", "Noch nix da"));
+		player.sendMessage(plugin.getLanguageManager().landInfoE2.replace("{owner}", regionData.getOwnerName()));
+		player.sendMessage(plugin.getLanguageManager().landInfoE3);
+		player.sendMessage(plugin.getLanguageManager().landInfoE4.replace("{time}", "Noch nix da"));
+		return;
 
-		return true;
+	}
+
+	private void shopInfo(Player player, RegionData regionData) {
+		return;
+	}
+
+	private void serverInfo(Player player, RegionData regionData) {
+		return;
+	}
+
+	private void noInfo(Player player, RegionData regionData, Location loc, Chunk chunk) {
+		double testValue = 300D;
+		final String regionID = plugin.getLandManager().buildLandName(loc.getWorld().getName(), chunk.getX(),
+				chunk.getZ());
+		player.sendMessage(plugin.getLanguageManager().landInfoA1.replace("{cost}", "" + testValue)
+				.replace("{regionID}", regionID));
+		return;
 	}
 
 }

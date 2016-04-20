@@ -259,11 +259,11 @@ public class LandManager {
 	}
 
 	public RegionData praseRegionData(final World world, final int valueX, final int valueZ) {
-		RegionData regionData = new RegionData(getWGRegion(world, valueZ, valueZ), world);
+		RegionData regionData = new RegionData(praseWGRegion(world, valueZ, valueZ), world);
 		return regionData;
 	}
 
-	private ProtectedRegion getWGRegion(final World world, final int valueX, final int valueZ) {
+	private ProtectedRegion praseWGRegion(final World world, final int valueX, final int valueZ) {
 		List<String> types = getAvailableNames();
 		RegionManager manager = plugin.getWorldGuardPlugin().getRegionManager(world);
 
