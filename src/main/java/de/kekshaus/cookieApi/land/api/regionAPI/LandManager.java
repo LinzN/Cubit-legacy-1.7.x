@@ -47,14 +47,17 @@ public class LandManager {
 	}
 
 	public boolean isLand(final World world, final int valueX, final int valueZ) {
-		List<String> types = getAvailableNames();
-		RegionManager manager = plugin.getWorldGuardPlugin().getRegionManager(world);
 
-		for (String name : types) {
-			String regionName = buildLandName(name, valueX, valueZ);
-			if (manager.hasRegion(regionName)) {
-				return true;
-			}
+		RegionManager manager = plugin.getWorldGuardPlugin().getRegionManager(world);
+		String serverName = buildLandName(LandTypes.SERVER.toString(), valueX, valueZ);
+		String shopName = buildLandName(LandTypes.SHOP.toString(), valueX, valueZ);
+		String worldName = buildLandName(world.getName(), valueX, valueZ);
+		if (manager.hasRegion(serverName)) {
+			return true;
+		} else if (manager.hasRegion(shopName)) {
+			return true;
+		} else if (manager.hasRegion(worldName)) {
+			return true;
 		}
 		return false;
 	}
@@ -259,32 +262,28 @@ public class LandManager {
 	}
 
 	public RegionData praseRegionData(final World world, final int valueX, final int valueZ) {
-		RegionData regionData = new RegionData(praseWGRegion(world, valueZ, valueZ), world);
+		ProtectedRegion region = praseWGRegion(world, valueZ, valueZ);
+		RegionData regionData = new RegionData(region, world);
 		return regionData;
 	}
 
 	private ProtectedRegion praseWGRegion(final World world, final int valueX, final int valueZ) {
-		List<String> types = getAvailableNames();
-		RegionManager manager = plugin.getWorldGuardPlugin().getRegionManager(world);
 
-		for (String name : types) {
-			String regionName = buildLandName(name, valueX, valueZ);
-			if (manager.hasRegion(regionName)) {
-				return manager.getRegion(regionName);
-			}
+		RegionManager manager = plugin.getWorldGuardPlugin().getRegionManager(world);
+		String serverName = buildLandName(LandTypes.SERVER.toString(), valueX, valueZ);
+		String shopName = buildLandName(LandTypes.SHOP.toString(), valueX, valueZ);
+		String worldName = buildLandName(world.getName(), valueX, valueZ);
+		if (manager.hasRegion(serverName)) {
+			return manager.getRegion(serverName);
+
+		} else if (manager.hasRegion(shopName)) {
+			return manager.getRegion(shopName);
+
+		} else if (manager.hasRegion(worldName)) {
+			return manager.getRegion(worldName);
+
 		}
 		return null;
-	}
-
-	private List<String> getAvailableNames() {
-		List<String> list = new ArrayList<String>();
-		for (LandTypes type : LandTypes.values()) {
-			list.add(type.toString());
-		}
-		for (World world : plugin.getServer().getWorlds()) {
-			list.add(world.getName());
-		}
-		return list;
 	}
 
 	public String buildLandName(final String type, final int valueX, final int valueZ) {
