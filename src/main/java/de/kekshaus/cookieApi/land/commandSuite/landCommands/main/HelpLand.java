@@ -9,9 +9,11 @@ import de.kekshaus.cookieApi.land.commandSuite.ILandCmd;
 public class HelpLand implements ILandCmd {
 
 	private Landplugin plugin;
+	private String permNode;
 
-	public HelpLand(Landplugin plugin) {
+	public HelpLand(Landplugin plugin, String permNode) {
 		this.plugin = plugin;
+		this.permNode = permNode;
 	}
 
 	@Override
@@ -25,7 +27,7 @@ public class HelpLand implements ILandCmd {
 		Player player = (Player) sender;
 
 		/* Permission Check */
-		if (!player.hasPermission(plugin.getPermNodes().helpLand)) {
+		if (!player.hasPermission(this.permNode)) {
 			sender.sendMessage(plugin.getLanguageManager().errorNoPermission);
 			return true;
 		}

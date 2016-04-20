@@ -14,9 +14,12 @@ import de.kekshaus.cookieApi.land.commandSuite.ILandCmd;
 public class BuyLand implements ILandCmd {
 
 	private Landplugin plugin;
+	private String permNode;
 
-	public BuyLand(Landplugin plugin) {
+	public BuyLand(Landplugin plugin, String permNode) {
 		this.plugin = plugin;
+		this.permNode = permNode;
+
 	}
 
 	@Override
@@ -31,7 +34,7 @@ public class BuyLand implements ILandCmd {
 		Player player = (Player) sender;
 
 		/* Permission Check */
-		if (!player.hasPermission(plugin.getPermNodes().buyLand)) {
+		if (!player.hasPermission(this.permNode)) {
 			sender.sendMessage(plugin.getLanguageManager().errorNoPermission);
 			return true;
 		}

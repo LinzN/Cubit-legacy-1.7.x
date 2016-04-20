@@ -14,9 +14,11 @@ import de.kekshaus.cookieApi.land.commandSuite.ILandCmd;
 public class InfoLand implements ILandCmd {
 
 	private Landplugin plugin;
+	private String permNode;
 
-	public InfoLand(Landplugin plugin) {
+	public InfoLand(Landplugin plugin, String permNode) {
 		this.plugin = plugin;
+		this.permNode = permNode;
 	}
 
 	@Override
@@ -31,7 +33,7 @@ public class InfoLand implements ILandCmd {
 		Player player = (Player) sender;
 
 		/* Permission Check */
-		if (!player.hasPermission(plugin.getPermNodes().infoLand)) {
+		if (!player.hasPermission(this.permNode)) {
 			sender.sendMessage(plugin.getLanguageManager().errorNoPermission);
 			return true;
 		}

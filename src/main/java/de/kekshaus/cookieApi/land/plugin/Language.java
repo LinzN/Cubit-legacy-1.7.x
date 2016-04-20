@@ -8,6 +8,7 @@ public class Language {
 	public String errorCommand = "§4Es ist ein Fehler bei dem Befehl [§e{command}§4] aufgetreten!";
 	public String errorNoCommand = "§cDiesen Befehl gibt es nicht! Gib §e{command}§c ein!";
 	public String errorNoPermission = "§4Du hast dafür leider keine Berechtigungen! :(";
+	public String errorNoLandPermission = "§cDu hast für das Land {regionID} keine Berechtigungen! :(";
 
 	/* Success MSG */
 	public String buySuccess = "§2Du hast das Grundstück §e{regionID}§2 gekauft!";

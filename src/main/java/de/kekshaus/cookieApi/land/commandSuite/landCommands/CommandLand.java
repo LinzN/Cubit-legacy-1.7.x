@@ -17,6 +17,7 @@ import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.BuyLand;
 import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.FlagLand;
 import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.HelpLand;
 import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.InfoLand;
+import de.kekshaus.cookieApi.land.plugin.PermissionNodes;
 
 public class CommandLand implements CommandExecutor {
 
@@ -58,17 +59,23 @@ public class CommandLand implements CommandExecutor {
 
 	public void loadCmd() {
 		try {
+			PermissionNodes perm = Landplugin.inst().getPermNodes();
 			/* GS Buy/Sell Commands */
-			this.cmdMap.put("info", new InfoLand(this.plugin));
-			this.cmdMap.put("help", new HelpLand(this.plugin));
-			this.cmdMap.put("buy", new BuyLand(this.plugin));
+			this.cmdMap.put("info", new InfoLand(this.plugin, perm.infoLand));
+			this.cmdMap.put("help", new HelpLand(this.plugin, perm.helpLand));
+			this.cmdMap.put("buy", new BuyLand(this.plugin, perm.buyLand));
 
 			/* Protection Commands */
-			this.cmdMap.put("pvp", new FlagLand(this.plugin, Landplugin.inst().getLandManager().pvpPacket));
-			this.cmdMap.put("fire", new FlagLand(this.plugin, Landplugin.inst().getLandManager().firePacket));
-			this.cmdMap.put("lock", new FlagLand(this.plugin, Landplugin.inst().getLandManager().lockPacket));
-			this.cmdMap.put("tnt", new FlagLand(this.plugin, Landplugin.inst().getLandManager().tntPacket));
-			this.cmdMap.put("monster", new FlagLand(this.plugin, Landplugin.inst().getLandManager().monsterPacket));
+			this.cmdMap.put("pvp", new FlagLand(this.plugin, Landplugin.inst().getLandManager().pvpPacket, false,
+					perm.flagLand + "pvp"));
+			this.cmdMap.put("fire", new FlagLand(this.plugin, Landplugin.inst().getLandManager().firePacket, false,
+					perm.flagLand + "fire"));
+			this.cmdMap.put("lock", new FlagLand(this.plugin, Landplugin.inst().getLandManager().lockPacket, false,
+					perm.flagLand + "lock"));
+			this.cmdMap.put("tnt", new FlagLand(this.plugin, Landplugin.inst().getLandManager().tntPacket, false,
+					perm.flagLand + "tnt"));
+			this.cmdMap.put("monster", new FlagLand(this.plugin, Landplugin.inst().getLandManager().monsterPacket,
+					false, perm.flagLand + "monster"));
 			this.isLoaded = true;
 		} catch (Exception e) {
 			e.printStackTrace();

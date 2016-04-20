@@ -220,4 +220,13 @@ public class LandManager {
 	public SaveRegions getRegionSaver() {
 		return this.saveMrg;
 	}
+
+	public boolean hasLandPermission(final RegionData regionData, final UUID uuid) {
+		if (regionData.praseWGRegion().getOwners().getUniqueIds().contains(uuid)) {
+
+			return true;
+		}
+		return false;
+
+	}
 }

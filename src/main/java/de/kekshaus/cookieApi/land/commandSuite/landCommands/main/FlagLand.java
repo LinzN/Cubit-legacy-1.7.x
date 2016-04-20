@@ -14,10 +14,14 @@ public class FlagLand implements ILandCmd {
 
 	private Landplugin plugin;
 	private IPacket packet;
+	private boolean isAdmin;
+	private String permNode;
 
-	public FlagLand(Landplugin plugin, IPacket packet) {
+	public FlagLand(Landplugin plugin, IPacket packet, boolean isAdmin, String permNode) {
 		this.plugin = plugin;
 		this.packet = packet;
+		this.isAdmin = isAdmin;
+		this.permNode = permNode;
 	}
 
 	@Override
@@ -32,7 +36,7 @@ public class FlagLand implements ILandCmd {
 		Player player = (Player) sender;
 
 		/* Permission Check */
-		if (!player.hasPermission(plugin.getPermNodes().flagLand + packet.getPacketName())) {
+		if (!player.hasPermission(this.permNode)) {
 			sender.sendMessage(plugin.getLanguageManager().errorNoPermission);
 			return true;
 		}
@@ -40,6 +44,16 @@ public class FlagLand implements ILandCmd {
 		final Location loc = player.getLocation();
 		final Chunk chunk = loc.getChunk();
 		RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
+
+		/*
+		 * Check if the player has permissions for this land or hat landadmin
+		 * permissions
+		 */
+		if (!plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId()) && this.isAdmin == false) {
+			sender.sendMessage(plugin.getLanguageManager().errorNoLandPermission.replace("{regionID}",
+					regionData.praseWGRegion().getId()));
+			return true;
+		}
 
 		/* Command based switch */
 		if (args.length < 2) {
@@ -60,7 +74,7 @@ public class FlagLand implements ILandCmd {
 
 			return true;
 		}
-		/* Switch flag-state to the other value */
+		/* Switch flag-state to the opposite value */
 		packet.switchState(regionData, true);
 		String stateString = plugin.getLandManager().getStringState(packet.getState(regionData));
 		sender.sendMessage(plugin.getLanguageManager().flagSwitchSuccess.replace("{flag}", packet.getPacketName())

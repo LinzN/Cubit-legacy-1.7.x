@@ -13,7 +13,8 @@ import com.google.common.collect.Maps;
 
 import de.kekshaus.cookieApi.land.Landplugin;
 import de.kekshaus.cookieApi.land.commandSuite.ILandCmd;
-import de.kekshaus.cookieApi.land.commandSuite.adminCommands.main.TestAdminCmd;
+import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.FlagLand;
+import de.kekshaus.cookieApi.land.plugin.PermissionNodes;
 
 public class CommandAdmin implements CommandExecutor {
 
@@ -54,7 +55,18 @@ public class CommandAdmin implements CommandExecutor {
 
 	public void loadCmd() {
 		try {
-			this.cmdMap.put("testcmd", new TestAdminCmd(this.plugin));
+			PermissionNodes perm = Landplugin.inst().getPermNodes();
+			/* Protection AdminCommands */
+			this.cmdMap.put("setpvp", new FlagLand(this.plugin, Landplugin.inst().getLandManager().pvpPacket, true,
+					perm.flagAdminLand + "pvp"));
+			this.cmdMap.put("setfire", new FlagLand(this.plugin, Landplugin.inst().getLandManager().firePacket, true,
+					perm.flagAdminLand + "fire"));
+			this.cmdMap.put("setlock", new FlagLand(this.plugin, Landplugin.inst().getLandManager().lockPacket, true,
+					perm.flagAdminLand + "lock"));
+			this.cmdMap.put("settnt", new FlagLand(this.plugin, Landplugin.inst().getLandManager().tntPacket, true,
+					perm.flagAdminLand + "tnt"));
+			this.cmdMap.put("setmonster", new FlagLand(this.plugin, Landplugin.inst().getLandManager().monsterPacket,
+					true, perm.flagAdminLand + "monster"));
 			this.isLoaded = true;
 		} catch (Exception e) {
 			e.printStackTrace();
