@@ -44,7 +44,6 @@ public class ManageRegions {
 	public RegionData removeRegion(RegionData regionData, World world) {
 		RegionManager manager = Landplugin.inst().getWorldGuardPlugin().getRegionManager(world);
 		manager.removeRegion(regionData.praseWGRegion().getId());
-
 		return regionData;
 
 	}

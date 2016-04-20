@@ -141,8 +141,8 @@ public class LandManager {
 
 	public boolean removeLand(final RegionData regionData, final World world) {
 		try {
-			RegionData emptyRegionData = mReg.removeRegion(regionData, world);
-			saveMrg.save(emptyRegionData);
+			mReg.removeRegion(regionData, world);
+			saveMrg.save(world);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;

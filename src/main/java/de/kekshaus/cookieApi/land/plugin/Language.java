@@ -9,9 +9,11 @@ public class Language {
 	public String errorNoCommand = "§cDiesen Befehl gibt es nicht! Gib §e{command}§c ein!";
 	public String errorNoPermission = "§4Du hast dafür leider keine Berechtigungen! :(";
 	public String errorNoLandPermission = "§cDu hast für das Land {regionID} keine Berechtigungen! :(";
+	public String errorNoLandFound = "§cEs wurde hier kein Land gefunden! :(";
 
 	/* Success MSG */
 	public String buySuccess = "§2Du hast das Grundstück §e{regionID}§2 gekauft!";
+	public String sellSuccess = "§2Du hast das Grundstück §e{regionID}§2 an den Server verkauft!";
 	public String flagSwitchSuccess = "§2Das System §9§l{flag}-Schutz §2wurde zu §9§l{value} §2gewechselt!";
 
 	/* UnSuccess MSG */

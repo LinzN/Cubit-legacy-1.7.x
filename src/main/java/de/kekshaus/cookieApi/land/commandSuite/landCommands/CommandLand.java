@@ -17,6 +17,7 @@ import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.BuyLand;
 import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.FlagLand;
 import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.HelpLand;
 import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.InfoLand;
+import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.SellLand;
 import de.kekshaus.cookieApi.land.plugin.PermissionNodes;
 
 public class CommandLand implements CommandExecutor {
@@ -64,6 +65,7 @@ public class CommandLand implements CommandExecutor {
 			this.cmdMap.put("info", new InfoLand(this.plugin, perm.infoLand));
 			this.cmdMap.put("help", new HelpLand(this.plugin, perm.helpLand));
 			this.cmdMap.put("buy", new BuyLand(this.plugin, perm.buyLand));
+			this.cmdMap.put("sell", new SellLand(this.plugin, false, perm.sellLand));
 
 			/* Protection Commands */
 			this.cmdMap.put("pvp", new FlagLand(this.plugin, Landplugin.inst().getLandManager().pvpPacket, false,

@@ -14,6 +14,7 @@ import com.google.common.collect.Maps;
 import de.kekshaus.cookieApi.land.Landplugin;
 import de.kekshaus.cookieApi.land.commandSuite.ILandCmd;
 import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.FlagLand;
+import de.kekshaus.cookieApi.land.commandSuite.landCommands.main.SellLand;
 import de.kekshaus.cookieApi.land.plugin.PermissionNodes;
 
 public class CommandAdmin implements CommandExecutor {
@@ -67,6 +68,7 @@ public class CommandAdmin implements CommandExecutor {
 					perm.flagAdminLand + "tnt"));
 			this.cmdMap.put("setmonster", new FlagLand(this.plugin, Landplugin.inst().getLandManager().monsterPacket,
 					true, perm.flagAdminLand + "monster"));
+			this.cmdMap.put("remove", new SellLand(this.plugin, true, perm.sellAdminLand));
 			this.isLoaded = true;
 		} catch (Exception e) {
 			e.printStackTrace();
