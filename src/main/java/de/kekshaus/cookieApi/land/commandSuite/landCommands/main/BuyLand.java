@@ -29,6 +29,10 @@ public class BuyLand implements ILandCmd {
 
 		/* Build and get all variables */
 		Player player = (Player) sender;
+
+		if (!player.hasPermission(plugin.getPermNodes().buyLand)) {
+			return true;
+		}
 		final Location loc = player.getLocation();
 		final Chunk chunk = loc.getChunk();
 		final String regionID = plugin.getLandManager().buildLandName(loc.getWorld().getName(), chunk.getX(),

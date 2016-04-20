@@ -18,10 +18,6 @@ import de.kekshaus.cookieApi.land.Landplugin;
 
 public class ManageRegionEntities {
 
-	public ManageRegionEntities() {
-
-	}
-
 	public List<RegionData> setOwner(List<RegionData> regionListe, World world, UUID playerUUID) {
 		OfflinePlayer player = Bukkit.getOfflinePlayer(playerUUID);
 		LocalPlayer lPlayer = Landplugin.inst().getWorldGuardPlugin().wrapOfflinePlayer(player);

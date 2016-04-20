@@ -2,21 +2,19 @@ package de.kekshaus.cookieApi.land.api.regionAPI.flags;
 
 import java.util.HashSet;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.EntityType;
 
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 
+import de.kekshaus.cookieApi.land.api.regionAPI.IPacket;
 import de.kekshaus.cookieApi.land.api.regionAPI.region.RegionData;
 
-public class MobPacket {
-
-	public MobPacket() {
-
-	}
+public class MonsterPacket implements IPacket {
 
 	@SuppressWarnings("serial")
-	private RegionData activateData(RegionData regionData) {
+	public RegionData enablePacket(RegionData regionData) {
 		regionData.praseWGRegion().setFlag(DefaultFlag.MOB_DAMAGE, StateFlag.State.DENY);
 		regionData.praseWGRegion().getFlags().put(DefaultFlag.DENY_SPAWN, new HashSet<EntityType>() {
 			{
@@ -42,7 +40,7 @@ public class MobPacket {
 	}
 
 	@SuppressWarnings("serial")
-	private RegionData deactivateData(RegionData regionData) {
+	public RegionData disablePacket(RegionData regionData) {
 		regionData.praseWGRegion().setFlag(DefaultFlag.MOB_DAMAGE, StateFlag.State.ALLOW);
 		regionData.praseWGRegion().getFlags().put(DefaultFlag.DENY_SPAWN, new HashSet<EntityType>() {
 			{
@@ -60,11 +58,18 @@ public class MobPacket {
 		return false;
 	}
 
+	public ChatColor getStateColor(RegionData regionData) {
+		if (getState(regionData)) {
+			return ChatColor.GREEN;
+		}
+		return ChatColor.RED;
+	}
+
 	public RegionData switchState(RegionData regionData, boolean value) {
 		if (value) {
-			return activateData(regionData);
+			return enablePacket(regionData);
 		} else {
-			return deactivateData(regionData);
+			return disablePacket(regionData);
 		}
 	}
 
@@ -74,5 +79,10 @@ public class MobPacket {
 		} else {
 			return switchState(regionData, true);
 		}
+	}
+
+	@Override
+	public String getPacketName() {
+		return "MONSTER";
 	}
 }

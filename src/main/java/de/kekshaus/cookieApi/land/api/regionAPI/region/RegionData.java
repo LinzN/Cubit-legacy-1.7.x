@@ -11,32 +11,26 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.kekshaus.cookieApi.guild.api.InternAPI;
 import de.kekshaus.cookieApi.guild.objects.Guild;
-import de.kekshaus.cookieApi.land.Landplugin;
 
 public class RegionData {
-	private String regionID;
+	// private String regionID;
 	private ProtectedRegion region;
 	private LandTypes type;
-	private String world;
-	private boolean newRegion = false;
+	private World world;
 
-	public RegionData(ProtectedRegion region, World world) {
-		this.regionID = region.getId();
+	public RegionData(World world) {
+		this.type = LandTypes.NOTYPE;
+		this.world = world;
+
+	}
+
+	public void setWGRegion(ProtectedRegion region) {
 		this.type = LandTypes.getLandType(region.getId());
-		this.world = world.getName();
 		this.region = region;
-
 	}
 
 	public ProtectedRegion praseWGRegion() {
-		if (newRegion) {
-			return this.region;
-		}
-		return Landplugin.inst().getWorldGuardPlugin().getRegionManager(Bukkit.getWorld(world)).getRegion(regionID);
-	}
-
-	public void setRegionState(boolean state) {
-		this.newRegion = state;
+		return this.region;
 	}
 
 	public Guild getGuild() {
@@ -44,36 +38,40 @@ public class RegionData {
 		return guild;
 	}
 
+	public String getMinPoint() {
+		return this.region.getMinimumPoint().getBlockX() + ", " + this.region.getMinimumPoint().getBlockZ();
+	}
+
+	public String getMaxPoint() {
+		return this.region.getMaximumPoint().getBlockX() + ", " + this.region.getMaximumPoint().getBlockZ();
+	}
+
 	public UUID getOwnerUUID() {
 		UUID playerUUID = null;
-		for (UUID uuid : Landplugin.inst().getWorldGuardPlugin().getRegionManager(Bukkit.getWorld(world))
-				.getRegion(regionID).getOwners().getUniqueIds()) {
+		for (UUID uuid : praseWGRegion().getOwners().getUniqueIds()) {
 			playerUUID = uuid;
 		}
 		return playerUUID;
 	}
 
 	public String getOwnerName() {
-		String name = null;
-		for (UUID uuid : Landplugin.inst().getWorldGuardPlugin().getRegionManager(Bukkit.getWorld(world))
-				.getRegion(regionID).getMembers().getUniqueIds()) {
-			name = Bukkit.getServer().getOfflinePlayer(uuid).getName();
-		}
-		return name;
+		return Bukkit.getServer().getOfflinePlayer(getOwnerUUID()).getName();
 	}
 
 	public Set<UUID> getMembersUUID() {
-		return Landplugin.inst().getWorldGuardPlugin().getRegionManager(Bukkit.getWorld(world)).getRegion(regionID)
-				.getMembers().getUniqueIds();
+		return praseWGRegion().getMembers().getUniqueIds();
 	}
 
 	public Set<String> getMembersName() {
 		Set<String> list = new HashSet<String>();
-		for (UUID uuid : Landplugin.inst().getWorldGuardPlugin().getRegionManager(Bukkit.getWorld(world))
-				.getRegion(regionID).getMembers().getUniqueIds()) {
+		for (UUID uuid : getMembersUUID()) {
 			list.add(Bukkit.getServer().getOfflinePlayer(uuid).getName());
 		}
 		return list;
+	}
+
+	public World getWorld() {
+		return this.world;
 	}
 
 	public LandTypes getLandType() {

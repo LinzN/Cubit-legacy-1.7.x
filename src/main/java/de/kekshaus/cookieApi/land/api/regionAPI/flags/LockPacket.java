@@ -1,19 +1,18 @@
 package de.kekshaus.cookieApi.land.api.regionAPI.flags;
 
+import org.bukkit.ChatColor;
+
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.RegionGroup;
 import com.sk89q.worldguard.protection.flags.RegionGroupFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 
+import de.kekshaus.cookieApi.land.api.regionAPI.IPacket;
 import de.kekshaus.cookieApi.land.api.regionAPI.region.RegionData;
 
-public class LockPacket {
+public class LockPacket implements IPacket {
 
-	public LockPacket() {
-
-	}
-
-	private RegionData activateData(RegionData regionData) {
+	public RegionData enablePacket(RegionData regionData) {
 		RegionGroupFlag groupFlag = DefaultFlag.USE.getRegionGroupFlag();
 		regionData.praseWGRegion().setFlag(groupFlag, RegionGroup.NON_MEMBERS);
 		regionData.praseWGRegion().setFlag(DefaultFlag.USE, StateFlag.State.DENY);
@@ -21,7 +20,7 @@ public class LockPacket {
 
 	}
 
-	private RegionData deactivateData(RegionData regionData) {
+	public RegionData disablePacket(RegionData regionData) {
 		RegionGroupFlag groupFlag = DefaultFlag.USE.getRegionGroupFlag();
 		regionData.praseWGRegion().setFlag(groupFlag, RegionGroup.ALL);
 		regionData.praseWGRegion().setFlag(DefaultFlag.USE, StateFlag.State.ALLOW);
@@ -36,11 +35,18 @@ public class LockPacket {
 		return false;
 	}
 
+	public ChatColor getStateColor(RegionData regionData) {
+		if (getState(regionData)) {
+			return ChatColor.GREEN;
+		}
+		return ChatColor.RED;
+	}
+
 	public RegionData switchState(RegionData regionData, boolean value) {
 		if (value) {
-			return activateData(regionData);
+			return enablePacket(regionData);
 		} else {
-			return deactivateData(regionData);
+			return disablePacket(regionData);
 		}
 	}
 
@@ -50,5 +56,10 @@ public class LockPacket {
 		} else {
 			return switchState(regionData, true);
 		}
+	}
+
+	@Override
+	public String getPacketName() {
+		return "LOCK";
 	}
 }

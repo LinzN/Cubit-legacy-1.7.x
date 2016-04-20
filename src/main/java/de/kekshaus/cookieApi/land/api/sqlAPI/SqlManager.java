@@ -1,5 +1,7 @@
 package de.kekshaus.cookieApi.land.api.sqlAPI;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 import de.kekshaus.cookieApi.land.Landplugin;
@@ -26,6 +28,11 @@ public class SqlManager {
 
 	public long getTimeStamp(UUID uuid) {
 		return getData.getTimeStamp(uuid);
+	}
+
+	public String getLastLoginFormated(UUID uuid) {
+		return new SimpleDateFormat("dd.MM.yyyy '-' HH:mm 'Uhr'").format(new Date(getTimeStamp(uuid)));
+
 	}
 
 	public OfferData getOfferData(OfferData data) {

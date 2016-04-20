@@ -7,11 +7,15 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import de.kekshaus.cookieApi.land.Landplugin;
 
 public class SaveRegions {
-	public SaveRegions() {
-
+	public void save(final RegionData regionData) {
+		saveData(regionData, regionData.getWorld());
 	}
 
-	public void save(final RegionData regionData, final World world) {
+	public void save(final World world) {
+		saveData(null, world);
+	}
+
+	public void saveData(final RegionData regionData, final World world) {
 		Landplugin.inst().getServer().getScheduler().runTaskAsynchronously(Landplugin.inst(), new Runnable() {
 			public void run() {
 				try {

@@ -14,6 +14,7 @@ import de.kekshaus.cookieApi.land.api.vaultAPI.VaultManager;
 import de.kekshaus.cookieApi.land.commandSuite.SetupCommands;
 import de.kekshaus.cookieApi.land.plugin.LandConfig;
 import de.kekshaus.cookieApi.land.plugin.Language;
+import de.kekshaus.cookieApi.land.plugin.PermissionNodes;
 
 public class Landplugin extends JavaPlugin {
 
@@ -27,6 +28,7 @@ public class Landplugin extends JavaPlugin {
 	private SqlManager sqlMrg;
 	private Language langMrg;
 	private LandConfig landConf;
+	private PermissionNodes permNodes;
 
 	public void onEnable() {
 		inst = this;
@@ -51,6 +53,7 @@ public class Landplugin extends JavaPlugin {
 		vaultMrg = new VaultManager(this);
 		langMrg = new Language();
 		landConf = new LandConfig(this);
+		permNodes = new PermissionNodes();
 
 	}
 
@@ -84,6 +87,10 @@ public class Landplugin extends JavaPlugin {
 
 	public LandConfig getLandConfig() {
 		return this.landConf;
+	}
+
+	public PermissionNodes getPermNodes() {
+		return this.permNodes;
 	}
 
 	public WorldGuardPlugin getWorldGuardPlugin() {

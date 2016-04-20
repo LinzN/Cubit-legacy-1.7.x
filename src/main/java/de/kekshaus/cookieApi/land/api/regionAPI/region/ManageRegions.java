@@ -17,10 +17,6 @@ import de.kekshaus.cookieApi.land.Landplugin;
 
 public class ManageRegions {
 
-	public ManageRegions() {
-
-	}
-
 	public RegionData newRegion(final int chunkX, final int chunkZ, final World world, final UUID playerUUID,
 			final String regionName) {
 		final Vector min;
@@ -40,7 +36,8 @@ public class ManageRegions {
 			domain.addPlayer(localplayer);
 			region.setOwners(domain);
 		}
-		RegionData regionData = new RegionData(region, world);
+		RegionData regionData = new RegionData(world);
+		regionData.setWGRegion(region);
 		return regionData;
 	}
 

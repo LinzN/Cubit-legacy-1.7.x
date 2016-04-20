@@ -13,7 +13,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import de.kekshaus.cookieApi.land.Landplugin;
 import de.kekshaus.cookieApi.land.api.regionAPI.flags.FirePacket;
 import de.kekshaus.cookieApi.land.api.regionAPI.flags.LockPacket;
-import de.kekshaus.cookieApi.land.api.regionAPI.flags.MobPacket;
+import de.kekshaus.cookieApi.land.api.regionAPI.flags.MonsterPacket;
 import de.kekshaus.cookieApi.land.api.regionAPI.flags.PvPPacket;
 import de.kekshaus.cookieApi.land.api.regionAPI.flags.TNTPacket;
 import de.kekshaus.cookieApi.land.api.regionAPI.region.LandTypes;
@@ -30,7 +30,7 @@ public class LandManager {
 	private SaveRegions saveMrg;
 	private FirePacket firePacket;
 	private LockPacket lockPacket;
-	private MobPacket mobPacket;
+	private MonsterPacket monsterPacket;
 	private PvPPacket pvpPacket;
 	private TNTPacket tntPacket;
 
@@ -41,7 +41,7 @@ public class LandManager {
 		this.saveMrg = new SaveRegions();
 		this.firePacket = new FirePacket();
 		this.lockPacket = new LockPacket();
-		this.mobPacket = new MobPacket();
+		this.monsterPacket = new MonsterPacket();
 		this.pvpPacket = new PvPPacket();
 		this.tntPacket = new TNTPacket();
 	}
@@ -83,13 +83,12 @@ public class LandManager {
 			World world = loc.getWorld();
 			String regionName = buildLandName(world.getName(), chunkX, chunkZ);
 			RegionData regionData = mReg.newRegion(chunkX, chunkZ, world, playerUUID, regionName);
-			regionData.setRegionState(true);
 			regionData = this.lockPacket.switchState(regionData, true);
-			regionData = this.mobPacket.switchState(regionData, true);
+			regionData = this.monsterPacket.switchState(regionData, true);
 			regionData = this.pvpPacket.switchState(regionData, true);
 			regionData = this.tntPacket.switchState(regionData, true);
 			regionData = this.firePacket.switchState(regionData, true);
-			saveMrg.save(regionData, world);
+			saveMrg.save(regionData);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -105,13 +104,12 @@ public class LandManager {
 			World world = loc.getWorld();
 			String regionName = buildLandName(LandTypes.SERVER.toString(), chunkX, chunkZ);
 			RegionData regionData = mReg.newRegion(chunkX, chunkZ, world, null, regionName);
-			regionData.setRegionState(true);
 			regionData = this.lockPacket.switchState(regionData, true);
-			regionData = this.mobPacket.switchState(regionData, true);
+			regionData = this.monsterPacket.switchState(regionData, true);
 			regionData = this.pvpPacket.switchState(regionData, true);
 			regionData = this.tntPacket.switchState(regionData, true);
 			regionData = this.firePacket.switchState(regionData, true);
-			saveMrg.save(regionData, world);
+			saveMrg.save(regionData);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -127,13 +125,12 @@ public class LandManager {
 			World world = loc.getWorld();
 			String regionName = buildLandName(LandTypes.SHOP.toString(), chunkX, chunkZ);
 			RegionData regionData = mReg.newRegion(chunkX, chunkZ, world, playerUUID, regionName);
-			regionData.setRegionState(true);
 			regionData = this.lockPacket.switchState(regionData, true);
-			regionData = this.mobPacket.switchState(regionData, true);
+			regionData = this.monsterPacket.switchState(regionData, true);
 			regionData = this.pvpPacket.switchState(regionData, true);
 			regionData = this.tntPacket.switchState(regionData, true);
 			regionData = this.firePacket.switchState(regionData, true);
-			saveMrg.save(regionData, world);
+			saveMrg.save(regionData);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -145,7 +142,7 @@ public class LandManager {
 	public boolean removeLand(final RegionData regionData, final World world) {
 		try {
 			RegionData emptyRegionData = mReg.removeRegion(regionData, world);
-			saveMrg.save(emptyRegionData, world);
+			saveMrg.save(emptyRegionData);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -159,7 +156,7 @@ public class LandManager {
 			List<RegionData> list = new ArrayList<RegionData>();
 			list.add(regionData);
 			mRegE.addMember(list, world, playerUUID);
-			saveMrg.save(null, world);
+			saveMrg.save(world);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -173,7 +170,7 @@ public class LandManager {
 			List<RegionData> list = new ArrayList<RegionData>();
 			list.add(regionData);
 			mRegE.removeMember(list, world, playerUUID);
-			saveMrg.save(null, world);
+			saveMrg.save(world);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -189,7 +186,7 @@ public class LandManager {
 			} else {
 				this.firePacket.switchState(regionData, state);
 			}
-			saveMrg.save(null, world);
+			saveMrg.save(world);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -205,7 +202,7 @@ public class LandManager {
 			} else {
 				this.lockPacket.switchState(regionData, state);
 			}
-			saveMrg.save(null, world);
+			saveMrg.save(world);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -217,11 +214,11 @@ public class LandManager {
 			final boolean random) {
 		try {
 			if (random) {
-				this.mobPacket.switchState(regionData);
+				this.monsterPacket.switchState(regionData);
 			} else {
-				this.mobPacket.switchState(regionData, state);
+				this.monsterPacket.switchState(regionData, state);
 			}
-			saveMrg.save(null, world);
+			saveMrg.save(world);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -237,7 +234,7 @@ public class LandManager {
 			} else {
 				this.pvpPacket.switchState(regionData, state);
 			}
-			saveMrg.save(null, world);
+			saveMrg.save(world);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -253,7 +250,7 @@ public class LandManager {
 			} else {
 				this.tntPacket.switchState(regionData, state);
 			}
-			saveMrg.save(null, world);
+			saveMrg.save(world);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -261,14 +258,36 @@ public class LandManager {
 		return true;
 	}
 
+	public String getColoredLockState(RegionData regionData) {
+		return this.lockPacket.getStateColor(regionData) + this.lockPacket.getPacketName();
+	}
+
+	public String getColoredFireState(RegionData regionData) {
+		return this.firePacket.getStateColor(regionData) + this.firePacket.getPacketName();
+	}
+
+	public String getColoredMonsterState(RegionData regionData) {
+		return this.monsterPacket.getStateColor(regionData) + this.monsterPacket.getPacketName();
+	}
+
+	public String getColoredPvPState(RegionData regionData) {
+		return this.pvpPacket.getStateColor(regionData) + this.pvpPacket.getPacketName();
+	}
+
+	public String getColoredTNTState(RegionData regionData) {
+		return this.tntPacket.getStateColor(regionData) + this.tntPacket.getPacketName();
+	}
+
 	public RegionData praseRegionData(final World world, final int valueX, final int valueZ) {
-		ProtectedRegion region = praseWGRegion(world, valueZ, valueZ);
-		RegionData regionData = new RegionData(region, world);
+		ProtectedRegion region = praseWGRegion(world, valueX, valueZ);
+		RegionData regionData = new RegionData(world);
+		if (region != null) {
+			regionData.setWGRegion(region);
+		}
 		return regionData;
 	}
 
 	private ProtectedRegion praseWGRegion(final World world, final int valueX, final int valueZ) {
-
 		RegionManager manager = plugin.getWorldGuardPlugin().getRegionManager(world);
 		String serverName = buildLandName(LandTypes.SERVER.toString(), valueX, valueZ);
 		String shopName = buildLandName(LandTypes.SHOP.toString(), valueX, valueZ);
