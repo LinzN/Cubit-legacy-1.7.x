@@ -77,11 +77,16 @@ public class InfoLand implements ILandCmd {
 		String formatedTime = plugin.getSqlManager().getLastLoginFormated(regionData.getOwnerUUID());
 		String minBorder = regionData.getMinPoint();
 		String maxBorder = regionData.getMaxPoint();
-		String statusLock = plugin.getLandManager().getColoredLockState(regionData);
-		String statusFire = plugin.getLandManager().getColoredFireState(regionData);
-		String statusPvP = plugin.getLandManager().getColoredPvPState(regionData);
-		String statusTNT = plugin.getLandManager().getColoredTNTState(regionData);
-		String statusMonster = plugin.getLandManager().getColoredMonsterState(regionData);
+		String statusLock = plugin.getLandManager().lockPacket.getStateColor(regionData)
+				+ plugin.getLandManager().lockPacket.getPacketName();
+		String statusFire = plugin.getLandManager().firePacket.getStateColor(regionData)
+				+ plugin.getLandManager().firePacket.getPacketName();
+		String statusPvP = plugin.getLandManager().pvpPacket.getStateColor(regionData)
+				+ plugin.getLandManager().pvpPacket.getPacketName();
+		String statusTNT = plugin.getLandManager().tntPacket.getStateColor(regionData)
+				+ plugin.getLandManager().tntPacket.getPacketName();
+		String statusMonster = plugin.getLandManager().monsterPacket.getStateColor(regionData)
+				+ plugin.getLandManager().monsterPacket.getPacketName();
 
 		player.sendMessage(
 				plugin.getLanguageManager().landInfoE1.replace("{regionID}", regionData.praseWGRegion().getId()));

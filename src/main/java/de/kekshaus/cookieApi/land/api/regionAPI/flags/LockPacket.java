@@ -7,6 +7,7 @@ import com.sk89q.worldguard.protection.flags.RegionGroup;
 import com.sk89q.worldguard.protection.flags.RegionGroupFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 
+import de.kekshaus.cookieApi.land.Landplugin;
 import de.kekshaus.cookieApi.land.api.regionAPI.IPacket;
 import de.kekshaus.cookieApi.land.api.regionAPI.region.RegionData;
 
@@ -42,19 +43,24 @@ public class LockPacket implements IPacket {
 		return ChatColor.RED;
 	}
 
-	public RegionData switchState(RegionData regionData, boolean value) {
+	public RegionData switchState(RegionData regionData, boolean value, boolean save) {
+		RegionData newRegionData = regionData;
 		if (value) {
-			return enablePacket(regionData);
+			newRegionData = enablePacket(regionData);
 		} else {
-			return disablePacket(regionData);
+			newRegionData = disablePacket(regionData);
 		}
+		if (save) {
+			Landplugin.inst().getLandManager().getRegionSaver().save(regionData.getWorld());
+		}
+		return newRegionData;
 	}
 
-	public RegionData switchState(RegionData regionData) {
+	public RegionData switchState(RegionData regionData, boolean save) {
 		if (getState(regionData)) {
-			return switchState(regionData, false);
+			return switchState(regionData, false, save);
 		} else {
-			return switchState(regionData, true);
+			return switchState(regionData, true, save);
 		}
 	}
 

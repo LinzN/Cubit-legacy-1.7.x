@@ -1,4 +1,4 @@
-package de.kekshaus.cookieApi.land.commandSuite.landCommands.main.flags;
+package de.kekshaus.cookieApi.land.commandSuite.landCommands.main;
 
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -6,15 +6,18 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import de.kekshaus.cookieApi.land.Landplugin;
+import de.kekshaus.cookieApi.land.api.regionAPI.IPacket;
 import de.kekshaus.cookieApi.land.api.regionAPI.region.RegionData;
 import de.kekshaus.cookieApi.land.commandSuite.ILandCmd;
 
-public class MonsterLand implements ILandCmd {
+public class FlagLand implements ILandCmd {
 
 	private Landplugin plugin;
+	private IPacket packet;
 
-	public MonsterLand(Landplugin plugin) {
+	public FlagLand(Landplugin plugin, IPacket packet) {
 		this.plugin = plugin;
+		this.packet = packet;
 	}
 
 	@Override
@@ -29,7 +32,7 @@ public class MonsterLand implements ILandCmd {
 		Player player = (Player) sender;
 
 		/* Permission Check */
-		if (!player.hasPermission(plugin.getPermNodes().monsterLand)) {
+		if (!player.hasPermission(plugin.getPermNodes().lockLand)) {
 			sender.sendMessage(plugin.getLanguageManager().errorNoPermission);
 			return true;
 		}
@@ -41,27 +44,28 @@ public class MonsterLand implements ILandCmd {
 		/* Command based switch */
 		if (args.length < 2) {
 		} else if (args[1].toString().equalsIgnoreCase("on")) {
-			if (plugin.getLandManager().switchMonsterPacket(regionData, loc.getWorld(), true, false)) {
-				sender.sendMessage(plugin.getLanguageManager().flagSwitchSuccess
-						.replace("{flag}", plugin.getLandManager().getMonsterName()).replace("{value}", "AKTIV"));
-			}
+
+			packet.switchState(regionData, true);
+			String stateString = plugin.getLandManager().getStringState(packet.getState(regionData));
+			sender.sendMessage(plugin.getLanguageManager().flagSwitchSuccess.replace("{flag}", packet.getPacketName())
+					.replace("{value}", stateString));
+
 			return true;
 		} else if (args[1].toString().equalsIgnoreCase("off")) {
-			if (plugin.getLandManager().switchMonsterPacket(regionData, loc.getWorld(), false, false)) {
-				sender.sendMessage(plugin.getLanguageManager().flagSwitchSuccess
-						.replace("{flag}", plugin.getLandManager().getMonsterName()).replace("{value}", "INAKTIV"));
-			}
+
+			packet.switchState(regionData, false);
+			String stateString = plugin.getLandManager().getStringState(packet.getState(regionData));
+			sender.sendMessage(plugin.getLanguageManager().flagSwitchSuccess.replace("{flag}", packet.getPacketName())
+					.replace("{value}", stateString));
+
 			return true;
 		}
 		/* Switch flag-state to the other value */
-		if (plugin.getLandManager().switchMonsterPacket(regionData, loc.getWorld(), false, true)) {
-			String status = "INAKTIV";
-			if (plugin.getLandManager().getMonsterState(regionData)) {
-				status = "AKTIV";
-			}
-			sender.sendMessage(plugin.getLanguageManager().flagSwitchSuccess
-					.replace("{flag}", plugin.getLandManager().getMonsterName()).replace("{value}", status));
-		}
+		packet.switchState(regionData, true);
+		String stateString = plugin.getLandManager().getStringState(packet.getState(regionData));
+		sender.sendMessage(plugin.getLanguageManager().flagSwitchSuccess.replace("{flag}", packet.getPacketName())
+				.replace("{value}", stateString));
+
 		return true;
 	}
 

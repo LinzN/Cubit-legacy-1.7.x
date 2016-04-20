@@ -13,9 +13,9 @@ public interface IPacket {
 
 	public abstract ChatColor getStateColor(RegionData regionData);
 
-	public abstract RegionData switchState(RegionData regionData, boolean value);
+	public abstract RegionData switchState(RegionData regionData, boolean value, boolean save);
 
-	public abstract RegionData switchState(RegionData regionData);
+	public abstract RegionData switchState(RegionData regionData, boolean save);
 
 	public abstract String getPacketName();
 }

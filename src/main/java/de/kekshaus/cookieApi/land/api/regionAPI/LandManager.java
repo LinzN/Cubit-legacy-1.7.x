@@ -28,11 +28,11 @@ public class LandManager {
 	private ManageRegions mReg;
 	private ManageRegionEntities mRegE;
 	private SaveRegions saveMrg;
-	private FirePacket firePacket;
-	private LockPacket lockPacket;
-	private MonsterPacket monsterPacket;
-	private PvPPacket pvpPacket;
-	private TNTPacket tntPacket;
+	public FirePacket firePacket;
+	public LockPacket lockPacket;
+	public MonsterPacket monsterPacket;
+	public PvPPacket pvpPacket;
+	public TNTPacket tntPacket;
 
 	public LandManager(Landplugin plugin) {
 		this.plugin = plugin;
@@ -83,11 +83,11 @@ public class LandManager {
 			World world = loc.getWorld();
 			String regionName = buildLandName(world.getName(), chunkX, chunkZ);
 			RegionData regionData = mReg.newRegion(chunkX, chunkZ, world, playerUUID, regionName);
-			regionData = this.lockPacket.switchState(regionData, true);
-			regionData = this.monsterPacket.switchState(regionData, true);
-			regionData = this.pvpPacket.switchState(regionData, true);
-			regionData = this.tntPacket.switchState(regionData, true);
-			regionData = this.firePacket.switchState(regionData, true);
+			regionData = this.lockPacket.switchState(regionData, true, false);
+			regionData = this.monsterPacket.switchState(regionData, true, false);
+			regionData = this.pvpPacket.switchState(regionData, true, false);
+			regionData = this.tntPacket.switchState(regionData, true, false);
+			regionData = this.firePacket.switchState(regionData, true, false);
 			saveMrg.save(regionData);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -178,144 +178,12 @@ public class LandManager {
 		return true;
 	}
 
-	public boolean switchFirePacket(final RegionData regionData, final World world, final boolean state,
-			final boolean random) {
-		try {
-			if (random) {
-				this.firePacket.switchState(regionData);
-			} else {
-				this.firePacket.switchState(regionData, state);
-			}
-			saveMrg.save(world);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
+	public String getStringState(boolean value) {
+		String stateString = "INAKTIV";
+		if (value) {
+			stateString = "AKTIV";
 		}
-		return true;
-	}
-
-	public boolean switchLockPacket(final RegionData regionData, final World world, final boolean state,
-			final boolean random) {
-		try {
-			if (random) {
-				this.lockPacket.switchState(regionData);
-			} else {
-				this.lockPacket.switchState(regionData, state);
-			}
-			saveMrg.save(world);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-
-	public boolean switchMonsterPacket(final RegionData regionData, final World world, final boolean state,
-			final boolean random) {
-		try {
-			if (random) {
-				this.monsterPacket.switchState(regionData);
-			} else {
-				this.monsterPacket.switchState(regionData, state);
-			}
-			saveMrg.save(world);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-
-	public boolean switchPvPPacket(final RegionData regionData, final World world, final boolean state,
-			final boolean random) {
-		try {
-			if (random) {
-				this.pvpPacket.switchState(regionData);
-			} else {
-				this.pvpPacket.switchState(regionData, state);
-			}
-			saveMrg.save(world);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-
-	public boolean switchTNTPacket(final RegionData regionData, final World world, final boolean state,
-			final boolean random) {
-		try {
-			if (random) {
-				this.tntPacket.switchState(regionData);
-			} else {
-				this.tntPacket.switchState(regionData, state);
-			}
-			saveMrg.save(world);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-
-	public String getColoredLockState(RegionData regionData) {
-		return this.lockPacket.getStateColor(regionData) + this.lockPacket.getPacketName();
-	}
-
-	public String getColoredFireState(RegionData regionData) {
-		return this.firePacket.getStateColor(regionData) + this.firePacket.getPacketName();
-	}
-
-	public String getColoredMonsterState(RegionData regionData) {
-		return this.monsterPacket.getStateColor(regionData) + this.monsterPacket.getPacketName();
-	}
-
-	public String getColoredPvPState(RegionData regionData) {
-		return this.pvpPacket.getStateColor(regionData) + this.pvpPacket.getPacketName();
-	}
-
-	public String getColoredTNTState(RegionData regionData) {
-		return this.tntPacket.getStateColor(regionData) + this.tntPacket.getPacketName();
-	}
-
-	public String getLockName() {
-		return this.lockPacket.getPacketName();
-	}
-
-	public String getFireName() {
-		return this.firePacket.getPacketName();
-	}
-
-	public String getMonsterName() {
-		return this.monsterPacket.getPacketName();
-	}
-
-	public String getPvPName() {
-		return this.pvpPacket.getPacketName();
-	}
-
-	public String getTNTName() {
-		return this.tntPacket.getPacketName();
-	}
-
-	public boolean getLockState(RegionData regionData) {
-		return this.lockPacket.getState(regionData);
-	}
-
-	public boolean getFireState(RegionData regionData) {
-		return this.firePacket.getState(regionData);
-	}
-
-	public boolean getMonsterState(RegionData regionData) {
-		return this.monsterPacket.getState(regionData);
-	}
-
-	public boolean getPvPState(RegionData regionData) {
-		return this.pvpPacket.getState(regionData);
-	}
-
-	public boolean getTNTState(RegionData regionData) {
-		return this.tntPacket.getState(regionData);
+		return stateString;
 	}
 
 	public RegionData praseRegionData(final World world, final int valueX, final int valueZ) {
@@ -347,5 +215,9 @@ public class LandManager {
 
 	public String buildLandName(final String type, final int valueX, final int valueZ) {
 		return type.toLowerCase() + "_" + valueX + "_" + valueZ;
+	}
+
+	public SaveRegions getRegionSaver() {
+		return this.saveMrg;
 	}
 }
