@@ -1,10 +1,10 @@
 package de.kekshaus.cookieApi.land.commandSuite.landCommands.main;
 
 import org.bukkit.Chunk;
-import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.inventivetalent.particle.ParticleEffect;
 
 import de.kekshaus.cookieApi.guild.objects.Guild;
 import de.kekshaus.cookieApi.land.Landplugin;
@@ -62,8 +62,7 @@ public class InfoLand implements ILandCmd {
 		}
 
 		/* After info command send Particle */
-		if (!plugin.getParticleManager().sendCustomPaticle(player, loc, Effect.HAPPY_VILLAGER,
-				Effect.FIREWORKS_SPARK)) {
+		if (!plugin.getParticleManager().sendParticle(player, loc, null, ParticleEffect.END_ROD)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-PARTICLE"));
 			plugin.getLogger().warning(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-PARTICLE"));

@@ -1,11 +1,11 @@
 package de.kekshaus.cookieApi.land.commandSuite.landCommands.main;
 
 import org.bukkit.Chunk;
-import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.inventivetalent.particle.ParticleEffect;
 
 import de.kekshaus.cookieApi.land.Landplugin;
 import de.kekshaus.cookieApi.land.api.regionAPI.region.RegionData;
@@ -82,7 +82,8 @@ public class SellLand implements ILandCmd {
 			return true;
 		}
 
-		if (!plugin.getParticleManager().sendCustomPaticle(player, loc, Effect.WITCH_MAGIC, Effect.FIREWORKS_SPARK)) {
+		if (!plugin.getParticleManager().sendParticle(player, loc, ParticleEffect.SPELL_WITCH,
+				ParticleEffect.FIREWORKS_SPARK)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-PARTICLE"));
 			plugin.getLogger().warning(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-PARTICLE"));
