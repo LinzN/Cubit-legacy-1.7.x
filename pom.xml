@@ -2,9 +2,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cookieApiLand</artifactId>
     <packaging>jar</packaging>
-    <name>cookieApiLand</name>
+    <name>cubit-alpha3</name>
 
 <repositories>
   <repository>
@@ -89,11 +88,6 @@
 	</dependency>
 	<dependency>
 		<groupId>de.cookieapi</groupId>
-		<artifactId>cookieApiBukkit</artifactId>
-		<version>1</version>
-	</dependency>
-	<dependency>
-		<groupId>de.cookieapi</groupId>
 		<artifactId>cookieApiGuild</artifactId>
 		<version>1</version>
 	</dependency>
@@ -132,8 +126,8 @@
       </plugin>
         </plugins>
     </build>
-    <version>1</version>
-    <groupId>de.cookieapi</groupId>
+    <version>3.0.0</version>
+    <groupId>de.cubit</groupId>
     <dependencyManagement>
     	<dependencies>
     	</dependencies>
@@ -142,4 +136,5 @@
     	<build.number>SNAPSHOT</build.number>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	<artifactId>cubit-alpha3</artifactId>
 </project>

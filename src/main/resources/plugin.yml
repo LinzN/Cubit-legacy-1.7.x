@@ -1,10 +1,10 @@
-name: cookieApiLand
-main : de.kekshaus.cookieApi.land.Landplugin
+name: Cubit-alpha3
+main : de.kekshaus.cubit.land.Landplugin
 version: ${project.version}.b${build.number}
 description: Landplugin
 author: Kekshaus
 load: POSTWORLD
-depend: [cookieApiBukkit]
+depend: [cookieApiGuild]
 
 commands:
   land:
