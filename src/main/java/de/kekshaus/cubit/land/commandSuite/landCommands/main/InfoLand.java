@@ -6,10 +6,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.inventivetalent.particle.ParticleEffect;
 
-import de.kekshaus.cookieApi.guild.objects.Guild;
 import de.kekshaus.cubit.land.Landplugin;
 import de.kekshaus.cubit.land.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.land.commandSuite.ILandCmd;
+import de.nlinz.xeonSuite.guild.objects.Guild;
 
 public class InfoLand implements ILandCmd {
 

@@ -9,9 +9,9 @@ import org.bukkit.World;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.kekshaus.cookieApi.guild.api.InternAPI;
-import de.kekshaus.cookieApi.guild.objects.Guild;
 import de.kekshaus.cubit.land.Landplugin;
+import de.nlinz.xeonSuite.guild.api.InternAPI;
+import de.nlinz.xeonSuite.guild.objects.Guild;
 
 public class RegionData {
 	// private String regionID;

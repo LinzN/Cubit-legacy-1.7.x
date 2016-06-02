@@ -87,8 +87,8 @@
 		</exclusions>
 	</dependency>
 	<dependency>
-		<groupId>de.cookieapi</groupId>
-		<artifactId>cookieApiGuild</artifactId>
+		<groupId>de.nlinz.xeonSuite</groupId>
+		<artifactId>XeonSuiteGuild</artifactId>
 		<version>1</version>
 	</dependency>
   </dependencies>
