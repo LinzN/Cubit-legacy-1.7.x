@@ -127,7 +127,7 @@
         </plugins>
     </build>
     <version>3.0.0</version>
-    <groupId>de.cubit</groupId>
+    <groupId>de.nlinz</groupId>
     <dependencyManagement>
     	<dependencies>
     	</dependencies>
