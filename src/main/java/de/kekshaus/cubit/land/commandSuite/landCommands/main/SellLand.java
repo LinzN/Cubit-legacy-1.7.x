@@ -2,7 +2,6 @@ package de.kekshaus.cubit.land.commandSuite.landCommands.main;
 
 import org.bukkit.Chunk;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.inventivetalent.particle.ParticleEffect;
@@ -59,9 +58,10 @@ public class SellLand implements ILandCmd {
 			return true;
 		}
 
-		double testValue = 200D;
+		double economyValue = Landplugin.inst().getVaultManager().calculateLandCost(player.getUniqueId(),
+				loc.getWorld(), false);
 
-		if (!plugin.getVaultManager().transferMoney(null, regionData.getOwnerUUID(), testValue)) {
+		if (!plugin.getVaultManager().transferMoney(null, regionData.getOwnerUUID(), economyValue)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-ECONOMY"));
 			plugin.getLogger().warning(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-ECONOMY"));
@@ -75,7 +75,8 @@ public class SellLand implements ILandCmd {
 			return true;
 		}
 
-		if (!plugin.getBlockManager().placeLandBorder(chunk, Material.REDSTONE_TORCH_ON)) {
+		if (!plugin.getBlockManager().placeLandBorder(chunk,
+				Landplugin.inst().getLandConfig().landSellMaterialBorder)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-BLOCK"));
 			plugin.getLogger().warning(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-BLOCK"));

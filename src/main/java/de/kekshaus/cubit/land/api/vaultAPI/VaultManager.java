@@ -2,7 +2,11 @@ package de.kekshaus.cubit.land.api.vaultAPI;
 
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.plugin.RegisteredServiceProvider;
+
+import com.sk89q.worldguard.LocalPlayer;
 
 import de.kekshaus.cubit.land.Landplugin;
 import de.kekshaus.cubit.land.api.vaultAPI.eConomy.EconomyManager;
@@ -46,6 +50,34 @@ public class VaultManager {
 			return false;
 		}
 		return true;
+	}
+
+	public double calculateLandCost(UUID uuid, World world, boolean buyTask) {
+		double landBasePrice = Landplugin.inst().getLandConfig().landBasePrice;
+		double landTaxAddition = Landplugin.inst().getLandConfig().landTaxAddition;
+		double landMaxPrice = Landplugin.inst().getLandConfig().landMaxPrice;
+		double landSellPercent = Landplugin.inst().getLandConfig().landSellPercent;
+		LocalPlayer localplayer = Landplugin.inst().getWorldGuardPlugin()
+				.wrapOfflinePlayer(Bukkit.getOfflinePlayer(uuid));
+		double regionSize = Landplugin.inst().getWorldGuardPlugin().getRegionManager(world)
+				.getRegionCountOfPlayer(localplayer);
+		double price;
+
+		if (buyTask) {
+			price = landBasePrice + (landTaxAddition * regionSize);
+			if (price > landMaxPrice) {
+				price = landMaxPrice;
+			}
+
+		} else {
+			double sellValue = landBasePrice + (landTaxAddition * regionSize);
+			if (sellValue > landMaxPrice) {
+				sellValue = landMaxPrice;
+			}
+			price = (sellValue * landSellPercent);
+		}
+
+		return price;
 	}
 
 }

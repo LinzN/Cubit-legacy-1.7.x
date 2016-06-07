@@ -15,12 +15,13 @@ public class LandConfig {
 	/* Land module */
 	public double landBasePrice;
 	public double landTaxAddition;
+	public double landMaxPrice;
 	public double landSellPercent;
 	public double landDeprecatedMember;
 	public double landDeprecatedOther;
 	public boolean landUseMaterialBorder;
 	public Material landBuyMaterialBorder;
-	public Material landSellaterialBorder;
+	public Material landSellMaterialBorder;
 
 	/* Database module */
 	public boolean sqlUse;
@@ -58,6 +59,7 @@ public class LandConfig {
 		/* Land module */
 		checkContent("module.land.basePrice", 235.00D);
 		checkContent("module.land.taxAddition", 5.00D);
+		checkContent("module.land.maxPrice", 750.00D);
 		checkContent("module.land.sellPercentInDecimal", 0.5D);
 		checkContent("module.land.deprecatedBuyupMember", 30.0D);
 		checkContent("module.land.deprecatedBuyupOther", 45.00D);
