@@ -64,8 +64,8 @@ public class LandConfig {
 		checkContent("module.land.deprecatedBuyupMember", 30.0D);
 		checkContent("module.land.deprecatedBuyupOther", 45.00D);
 		checkContent("module.land.useMaterialBorder", true);
-		checkContent("module.land.buyMaterialBorder", Material.TORCH);
-		checkContent("module.land.sellMaterialBorder", Material.REDSTONE_TORCH_ON);
+		checkContent("module.land.buyMaterialBorder", Material.TORCH.toString());
+		checkContent("module.land.sellMaterialBorder", Material.REDSTONE_TORCH_ON.toString());
 
 		/* Database module */
 		checkContent("module.database.useSql", false);
@@ -78,6 +78,16 @@ public class LandConfig {
 	}
 
 	private void loadContent() {
+		this.landBasePrice = (double) this.configFile.get("module.land.basePrice");
+		this.landTaxAddition = (double) this.configFile.get("module.land.taxAddition");
+		this.landMaxPrice = (double) this.configFile.get("module.land.maxPrice");
+		this.landSellPercent = (double) this.configFile.get("module.land.sellPercentInDecimal");
+		this.landDeprecatedMember = (double) this.configFile.get("module.land.deprecatedBuyupMember");
+		this.landDeprecatedOther = (double) this.configFile.get("module.land.deprecatedBuyupOther");
+		this.landUseMaterialBorder = (boolean) this.configFile.get("module.land.useMaterialBorder");
+		this.landBuyMaterialBorder = Material.valueOf((String) this.configFile.get("module.land.buyMaterialBorder"));
+		this.landSellMaterialBorder = Material.valueOf((String) this.configFile.get("module.land.sellMaterialBorder"));
+
 		this.sqlUse = (boolean) this.configFile.get("module.database.useSql");
 		this.sqlDataBase = (String) this.configFile.get("module.database.databaseName");
 		this.sqlHostname = (String) this.configFile.get("module.database.hostName");
