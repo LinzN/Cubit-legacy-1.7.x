@@ -6,6 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockFromToEvent;
 
 import de.kekshaus.cubit.land.Landplugin;
+import de.kekshaus.cubit.land.api.regionAPI.region.LandTypes;
 import de.kekshaus.cubit.land.api.regionAPI.region.RegionData;
 
 public class AdditionalPhysicsListener implements Listener {
@@ -21,6 +22,10 @@ public class AdditionalPhysicsListener implements Listener {
 
 		RegionData toLand = Landplugin.inst().getLandManager().praseRegionData(toChunk.getWorld(), toChunk.getX(),
 				toChunk.getZ());
+
+		if (fromLand.getLandType() == LandTypes.NOTYPE || toLand.getLandType() == LandTypes.NOTYPE) {
+			return;
+		}
 
 		if (!Landplugin.inst().getLandManager().hasLandPermission(toLand, fromLand.getOwnerUUID())) {
 			event.setCancelled(true);
