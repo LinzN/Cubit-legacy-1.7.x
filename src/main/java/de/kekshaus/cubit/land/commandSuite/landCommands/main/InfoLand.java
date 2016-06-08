@@ -118,10 +118,11 @@ public class InfoLand implements ILandCmd {
 
 	private void noInfo(Player player, RegionData regionData, Location loc, Chunk chunk) {
 		/* Buy-able region */
-		double testValue = 300D;
+		double economyValue = Landplugin.inst().getVaultManager().calculateLandCost(player.getUniqueId(),
+				loc.getWorld(), true);
 		final String regionID = plugin.getLandManager().buildLandName(loc.getWorld().getName(), chunk.getX(),
 				chunk.getZ());
-		player.sendMessage(plugin.getLanguageManager().landInfoA1.replace("{cost}", "" + testValue)
+		player.sendMessage(plugin.getLanguageManager().landInfoA1.replace("{cost}", "" + economyValue)
 				.replace("{regionID}", regionID));
 		return;
 	}
