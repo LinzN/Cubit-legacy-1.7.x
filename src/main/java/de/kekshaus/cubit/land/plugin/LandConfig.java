@@ -25,6 +25,7 @@ public class LandConfig {
 
 	/* Database module */
 	public boolean sqlUse;
+	public boolean sqlUseXeonSuiteSameDatabase;
 	public String sqlDataBase;
 	public String sqlHostname;
 	public int sqlPort;
@@ -68,7 +69,9 @@ public class LandConfig {
 		checkContent("module.land.sellMaterialBorder", Material.REDSTONE_TORCH_ON.toString());
 
 		/* Database module */
+
 		checkContent("module.database.useSql", false);
+		checkContent("module.database.useXeonSuiteSameDatabase", false);
 		checkContent("module.database.databaseName", "cubit");
 		checkContent("module.database.hostName", "localhost");
 		checkContent("module.database.port", 3306);
@@ -89,6 +92,7 @@ public class LandConfig {
 		this.landSellMaterialBorder = Material.valueOf((String) this.configFile.get("module.land.sellMaterialBorder"));
 
 		this.sqlUse = (boolean) this.configFile.get("module.database.useSql");
+		this.sqlUseXeonSuiteSameDatabase = (boolean) this.configFile.get("module.database.useXeonSuiteSameDatabase");
 		this.sqlDataBase = (String) this.configFile.get("module.database.databaseName");
 		this.sqlHostname = (String) this.configFile.get("module.database.hostName");
 		this.sqlPort = (int) this.configFile.get("module.database.port");

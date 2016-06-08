@@ -51,4 +51,8 @@ public class SqlManager {
 		setData.removeOffer(data);
 	}
 
+	public void updatePlayer(UUID uuid, String player, long time) {
+		setData.updateProfile(uuid, player, time);
+	}
+
 }

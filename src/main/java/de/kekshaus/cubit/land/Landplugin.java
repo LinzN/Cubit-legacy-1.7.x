@@ -15,6 +15,8 @@ import de.kekshaus.cubit.land.commandSuite.SetupCommands;
 import de.kekshaus.cubit.land.plugin.LandConfig;
 import de.kekshaus.cubit.land.plugin.Language;
 import de.kekshaus.cubit.land.plugin.PermissionNodes;
+import de.kekshaus.cubit.land.plugin.listener.AdditionalPhysicsListener;
+import de.kekshaus.cubit.land.plugin.listener.LoginListener;
 
 public class Landplugin extends JavaPlugin {
 
@@ -36,10 +38,12 @@ public class Landplugin extends JavaPlugin {
 		inst = this;
 		this.wgPl = WorldGuardPlugin.inst();
 		this.wePl = WorldEdit.getInstance();
-		if (this.getServer().getPluginManager().getPlugin("cookieApiGuild") != null) {
+		if (this.getServer().getPluginManager().getPlugin("XeonSuiteGuild") != null) {
 			isGuildLoaded = true;
 		}
 		setupManagers();
+		this.getServer().getPluginManager().registerEvents(new LoginListener(), this);
+		this.getServer().getPluginManager().registerEvents(new AdditionalPhysicsListener(), this);
 		if (!this.sqlMrg.link()) {
 			this.setEnabled(false);
 		}

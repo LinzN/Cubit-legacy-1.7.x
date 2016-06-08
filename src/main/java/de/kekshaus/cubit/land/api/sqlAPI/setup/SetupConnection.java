@@ -24,8 +24,12 @@ public class SetupConnection {
 		try {
 			Connection connection = handler.getConnection();
 			String sql = "CREATE TABLE IF NOT EXISTS offerManager (Id int NOT NULL AUTO_INCREMENT, regionID text, world text, uuid text, value double, PRIMARY KEY (Id));";
+			String sql3 = "CREATE TABLE IF NOT EXISTS uuidcache (Id int NOT NULL AUTO_INCREMENT, UUID text, NAME text, TIMESTAMP bigint, PRIMARY KEY (id));";
 			Statement action = connection.createStatement();
 			action.executeUpdate(sql);
+			if (Landplugin.inst().getLandConfig().sqlUseXeonSuiteSameDatabase) {
+				action.executeUpdate(sql3);
+			}
 			action.close();
 			handler.release(connection);
 			plugin.getLogger().info("Datenbank geladen!");
