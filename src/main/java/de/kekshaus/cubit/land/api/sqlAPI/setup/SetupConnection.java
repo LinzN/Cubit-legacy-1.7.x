@@ -27,7 +27,7 @@ public class SetupConnection {
 			String sql3 = "CREATE TABLE IF NOT EXISTS uuidcache (Id int NOT NULL AUTO_INCREMENT, UUID text, NAME text, TIMESTAMP bigint, PRIMARY KEY (id));";
 			Statement action = connection.createStatement();
 			action.executeUpdate(sql);
-			if (Landplugin.inst().getLandConfig().sqlUseXeonSuiteSameDatabase) {
+			if (!Landplugin.inst().getLandConfig().sqlUseXeonSuiteSameDatabase) {
 				action.executeUpdate(sql3);
 			}
 			action.close();
