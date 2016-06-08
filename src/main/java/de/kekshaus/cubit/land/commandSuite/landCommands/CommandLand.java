@@ -13,10 +13,12 @@ import com.google.common.collect.Maps;
 
 import de.kekshaus.cubit.land.Landplugin;
 import de.kekshaus.cubit.land.commandSuite.ILandCmd;
+import de.kekshaus.cubit.land.commandSuite.landCommands.main.AddMemberLand;
 import de.kekshaus.cubit.land.commandSuite.landCommands.main.BuyLand;
 import de.kekshaus.cubit.land.commandSuite.landCommands.main.FlagLand;
 import de.kekshaus.cubit.land.commandSuite.landCommands.main.HelpLand;
 import de.kekshaus.cubit.land.commandSuite.landCommands.main.InfoLand;
+import de.kekshaus.cubit.land.commandSuite.landCommands.main.RemoveMemberLand;
 import de.kekshaus.cubit.land.commandSuite.landCommands.main.SellLand;
 import de.kekshaus.cubit.land.plugin.PermissionNodes;
 
@@ -35,6 +37,7 @@ public class CommandLand implements CommandExecutor {
 	@Override
 	public boolean onCommand(final CommandSender sender, Command cmd, String label, final String[] args) {
 		cmdThread.submit(new Runnable() {
+			@Override
 			public void run() {
 				if (args.length == 0) {
 					// help site
@@ -66,6 +69,9 @@ public class CommandLand implements CommandExecutor {
 			this.cmdMap.put("help", new HelpLand(this.plugin, perm.helpLand));
 			this.cmdMap.put("buy", new BuyLand(this.plugin, perm.buyLand));
 			this.cmdMap.put("sell", new SellLand(this.plugin, false, perm.sellLand));
+
+			this.cmdMap.put("add", new AddMemberLand(this.plugin, false, perm.addMemberLand));
+			this.cmdMap.put("remove", new RemoveMemberLand(this.plugin, false, perm.removeMemberLand));
 
 			/* Protection Commands */
 			this.cmdMap.put("pvp", new FlagLand(this.plugin, Landplugin.inst().getLandManager().pvpPacket, false,

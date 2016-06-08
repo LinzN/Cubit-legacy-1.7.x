@@ -3,14 +3,18 @@ package de.kekshaus.cubit.land.plugin;
 public class PermissionNodes {
 
 	/* User Perms */
-	public String infoLand = "cookieApi.land.land.info";
-	public String buyLand = "cookieApi.land.land.buy";
-	public String sellLand = "cookieApi.land.land.sell";
-	public String helpLand = "cookieApi.land.land.help";
-	public String flagLand = "cookieApi.land.land.flag.";
+	public String infoLand = "cubitAlpha.land.info";
+	public String buyLand = "cubitAlpha.land.buy";
+	public String sellLand = "cubitAlpha.land.sell";
+	public String helpLand = "cubitAlpha.land.help";
+	public String addMemberLand = "cubitAlpha.land.addmember";
+	public String removeMemberLand = "cubitAlpha.land.removemember";
+	public String flagLand = "cubitAlpha.land.flag.";
 
 	/* Admin Perms */
-	public String flagAdminLand = "cookieApi.land.admin.flag.";
-	public String sellAdminLand = "cookieApi.land.admin.sell";
+	public String flagAdminLand = "cubitAlpha.admin.flag.";
+	public String sellAdminLand = "cubitAlpha.admin.sell";
+	public String addMemberAdminLand = "cubitAlpha.admin.addmember";
+	public String removeMemberAdminLand = "cubitAlpha.admin.removemember";
 
 }

@@ -13,7 +13,9 @@ import com.google.common.collect.Maps;
 
 import de.kekshaus.cubit.land.Landplugin;
 import de.kekshaus.cubit.land.commandSuite.ILandCmd;
+import de.kekshaus.cubit.land.commandSuite.landCommands.main.AddMemberLand;
 import de.kekshaus.cubit.land.commandSuite.landCommands.main.FlagLand;
+import de.kekshaus.cubit.land.commandSuite.landCommands.main.RemoveMemberLand;
 import de.kekshaus.cubit.land.commandSuite.landCommands.main.SellLand;
 import de.kekshaus.cubit.land.plugin.PermissionNodes;
 
@@ -32,6 +34,7 @@ public class CommandAdmin implements CommandExecutor {
 	@Override
 	public boolean onCommand(final CommandSender sender, Command cmd, String label, final String[] args) {
 		cmdThread.submit(new Runnable() {
+			@Override
 			public void run() {
 				if (args.length == 0) {
 					// help site
@@ -69,6 +72,9 @@ public class CommandAdmin implements CommandExecutor {
 			this.cmdMap.put("setmonster", new FlagLand(this.plugin, Landplugin.inst().getLandManager().monsterPacket,
 					true, perm.flagAdminLand + "monster"));
 			this.cmdMap.put("remove", new SellLand(this.plugin, true, perm.sellAdminLand));
+			this.cmdMap.put("addplayer", new AddMemberLand(this.plugin, true, perm.addMemberAdminLand));
+			this.cmdMap.put("removeplayer", new RemoveMemberLand(this.plugin, true, perm.removeMemberAdminLand));
+
 			this.isLoaded = true;
 		} catch (Exception e) {
 			e.printStackTrace();
