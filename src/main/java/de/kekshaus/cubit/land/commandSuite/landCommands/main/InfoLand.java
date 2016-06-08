@@ -98,11 +98,15 @@ public class InfoLand implements ILandCmd {
 			}
 		}
 		player.sendMessage(plugin.getLanguageManager().landInfoE2.replace("{owner}", regionData.getOwnerName()));
+		if (regionData.getMembersName().size() != 0) {
+			player.sendMessage(plugin.getLanguageManager().landInfoE3.replace("{members}",
+					regionData.getMembersName().toString()));
+		}
 		player.sendMessage(
-				plugin.getLanguageManager().landInfoE3.replace("{min}", minBorder).replace("{max}", maxBorder));
-		player.sendMessage(plugin.getLanguageManager().landInfoE4.replace("{time}", formatedTime));
+				plugin.getLanguageManager().landInfoE4.replace("{min}", minBorder).replace("{max}", maxBorder));
+		player.sendMessage(plugin.getLanguageManager().landInfoE5.replace("{time}", formatedTime));
 		player.sendMessage(
-				plugin.getLanguageManager().landInfoE5.replace("{lock}", statusLock).replace("{monster}", statusMonster)
+				plugin.getLanguageManager().landInfoE6.replace("{lock}", statusLock).replace("{monster}", statusMonster)
 						.replace("{fire}", statusFire).replace("{pvp}", statusPvP).replace("{tnt}", statusTNT));
 		return;
 

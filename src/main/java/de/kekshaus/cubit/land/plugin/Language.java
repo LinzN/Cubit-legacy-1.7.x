@@ -29,9 +29,10 @@ public class Language {
 	public String landInfoE1 = "§2Grundstück: §9{regionID}";
 	public String landInfoE1A1 = "§2Gilde: §e{guild}";
 	public String landInfoE2 = "§2Besitzer: §5{owner}";
-	public String landInfoE3 = "§2Grenzen: [§e{min}§2] bis [§e{max}§2]";
-	public String landInfoE4 = "§2Zuletzt online: §e{time}";
-	public String landInfoE5 = "§2Schutz-Systeme: {lock}, {monster}, {fire}, {pvp}, {tnt}";
+	public String landInfoE3 = "§2Mitgleider: §5{members}";
+	public String landInfoE4 = "§2Grenzen: [§e{min}§2] bis [§e{max}§2]";
+	public String landInfoE5 = "§2Zuletzt online: §e{time}";
+	public String landInfoE6 = "§2Schutz-Systeme: {lock}, {monster}, {fire}, {pvp}, {tnt}";
 
 	/* Page 1 Help for Land Command */
 	public String landHelpE1P1 = "";
