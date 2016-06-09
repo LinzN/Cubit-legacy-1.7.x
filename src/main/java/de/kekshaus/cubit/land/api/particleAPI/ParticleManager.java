@@ -2,6 +2,7 @@ package de.kekshaus.cubit.land.api.particleAPI;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -61,16 +62,17 @@ public class ParticleManager {
 
 	public boolean sendParticle(Player player, final Location loc, final ParticleEffect primaryEffect,
 			final ParticleEffect secondaryEffect) {
-		/*
-		 * final Collection<Player> pList = new HashSet<Player>();
-		 * pList.add(player);
-		 * plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new
-		 * Runnable() {
-		 * 
-		 * @Override public void run() { scheduleParticleTask(pList, loc,
-		 * primaryEffect, secondaryEffect); } });
-		 * 
-		 */
+
+		final Collection<Player> pList = new HashSet<Player>();
+		pList.add(player);
+		plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+
+			@Override
+			public void run() {
+				scheduleParticleTask(pList, loc, primaryEffect, secondaryEffect);
+			}
+		});
+
 		return true;
 	}
 
