@@ -15,6 +15,8 @@ public class Language {
 	public String buySuccess = "§2Du hast das Grundstück §e{regionID}§2 gekauft!";
 	public String sellSuccess = "§2Du hast das Grundstück §e{regionID}§2 an den Server verkauft!";
 	public String flagSwitchSuccess = "§2Das System §9§l{flag}-Schutz §2wurde zu §9§l{value} §2gewechselt!";
+	public String addMemberSuccess = "§2Du hat {member} dem Grundstück §e{regionID}§2 hinzugefügt!";
+	public String removeMemberSuccess = "§2Du hat {member} vom Grundstück §e{regionID}§2 entfernt!";
 
 	/* UnSuccess MSG */
 	public String buyIsAlreadyLand = "§cDieses Grundstück §e{regionID}§c ist nicht mehr frei!";

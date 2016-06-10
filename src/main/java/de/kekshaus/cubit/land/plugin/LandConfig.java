@@ -23,6 +23,10 @@ public class LandConfig {
 	public Material landBuyMaterialBorder;
 	public Material landSellMaterialBorder;
 
+	/* Particle module */
+	public boolean particleUse;
+	public boolean particleUseInventivetalentParticeApi;
+
 	/* Database module */
 	public boolean sqlUse;
 	public boolean sqlUseXeonSuiteSameDatabase;
@@ -68,6 +72,10 @@ public class LandConfig {
 		checkContent("module.land.buyMaterialBorder", Material.TORCH.toString());
 		checkContent("module.land.sellMaterialBorder", Material.REDSTONE_TORCH_ON.toString());
 
+		/* Particle module */
+
+		checkContent("module.particle.use", true);
+		checkContent("module.particle.useInventivetalentParticleAPI", false);
 		/* Database module */
 
 		checkContent("module.database.useSql", false);
@@ -90,6 +98,10 @@ public class LandConfig {
 		this.landUseMaterialBorder = (boolean) this.configFile.get("module.land.useMaterialBorder");
 		this.landBuyMaterialBorder = Material.valueOf((String) this.configFile.get("module.land.buyMaterialBorder"));
 		this.landSellMaterialBorder = Material.valueOf((String) this.configFile.get("module.land.sellMaterialBorder"));
+
+		this.particleUse = (boolean) this.configFile.get("module.particle.use");
+		this.particleUseInventivetalentParticeApi = (boolean) this.configFile
+				.get("module.particle.useInventivetalentParticleAPI");
 
 		this.sqlUse = (boolean) this.configFile.get("module.database.useSql");
 		this.sqlUseXeonSuiteSameDatabase = (boolean) this.configFile.get("module.database.useXeonSuiteSameDatabase");

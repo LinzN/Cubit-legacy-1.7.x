@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -60,7 +61,8 @@ public class RemoveMemberLand implements ILandCmd {
 			return true;
 		}
 		@SuppressWarnings("deprecation")
-		UUID uuid = Bukkit.getOfflinePlayer(args[1]).getUniqueId();
+		OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(args[1]);
+		UUID uuid = offlinePlayer.getUniqueId();
 		if (!plugin.getLandManager().removeMember(regionData, loc.getWorld(), uuid)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "REMOVE-MEMBER"));
@@ -68,7 +70,9 @@ public class RemoveMemberLand implements ILandCmd {
 			return true;
 		}
 
-		sender.sendMessage("Success!");
+		sender.sendMessage(plugin.getLanguageManager().removeMemberSuccess
+				.replace("{regionID}", regionData.praseWGRegion().getId())
+				.replace("{member}", offlinePlayer.getName()));
 
 		return true;
 	}

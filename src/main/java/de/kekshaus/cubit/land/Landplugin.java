@@ -59,7 +59,7 @@ public class Landplugin extends JavaPlugin {
 		sqlMrg = new SqlManager(this);
 		landMrg = new LandManager(this);
 		blockMrg = new BlockManager(this);
-		particleMrg = new ParticleManager(this, false);
+		particleMrg = new ParticleManager(this);
 		vaultMrg = new VaultManager(this);
 		langMrg = new Language();
 		landConf = new LandConfig(this);
