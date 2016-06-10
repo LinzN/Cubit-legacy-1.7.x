@@ -1,6 +1,7 @@
 package de.kekshaus.cubit.land.commandSuite.landCommands.main;
 
 import org.bukkit.Chunk;
+import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -62,7 +63,8 @@ public class InfoLand implements ILandCmd {
 		}
 
 		/* After info command send Particle */
-		if (!plugin.getParticleManager().sendParticle(player, loc, null, ParticleEffect.END_ROD)) {
+		if (!plugin.getParticleManager().sendParticle(player, loc, null, ParticleEffect.END_ROD, null,
+				Effect.FIREWORKS_SPARK)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-PARTICLE"));
 			plugin.getLogger().warning(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-PARTICLE"));

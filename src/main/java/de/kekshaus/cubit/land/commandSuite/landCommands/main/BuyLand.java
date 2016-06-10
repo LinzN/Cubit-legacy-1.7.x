@@ -1,6 +1,7 @@
 package de.kekshaus.cubit.land.commandSuite.landCommands.main;
 
 import org.bukkit.Chunk;
+import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -78,7 +79,7 @@ public class BuyLand implements ILandCmd {
 		}
 
 		if (!plugin.getParticleManager().sendParticle(player, loc, ParticleEffect.VILLAGER_HAPPY,
-				ParticleEffect.FIREWORKS_SPARK)) {
+				ParticleEffect.FIREWORKS_SPARK, Effect.HAPPY_VILLAGER, Effect.FIREWORKS_SPARK)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-PARTICLE"));
 			plugin.getLogger().warning(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-PARTICLE"));
