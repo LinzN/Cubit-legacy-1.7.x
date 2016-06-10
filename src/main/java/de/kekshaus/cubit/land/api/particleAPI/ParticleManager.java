@@ -17,18 +17,66 @@ public class ParticleManager {
 		this.useInventivLib = useInventivLib;
 	}
 
-	public boolean sendParticle(final Player player, final Location loc, final ParticleEffect primaryEffectInventiv,
-			final ParticleEffect secondaryEffectInventiv, final Effect primaryEffectSpigot,
-			final Effect secondaryEffectSpigot) {
-		plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
-			@Override
-			public void run() {
-				new ParticleSender(useInventivLib, player, loc, primaryEffectInventiv, secondaryEffectInventiv,
-						primaryEffectSpigot, secondaryEffectSpigot);
-			}
-		});
+	public boolean sendBuy(final Player player, final Location loc) {
+		if (this.useInventivLib) {
+			plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+				@Override
+				public void run() {
+					new ParticleSender(player, loc, ParticleEffect.VILLAGER_HAPPY, ParticleEffect.FIREWORKS_SPARK);
+				}
+			});
+		} else {
+			plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+				@Override
+				public void run() {
+					new ParticleSender(player, loc, Effect.HAPPY_VILLAGER, Effect.FIREWORKS_SPARK);
+				}
 
+			});
+
+		}
 		return true;
 	}
 
+	public boolean sendSell(final Player player, final Location loc) {
+		if (this.useInventivLib) {
+			plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+				@Override
+				public void run() {
+					new ParticleSender(player, loc, ParticleEffect.SPELL_WITCH, ParticleEffect.FIREWORKS_SPARK);
+				}
+			});
+		} else {
+			plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+				@Override
+				public void run() {
+					new ParticleSender(player, loc, Effect.WITCH_MAGIC, Effect.FIREWORKS_SPARK);
+				}
+
+			});
+
+		}
+		return true;
+	}
+
+	public boolean sendInfo(final Player player, final Location loc) {
+		if (this.useInventivLib) {
+			plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+				@Override
+				public void run() {
+					new ParticleSender(player, loc, null, ParticleEffect.END_ROD);
+				}
+			});
+		} else {
+			plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+				@Override
+				public void run() {
+					new ParticleSender(player, loc, null, Effect.FIREWORKS_SPARK);
+				}
+
+			});
+
+		}
+		return true;
+	}
 }

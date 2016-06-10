@@ -1,11 +1,9 @@
 package de.kekshaus.cubit.land.commandSuite.landCommands.main;
 
 import org.bukkit.Chunk;
-import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.inventivetalent.particle.ParticleEffect;
 
 import de.kekshaus.cubit.land.Landplugin;
 import de.kekshaus.cubit.land.api.regionAPI.region.LandTypes;
@@ -78,8 +76,7 @@ public class BuyLand implements ILandCmd {
 			return true;
 		}
 
-		if (!plugin.getParticleManager().sendParticle(player, loc, ParticleEffect.VILLAGER_HAPPY,
-				ParticleEffect.FIREWORKS_SPARK, Effect.HAPPY_VILLAGER, Effect.FIREWORKS_SPARK)) {
+		if (!plugin.getParticleManager().sendBuy(player, loc)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-PARTICLE"));
 			plugin.getLogger().warning(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-PARTICLE"));

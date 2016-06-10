@@ -12,7 +12,6 @@ import org.inventivetalent.particle.ParticleEffect;
 
 public class ParticleSender {
 
-	private boolean useInventivLib;
 	private Player player;
 	private ArrayList<Location> edgeBlocks;
 	private ParticleEffect primaryEffectInventiv;
@@ -20,18 +19,25 @@ public class ParticleSender {
 	private Effect primaryEffectSpigot;
 	private Effect secondaryEffectSpigot;
 
-	public ParticleSender(boolean useInventivLib, Player player, Location location,
-			ParticleEffect primaryEffectInventiv, ParticleEffect secondaryEffectInventiv, Effect primaryEffectSpigot,
-			Effect secondaryEffectSpigot) {
+	public ParticleSender(Player player, Location location, ParticleEffect primaryEffectInventiv,
+			ParticleEffect secondaryEffectInventiv) {
 
-		this.useInventivLib = useInventivLib;
 		this.player = player;
 		this.edgeBlocks = getChunkEdgeLocation(location);
 		this.primaryEffectInventiv = primaryEffectInventiv;
 		this.secondaryEffectInventiv = secondaryEffectInventiv;
+
+		startInventiv();
+
+	}
+
+	public ParticleSender(Player player, Location location, Effect primaryEffectSpigot, Effect secondaryEffectSpigot) {
+
+		this.player = player;
+		this.edgeBlocks = getChunkEdgeLocation(location);
 		this.primaryEffectSpigot = primaryEffectSpigot;
 		this.secondaryEffectSpigot = secondaryEffectSpigot;
-		start();
+		startSpigot();
 
 	}
 
@@ -80,14 +86,24 @@ public class ParticleSender {
 		}
 	}
 
-	private void start() {
+	private void startInventiv() {
 		int loopValue = 0;
 		while (loopValue <= 5) {
-			if (this.useInventivLib) {
-				sendInventivParticle();
-			} else {
-				sendSpigotParticle();
+			sendInventivParticle();
+			loopValue++;
+			try {
+				Thread.sleep(800);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
+		}
+
+	}
+
+	private void startSpigot() {
+		int loopValue = 0;
+		while (loopValue <= 5) {
+			sendSpigotParticle();
 			loopValue++;
 			try {
 				Thread.sleep(800);
