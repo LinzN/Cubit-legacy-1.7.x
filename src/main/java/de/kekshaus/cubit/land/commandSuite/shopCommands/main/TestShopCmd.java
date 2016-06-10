@@ -15,7 +15,7 @@ public class TestShopCmd implements ILandCmd {
 
 	@Override
 	public boolean runCmd(final CommandSender sender, String[] args) {
-
+		this.plugin.equals("");
 		sender.sendMessage("Test hallo Shop");
 		return true;
 	}

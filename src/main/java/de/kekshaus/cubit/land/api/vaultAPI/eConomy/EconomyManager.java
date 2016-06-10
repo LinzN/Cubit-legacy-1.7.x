@@ -11,11 +11,9 @@ import net.milkbowl.vault.economy.Economy;
 public class EconomyManager {
 
 	private Economy econ;
-	private Landplugin plugin;
 
 	public EconomyManager(Landplugin plugin, Economy econ) {
 		this.econ = econ;
-		this.plugin = plugin;
 
 	}
 

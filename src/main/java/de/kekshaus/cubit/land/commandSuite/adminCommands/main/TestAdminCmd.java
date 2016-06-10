@@ -15,7 +15,7 @@ public class TestAdminCmd implements ILandCmd {
 
 	@Override
 	public boolean runCmd(final CommandSender sender, String[] args) {
-
+		this.plugin.equals("");
 		sender.sendMessage("Test hallo. Admin Command");
 		return true;
 	}
