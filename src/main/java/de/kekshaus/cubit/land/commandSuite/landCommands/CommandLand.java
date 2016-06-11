@@ -70,6 +70,8 @@ public class CommandLand implements CommandExecutor {
 			this.cmdMap.put("help", new HelpLand(this.plugin, perm.helpLand));
 			this.cmdMap.put("buy", new BuyLand(this.plugin, perm.buyLand));
 			this.cmdMap.put("sell", new SellLand(this.plugin, false, perm.sellLand));
+			this.cmdMap.put("kaufen", new BuyLand(this.plugin, perm.buyLand));
+			this.cmdMap.put("verkaufen", new SellLand(this.plugin, false, perm.sellLand));
 
 			this.cmdMap.put("add", new AddMemberLand(this.plugin, false, perm.addMemberLand));
 			this.cmdMap.put("remove", new RemoveMemberLand(this.plugin, false, perm.removeMemberLand));
