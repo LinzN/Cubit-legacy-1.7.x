@@ -23,8 +23,8 @@ public class SetData {
 					+ data.getRegionID() + "' AND world = '" + data.getWorld() + "';");
 			ResultSet result = sql.executeQuery();
 			if (result.next()) {
-				PreparedStatement update = conn.prepareStatement("UPDATE offerManager SET value = " + data.getValue()
-						+ ", uuid = " + data.getPlayerUUID().toString() + " WHERE regionID = '" + data.getRegionID()
+				PreparedStatement update = conn.prepareStatement("UPDATE offerManager SET value = '" + data.getValue()
+						+ "', uuid = '" + data.getPlayerUUID().toString() + "' WHERE regionID = '" + data.getRegionID()
 						+ "' AND world = '" + data.getWorld() + "';");
 				update.executeUpdate();
 				update.close();
