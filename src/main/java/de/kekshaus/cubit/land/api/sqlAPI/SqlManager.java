@@ -43,12 +43,14 @@ public class SqlManager {
 		return getData.hasOfferData(data);
 	}
 
-	public void setOfferData(OfferData data) {
+	public boolean setOfferData(OfferData data) {
 		setData.setOffer(data);
+		return true;
 	}
 
-	public void removeOfferData(OfferData data) {
+	public boolean removeOfferData(OfferData data) {
 		setData.removeOffer(data);
+		return true;
 	}
 
 	public void updatePlayer(UUID uuid, String player, long time) {

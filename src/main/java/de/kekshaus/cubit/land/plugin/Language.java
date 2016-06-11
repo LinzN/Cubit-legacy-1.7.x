@@ -17,7 +17,9 @@ public class Language {
 	public String flagSwitchSuccess = "§2Das System §9§l{flag}-Schutz §2wurde zu §9§l{value} §2gewechselt!";
 	public String addMemberSuccess = "§2Du hat {member} dem Grundstück §e{regionID}§2 hinzugefügt!";
 	public String removeMemberSuccess = "§2Du hat {member} vom Grundstück §e{regionID}§2 entfernt!";
-
+	public String offerAddSuccess = "§2Du bietest das Grundstück §e{regionID}§2 für §e{value} §2 an!";
+	public String offerRemoveSuccess = "§2Du bietest das Grundstück §e{regionID}§2 nicht mehr an!";
+	public String showOffer = "§2Dieses Grundstück wird für §e{value}§2 angeboten. Gib §e/land takeoffer §2ein um es zu kaufen!";
 	/* UnSuccess MSG */
 	public String buyIsAlreadyLand = "§cDieses Grundstück §e{regionID}§c ist nicht mehr frei!";
 	public String notEnoughMoney = "§cDas kannst du dir leider nicht leisten. Kosten: §e{cost} Mines§c!";

@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 
 import de.kekshaus.cubit.land.Landplugin;
 import de.kekshaus.cubit.land.api.regionAPI.region.RegionData;
+import de.kekshaus.cubit.land.api.sqlAPI.handler.OfferData;
 import de.kekshaus.cubit.land.commandSuite.ILandCmd;
 import de.nlinz.xeonSuite.guild.objects.Guild;
 
@@ -107,6 +108,12 @@ public class InfoLand implements ILandCmd {
 		player.sendMessage(
 				plugin.getLanguageManager().landInfoE6.replace("{lock}", statusLock).replace("{monster}", statusMonster)
 						.replace("{fire}", statusFire).replace("{pvp}", statusPvP).replace("{tnt}", statusTNT));
+
+		OfferData tempData = new OfferData(regionData.praseWGRegion().getId(), regionData.getWorld().getName());
+		if (plugin.getSqlManager().hasOfferData(tempData)) {
+			player.sendMessage(plugin.getLanguageManager().showOffer.replace("{value}",
+					"" + plugin.getSqlManager().getOfferData(tempData).getValue()));
+		}
 		return;
 
 	}

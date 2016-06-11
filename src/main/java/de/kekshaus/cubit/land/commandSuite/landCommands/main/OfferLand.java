@@ -59,13 +59,26 @@ public class OfferLand implements ILandCmd {
 			OfferData offerData = new OfferData(regionData.praseWGRegion().getId(), loc.getWorld().toString());
 			offerData.setPlayerUUID(regionData.getOwnerUUID());
 			offerData.setValue(Double.parseDouble(args[1]));
-			plugin.getSqlManager().setOfferData(offerData);
-			sender.sendMessage("Success offered");
+			if (!plugin.getSqlManager().setOfferData(offerData)) {
+				/* If this task failed! This should never happen */
+				sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "OFFER-ADD"));
+				plugin.getLogger().warning(plugin.getLanguageManager().errorInTask.replace("{error}", "OFFER-ADD"));
+				return true;
+			}
+			sender.sendMessage(plugin.getLanguageManager().offerAddSuccess
+					.replace("{regionID}", regionData.praseWGRegion().getId()).replace("{value}", args[1]));
 		} else {
 			OfferData offerData = new OfferData(regionData.praseWGRegion().getId(), loc.getWorld().toString());
 			if (plugin.getSqlManager().hasOfferData(offerData)) {
-				plugin.getSqlManager().removeOfferData(plugin.getSqlManager().getOfferData(offerData));
-				sender.sendMessage("Success removed");
+				if (!plugin.getSqlManager().removeOfferData(plugin.getSqlManager().getOfferData(offerData))) {
+					/* If this task failed! This should never happen */
+					sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "OFFER-REMOVE"));
+					plugin.getLogger()
+							.warning(plugin.getLanguageManager().errorInTask.replace("{error}", "OFFER-REMOVE"));
+					return true;
+				}
+				sender.sendMessage(plugin.getLanguageManager().offerRemoveSuccess.replace("{regionID}",
+						regionData.praseWGRegion().getId()));
 			}
 		}
 
