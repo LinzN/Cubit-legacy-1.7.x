@@ -73,7 +73,7 @@ public class GetData {
 		ConnectionManager manager = ConnectionManager.DEFAULT;
 		try {
 			Connection conn = manager.getConnection("cookieLand");
-			PreparedStatement sql = conn.prepareStatement("SELECT uuid FROM cubitRegions WHERE regionID = '"
+			PreparedStatement sql = conn.prepareStatement("SELECT uuid FROM offerManager WHERE regionID = '"
 					+ data.getRegionID() + "' AND world = '" + data.getWorld() + "';");
 			ResultSet result = sql.executeQuery();
 			if (result.next()) {
