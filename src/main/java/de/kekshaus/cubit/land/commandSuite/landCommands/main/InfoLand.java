@@ -108,9 +108,8 @@ public class InfoLand implements ILandCmd {
 						.replace("{fire}", statusFire).replace("{pvp}", statusPvP).replace("{tnt}", statusTNT));
 
 		if (plugin.getSqlManager().isOffered(regionData.getRegionName(), regionData.getWorld())) {
-			System.out.println("Debug Info Has offer");
-			player.sendMessage(plugin.getLanguageManager().showOffer.replace("{value}",
-					"" + plugin.getSqlManager().getOfferData(regionData.getRegionName(), regionData.getWorld())));
+			player.sendMessage(plugin.getLanguageManager().showOffer.replace("{value}", "" + plugin.getSqlManager()
+					.getOfferData(regionData.getRegionName(), regionData.getWorld()).getValue()));
 		}
 		return;
 
