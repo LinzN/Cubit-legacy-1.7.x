@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 
 import de.kekshaus.cubit.land.Landplugin;
 import de.kekshaus.cubit.land.api.regionAPI.region.RegionData;
-import de.kekshaus.cubit.land.api.sqlAPI.handler.OfferData;
 import de.kekshaus.cubit.land.commandSuite.ILandCmd;
 import de.nlinz.xeonSuite.guild.objects.Guild;
 
@@ -88,8 +87,7 @@ public class InfoLand implements ILandCmd {
 		String statusMonster = plugin.getLandManager().monsterPacket.getStateColor(regionData)
 				+ plugin.getLandManager().monsterPacket.getPacketName();
 
-		player.sendMessage(
-				plugin.getLanguageManager().landInfoE1.replace("{regionID}", regionData.praseWGRegion().getId()));
+		player.sendMessage(plugin.getLanguageManager().landInfoE1.replace("{regionID}", regionData.getRegionName()));
 
 		if (this.plugin.isGuildLoaded()) {
 			Guild guild = regionData.getGuild();
@@ -109,11 +107,10 @@ public class InfoLand implements ILandCmd {
 				plugin.getLanguageManager().landInfoE6.replace("{lock}", statusLock).replace("{monster}", statusMonster)
 						.replace("{fire}", statusFire).replace("{pvp}", statusPvP).replace("{tnt}", statusTNT));
 
-		OfferData tempData = new OfferData(regionData.praseWGRegion().getId(), regionData.getWorld().getName());
-		if (plugin.getSqlManager().hasOfferData(tempData)) {
+		if (plugin.getSqlManager().isOffered(regionData.getRegionName(), regionData.getWorld().getName())) {
 			System.out.println("Debug Info Has offer");
-			player.sendMessage(plugin.getLanguageManager().showOffer.replace("{value}",
-					"" + plugin.getSqlManager().getOfferData(tempData).getValue()));
+			player.sendMessage(plugin.getLanguageManager().showOffer.replace("{value}", "" + plugin.getSqlManager()
+					.getOfferData(regionData.getRegionName(), regionData.getWorld().getName())));
 		}
 		return;
 

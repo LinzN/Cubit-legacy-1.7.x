@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
+
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.Vector2D;
 import com.sk89q.worldguard.LocalPlayer;
@@ -43,7 +44,7 @@ public class ManageRegions {
 
 	public RegionData removeRegion(RegionData regionData, World world) {
 		RegionManager manager = Landplugin.inst().getWorldGuardPlugin().getRegionManager(world);
-		manager.removeRegion(regionData.praseWGRegion().getId());
+		manager.removeRegion(regionData.getRegionName());
 		return regionData;
 
 	}

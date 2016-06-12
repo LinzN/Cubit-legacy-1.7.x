@@ -57,7 +57,7 @@ public class RemoveMemberLand implements ILandCmd {
 		 */
 		if (!plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId()) && this.isAdmin == false) {
 			sender.sendMessage(plugin.getLanguageManager().errorNoLandPermission.replace("{regionID}",
-					regionData.praseWGRegion().getId()));
+					regionData.getRegionName()));
 			return true;
 		}
 		@SuppressWarnings("deprecation")
@@ -71,8 +71,7 @@ public class RemoveMemberLand implements ILandCmd {
 		}
 
 		sender.sendMessage(plugin.getLanguageManager().removeMemberSuccess
-				.replace("{regionID}", regionData.praseWGRegion().getId())
-				.replace("{member}", offlinePlayer.getName()));
+				.replace("{regionID}", regionData.getRegionName()).replace("{member}", offlinePlayer.getName()));
 
 		return true;
 	}

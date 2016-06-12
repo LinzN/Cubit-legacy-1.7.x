@@ -82,4 +82,8 @@ public class RegionData {
 		return this.type;
 	}
 
+	public String getRegionName() {
+		return this.region.getId();
+	}
+
 }

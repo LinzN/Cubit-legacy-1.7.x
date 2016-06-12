@@ -35,12 +35,12 @@ public class SqlManager {
 
 	}
 
-	public OfferData getOfferData(OfferData data) {
-		return getData.getOfferData(data);
+	public OfferData getOfferData(String regionID, String world) {
+		return getData.getOfferData(regionID, world);
 	}
 
-	public boolean hasOfferData(OfferData data) {
-		return getData.hasOfferData(data);
+	public boolean isOffered(String regionID, String world) {
+		return getData.isOffered(regionID, world);
 	}
 
 	public boolean setOfferData(OfferData data) {
@@ -48,8 +48,8 @@ public class SqlManager {
 		return true;
 	}
 
-	public boolean removeOfferData(OfferData data) {
-		setData.removeOffer(data);
+	public boolean removeOfferData(String regionID, String world) {
+		setData.removeOffer(regionID, world);
 		return true;
 	}
 

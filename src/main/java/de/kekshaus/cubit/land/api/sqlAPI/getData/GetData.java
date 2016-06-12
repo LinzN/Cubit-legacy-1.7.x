@@ -45,16 +45,18 @@ public class GetData {
 
 	}
 
-	public OfferData getOfferData(OfferData data) {
+	public OfferData getOfferData(String regionID, String world) {
 		ConnectionManager manager = ConnectionManager.DEFAULT;
+		OfferData data = null;
 		try {
 			Connection conn = manager.getConnection("cookieLand");
 			PreparedStatement sql = conn.prepareStatement("SELECT value, uuid FROM offerManager WHERE regionID = '"
-					+ data.getRegionID() + "' AND world = '" + data.getWorld() + "';");
+					+ regionID + "' AND world = '" + world + "';");
 			ResultSet result = sql.executeQuery();
 			if (result.next()) {
 				double value = result.getDouble(1);
 				UUID playerUUID = UUID.fromString(result.getString(2));
+				data = new OfferData(regionID, world);
 				data.setPlayerUUID(playerUUID);
 				data.setValue(value);
 			}
@@ -68,13 +70,13 @@ public class GetData {
 		return data;
 	}
 
-	public boolean hasOfferData(OfferData data) {
+	public boolean isOffered(String regionID, String world) {
 		boolean isoffered = false;
 		ConnectionManager manager = ConnectionManager.DEFAULT;
 		try {
 			Connection conn = manager.getConnection("cookieLand");
-			PreparedStatement sql = conn.prepareStatement("SELECT uuid FROM offerManager WHERE regionID = '"
-					+ data.getRegionID() + "' AND world = '" + data.getWorld() + "';");
+			PreparedStatement sql = conn.prepareStatement(
+					"SELECT uuid FROM offerManager WHERE regionID = '" + regionID + "' AND world = '" + world + "';");
 			ResultSet result = sql.executeQuery();
 			if (result.next()) {
 				isoffered = true;

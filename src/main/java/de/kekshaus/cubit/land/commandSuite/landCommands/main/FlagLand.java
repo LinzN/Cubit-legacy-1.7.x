@@ -51,7 +51,7 @@ public class FlagLand implements ILandCmd {
 		 */
 		if (!plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId()) && this.isAdmin == false) {
 			sender.sendMessage(plugin.getLanguageManager().errorNoLandPermission.replace("{regionID}",
-					regionData.praseWGRegion().getId()));
+					regionData.getRegionName()));
 			return true;
 		}
 

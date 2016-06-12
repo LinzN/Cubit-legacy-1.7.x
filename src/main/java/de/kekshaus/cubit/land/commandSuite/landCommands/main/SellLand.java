@@ -49,11 +49,11 @@ public class SellLand implements ILandCmd {
 		}
 
 		RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
-		final String regionID = regionData.praseWGRegion().getId();
+		final String regionID = regionData.getRegionName();
 
 		if (!plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId()) && this.isAdmin == false) {
 			sender.sendMessage(plugin.getLanguageManager().errorNoLandPermission.replace("{regionID}",
-					regionData.praseWGRegion().getId()));
+					regionData.getRegionName()));
 			return true;
 		}
 

@@ -50,13 +50,13 @@ public class OfferLand implements ILandCmd {
 		 */
 		if (!plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId()) && this.isAdmin == false) {
 			sender.sendMessage(plugin.getLanguageManager().errorNoLandPermission.replace("{regionID}",
-					regionData.praseWGRegion().getId()));
+					regionData.getRegionName()));
 			return true;
 		}
 
 		if (args.length < 2) {
 		} else if (args.length >= 2 && Double.parseDouble(args[1]) > 0D) {
-			OfferData offerData = new OfferData(regionData.praseWGRegion().getId(), loc.getWorld().toString());
+			OfferData offerData = new OfferData(regionData.getRegionName(), loc.getWorld().toString());
 			offerData.setPlayerUUID(regionData.getOwnerUUID());
 			offerData.setValue(Double.parseDouble(args[1]));
 			if (!plugin.getSqlManager().setOfferData(offerData)) {
@@ -66,11 +66,11 @@ public class OfferLand implements ILandCmd {
 				return true;
 			}
 			sender.sendMessage(plugin.getLanguageManager().offerAddSuccess
-					.replace("{regionID}", regionData.praseWGRegion().getId()).replace("{value}", args[1]));
+					.replace("{regionID}", regionData.getRegionName()).replace("{value}", args[1]));
 		} else {
-			OfferData offerData = new OfferData(regionData.praseWGRegion().getId(), loc.getWorld().toString());
-			if (plugin.getSqlManager().hasOfferData(offerData)) {
-				if (!plugin.getSqlManager().removeOfferData(plugin.getSqlManager().getOfferData(offerData))) {
+
+			if (plugin.getSqlManager().isOffered(regionData.getRegionName(), loc.getWorld().toString())) {
+				if (!plugin.getSqlManager().removeOfferData(regionData.getRegionName(), loc.getWorld().toString())) {
 					/* If this task failed! This should never happen */
 					sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "OFFER-REMOVE"));
 					plugin.getLogger()
@@ -78,7 +78,7 @@ public class OfferLand implements ILandCmd {
 					return true;
 				}
 				sender.sendMessage(plugin.getLanguageManager().offerRemoveSuccess.replace("{regionID}",
-						regionData.praseWGRegion().getId()));
+						regionData.getRegionName()));
 			}
 		}
 
