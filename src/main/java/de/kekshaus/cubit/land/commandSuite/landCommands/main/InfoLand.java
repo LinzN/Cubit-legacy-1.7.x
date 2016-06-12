@@ -111,6 +111,7 @@ public class InfoLand implements ILandCmd {
 
 		OfferData tempData = new OfferData(regionData.praseWGRegion().getId(), regionData.getWorld().getName());
 		if (plugin.getSqlManager().hasOfferData(tempData)) {
+			System.out.println("Debug Info Has offer");
 			player.sendMessage(plugin.getLanguageManager().showOffer.replace("{value}",
 					"" + plugin.getSqlManager().getOfferData(tempData).getValue()));
 		}
