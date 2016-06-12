@@ -56,7 +56,7 @@ public class GetData {
 			if (result.next()) {
 				double value = result.getDouble(1);
 				UUID playerUUID = UUID.fromString(result.getString(2));
-				data = new OfferData(regionID, world);
+				data = new OfferData(regionID, Bukkit.getWorld(world));
 				data.setPlayerUUID(playerUUID);
 				data.setValue(value);
 			}

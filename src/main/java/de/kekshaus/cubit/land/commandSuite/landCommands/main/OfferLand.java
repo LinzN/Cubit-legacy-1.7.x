@@ -56,7 +56,7 @@ public class OfferLand implements ILandCmd {
 
 		if (args.length < 2) {
 		} else if (args.length >= 2 && Double.parseDouble(args[1]) > 0D) {
-			OfferData offerData = new OfferData(regionData.getRegionName(), loc.getWorld().toString());
+			OfferData offerData = new OfferData(regionData.getRegionName(), loc.getWorld());
 			offerData.setPlayerUUID(regionData.getOwnerUUID());
 			offerData.setValue(Double.parseDouble(args[1]));
 			if (!plugin.getSqlManager().setOfferData(offerData)) {

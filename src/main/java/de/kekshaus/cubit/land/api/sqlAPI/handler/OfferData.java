@@ -2,31 +2,33 @@ package de.kekshaus.cubit.land.api.sqlAPI.handler;
 
 import java.util.UUID;
 
+import org.bukkit.World;
+
 public class OfferData {
 	private double value;
 	private UUID playerUUID;
 	private String regionID;
-	private String world;
+	private World world;
 
-	public OfferData(String regionID, String world, UUID playerUUID, double value) {
+	public OfferData(String regionID, World world, UUID playerUUID, double value) {
 		this.value = value;
 		this.playerUUID = playerUUID;
 		this.regionID = regionID;
 		this.world = world;
 	}
 
-	public OfferData(String regionID, String world) {
+	public OfferData(String regionID, World world) {
 		this.regionID = regionID;
 		this.world = world;
 	}
 
-	public OfferData(String regionID, String world, UUID playerUUID) {
+	public OfferData(String regionID, World world, UUID playerUUID) {
 		this.playerUUID = playerUUID;
 		this.regionID = regionID;
 		this.world = world;
 	}
 
-	public OfferData(String regionID, String world, double value) {
+	public OfferData(String regionID, World world, double value) {
 		this.value = value;
 		this.regionID = regionID;
 		this.world = world;
@@ -44,7 +46,7 @@ public class OfferData {
 		this.regionID = regionID;
 	}
 
-	public void setWorld(String world) {
+	public void setWorld(World world) {
 		this.world = world;
 	}
 
@@ -60,7 +62,7 @@ public class OfferData {
 		return this.value;
 	}
 
-	public String getWorld() {
+	public World getWorld() {
 		return this.world;
 	}
 
