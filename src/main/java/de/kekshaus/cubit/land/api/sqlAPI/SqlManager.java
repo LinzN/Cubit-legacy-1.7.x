@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
+import org.bukkit.World;
+
 import de.kekshaus.cubit.land.Landplugin;
 import de.kekshaus.cubit.land.api.sqlAPI.getData.GetData;
 import de.kekshaus.cubit.land.api.sqlAPI.handler.OfferData;
@@ -35,12 +37,12 @@ public class SqlManager {
 
 	}
 
-	public OfferData getOfferData(String regionID, String world) {
-		return getData.getOfferData(regionID, world);
+	public OfferData getOfferData(String regionID, World world) {
+		return getData.getOfferData(regionID, world.getName().toLowerCase());
 	}
 
-	public boolean isOffered(String regionID, String world) {
-		return getData.isOffered(regionID, world);
+	public boolean isOffered(String regionID, World world) {
+		return getData.isOffered(regionID, world.getName().toLowerCase());
 	}
 
 	public boolean setOfferData(OfferData data) {
@@ -48,8 +50,8 @@ public class SqlManager {
 		return true;
 	}
 
-	public boolean removeOfferData(String regionID, String world) {
-		setData.removeOffer(regionID, world);
+	public boolean removeOfferData(String regionID, World world) {
+		setData.removeOffer(regionID, world.getName().toLowerCase());
 		return true;
 	}
 

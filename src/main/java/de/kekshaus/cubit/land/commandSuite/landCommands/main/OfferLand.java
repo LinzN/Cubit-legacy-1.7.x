@@ -69,8 +69,8 @@ public class OfferLand implements ILandCmd {
 					.replace("{regionID}", regionData.getRegionName()).replace("{value}", args[1]));
 		} else {
 
-			if (plugin.getSqlManager().isOffered(regionData.getRegionName(), loc.getWorld().toString())) {
-				if (!plugin.getSqlManager().removeOfferData(regionData.getRegionName(), loc.getWorld().toString())) {
+			if (plugin.getSqlManager().isOffered(regionData.getRegionName(), loc.getWorld())) {
+				if (!plugin.getSqlManager().removeOfferData(regionData.getRegionName(), loc.getWorld())) {
 					/* If this task failed! This should never happen */
 					sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "OFFER-REMOVE"));
 					plugin.getLogger()
