@@ -38,7 +38,7 @@ public class SqlManager {
 	}
 
 	public OfferData getOfferData(String regionID, World world) {
-		return getData.getOfferData(regionID, world.getName().toLowerCase());
+		return getData.getOfferData(regionID, world);
 	}
 
 	public boolean isOffered(String regionID, World world) {

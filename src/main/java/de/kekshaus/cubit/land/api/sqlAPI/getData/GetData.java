@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 
 import de.kekshaus.cubit.land.api.sqlAPI.handler.ConnectionManager;
 import de.kekshaus.cubit.land.api.sqlAPI.handler.OfferData;
@@ -45,18 +46,18 @@ public class GetData {
 
 	}
 
-	public OfferData getOfferData(String regionID, String world) {
+	public OfferData getOfferData(String regionID, World world) {
 		ConnectionManager manager = ConnectionManager.DEFAULT;
 		OfferData data = null;
 		try {
 			Connection conn = manager.getConnection("cookieLand");
 			PreparedStatement sql = conn.prepareStatement("SELECT value, uuid FROM offerManager WHERE regionID = '"
-					+ regionID + "' AND world = '" + world + "';");
+					+ regionID + "' AND world = '" + world.getName().toLowerCase() + "';");
 			ResultSet result = sql.executeQuery();
 			if (result.next()) {
 				double value = result.getDouble(1);
 				UUID playerUUID = UUID.fromString(result.getString(2));
-				data = new OfferData(regionID, Bukkit.getWorld(world));
+				data = new OfferData(regionID, world);
 				data.setPlayerUUID(playerUUID);
 				data.setValue(value);
 			}
