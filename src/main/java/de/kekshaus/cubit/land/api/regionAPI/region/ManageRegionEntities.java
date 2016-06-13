@@ -118,6 +118,29 @@ public class ManageRegionEntities {
 
 	}
 
+	public List<RegionData> clearOwners(List<RegionData> regionListe, World world) {
+		if (regionListe.size() <= 30) {
+
+			for (RegionData region : regionListe) {
+				region.praseWGRegion().getOwners().clear();
+			}
+		} else {
+
+			int loops = regionListe.size() / 30 + 1;
+			for (int i = 0; i < loops; i++) {
+				List<RegionData> list = regionListe.subList(i * 30,
+						30 * i + 29 >= regionListe.size() ? regionListe.size() : 30 * i + 29);
+
+				for (RegionData region : list) {
+					region.praseWGRegion().getOwners().clear();
+				}
+			}
+
+		}
+		return regionListe;
+
+	}
+
 	public List<ProtectedRegion> getAllLands(UUID playerUUID, World world) {
 		OfflinePlayer player = Bukkit.getOfflinePlayer(playerUUID);
 		LocalPlayer lPlayer = Landplugin.inst().getWorldGuardPlugin().wrapOfflinePlayer(player);

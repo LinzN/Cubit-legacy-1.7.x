@@ -178,6 +178,23 @@ public class LandManager {
 		return true;
 	}
 
+	public boolean changeLandOwner(final RegionData regionData, final World world, final UUID playerUUID) {
+		try {
+
+			List<RegionData> list = new ArrayList<RegionData>();
+			list.add(regionData);
+			mRegE.clearMember(list, world);
+			mRegE.clearOwners(list, world);
+			mRegE.setOwner(list, world, playerUUID);
+
+			saveMrg.save(world);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
 	public String getStringState(boolean value) {
 		String stateString = "INAKTIV";
 		if (value) {

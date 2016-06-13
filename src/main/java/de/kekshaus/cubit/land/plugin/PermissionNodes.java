@@ -11,6 +11,7 @@ public class PermissionNodes {
 	public String removeMemberLand = "cubitAlpha.land.removemember";
 	public String flagLand = "cubitAlpha.land.flag.";
 	public String offerLand = "cubitAlpha.land.offer";
+	public String takeOfferLand = "cubitAlpha.land.takeoffer";
 
 	/* Admin Perms */
 	public String flagAdminLand = "cubitAlpha.admin.flag.";

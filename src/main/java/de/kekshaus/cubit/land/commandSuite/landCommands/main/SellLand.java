@@ -81,6 +81,13 @@ public class SellLand implements ILandCmd {
 			plugin.getLogger().warning(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-BLOCK"));
 			return true;
 		}
+		if (!plugin.getSqlManager().removeOfferData(regionData.getRegionName(), loc.getWorld())) {
+			/* If this task failed! This should never happen */
+			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "TAKEOFFER-REMOVEOFFER"));
+			plugin.getLogger()
+					.warning(plugin.getLanguageManager().errorInTask.replace("{error}", "TAKEOFFER-REMOVEOFFER"));
+			return true;
+		}
 
 		if (!plugin.getParticleManager().sendSell(player, loc)) {
 			/* If this task failed! This should never happen */
