@@ -120,6 +120,11 @@ public class InfoLand implements ILandCmd {
 	}
 
 	private void serverInfo(Player player, RegionData regionData) {
+		String minBorder = regionData.getMinPoint();
+		String maxBorder = regionData.getMaxPoint();
+		player.sendMessage(plugin.getLanguageManager().landInfoE2.replace("{owner}", "Server"));
+		player.sendMessage(
+				plugin.getLanguageManager().landInfoE4.replace("{min}", minBorder).replace("{max}", maxBorder));
 		return;
 	}
 
