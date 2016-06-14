@@ -33,7 +33,12 @@ public class EconomyManager {
 		if (recieverUUID != null) {
 			OfflinePlayer reciever = Bukkit.getOfflinePlayer(recieverUUID);
 			econ.depositPlayer(reciever, value);
+
 		}
+	}
+
+	public String formateToEconomy(double value) {
+		return econ.format(value);
 	}
 
 }

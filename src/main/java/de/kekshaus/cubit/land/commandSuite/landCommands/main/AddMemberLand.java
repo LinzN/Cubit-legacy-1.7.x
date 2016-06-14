@@ -43,7 +43,7 @@ public class AddMemberLand implements ILandCmd {
 		}
 
 		if (args.length < 2) {
-			sender.sendMessage(" Debug: Wrong arguments");
+			sender.sendMessage(plugin.getLanguageManager().wrongArguments.replace("{usage}", "/land add [Mitspieler]"));
 			return true;
 		}
 

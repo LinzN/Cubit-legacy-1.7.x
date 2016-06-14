@@ -57,7 +57,16 @@ public class TakeOfferLand implements ILandCmd {
 
 		OfferData offerData = plugin.getSqlManager().getOfferData(regionData.getRegionName(), loc.getWorld());
 		if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), offerData.getValue())) {
-			sender.sendMessage(plugin.getLanguageManager().notEnoughMoney.replace("{cost}", "" + offerData.getValue()));
+			sender.sendMessage(plugin.getLanguageManager().notEnoughMoney.replace("{cost}",
+					"" + plugin.getVaultManager().formateToEconomy(offerData.getValue())));
+		}
+
+		if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), regionData.getOwnerUUID(),
+				offerData.getValue())) {
+			/* If this task failed! This should never happen */
+			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "TAKEOFFER-ECONOMY"));
+			plugin.getLogger().warning(plugin.getLanguageManager().errorInTask.replace("{error}", "TAKEOFFER-ECONOMY"));
+			return true;
 		}
 		/* Change owner and clear Memberlist */
 		if (!plugin.getLandManager().changeLandOwner(regionData, loc.getWorld(), player.getUniqueId())) {

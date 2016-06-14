@@ -80,4 +80,8 @@ public class VaultManager {
 		return price;
 	}
 
+	public String formateToEconomy(double value) {
+		return ecoMrg.formateToEconomy(value);
+	}
+
 }

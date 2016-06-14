@@ -134,7 +134,8 @@ public class InfoLand implements ILandCmd {
 				loc.getWorld(), true);
 		final String regionID = plugin.getLandManager().buildLandName(loc.getWorld().getName(), chunk.getX(),
 				chunk.getZ());
-		player.sendMessage(plugin.getLanguageManager().landInfoA1.replace("{cost}", "" + economyValue)
+		player.sendMessage(plugin.getLanguageManager().landInfoA1
+				.replace("{cost}", "" + plugin.getVaultManager().formateToEconomy(economyValue))
 				.replace("{regionID}", regionID));
 		return;
 	}

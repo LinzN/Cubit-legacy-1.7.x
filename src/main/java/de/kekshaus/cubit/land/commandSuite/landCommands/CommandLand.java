@@ -18,6 +18,7 @@ import de.kekshaus.cubit.land.commandSuite.landCommands.main.BuyLand;
 import de.kekshaus.cubit.land.commandSuite.landCommands.main.FlagLand;
 import de.kekshaus.cubit.land.commandSuite.landCommands.main.HelpLand;
 import de.kekshaus.cubit.land.commandSuite.landCommands.main.InfoLand;
+import de.kekshaus.cubit.land.commandSuite.landCommands.main.KickLand;
 import de.kekshaus.cubit.land.commandSuite.landCommands.main.OfferLand;
 import de.kekshaus.cubit.land.commandSuite.landCommands.main.RemoveMemberLand;
 import de.kekshaus.cubit.land.commandSuite.landCommands.main.SellLand;
@@ -80,6 +81,7 @@ public class CommandLand implements CommandExecutor {
 			this.cmdMap.put("offer", new OfferLand(this.plugin, false, perm.offerLand));
 
 			this.cmdMap.put("takeoffer", new TakeOfferLand(this.plugin, perm.takeOfferLand));
+			this.cmdMap.put("kick", new KickLand(this.plugin, perm.kickLand));
 
 			/* Protection Commands */
 			this.cmdMap.put("pvp", new FlagLand(this.plugin, Landplugin.inst().getLandManager().pvpPacket, false,

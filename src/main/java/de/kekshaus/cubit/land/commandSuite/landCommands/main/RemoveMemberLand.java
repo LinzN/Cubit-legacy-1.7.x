@@ -43,7 +43,8 @@ public class RemoveMemberLand implements ILandCmd {
 		}
 
 		if (args.length < 2) {
-			sender.sendMessage(" Debug: Wrong arguments");
+			sender.sendMessage(
+					plugin.getLanguageManager().wrongArguments.replace("{usage}", "/land remove [Mitspieler]"));
 			return true;
 		}
 

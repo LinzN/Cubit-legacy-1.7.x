@@ -10,6 +10,7 @@ public class Language {
 	public String errorNoPermission = "§4Du hast dafür leider keine Berechtigungen! :(";
 	public String errorNoLandPermission = "§cDu hast für das Land {regionID} keine Berechtigungen! :(";
 	public String errorNoLandFound = "§cEs wurde hier kein Land gefunden! :(";
+	public String noNumberFound = "§cDies ist keine Gültige Nummer";
 
 	/* Success MSG */
 	public String buySuccess = "§2Du hast das Grundstück §e{regionID}§2 gekauft!";
@@ -17,20 +18,23 @@ public class Language {
 	public String flagSwitchSuccess = "§2Das System §9§l{flag}-Schutz §2wurde zu §9§l{value} §2gewechselt!";
 	public String addMemberSuccess = "§2Du hat {member} dem Grundstück §e{regionID}§2 hinzugefügt!";
 	public String removeMemberSuccess = "§2Du hat {member} vom Grundstück §e{regionID}§2 entfernt!";
-	public String offerAddSuccess = "§2Du bietest das Grundstück §e{regionID}§2 für §e{value} §2 an!";
+	public String offerAddSuccess = "§2Du bietest das Grundstück §e{regionID}§2 für §e{value}§2 an!";
 	public String offerRemoveSuccess = "§2Du bietest das Grundstück §e{regionID}§2 nicht mehr an!";
-	public String showOffer = "§2Dieses Grundstück wird für §e{value} Mines§2 angeboten. Gib §e/land takeoffer §2ein um es zu kaufen!";
+	public String showOffer = "§2Dieses Grundstück wird für §e{value}§2 angeboten. Gib §e/land takeoffer §2ein um es zu kaufen!";
+	public String kickedInfo = "§6Du wurdest von dem Besitzer des Landes {regionID} verwiesen!";
+	public String kickInfo = "§2Alle nicht-Member wurden dem Land {regionID} verwiesen!";
 	/* UnSuccess MSG */
 	public String buyIsAlreadyLand = "§cDieses Grundstück §e{regionID}§c ist nicht mehr frei!";
-	public String notEnoughMoney = "§cDas kannst du dir leider nicht leisten. Kosten: §e{cost} Mines§c!";
+	public String notEnoughMoney = "§cDas kannst du dir leider nicht leisten. Kosten: §e{cost}§c!";
 	public String takeOwnLand = "§cDu kannst nicht dein eigenes Land kaufen!";
 	public String notOffered = "§cDas Land {regionID} wird nicht zum Verkauf angeboten!";
+	public String wrongArguments = "§cFehler im Befehl: Benutze {usage}!";
 
 	/* Header for Plugin */
 	public String landHeader = "§6<<<<<<<<<<<<<<<<<<<<<§2§l|GrundStück|§6>>>>>>>>>>>>>>>>>>>>>";
 
 	/* Land Info Page */
-	public String landInfoA1 = "§2Dieses Grundstück [§e{regionID}§2] ist noch unbewohnt. \n§2Kaufe es mit §e/land buy §2für §e{cost} Mines§2!";
+	public String landInfoA1 = "§2Dieses Grundstück [§e{regionID}§2] ist noch unbewohnt. \n§2Kaufe es mit §e/land buy §2für §e{cost}§2!";
 
 	public String landInfoE1 = "§2Grundstück: §9{regionID}";
 	public String landInfoE1A1 = "§2Gilde: §e{guild}";
