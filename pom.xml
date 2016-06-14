@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<packaging>jar</packaging>
-	<name>cubit-alpha3</name>
+	<name>cubit</name>
 
 	<repositories>
 		<repository>
@@ -131,7 +131,7 @@
 			</plugin>
 		</plugins>
 	</build>
-	<version>3.0.0</version>
+	<version>alpha3</version>
 	<groupId>de.nlinz</groupId>
 	<dependencyManagement>
 		<dependencies>
@@ -141,5 +141,5 @@
 		<build.number>SNAPSHOT</build.number>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	<artifactId>cubit-alpha3</artifactId>
+	<artifactId>cubit</artifactId>
 </project>

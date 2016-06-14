@@ -1,4 +1,4 @@
-name: Cubit-alpha3
+name: Cubit
 main : de.kekshaus.cubit.land.Landplugin
 version: ${project.version}.b${build.number}
 description: Landplugin
