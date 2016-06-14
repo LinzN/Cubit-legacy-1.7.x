@@ -43,7 +43,7 @@ public class Language {
 	/* Page 1 Help for Land Command */
 	public String landHelpE1P1 = "§6<<<<<<<<<<<<<<<<<§2§l|GrundStück Hilfe|§6>>>>>>>>>>>>>>>>>";
 	public String landHelpE2P1 = "§2 Infos zum Grundstück: §e/land info";
-	public String landHelpE3P1 = "§2 Liste deiner Grundstücke: §e/land list [SEITE]";
+	public String landHelpE3P1 = "§2 Liste deiner Grundstücke: §4/land list [SEITE]";
 	public String landHelpE4P1 = "§6§lMehr Befehle auf den folgenden Seiten:";
 	public String landHelpE5P1 = "§2 Seite 2: Kaufen - Verkaufen §a/land help 2";
 	public String landHelpE6P1 = "§2 Seite 3: Mitspieler verwalten §a/land help 3";
