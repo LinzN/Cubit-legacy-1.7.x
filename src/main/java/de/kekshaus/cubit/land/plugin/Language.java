@@ -70,8 +70,8 @@ public class Language {
 	public String landHelpE2P4 = "§2 Feuer Schutz: §e/land fire (§aON§e/§cOFF§e)";
 	public String landHelpE3P4 = "§2 Zugriff Schutz: §e/land lock (§aON§e/§cOFF§e)";
 	public String landHelpE4P4 = "§2 PvP Schutz: §e/land pvp (§aON§e/§cOFF§e)";
-	public String landHelpE4P5 = "§2 TnT Schutz: §e/land tnt (§aON§e/§cOFF§e)";
-	public String landHelpE4P6 = "§2 Monster Schutz: §e/land monster (§aON§e/§cOFF§e)";
-	public String landHelpE5P7 = "§a§lZurück auf Seite 3 mit §6/land help 3";
+	public String landHelpE5P4 = "§2 TnT Schutz: §e/land tnt (§aON§e/§cOFF§e)";
+	public String landHelpE6P4 = "§2 Monster Schutz: §e/land monster (§aON§e/§cOFF§e)";
+	public String landHelpE7P4 = "§a§lZurück auf Seite 3 mit §6/land help 3";
 
 }

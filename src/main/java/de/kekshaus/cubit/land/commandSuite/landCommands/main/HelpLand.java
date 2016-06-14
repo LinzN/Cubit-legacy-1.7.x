@@ -84,6 +84,9 @@ public class HelpLand implements ILandCmd {
 		sender.sendMessage(plugin.getLanguageManager().landHelpE2P4);
 		sender.sendMessage(plugin.getLanguageManager().landHelpE3P4);
 		sender.sendMessage(plugin.getLanguageManager().landHelpE4P4);
+		sender.sendMessage(plugin.getLanguageManager().landHelpE5P4);
+		sender.sendMessage(plugin.getLanguageManager().landHelpE6P4);
+		sender.sendMessage(plugin.getLanguageManager().landHelpE7P4);
 		return true;
 
 	}
