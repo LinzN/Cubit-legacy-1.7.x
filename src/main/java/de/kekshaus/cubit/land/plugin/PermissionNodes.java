@@ -18,5 +18,6 @@ public class PermissionNodes {
 	public String sellAdminLand = "cubit.command.admin.sell";
 	public String addMemberAdminLand = "cubit.command.admin.addmember";
 	public String removeMemberAdminLand = "cubit.command.admin.removemember";
+	public String offerAdminLand = "cubit.command.admin.offer";
 
 }

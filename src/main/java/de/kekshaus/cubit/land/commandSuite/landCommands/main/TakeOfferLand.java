@@ -46,13 +46,12 @@ public class TakeOfferLand implements ILandCmd {
 		 * Check if the player has permissions for this land or hat landadmin
 		 * permissions
 		 */
-		if (!plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId())) {
-			sender.sendMessage(plugin.getLanguageManager().errorNoLandPermission.replace("{regionID}",
-					regionData.getRegionName()));
+		if (plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId())) {
+			player.sendMessage(plugin.getLanguageManager().takeOwnLand);
 			return true;
 		}
 		if (!plugin.getSqlManager().isOffered(regionData.getRegionName(), loc.getWorld())) {
-			sender.sendMessage("Not offered!");
+			sender.sendMessage(plugin.getLanguageManager().notOffered.replace("regionID", regionData.getRegionName()));
 			return true;
 		}
 
@@ -60,7 +59,7 @@ public class TakeOfferLand implements ILandCmd {
 		if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), offerData.getValue())) {
 			sender.sendMessage(plugin.getLanguageManager().notEnoughMoney.replace("{cost}", "" + offerData.getValue()));
 		}
-
+		/* Change owner and clear Memberlist */
 		if (!plugin.getLandManager().changeLandOwner(regionData, loc.getWorld(), player.getUniqueId())) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "TAKEOFFER-UPDATEOWNER"));
@@ -68,6 +67,7 @@ public class TakeOfferLand implements ILandCmd {
 					.warning(plugin.getLanguageManager().errorInTask.replace("{error}", "TAKEOFFER-UPDATEOWNER"));
 			return true;
 		}
+		/* Remove offer from Database */
 		if (!plugin.getSqlManager().removeOfferData(regionData.getRegionName(), loc.getWorld())) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "TAKEOFFER-REMOVEOFFER"));
@@ -75,7 +75,8 @@ public class TakeOfferLand implements ILandCmd {
 					.warning(plugin.getLanguageManager().errorInTask.replace("{error}", "TAKEOFFER-REMOVEOFFER"));
 			return true;
 		}
-		sender.sendMessage("Du hast das GS abgekauft!");
+		/* Task was successfully. Send BuyMessage */
+		sender.sendMessage(plugin.getLanguageManager().buySuccess.replace("{regionID}", regionData.getRegionName()));
 
 		return true;
 	}

@@ -45,21 +45,45 @@ public class HelpLand implements ILandCmd {
 	}
 
 	private boolean page1(CommandSender sender) {
+		sender.sendMessage(plugin.getLanguageManager().landHelpE1P1);
+		sender.sendMessage(plugin.getLanguageManager().landHelpE2P1);
+		sender.sendMessage(plugin.getLanguageManager().landHelpE3P1);
+		sender.sendMessage(plugin.getLanguageManager().landHelpE4P1);
+		sender.sendMessage(plugin.getLanguageManager().landHelpE5P1);
+		sender.sendMessage(plugin.getLanguageManager().landHelpE6P1);
+		sender.sendMessage(plugin.getLanguageManager().landHelpE7P1);
 		return true;
 
 	}
 
 	private boolean page2(CommandSender sender) {
+		sender.sendMessage(plugin.getLanguageManager().landHelpE1P2);
+		sender.sendMessage(plugin.getLanguageManager().landHelpE2P2);
+		sender.sendMessage(plugin.getLanguageManager().landHelpE3P2);
+		sender.sendMessage(plugin.getLanguageManager().landHelpE4P2);
+		sender.sendMessage(plugin.getLanguageManager().landHelpE5P2);
+		sender.sendMessage(plugin.getLanguageManager().landHelpE6P2);
+		sender.sendMessage(plugin.getLanguageManager().landHelpE7P2);
 		return true;
 
 	}
 
 	private boolean page3(CommandSender sender) {
+		sender.sendMessage(plugin.getLanguageManager().landHelpE1P3);
+		sender.sendMessage(plugin.getLanguageManager().landHelpE2P3);
+		sender.sendMessage(plugin.getLanguageManager().landHelpE3P3);
+		sender.sendMessage(plugin.getLanguageManager().landHelpE4P3);
+		sender.sendMessage(plugin.getLanguageManager().landHelpE5P3);
+
 		return true;
 
 	}
 
 	private boolean page4(CommandSender sender) {
+		sender.sendMessage(plugin.getLanguageManager().landHelpE1P4);
+		sender.sendMessage(plugin.getLanguageManager().landHelpE2P4);
+		sender.sendMessage(plugin.getLanguageManager().landHelpE3P4);
+		sender.sendMessage(plugin.getLanguageManager().landHelpE4P4);
 		return true;
 
 	}
