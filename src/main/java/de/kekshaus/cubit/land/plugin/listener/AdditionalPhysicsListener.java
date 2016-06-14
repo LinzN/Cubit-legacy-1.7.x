@@ -23,7 +23,7 @@ public class AdditionalPhysicsListener implements Listener {
 		RegionData toLand = Landplugin.inst().getLandManager().praseRegionData(toChunk.getWorld(), toChunk.getX(),
 				toChunk.getZ());
 
-		if (fromLand.getLandType() == LandTypes.NOTYPE || toLand.getLandType() == LandTypes.NOTYPE) {
+		if (toLand.getLandType() == LandTypes.NOTYPE) {
 			return;
 		}
 
