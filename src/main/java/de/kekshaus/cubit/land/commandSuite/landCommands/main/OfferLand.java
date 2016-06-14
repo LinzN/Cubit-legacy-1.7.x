@@ -7,8 +7,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import de.kekshaus.cubit.land.Landplugin;
+import de.kekshaus.cubit.land.api.database.sqlAPI.handler.OfferData;
 import de.kekshaus.cubit.land.api.regionAPI.region.RegionData;
-import de.kekshaus.cubit.land.api.sqlAPI.handler.OfferData;
 import de.kekshaus.cubit.land.commandSuite.ILandCmd;
 
 public class OfferLand implements ILandCmd {
@@ -62,8 +62,8 @@ public class OfferLand implements ILandCmd {
 			}
 			double value = Double.parseDouble(args[1]);
 			if (value <= 0) {
-				if (plugin.getSqlManager().isOffered(regionData.getRegionName(), loc.getWorld())) {
-					if (!plugin.getSqlManager().removeOfferData(regionData.getRegionName(), loc.getWorld())) {
+				if (plugin.getDatabaseManager().isOffered(regionData.getRegionName(), loc.getWorld())) {
+					if (!plugin.getDatabaseManager().removeOfferData(regionData.getRegionName(), loc.getWorld())) {
 						/* If this task failed! This should never happen */
 						sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "OFFER-REMOVE"));
 						plugin.getLogger()
@@ -77,7 +77,7 @@ public class OfferLand implements ILandCmd {
 				OfferData offerData = new OfferData(regionData.getRegionName(), loc.getWorld());
 				offerData.setPlayerUUID(regionData.getOwnerUUID());
 				offerData.setValue(value);
-				if (!plugin.getSqlManager().setOfferData(offerData)) {
+				if (!plugin.getDatabaseManager().setOfferData(offerData)) {
 					/* If this task failed! This should never happen */
 					sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "OFFER-ADD"));
 					plugin.getLogger().warning(plugin.getLanguageManager().errorInTask.replace("{error}", "OFFER-ADD"));

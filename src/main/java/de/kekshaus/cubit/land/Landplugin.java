@@ -7,9 +7,9 @@ import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 import de.kekshaus.cubit.land.api.blockAPI.BlockManager;
+import de.kekshaus.cubit.land.api.database.DatabaseManager;
 import de.kekshaus.cubit.land.api.particleAPI.ParticleManager;
 import de.kekshaus.cubit.land.api.regionAPI.LandManager;
-import de.kekshaus.cubit.land.api.sqlAPI.SqlManager;
 import de.kekshaus.cubit.land.api.vaultAPI.VaultManager;
 import de.kekshaus.cubit.land.commandSuite.SetupCommands;
 import de.kekshaus.cubit.land.plugin.LandConfig;
@@ -28,7 +28,7 @@ public class Landplugin extends JavaPlugin {
 	private BlockManager blockMrg;
 	private ParticleManager particleMrg;
 	private VaultManager vaultMrg;
-	private SqlManager sqlMrg;
+	private DatabaseManager databaseMrg;
 	private Language langMrg;
 	private LandConfig landConf;
 	private PermissionNodes permNodes;
@@ -44,7 +44,7 @@ public class Landplugin extends JavaPlugin {
 		setupManagers();
 		this.getServer().getPluginManager().registerEvents(new LoginListener(), this);
 		this.getServer().getPluginManager().registerEvents(new AdditionalPhysicsListener(), this);
-		if (!this.sqlMrg.link()) {
+		if (!this.databaseMrg.link()) {
 			this.setEnabled(false);
 		}
 		new SetupCommands(this);
@@ -56,7 +56,7 @@ public class Landplugin extends JavaPlugin {
 	}
 
 	private void setupManagers() {
-		sqlMrg = new SqlManager(this);
+		databaseMrg = new DatabaseManager(this);
 		landMrg = new LandManager(this);
 		blockMrg = new BlockManager(this);
 		particleMrg = new ParticleManager(this);
@@ -83,8 +83,8 @@ public class Landplugin extends JavaPlugin {
 		return this.particleMrg;
 	}
 
-	public SqlManager getSqlManager() {
-		return this.sqlMrg;
+	public DatabaseManager getDatabaseManager() {
+		return this.databaseMrg;
 	}
 
 	public VaultManager getVaultManager() {

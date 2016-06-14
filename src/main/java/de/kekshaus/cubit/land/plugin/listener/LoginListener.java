@@ -19,7 +19,7 @@ public class LoginListener implements Listener {
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
-					Landplugin.inst().getSqlManager().updatePlayer(event.getPlayer().getUniqueId(),
+					Landplugin.inst().getDatabaseManager().updatePlayer(event.getPlayer().getUniqueId(),
 							event.getPlayer().getName(), new Date().getTime());
 
 				}

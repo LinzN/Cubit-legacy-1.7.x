@@ -1,16 +1,14 @@
-package de.kekshaus.cubit.land.api.sqlAPI;
+package de.kekshaus.cubit.land.api.database.sqlAPI;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.UUID;
 
 import org.bukkit.World;
 
 import de.kekshaus.cubit.land.Landplugin;
-import de.kekshaus.cubit.land.api.sqlAPI.getData.GetData;
-import de.kekshaus.cubit.land.api.sqlAPI.handler.OfferData;
-import de.kekshaus.cubit.land.api.sqlAPI.setData.SetData;
-import de.kekshaus.cubit.land.api.sqlAPI.setup.SetupConnection;
+import de.kekshaus.cubit.land.api.database.sqlAPI.getData.GetData;
+import de.kekshaus.cubit.land.api.database.sqlAPI.handler.OfferData;
+import de.kekshaus.cubit.land.api.database.sqlAPI.setData.SetData;
+import de.kekshaus.cubit.land.api.database.sqlAPI.setup.SetupConnection;
 
 public class SqlManager {
 
@@ -30,11 +28,6 @@ public class SqlManager {
 
 	public long getTimeStamp(UUID uuid) {
 		return getData.getTimeStamp(uuid);
-	}
-
-	public String getLastLoginFormated(UUID uuid) {
-		return new SimpleDateFormat("dd.MM.yyyy '-' HH:mm 'Uhr'").format(new Date(getTimeStamp(uuid)));
-
 	}
 
 	public OfferData getOfferData(String regionID, World world) {

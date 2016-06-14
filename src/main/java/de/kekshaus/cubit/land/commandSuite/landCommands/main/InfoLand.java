@@ -73,7 +73,7 @@ public class InfoLand implements ILandCmd {
 
 	private void landInfo(Player player, RegionData regionData) {
 		/* Get RegionData Info */
-		String formatedTime = plugin.getSqlManager().getLastLoginFormated(regionData.getOwnerUUID());
+		String formatedTime = plugin.getDatabaseManager().getLastLoginFormated(regionData.getOwnerUUID());
 		String minBorder = regionData.getMinPoint();
 		String maxBorder = regionData.getMaxPoint();
 		String statusLock = plugin.getLandManager().lockPacket.getStateColor(regionData)
@@ -107,8 +107,8 @@ public class InfoLand implements ILandCmd {
 				plugin.getLanguageManager().landInfoE6.replace("{lock}", statusLock).replace("{monster}", statusMonster)
 						.replace("{fire}", statusFire).replace("{pvp}", statusPvP).replace("{tnt}", statusTNT));
 
-		if (plugin.getSqlManager().isOffered(regionData.getRegionName(), regionData.getWorld())) {
-			player.sendMessage(plugin.getLanguageManager().showOffer.replace("{value}", "" + plugin.getSqlManager()
+		if (plugin.getDatabaseManager().isOffered(regionData.getRegionName(), regionData.getWorld())) {
+			player.sendMessage(plugin.getLanguageManager().showOffer.replace("{value}", "" + plugin.getDatabaseManager()
 					.getOfferData(regionData.getRegionName(), regionData.getWorld()).getValue()));
 		}
 		return;

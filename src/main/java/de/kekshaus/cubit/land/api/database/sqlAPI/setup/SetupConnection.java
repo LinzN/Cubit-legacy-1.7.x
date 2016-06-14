@@ -1,12 +1,12 @@
-package de.kekshaus.cubit.land.api.sqlAPI.setup;
+package de.kekshaus.cubit.land.api.database.sqlAPI.setup;
 
 import java.sql.Connection;
 import java.sql.Statement;
 
 import de.kekshaus.cubit.land.Landplugin;
-import de.kekshaus.cubit.land.api.sqlAPI.handler.ConnectionFactory;
-import de.kekshaus.cubit.land.api.sqlAPI.handler.ConnectionHandler;
-import de.kekshaus.cubit.land.api.sqlAPI.handler.ConnectionManager;
+import de.kekshaus.cubit.land.api.database.sqlAPI.handler.ConnectionFactory;
+import de.kekshaus.cubit.land.api.database.sqlAPI.handler.ConnectionHandler;
+import de.kekshaus.cubit.land.api.database.sqlAPI.handler.ConnectionManager;
 
 public class SetupConnection {
 

@@ -6,8 +6,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import de.kekshaus.cubit.land.Landplugin;
+import de.kekshaus.cubit.land.api.database.sqlAPI.handler.OfferData;
 import de.kekshaus.cubit.land.api.regionAPI.region.RegionData;
-import de.kekshaus.cubit.land.api.sqlAPI.handler.OfferData;
 import de.kekshaus.cubit.land.commandSuite.ILandCmd;
 
 public class TakeOfferLand implements ILandCmd {
@@ -50,12 +50,12 @@ public class TakeOfferLand implements ILandCmd {
 			player.sendMessage(plugin.getLanguageManager().takeOwnLand);
 			return true;
 		}
-		if (!plugin.getSqlManager().isOffered(regionData.getRegionName(), loc.getWorld())) {
+		if (!plugin.getDatabaseManager().isOffered(regionData.getRegionName(), loc.getWorld())) {
 			sender.sendMessage(plugin.getLanguageManager().notOffered.replace("regionID", regionData.getRegionName()));
 			return true;
 		}
 
-		OfferData offerData = plugin.getSqlManager().getOfferData(regionData.getRegionName(), loc.getWorld());
+		OfferData offerData = plugin.getDatabaseManager().getOfferData(regionData.getRegionName(), loc.getWorld());
 		if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), offerData.getValue())) {
 			sender.sendMessage(plugin.getLanguageManager().notEnoughMoney.replace("{cost}",
 					"" + plugin.getVaultManager().formateToEconomy(offerData.getValue())));
@@ -77,7 +77,7 @@ public class TakeOfferLand implements ILandCmd {
 			return true;
 		}
 		/* Remove offer from Database */
-		if (!plugin.getSqlManager().removeOfferData(regionData.getRegionName(), loc.getWorld())) {
+		if (!plugin.getDatabaseManager().removeOfferData(regionData.getRegionName(), loc.getWorld())) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "TAKEOFFER-REMOVEOFFER"));
 			plugin.getLogger()

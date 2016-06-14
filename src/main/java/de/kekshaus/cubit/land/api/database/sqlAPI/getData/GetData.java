@@ -1,4 +1,4 @@
-package de.kekshaus.cubit.land.api.sqlAPI.getData;
+package de.kekshaus.cubit.land.api.database.sqlAPI.getData;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,8 +9,8 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 
-import de.kekshaus.cubit.land.api.sqlAPI.handler.ConnectionManager;
-import de.kekshaus.cubit.land.api.sqlAPI.handler.OfferData;
+import de.kekshaus.cubit.land.api.database.sqlAPI.handler.ConnectionManager;
+import de.kekshaus.cubit.land.api.database.sqlAPI.handler.OfferData;
 
 public class GetData {
 
