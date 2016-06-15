@@ -56,7 +56,6 @@ public class Landplugin extends JavaPlugin {
 	}
 
 	private void setupManagers() {
-		databaseMrg = new DatabaseManager(this);
 		landMrg = new LandManager(this);
 		blockMrg = new BlockManager(this);
 		particleMrg = new ParticleManager(this);
@@ -64,6 +63,7 @@ public class Landplugin extends JavaPlugin {
 		langMrg = new Language();
 		landConf = new LandConfig(this);
 		permNodes = new PermissionNodes();
+		databaseMrg = new DatabaseManager(this);
 
 	}
 

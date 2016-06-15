@@ -21,17 +21,15 @@ public class DatabaseManager {
 
 	public DatabaseManager(Landplugin plugin) {
 		this.plugin = plugin;
-		this.useSql = this.plugin.getLandConfig().sqlUse;
 
-		if (this.useSql) {
-			sqlMrg = new SqlManager(this.plugin);
-		} else {
-			yamlMrg = new YamlManager(this.plugin);
-		}
+		sqlMrg = new SqlManager(this.plugin);
+
+		yamlMrg = new YamlManager(this.plugin);
 
 	}
 
 	public boolean link() {
+		this.useSql = this.plugin.getLandConfig().sqlUse;
 		if (this.useSql) {
 			return this.sqlMrg.link();
 		} else {
