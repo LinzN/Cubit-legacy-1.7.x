@@ -9,7 +9,7 @@ public class YamlFileOperator {
 	public SettingsYaml settings;
 
 	public YamlFileOperator(JavaPlugin plugin) {
-		File configDirectory = new File(plugin.getDataFolder(), "configs");
+		File configDirectory = new File(plugin.getDataFolder(), "flatfile");
 		if (!configDirectory.exists()) {
 			configDirectory.mkdir();
 		}
