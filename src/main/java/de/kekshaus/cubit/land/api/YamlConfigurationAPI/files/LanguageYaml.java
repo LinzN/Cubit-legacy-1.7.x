@@ -191,19 +191,17 @@ public class LanguageYaml {
 				"§a§lMehr auf Seite 4 mit §6/land help 4");
 
 		/* Page 4 Help for Land Command */
-		landHelpE1P4 = this.configFile.getLanguageString("theme.helpPage4.header",
-				"§6§lGrundstücks Sicherungen: [Seite 4]");
+		landHelpE1P4 = this.configFile.getLanguageString("theme.helpPage4.header", "§6§lRegion Protection: [Seite 4]");
 		landHelpE2P4 = this.configFile.getLanguageString("theme.helpPage4.help1",
-				"§2 Feuer Schutz: §e/land fire (§aON§e/§cOFF§e)");
+				"§2 Fire Protection: §e/land fire (§aON§e/§cOFF§e)");
 		landHelpE3P4 = this.configFile.getLanguageString("theme.helpPage4.help2",
-				"§2 Zugriff Schutz: §e/land lock (§aON§e/§cOFF§e)");
+				"§2 Access Protection: §e/land lock (§aON§e/§cOFF§e)");
 		landHelpE4P4 = this.configFile.getLanguageString("theme.helpPage4.help3",
-				"§2 PvP Schutz: §e/land pvp (§aON§e/§cOFF§e)");
+				"§2 PvP Protection: §e/land pvp (§aON§e/§cOFF§e)");
 		landHelpE5P4 = this.configFile.getLanguageString("theme.helpPage4.help4",
-				"§2 TnT Schutz: §e/land tnt (§aON§e/§cOFF§e)");
+				"§2 TnT Protection: §e/land tnt (§aON§e/§cOFF§e)");
 		landHelpE6P4 = this.configFile.getLanguageString("theme.helpPage4.help5",
-				"§2 Monster Schutz: §e/land monster (§aON§e/§cOFF§e)");
-		landHelpE7P4 = this.configFile.getLanguageString("theme.helpPage4.help6",
-				"§a§lZurück auf Seite 3 mit §6/land help 3");
+				"§2 Monster Protection: §e/land monster (§aON§e/§cOFF§e)");
+		landHelpE7P4 = this.configFile.getLanguageString("theme.helpPage4.help6", "§a§lBack to page 3 §6/land help 3");
 	}
 }
