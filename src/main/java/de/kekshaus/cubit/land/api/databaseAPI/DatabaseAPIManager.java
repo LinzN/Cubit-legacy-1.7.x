@@ -7,40 +7,34 @@ import java.util.UUID;
 import org.bukkit.World;
 
 import de.kekshaus.cubit.land.Landplugin;
-import de.kekshaus.cubit.land.api.databaseAPI.sql.DataBaseSQLProvider;
-import de.kekshaus.cubit.land.api.databaseAPI.yaml.DataBaseYAMLProvider;
+import de.kekshaus.cubit.land.api.databaseAPI.sql.DatabaseProviderSQL;
+import de.kekshaus.cubit.land.api.databaseAPI.yaml.DatabaseProviderYAML;
 
 public class DatabaseAPIManager {
 
 	private Landplugin plugin;
-	private DataBaseSQLProvider sqlMrg;
-	private DataBaseYAMLProvider yamlMrg;
+	private IDatabaseProvider databaseProvider;
 	private boolean useSql;
 
 	public DatabaseAPIManager(Landplugin plugin) {
 		this.plugin = plugin;
-
-		sqlMrg = new DataBaseSQLProvider(this.plugin);
-
-		yamlMrg = new DataBaseYAMLProvider(this.plugin);
+		this.useSql = this.plugin.getYamlManager().getSettings().sqlUse;
+		if (this.useSql) {
+			this.databaseProvider = new DatabaseProviderSQL(plugin);
+		} else {
+			this.databaseProvider = new DatabaseProviderYAML(plugin);
+		}
 
 	}
 
 	public boolean link() {
-		this.useSql = this.plugin.getYamlManager().getSettings().sqlUse;
-		if (this.useSql) {
-			return this.sqlMrg.link();
-		} else {
-			return this.yamlMrg.link();
-		}
+		return this.databaseProvider.link();
+
 	}
 
 	public long getTimeStamp(UUID uuid) {
-		if (this.useSql) {
-			return sqlMrg.getTimeStamp(uuid);
-		} else {
-			return yamlMrg.getTimeStamp(uuid);
-		}
+		return databaseProvider.getTimeStamp(uuid);
+
 	}
 
 	public String getLastLoginFormated(UUID uuid) {
@@ -49,41 +43,28 @@ public class DatabaseAPIManager {
 	}
 
 	public OfferData getOfferData(String regionID, World world) {
-		if (this.useSql) {
-			return sqlMrg.getOfferData(regionID, world);
-		} else {
-			return yamlMrg.getOfferData(regionID, world);
-		}
+		return databaseProvider.getOfferData(regionID, world);
+
 	}
 
 	public boolean isOffered(String regionID, World world) {
-		if (this.useSql) {
-			return sqlMrg.isOffered(regionID, world);
-		} else {
-			return yamlMrg.isOffered(regionID, world);
-		}
+		return databaseProvider.isOffered(regionID, world);
+
 	}
 
 	public boolean setOfferData(OfferData data) {
-		if (this.useSql) {
-			return sqlMrg.setOfferData(data);
-		} else {
-			return yamlMrg.setOfferData(data);
-		}
+		return databaseProvider.setOfferData(data);
+
 	}
 
 	public boolean removeOfferData(String regionID, World world) {
-		if (this.useSql) {
-			return sqlMrg.removeOfferData(regionID, world);
-		} else {
-			return yamlMrg.removeOfferData(regionID, world);
-		}
+		return databaseProvider.removeOfferData(regionID, world);
+
 	}
 
 	public void updatePlayer(UUID uuid, String player, long time) {
-		if (this.useSql) {
-			sqlMrg.updatePlayer(uuid, player, time);
-		}
+		databaseProvider.updatePlayer(uuid, player, time);
+
 	}
 
 }
