@@ -1,14 +1,14 @@
-package de.kekshaus.cubit.land.api.database.sqlAPI;
+package de.kekshaus.cubit.land.api.databaseAPI.sql;
 
 import java.util.UUID;
 
 import org.bukkit.World;
 
 import de.kekshaus.cubit.land.Landplugin;
-import de.kekshaus.cubit.land.api.database.OfferData;
-import de.kekshaus.cubit.land.api.database.sqlAPI.getData.DataBaseSQLGetData;
-import de.kekshaus.cubit.land.api.database.sqlAPI.setData.DataBaseSQLSetData;
-import de.kekshaus.cubit.land.api.database.sqlAPI.setup.DataBaseSQLSetup;
+import de.kekshaus.cubit.land.api.databaseAPI.OfferData;
+import de.kekshaus.cubit.land.api.databaseAPI.sql.getData.DataBaseSQLGetData;
+import de.kekshaus.cubit.land.api.databaseAPI.sql.setData.DataBaseSQLSetData;
+import de.kekshaus.cubit.land.api.databaseAPI.sql.setup.DataBaseSQLSetup;
 
 public class DataBaseSQLProvider {
 

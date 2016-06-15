@@ -1,11 +1,11 @@
-package de.kekshaus.cubit.land.api.database.yamlAPI;
+package de.kekshaus.cubit.land.api.databaseAPI.yaml;
 
 import java.util.UUID;
 
 import org.bukkit.World;
 
 import de.kekshaus.cubit.land.Landplugin;
-import de.kekshaus.cubit.land.api.database.OfferData;
+import de.kekshaus.cubit.land.api.databaseAPI.OfferData;
 
 public class DataBaseYAMLProvider {
 

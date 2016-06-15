@@ -1,4 +1,4 @@
-package de.kekshaus.cubit.land.api.database;
+package de.kekshaus.cubit.land.api.databaseAPI;
 
 import java.util.UUID;
 

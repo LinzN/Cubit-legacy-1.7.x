@@ -8,7 +8,7 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 import de.kekshaus.cubit.land.api.YamlConfigurationAPI.YamlConfigurationManager;
 import de.kekshaus.cubit.land.api.blockAPI.BlockAPIManager;
-import de.kekshaus.cubit.land.api.database.DatabaseAPIManager;
+import de.kekshaus.cubit.land.api.databaseAPI.DatabaseAPIManager;
 import de.kekshaus.cubit.land.api.particleAPI.ParticleAPIManager;
 import de.kekshaus.cubit.land.api.regionAPI.RegionAPIManager;
 import de.kekshaus.cubit.land.api.vaultAPI.VaultAPIManager;

@@ -1,4 +1,4 @@
-package de.kekshaus.cubit.land.api.database;
+package de.kekshaus.cubit.land.api.databaseAPI;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,8 +8,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.World;
 
 import de.kekshaus.cubit.land.Landplugin;
-import de.kekshaus.cubit.land.api.database.sqlAPI.DataBaseSQLProvider;
-import de.kekshaus.cubit.land.api.database.yamlAPI.DataBaseYAMLProvider;
+import de.kekshaus.cubit.land.api.databaseAPI.sql.DataBaseSQLProvider;
+import de.kekshaus.cubit.land.api.databaseAPI.yaml.DataBaseYAMLProvider;
 
 public class DatabaseAPIManager {
 

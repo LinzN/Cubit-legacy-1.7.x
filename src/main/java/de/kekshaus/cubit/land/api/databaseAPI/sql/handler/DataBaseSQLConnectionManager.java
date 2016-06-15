@@ -1,4 +1,4 @@
-package de.kekshaus.cubit.land.api.database.sqlAPI.handler;
+package de.kekshaus.cubit.land.api.databaseAPI.sql.handler;
 
 import java.sql.Connection;
 import java.sql.SQLException;

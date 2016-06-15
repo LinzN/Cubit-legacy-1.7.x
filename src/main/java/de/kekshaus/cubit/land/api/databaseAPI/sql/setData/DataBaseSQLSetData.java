@@ -1,4 +1,4 @@
-package de.kekshaus.cubit.land.api.database.sqlAPI.setData;
+package de.kekshaus.cubit.land.api.databaseAPI.sql.setData;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
-import de.kekshaus.cubit.land.api.database.OfferData;
-import de.kekshaus.cubit.land.api.database.sqlAPI.handler.DataBaseSQLConnectionManager;
+import de.kekshaus.cubit.land.api.databaseAPI.OfferData;
+import de.kekshaus.cubit.land.api.databaseAPI.sql.handler.DataBaseSQLConnectionManager;
 
 public class DataBaseSQLSetData {
 
