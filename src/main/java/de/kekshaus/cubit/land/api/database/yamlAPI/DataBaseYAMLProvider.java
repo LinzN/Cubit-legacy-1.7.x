@@ -5,13 +5,13 @@ import java.util.UUID;
 import org.bukkit.World;
 
 import de.kekshaus.cubit.land.Landplugin;
-import de.kekshaus.cubit.land.api.database.sqlAPI.handler.OfferData;
+import de.kekshaus.cubit.land.api.database.OfferData;
 
-public class YamlManager {
+public class DataBaseYAMLProvider {
 
 	private Landplugin plugin;
 
-	public YamlManager(Landplugin plugin) {
+	public DataBaseYAMLProvider(Landplugin plugin) {
 		this.plugin = plugin;
 	}
 

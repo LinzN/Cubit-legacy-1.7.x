@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import de.kekshaus.cubit.land.Landplugin;
-import de.kekshaus.cubit.land.api.database.sqlAPI.handler.OfferData;
+import de.kekshaus.cubit.land.api.database.OfferData;
 import de.kekshaus.cubit.land.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.land.commandSuite.ILandCmd;
 

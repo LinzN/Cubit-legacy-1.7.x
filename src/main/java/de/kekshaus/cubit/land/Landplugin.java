@@ -6,13 +6,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
-import de.kekshaus.cubit.land.api.blockAPI.BlockManager;
-import de.kekshaus.cubit.land.api.database.DatabaseManager;
-import de.kekshaus.cubit.land.api.particleAPI.ParticleManager;
-import de.kekshaus.cubit.land.api.regionAPI.LandManager;
-import de.kekshaus.cubit.land.api.vaultAPI.VaultManager;
+import de.kekshaus.cubit.land.api.YamlConfigurationAPI.YamlConfigurationManager;
+import de.kekshaus.cubit.land.api.blockAPI.BlockAPIManager;
+import de.kekshaus.cubit.land.api.database.DatabaseAPIManager;
+import de.kekshaus.cubit.land.api.particleAPI.ParticleAPIManager;
+import de.kekshaus.cubit.land.api.regionAPI.RegionAPIManager;
+import de.kekshaus.cubit.land.api.vaultAPI.VaultAPIManager;
 import de.kekshaus.cubit.land.commandSuite.SetupCommands;
-import de.kekshaus.cubit.land.plugin.LandConfig;
 import de.kekshaus.cubit.land.plugin.Language;
 import de.kekshaus.cubit.land.plugin.PermissionNodes;
 import de.kekshaus.cubit.land.plugin.listener.AdditionalPhysicsListener;
@@ -24,14 +24,14 @@ public class Landplugin extends JavaPlugin {
 	private boolean isGuildLoaded = false;
 	private WorldGuardPlugin wgPl;
 	private WorldEdit wePl;
-	private LandManager landMrg;
-	private BlockManager blockMrg;
-	private ParticleManager particleMrg;
-	private VaultManager vaultMrg;
-	private DatabaseManager databaseMrg;
+	private RegionAPIManager landMrg;
+	private BlockAPIManager blockMrg;
+	private ParticleAPIManager particleMrg;
+	private VaultAPIManager vaultMrg;
+	private DatabaseAPIManager databaseMrg;
 	private Language langMrg;
-	private LandConfig landConf;
 	private PermissionNodes permNodes;
+	private YamlConfigurationManager yamlConfiguration;
 
 	@Override
 	public void onEnable() {
@@ -56,14 +56,14 @@ public class Landplugin extends JavaPlugin {
 	}
 
 	private void setupManagers() {
-		landMrg = new LandManager(this);
-		blockMrg = new BlockManager(this);
-		particleMrg = new ParticleManager(this);
-		vaultMrg = new VaultManager(this);
+		yamlConfiguration = new YamlConfigurationManager(this);
+		landMrg = new RegionAPIManager(this);
+		blockMrg = new BlockAPIManager(this);
+		particleMrg = new ParticleAPIManager(this);
+		vaultMrg = new VaultAPIManager(this);
 		langMrg = new Language();
-		landConf = new LandConfig(this);
 		permNodes = new PermissionNodes();
-		databaseMrg = new DatabaseManager(this);
+		databaseMrg = new DatabaseAPIManager(this);
 
 	}
 
@@ -71,32 +71,28 @@ public class Landplugin extends JavaPlugin {
 		return inst;
 	}
 
-	public LandManager getLandManager() {
+	public RegionAPIManager getLandManager() {
 		return this.landMrg;
 	}
 
-	public BlockManager getBlockManager() {
+	public BlockAPIManager getBlockManager() {
 		return this.blockMrg;
 	}
 
-	public ParticleManager getParticleManager() {
+	public ParticleAPIManager getParticleManager() {
 		return this.particleMrg;
 	}
 
-	public DatabaseManager getDatabaseManager() {
+	public DatabaseAPIManager getDatabaseManager() {
 		return this.databaseMrg;
 	}
 
-	public VaultManager getVaultManager() {
+	public VaultAPIManager getVaultManager() {
 		return this.vaultMrg;
 	}
 
 	public Language getLanguageManager() {
 		return this.langMrg;
-	}
-
-	public LandConfig getLandConfig() {
-		return this.landConf;
 	}
 
 	public PermissionNodes getPermNodes() {
@@ -109,6 +105,10 @@ public class Landplugin extends JavaPlugin {
 
 	public WorldEdit getWorldEdit() {
 		return this.wePl;
+	}
+
+	public YamlConfigurationManager getYamlManager() {
+		return this.yamlConfiguration;
 	}
 
 	public boolean isGuildLoaded() {

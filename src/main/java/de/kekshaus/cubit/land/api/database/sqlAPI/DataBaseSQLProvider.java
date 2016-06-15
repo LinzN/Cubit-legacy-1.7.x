@@ -5,25 +5,25 @@ import java.util.UUID;
 import org.bukkit.World;
 
 import de.kekshaus.cubit.land.Landplugin;
-import de.kekshaus.cubit.land.api.database.sqlAPI.getData.GetData;
-import de.kekshaus.cubit.land.api.database.sqlAPI.handler.OfferData;
-import de.kekshaus.cubit.land.api.database.sqlAPI.setData.SetData;
-import de.kekshaus.cubit.land.api.database.sqlAPI.setup.SetupConnection;
+import de.kekshaus.cubit.land.api.database.OfferData;
+import de.kekshaus.cubit.land.api.database.sqlAPI.getData.DataBaseSQLGetData;
+import de.kekshaus.cubit.land.api.database.sqlAPI.setData.DataBaseSQLSetData;
+import de.kekshaus.cubit.land.api.database.sqlAPI.setup.DataBaseSQLSetup;
 
-public class SqlManager {
+public class DataBaseSQLProvider {
 
 	private Landplugin plugin;
-	private SetData setData;
-	private GetData getData;
+	private DataBaseSQLSetData setData;
+	private DataBaseSQLGetData getData;
 
-	public SqlManager(Landplugin plugin) {
+	public DataBaseSQLProvider(Landplugin plugin) {
 		this.plugin = plugin;
-		this.setData = new SetData();
-		this.getData = new GetData();
+		this.setData = new DataBaseSQLSetData();
+		this.getData = new DataBaseSQLGetData();
 	}
 
 	public boolean link() {
-		return SetupConnection.setup(plugin);
+		return DataBaseSQLSetup.setup(plugin);
 	}
 
 	public long getTimeStamp(UUID uuid) {

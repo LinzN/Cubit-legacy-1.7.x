@@ -22,7 +22,7 @@ import de.kekshaus.cubit.land.api.regionAPI.region.ManageRegions;
 import de.kekshaus.cubit.land.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.land.api.regionAPI.region.SaveRegions;
 
-public class LandManager {
+public class RegionAPIManager {
 
 	private Landplugin plugin;
 	private ManageRegions mReg;
@@ -34,7 +34,7 @@ public class LandManager {
 	public PvPPacket pvpPacket;
 	public TNTPacket tntPacket;
 
-	public LandManager(Landplugin plugin) {
+	public RegionAPIManager(Landplugin plugin) {
 		this.plugin = plugin;
 		this.mReg = new ManageRegions();
 		this.mRegE = new ManageRegionEntities();

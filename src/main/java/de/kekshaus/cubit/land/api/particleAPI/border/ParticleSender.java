@@ -1,4 +1,4 @@
-package de.kekshaus.cubit.land.api.particleAPI;
+package de.kekshaus.cubit.land.api.particleAPI.border;
 
 import java.util.ArrayList;
 import java.util.Collection;

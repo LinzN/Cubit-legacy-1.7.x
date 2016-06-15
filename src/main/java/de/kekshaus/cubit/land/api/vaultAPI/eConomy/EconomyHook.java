@@ -8,11 +8,11 @@ import org.bukkit.OfflinePlayer;
 import de.kekshaus.cubit.land.Landplugin;
 import net.milkbowl.vault.economy.Economy;
 
-public class EconomyManager {
+public class EconomyHook {
 
 	private Economy econ;
 
-	public EconomyManager(Landplugin plugin, Economy econ) {
+	public EconomyHook(Landplugin plugin, Economy econ) {
 		this.econ = econ;
 
 	}

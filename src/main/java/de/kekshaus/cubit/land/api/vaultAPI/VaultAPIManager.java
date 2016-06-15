@@ -9,19 +9,19 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import com.sk89q.worldguard.LocalPlayer;
 
 import de.kekshaus.cubit.land.Landplugin;
-import de.kekshaus.cubit.land.api.vaultAPI.eConomy.EconomyManager;
+import de.kekshaus.cubit.land.api.vaultAPI.eConomy.EconomyHook;
 import net.milkbowl.vault.economy.Economy;
 
-public class VaultManager {
+public class VaultAPIManager {
 
 	private Landplugin plugin;
 	private Economy econ = null;
-	private EconomyManager ecoMrg;
+	private EconomyHook ecoMrg;
 
-	public VaultManager(Landplugin plugin) {
+	public VaultAPIManager(Landplugin plugin) {
 		this.plugin = plugin;
 		setupEconomy();
-		this.ecoMrg = new EconomyManager(plugin, econ);
+		this.ecoMrg = new EconomyHook(plugin, econ);
 
 	}
 
@@ -53,10 +53,10 @@ public class VaultManager {
 	}
 
 	public double calculateLandCost(UUID uuid, World world, boolean buyTask) {
-		double landBasePrice = Landplugin.inst().getLandConfig().landBasePrice;
-		double landTaxAddition = Landplugin.inst().getLandConfig().landTaxAddition;
-		double landMaxPrice = Landplugin.inst().getLandConfig().landMaxPrice;
-		double landSellPercent = Landplugin.inst().getLandConfig().landSellPercent;
+		double landBasePrice = Landplugin.inst().getYamlManager().getSettings().landBasePrice;
+		double landTaxAddition = Landplugin.inst().getYamlManager().getSettings().landTaxAddition;
+		double landMaxPrice = Landplugin.inst().getYamlManager().getSettings().landMaxPrice;
+		double landSellPercent = Landplugin.inst().getYamlManager().getSettings().landSellPercent;
 		LocalPlayer localplayer = Landplugin.inst().getWorldGuardPlugin()
 				.wrapOfflinePlayer(Bukkit.getOfflinePlayer(uuid));
 		double regionSize = Landplugin.inst().getWorldGuardPlugin().getRegionManager(world)

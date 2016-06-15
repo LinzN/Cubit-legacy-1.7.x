@@ -6,14 +6,14 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class ConnectionManager {
+public class DataBaseSQLConnectionManager {
 
-	public final static ConnectionManager DEFAULT = new ConnectionManager();
+	public final static DataBaseSQLConnectionManager DEFAULT = new DataBaseSQLConnectionManager();
 
-	private final Map<String, ConnectionHandler> map;
+	private final Map<String, DataBaseSQLConnectionHandler> map;
 
-	public ConnectionHandler getHandler(String key, ConnectionFactory f) {
-		ConnectionHandler handler = new ConnectionHandler(key, f);
+	public DataBaseSQLConnectionHandler getHandler(String key, DataBaseSQLConnectionFactory f) {
+		DataBaseSQLConnectionHandler handler = new DataBaseSQLConnectionHandler(key, f);
 		map.put(key, handler);
 		return handler;
 	}
@@ -26,20 +26,20 @@ public class ConnectionManager {
 		map.get(handle).release(c);
 	}
 
-	public ConnectionHandler getHandler(String key) {
-		ConnectionHandler handler = map.get(key);
+	public DataBaseSQLConnectionHandler getHandler(String key) {
+		DataBaseSQLConnectionHandler handler = map.get(key);
 		if (handler == null) {
 			throw new NoSuchElementException();
 		}
 		return handler;
 	}
 
-	public ConnectionManager() {
+	public DataBaseSQLConnectionManager() {
 		this.map = new ConcurrentHashMap<>();
 	}
 
 	public void shutdown() {
-		for (ConnectionHandler handler : map.values()) {
+		for (DataBaseSQLConnectionHandler handler : map.values()) {
 			handler.shutdown();
 		}
 		map.clear();

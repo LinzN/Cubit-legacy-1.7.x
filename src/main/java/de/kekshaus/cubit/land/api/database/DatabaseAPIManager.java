@@ -8,28 +8,27 @@ import org.bukkit.Bukkit;
 import org.bukkit.World;
 
 import de.kekshaus.cubit.land.Landplugin;
-import de.kekshaus.cubit.land.api.database.sqlAPI.SqlManager;
-import de.kekshaus.cubit.land.api.database.sqlAPI.handler.OfferData;
-import de.kekshaus.cubit.land.api.database.yamlAPI.YamlManager;
+import de.kekshaus.cubit.land.api.database.sqlAPI.DataBaseSQLProvider;
+import de.kekshaus.cubit.land.api.database.yamlAPI.DataBaseYAMLProvider;
 
-public class DatabaseManager {
+public class DatabaseAPIManager {
 
 	private Landplugin plugin;
-	private SqlManager sqlMrg;
-	private YamlManager yamlMrg;
+	private DataBaseSQLProvider sqlMrg;
+	private DataBaseYAMLProvider yamlMrg;
 	private boolean useSql;
 
-	public DatabaseManager(Landplugin plugin) {
+	public DatabaseAPIManager(Landplugin plugin) {
 		this.plugin = plugin;
 
-		sqlMrg = new SqlManager(this.plugin);
+		sqlMrg = new DataBaseSQLProvider(this.plugin);
 
-		yamlMrg = new YamlManager(this.plugin);
+		yamlMrg = new DataBaseYAMLProvider(this.plugin);
 
 	}
 
 	public boolean link() {
-		this.useSql = this.plugin.getLandConfig().sqlUse;
+		this.useSql = this.plugin.getYamlManager().getSettings().sqlUse;
 		if (this.useSql) {
 			return this.sqlMrg.link();
 		} else {

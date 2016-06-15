@@ -1,14 +1,10 @@
-package de.kekshaus.cubit.land.plugin;
+package de.kekshaus.cubit.land.api.YamlConfigurationAPI.setup;
 
 import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
 
-import de.kekshaus.cubit.land.Landplugin;
+public class SettingsYaml {
 
-public class LandConfig {
-
-	private Landplugin plugin;
-	private FileConfiguration configFile;
+	private CustomConfig configFile;
 
 	/* Public config values */
 
@@ -36,8 +32,8 @@ public class LandConfig {
 	public String sqlUser;
 	public String sqlPassword;
 
-	public LandConfig(Landplugin plugin) {
-		this.plugin = plugin;
+	public SettingsYaml(CustomConfig config) {
+		this.configFile = config;
 		initConfig();
 	}
 
@@ -47,10 +43,9 @@ public class LandConfig {
 	}
 
 	private void saveConfig() {
-		this.plugin.saveDefaultConfig();
-		this.plugin.saveConfig();
-		this.plugin.reloadConfig();
-		this.configFile = this.plugin.getConfig();
+		this.configFile.save();
+		this.configFile.reload();
+
 	}
 
 	private void initContent() {

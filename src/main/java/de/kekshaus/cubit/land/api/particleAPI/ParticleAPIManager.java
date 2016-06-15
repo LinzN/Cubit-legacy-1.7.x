@@ -7,18 +7,19 @@ import org.bukkit.entity.Player;
 import org.inventivetalent.particle.ParticleEffect;
 
 import de.kekshaus.cubit.land.Landplugin;
+import de.kekshaus.cubit.land.api.particleAPI.border.ParticleSender;
 
-public class ParticleManager {
+public class ParticleAPIManager {
 
 	private Landplugin plugin;
 
-	public ParticleManager(Landplugin plugin) {
+	public ParticleAPIManager(Landplugin plugin) {
 		this.plugin = plugin;
 	}
 
 	public boolean sendBuy(final Player player, final Location loc) {
-		if (Landplugin.inst().getLandConfig().particleUse) {
-			if (Landplugin.inst().getLandConfig().particleUseInventivetalentParticeApi
+		if (Landplugin.inst().getYamlManager().getSettings().particleUse) {
+			if (Landplugin.inst().getYamlManager().getSettings().particleUseInventivetalentParticeApi
 					&& Bukkit.getPluginManager().getPlugin("ParticleLIB") != null) {
 				plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
 					@Override
@@ -41,8 +42,8 @@ public class ParticleManager {
 	}
 
 	public boolean sendSell(final Player player, final Location loc) {
-		if (Landplugin.inst().getLandConfig().particleUse) {
-			if (Landplugin.inst().getLandConfig().particleUseInventivetalentParticeApi) {
+		if (Landplugin.inst().getYamlManager().getSettings().particleUse) {
+			if (Landplugin.inst().getYamlManager().getSettings().particleUseInventivetalentParticeApi) {
 				plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
 					@Override
 					public void run() {
@@ -64,8 +65,8 @@ public class ParticleManager {
 	}
 
 	public boolean sendInfo(final Player player, final Location loc) {
-		if (Landplugin.inst().getLandConfig().particleUse) {
-			if (Landplugin.inst().getLandConfig().particleUseInventivetalentParticeApi) {
+		if (Landplugin.inst().getYamlManager().getSettings().particleUse) {
+			if (Landplugin.inst().getYamlManager().getSettings().particleUseInventivetalentParticeApi) {
 				plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
 					@Override
 					public void run() {

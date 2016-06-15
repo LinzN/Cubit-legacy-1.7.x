@@ -6,11 +6,11 @@ import org.bukkit.Material;
 import de.kekshaus.cubit.land.Landplugin;
 import de.kekshaus.cubit.land.api.blockAPI.border.ChunkBorder;
 
-public class BlockManager {
+public class BlockAPIManager {
 
 	private Landplugin plugin;
 
-	public BlockManager(Landplugin plugin) {
+	public BlockAPIManager(Landplugin plugin) {
 		this.plugin = plugin;
 	}
 

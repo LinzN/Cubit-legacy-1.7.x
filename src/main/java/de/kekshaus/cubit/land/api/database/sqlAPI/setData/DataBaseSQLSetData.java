@@ -6,13 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
-import de.kekshaus.cubit.land.api.database.sqlAPI.handler.ConnectionManager;
-import de.kekshaus.cubit.land.api.database.sqlAPI.handler.OfferData;
+import de.kekshaus.cubit.land.api.database.OfferData;
+import de.kekshaus.cubit.land.api.database.sqlAPI.handler.DataBaseSQLConnectionManager;
 
-public class SetData {
+public class DataBaseSQLSetData {
 
 	public void setOffer(OfferData data) {
-		ConnectionManager manager = ConnectionManager.DEFAULT;
+		DataBaseSQLConnectionManager manager = DataBaseSQLConnectionManager.DEFAULT;
 		try {
 			Connection conn = manager.getConnection("cookieLand");
 			PreparedStatement sql = conn.prepareStatement("SELECT value FROM offerManager WHERE regionID = '"
@@ -42,7 +42,7 @@ public class SetData {
 	}
 
 	public void removeOffer(String regionID, String world) {
-		ConnectionManager manager = ConnectionManager.DEFAULT;
+		DataBaseSQLConnectionManager manager = DataBaseSQLConnectionManager.DEFAULT;
 		try {
 			Connection conn = manager.getConnection("cookieLand");
 			PreparedStatement sql = conn.prepareStatement(
@@ -66,7 +66,7 @@ public class SetData {
 	}
 
 	public boolean updateProfile(UUID uuid, String player, long time) {
-		ConnectionManager manager = ConnectionManager.DEFAULT;
+		DataBaseSQLConnectionManager manager = DataBaseSQLConnectionManager.DEFAULT;
 		try {
 			Connection conn = manager.getConnection("cookieLand");
 			PreparedStatement sql = conn.prepareStatement("SELECT NAME FROM uuidcache WHERE UUID = '" + uuid + "';");
