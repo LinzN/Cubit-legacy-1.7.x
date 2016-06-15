@@ -20,7 +20,7 @@ public class DataBaseYAMLProvider {
 	}
 
 	public long getTimeStamp(UUID uuid) {
-		return 0;
+		return plugin.getServer().getOfflinePlayer(uuid).getLastPlayed();
 	}
 
 	public OfferData getOfferData(String regionID, World world) {

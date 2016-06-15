@@ -20,7 +20,7 @@ public class HelpLand implements ILandCmd {
 	public boolean runCmd(final CommandSender sender, String[] args) {
 		if (!(sender instanceof Player)) {
 			/* This is not possible from the server console */
-			sender.sendMessage(plugin.getLanguageManager().noConsoleMode);
+			sender.sendMessage(plugin.getYamlManager().getLanguage().noConsoleMode);
 			return true;
 		}
 		/* Build and get all variables */
@@ -28,7 +28,7 @@ public class HelpLand implements ILandCmd {
 
 		/* Permission Check */
 		if (!player.hasPermission(this.permNode)) {
-			sender.sendMessage(plugin.getLanguageManager().errorNoPermission);
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoPermission);
 			return true;
 		}
 
@@ -45,48 +45,48 @@ public class HelpLand implements ILandCmd {
 	}
 
 	private boolean page1(CommandSender sender) {
-		sender.sendMessage(plugin.getLanguageManager().landHelpE1P1);
-		sender.sendMessage(plugin.getLanguageManager().landHelpE2P1);
-		sender.sendMessage(plugin.getLanguageManager().landHelpE3P1);
-		sender.sendMessage(plugin.getLanguageManager().landHelpE4P1);
-		sender.sendMessage(plugin.getLanguageManager().landHelpE5P1);
-		sender.sendMessage(plugin.getLanguageManager().landHelpE6P1);
-		sender.sendMessage(plugin.getLanguageManager().landHelpE7P1);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE1P1);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE2P1);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE3P1);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE4P1);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE5P1);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE6P1);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE7P1);
 		return true;
 
 	}
 
 	private boolean page2(CommandSender sender) {
-		sender.sendMessage(plugin.getLanguageManager().landHelpE1P2);
-		sender.sendMessage(plugin.getLanguageManager().landHelpE2P2);
-		sender.sendMessage(plugin.getLanguageManager().landHelpE3P2);
-		sender.sendMessage(plugin.getLanguageManager().landHelpE4P2);
-		sender.sendMessage(plugin.getLanguageManager().landHelpE5P2);
-		sender.sendMessage(plugin.getLanguageManager().landHelpE6P2);
-		sender.sendMessage(plugin.getLanguageManager().landHelpE7P2);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE1P2);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE2P2);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE3P2);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE4P2);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE5P2);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE6P2);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE7P2);
 		return true;
 
 	}
 
 	private boolean page3(CommandSender sender) {
-		sender.sendMessage(plugin.getLanguageManager().landHelpE1P3);
-		sender.sendMessage(plugin.getLanguageManager().landHelpE2P3);
-		sender.sendMessage(plugin.getLanguageManager().landHelpE3P3);
-		sender.sendMessage(plugin.getLanguageManager().landHelpE4P3);
-		sender.sendMessage(plugin.getLanguageManager().landHelpE5P3);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE1P3);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE2P3);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE3P3);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE4P3);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE5P3);
 
 		return true;
 
 	}
 
 	private boolean page4(CommandSender sender) {
-		sender.sendMessage(plugin.getLanguageManager().landHelpE1P4);
-		sender.sendMessage(plugin.getLanguageManager().landHelpE2P4);
-		sender.sendMessage(plugin.getLanguageManager().landHelpE3P4);
-		sender.sendMessage(plugin.getLanguageManager().landHelpE4P4);
-		sender.sendMessage(plugin.getLanguageManager().landHelpE5P4);
-		sender.sendMessage(plugin.getLanguageManager().landHelpE6P4);
-		sender.sendMessage(plugin.getLanguageManager().landHelpE7P4);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE1P4);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE2P4);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE3P4);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE4P4);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE5P4);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE6P4);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE7P4);
 		return true;
 
 	}

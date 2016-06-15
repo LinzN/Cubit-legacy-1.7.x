@@ -25,7 +25,7 @@ public class TakeOfferLand implements ILandCmd {
 	public boolean runCmd(final CommandSender sender, String[] args) {
 		if (!(sender instanceof Player)) {
 			/* This is not possible from the server console */
-			sender.sendMessage(plugin.getLanguageManager().noConsoleMode);
+			sender.sendMessage(plugin.getYamlManager().getLanguage().noConsoleMode);
 			return true;
 		}
 
@@ -34,7 +34,7 @@ public class TakeOfferLand implements ILandCmd {
 
 		/* Permission Check */
 		if (!player.hasPermission(this.permNode)) {
-			sender.sendMessage(plugin.getLanguageManager().errorNoPermission);
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoPermission);
 			return true;
 		}
 
@@ -47,45 +47,51 @@ public class TakeOfferLand implements ILandCmd {
 		 * permissions
 		 */
 		if (plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId())) {
-			player.sendMessage(plugin.getLanguageManager().takeOwnLand);
+			player.sendMessage(plugin.getYamlManager().getLanguage().takeOwnLand);
 			return true;
 		}
 		if (!plugin.getDatabaseManager().isOffered(regionData.getRegionName(), loc.getWorld())) {
-			sender.sendMessage(plugin.getLanguageManager().notOffered.replace("regionID", regionData.getRegionName()));
+			sender.sendMessage(
+					plugin.getYamlManager().getLanguage().notOffered.replace("regionID", regionData.getRegionName()));
 			return true;
 		}
 
 		OfferData offerData = plugin.getDatabaseManager().getOfferData(regionData.getRegionName(), loc.getWorld());
 		if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), offerData.getValue())) {
-			sender.sendMessage(plugin.getLanguageManager().notEnoughMoney.replace("{cost}",
+			sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
 					"" + plugin.getVaultManager().formateToEconomy(offerData.getValue())));
 		}
 
 		if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), regionData.getOwnerUUID(),
 				offerData.getValue())) {
 			/* If this task failed! This should never happen */
-			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "TAKEOFFER-ECONOMY"));
-			plugin.getLogger().warning(plugin.getLanguageManager().errorInTask.replace("{error}", "TAKEOFFER-ECONOMY"));
+			sender.sendMessage(
+					plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "TAKEOFFER-ECONOMY"));
+			plugin.getLogger()
+					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "TAKEOFFER-ECONOMY"));
 			return true;
 		}
 		/* Change owner and clear Memberlist */
 		if (!plugin.getLandManager().changeLandOwner(regionData, loc.getWorld(), player.getUniqueId())) {
 			/* If this task failed! This should never happen */
-			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "TAKEOFFER-UPDATEOWNER"));
-			plugin.getLogger()
-					.warning(plugin.getLanguageManager().errorInTask.replace("{error}", "TAKEOFFER-UPDATEOWNER"));
+			sender.sendMessage(
+					plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "TAKEOFFER-UPDATEOWNER"));
+			plugin.getLogger().warning(
+					plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "TAKEOFFER-UPDATEOWNER"));
 			return true;
 		}
 		/* Remove offer from Database */
 		if (!plugin.getDatabaseManager().removeOfferData(regionData.getRegionName(), loc.getWorld())) {
 			/* If this task failed! This should never happen */
-			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "TAKEOFFER-REMOVEOFFER"));
-			plugin.getLogger()
-					.warning(plugin.getLanguageManager().errorInTask.replace("{error}", "TAKEOFFER-REMOVEOFFER"));
+			sender.sendMessage(
+					plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "TAKEOFFER-REMOVEOFFER"));
+			plugin.getLogger().warning(
+					plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "TAKEOFFER-REMOVEOFFER"));
 			return true;
 		}
 		/* Task was successfully. Send BuyMessage */
-		sender.sendMessage(plugin.getLanguageManager().buySuccess.replace("{regionID}", regionData.getRegionName()));
+		sender.sendMessage(
+				plugin.getYamlManager().getLanguage().buySuccess.replace("{regionID}", regionData.getRegionName()));
 
 		return true;
 	}

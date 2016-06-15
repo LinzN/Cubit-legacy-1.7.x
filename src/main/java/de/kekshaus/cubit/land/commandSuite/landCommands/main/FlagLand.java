@@ -28,7 +28,7 @@ public class FlagLand implements ILandCmd {
 	public boolean runCmd(final CommandSender sender, String[] args) {
 		if (!(sender instanceof Player)) {
 			/* This is not possible from the server console */
-			sender.sendMessage(plugin.getLanguageManager().noConsoleMode);
+			sender.sendMessage(plugin.getYamlManager().getLanguage().noConsoleMode);
 			return true;
 		}
 
@@ -37,7 +37,7 @@ public class FlagLand implements ILandCmd {
 
 		/* Permission Check */
 		if (!player.hasPermission(this.permNode)) {
-			sender.sendMessage(plugin.getLanguageManager().errorNoPermission);
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoPermission);
 			return true;
 		}
 
@@ -50,7 +50,7 @@ public class FlagLand implements ILandCmd {
 		 * permissions
 		 */
 		if (!plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId()) && this.isAdmin == false) {
-			sender.sendMessage(plugin.getLanguageManager().errorNoLandPermission.replace("{regionID}",
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
 					regionData.getRegionName()));
 			return true;
 		}
@@ -61,24 +61,24 @@ public class FlagLand implements ILandCmd {
 
 			packet.switchState(regionData, true, true);
 			String stateString = plugin.getLandManager().getStringState(packet.getState(regionData));
-			sender.sendMessage(plugin.getLanguageManager().flagSwitchSuccess.replace("{flag}", packet.getPacketName())
-					.replace("{value}", stateString));
+			sender.sendMessage(plugin.getYamlManager().getLanguage().flagSwitchSuccess
+					.replace("{flag}", packet.getPacketName()).replace("{value}", stateString));
 
 			return true;
 		} else if (args[1].toString().equalsIgnoreCase("off")) {
 
 			packet.switchState(regionData, false, true);
 			String stateString = plugin.getLandManager().getStringState(packet.getState(regionData));
-			sender.sendMessage(plugin.getLanguageManager().flagSwitchSuccess.replace("{flag}", packet.getPacketName())
-					.replace("{value}", stateString));
+			sender.sendMessage(plugin.getYamlManager().getLanguage().flagSwitchSuccess
+					.replace("{flag}", packet.getPacketName()).replace("{value}", stateString));
 
 			return true;
 		}
 		/* Switch flag-state to the opposite value */
 		packet.switchState(regionData, true);
 		String stateString = plugin.getLandManager().getStringState(packet.getState(regionData));
-		sender.sendMessage(plugin.getLanguageManager().flagSwitchSuccess.replace("{flag}", packet.getPacketName())
-				.replace("{value}", stateString));
+		sender.sendMessage(plugin.getYamlManager().getLanguage().flagSwitchSuccess
+				.replace("{flag}", packet.getPacketName()).replace("{value}", stateString));
 
 		return true;
 	}

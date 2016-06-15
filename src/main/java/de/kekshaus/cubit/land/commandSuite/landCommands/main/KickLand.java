@@ -28,7 +28,7 @@ public class KickLand implements ILandCmd {
 	public boolean runCmd(final CommandSender sender, String[] args) {
 		if (!(sender instanceof Player)) {
 			/* This is not possible from the server console */
-			sender.sendMessage(plugin.getLanguageManager().noConsoleMode);
+			sender.sendMessage(plugin.getYamlManager().getLanguage().noConsoleMode);
 			return true;
 		}
 
@@ -37,7 +37,7 @@ public class KickLand implements ILandCmd {
 
 		/* Permission Check */
 		if (!player.hasPermission(this.permNode)) {
-			sender.sendMessage(plugin.getLanguageManager().errorNoPermission);
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoPermission);
 			return true;
 		}
 
@@ -51,7 +51,7 @@ public class KickLand implements ILandCmd {
 		 * permissions
 		 */
 		if (!plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId())) {
-			sender.sendMessage(plugin.getLanguageManager().errorNoLandPermission.replace("{regionID}",
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
 					regionData.getRegionName()));
 			return true;
 		}
@@ -78,7 +78,7 @@ public class KickLand implements ILandCmd {
 					public void run() {
 						// TODO Auto-generated method stub
 						kickedPlayer.teleport(loc.getWorld().getSpawnLocation());
-						kickedPlayer.sendMessage(plugin.getLanguageManager().kickedInfo.replace("{regionID}",
+						kickedPlayer.sendMessage(plugin.getYamlManager().getLanguage().kickedInfo.replace("{regionID}",
 								regionData.getRegionName()));
 					}
 
@@ -86,7 +86,8 @@ public class KickLand implements ILandCmd {
 
 			}
 		}
-		sender.sendMessage(plugin.getLanguageManager().kickInfo.replace("{regionID}", regionData.getRegionName()));
+		sender.sendMessage(
+				plugin.getYamlManager().getLanguage().kickInfo.replace("{regionID}", regionData.getRegionName()));
 
 		return true;
 	}

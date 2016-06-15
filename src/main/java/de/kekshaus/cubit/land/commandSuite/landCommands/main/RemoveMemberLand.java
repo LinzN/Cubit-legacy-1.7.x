@@ -29,7 +29,7 @@ public class RemoveMemberLand implements ILandCmd {
 	public boolean runCmd(final CommandSender sender, String[] args) {
 		if (!(sender instanceof Player)) {
 			/* This is not possible from the server console */
-			sender.sendMessage(plugin.getLanguageManager().noConsoleMode);
+			sender.sendMessage(plugin.getYamlManager().getLanguage().noConsoleMode);
 			return true;
 		}
 
@@ -38,13 +38,13 @@ public class RemoveMemberLand implements ILandCmd {
 
 		/* Permission Check */
 		if (!player.hasPermission(this.permNode)) {
-			sender.sendMessage(plugin.getLanguageManager().errorNoPermission);
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoPermission);
 			return true;
 		}
 
 		if (args.length < 2) {
-			sender.sendMessage(
-					plugin.getLanguageManager().wrongArguments.replace("{usage}", "/land remove [Mitspieler]"));
+			sender.sendMessage(plugin.getYamlManager().getLanguage().wrongArguments.replace("{usage}",
+					"/land remove [Mitspieler]"));
 			return true;
 		}
 
@@ -57,7 +57,7 @@ public class RemoveMemberLand implements ILandCmd {
 		 * permissions
 		 */
 		if (!plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId()) && this.isAdmin == false) {
-			sender.sendMessage(plugin.getLanguageManager().errorNoLandPermission.replace("{regionID}",
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
 					regionData.getRegionName()));
 			return true;
 		}
@@ -66,12 +66,13 @@ public class RemoveMemberLand implements ILandCmd {
 		UUID uuid = offlinePlayer.getUniqueId();
 		if (!plugin.getLandManager().removeMember(regionData, loc.getWorld(), uuid)) {
 			/* If this task failed! This should never happen */
-			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "REMOVE-MEMBER"));
-			plugin.getLogger().warning(plugin.getLanguageManager().errorInTask.replace("{error}", "REMOVE-MEMBER"));
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "REMOVE-MEMBER"));
+			plugin.getLogger()
+					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "REMOVE-MEMBER"));
 			return true;
 		}
 
-		sender.sendMessage(plugin.getLanguageManager().removeMemberSuccess
+		sender.sendMessage(plugin.getYamlManager().getLanguage().removeMemberSuccess
 				.replace("{regionID}", regionData.getRegionName()).replace("{member}", offlinePlayer.getName()));
 
 		return true;

@@ -42,10 +42,12 @@ public class CommandAdmin implements CommandExecutor {
 				} else if (getCmdMap().containsKey(args[0])) {
 					String command = args[0];
 					if (!getCmdMap().get(command).runCmd(sender, args)) {
-						sender.sendMessage(plugin.getLanguageManager().errorCommand.replace("{command}", command));
+						sender.sendMessage(
+								plugin.getYamlManager().getLanguage().errorCommand.replace("{command}", command));
 					}
 				} else {
-					sender.sendMessage(plugin.getLanguageManager().errorNoCommand.replace("{command}", "/ladmin help"));
+					sender.sendMessage(
+							plugin.getYamlManager().getLanguage().errorNoCommand.replace("{command}", "/ladmin help"));
 				}
 			}
 		});

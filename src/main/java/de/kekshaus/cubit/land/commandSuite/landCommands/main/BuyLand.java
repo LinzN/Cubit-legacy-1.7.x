@@ -24,7 +24,7 @@ public class BuyLand implements ILandCmd {
 	public boolean runCmd(final CommandSender sender, String[] args) {
 		if (!(sender instanceof Player)) {
 			/* This is not possible from the server console */
-			sender.sendMessage(plugin.getLanguageManager().noConsoleMode);
+			sender.sendMessage(plugin.getYamlManager().getLanguage().noConsoleMode);
 			return true;
 		}
 
@@ -33,7 +33,7 @@ public class BuyLand implements ILandCmd {
 
 		/* Permission Check */
 		if (!player.hasPermission(this.permNode)) {
-			sender.sendMessage(plugin.getLanguageManager().errorNoPermission);
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoPermission);
 			return true;
 		}
 
@@ -44,49 +44,53 @@ public class BuyLand implements ILandCmd {
 
 		/* Check if this is a valid buyTask */
 		if (plugin.getLandManager().isLand(loc.getWorld(), chunk.getX(), chunk.getZ())) {
-			sender.sendMessage(plugin.getLanguageManager().buyIsAlreadyLand.replace("{regionID}", regionID));
+			sender.sendMessage(plugin.getYamlManager().getLanguage().buyIsAlreadyLand.replace("{regionID}", regionID));
 			return true;
 		}
 
 		double economyValue = Landplugin.inst().getVaultManager().calculateLandCost(player.getUniqueId(),
 				loc.getWorld(), true);
 		if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), economyValue)) {
-			sender.sendMessage(plugin.getLanguageManager().notEnoughMoney.replace("{cost}",
+			sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
 					"" + plugin.getVaultManager().formateToEconomy(economyValue)));
 			return true;
 		}
 
 		if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), null, economyValue)) {
 			/* If this task failed! This should never happen */
-			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-ECONOMY"));
-			plugin.getLogger().warning(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-ECONOMY"));
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-ECONOMY"));
+			plugin.getLogger()
+					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-ECONOMY"));
 			return true;
 		}
 
 		if (!plugin.getLandManager().createLand(loc, player.getUniqueId(), LandTypes.WORLD)) {
 			/* If this task failed! This should never happen */
-			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-REGION"));
-			plugin.getLogger().warning(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-REGION"));
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-REGION"));
+			plugin.getLogger()
+					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-REGION"));
 			return true;
 		}
 
 		if (!plugin.getBlockManager().placeLandBorder(chunk,
 				Landplugin.inst().getYamlManager().getSettings().landBuyMaterialBorder)) {
 			/* If this task failed! This should never happen */
-			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-BLOCK"));
-			plugin.getLogger().warning(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-BLOCK"));
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-BLOCK"));
+			plugin.getLogger()
+					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-BLOCK"));
 			return true;
 		}
 
 		if (!plugin.getParticleManager().sendBuy(player, loc)) {
 			/* If this task failed! This should never happen */
-			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-PARTICLE"));
-			plugin.getLogger().warning(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-PARTICLE"));
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-PARTICLE"));
+			plugin.getLogger()
+					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-PARTICLE"));
 			return true;
 		}
 
 		/* Task was successfully. Send BuyMessage */
-		sender.sendMessage(plugin.getLanguageManager().buySuccess.replace("{regionID}", regionID));
+		sender.sendMessage(plugin.getYamlManager().getLanguage().buySuccess.replace("{regionID}", regionID));
 		return true;
 	}
 

@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
 import org.bukkit.World;
 
 import de.kekshaus.cubit.land.Landplugin;
@@ -40,7 +39,7 @@ public class DatabaseAPIManager {
 		if (this.useSql) {
 			return sqlMrg.getTimeStamp(uuid);
 		} else {
-			return Bukkit.getOfflinePlayer(uuid).getLastPlayed();
+			return yamlMrg.getTimeStamp(uuid);
 		}
 	}
 

@@ -24,7 +24,7 @@ public class InfoLand implements ILandCmd {
 	public boolean runCmd(final CommandSender sender, String[] args) {
 		if (!(sender instanceof Player)) {
 			/* This is not possible from the server console */
-			sender.sendMessage(plugin.getLanguageManager().noConsoleMode);
+			sender.sendMessage(plugin.getYamlManager().getLanguage().noConsoleMode);
 			return true;
 		}
 
@@ -33,7 +33,7 @@ public class InfoLand implements ILandCmd {
 
 		/* Permission Check */
 		if (!player.hasPermission(this.permNode)) {
-			sender.sendMessage(plugin.getLanguageManager().errorNoPermission);
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoPermission);
 			return true;
 		}
 
@@ -42,7 +42,7 @@ public class InfoLand implements ILandCmd {
 		RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 
 		/* Send header */
-		sender.sendMessage(plugin.getLanguageManager().landHeader);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHeader);
 
 		/* Check Type of this Region */
 		switch (regionData.getLandType()) {
@@ -63,8 +63,9 @@ public class InfoLand implements ILandCmd {
 		/* After info command send Particle */
 		if (!plugin.getParticleManager().sendInfo(player, loc)) {
 			/* If this task failed! This should never happen */
-			sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-PARTICLE"));
-			plugin.getLogger().warning(plugin.getLanguageManager().errorInTask.replace("{error}", "CREATE-PARTICLE"));
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-PARTICLE"));
+			plugin.getLogger()
+					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-PARTICLE"));
 			return true;
 		}
 
@@ -87,29 +88,32 @@ public class InfoLand implements ILandCmd {
 		String statusMonster = plugin.getLandManager().monsterPacket.getStateColor(regionData)
 				+ plugin.getLandManager().monsterPacket.getPacketName();
 
-		player.sendMessage(plugin.getLanguageManager().landInfoE1.replace("{regionID}", regionData.getRegionName()));
+		player.sendMessage(
+				plugin.getYamlManager().getLanguage().landInfoE1.replace("{regionID}", regionData.getRegionName()));
 
 		if (this.plugin.isGuildLoaded()) {
 			Guild guild = regionData.getGuild();
 			if (guild != null) {
-				player.sendMessage(plugin.getLanguageManager().landInfoE1A1.replace("{guild}", guild.getGuildName()));
+				player.sendMessage(
+						plugin.getYamlManager().getLanguage().landInfoE1A1.replace("{guild}", guild.getGuildName()));
 			}
 		}
-		player.sendMessage(plugin.getLanguageManager().landInfoE2.replace("{owner}", regionData.getOwnerName()));
+		player.sendMessage(
+				plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}", regionData.getOwnerName()));
 		if (regionData.getMembersName().size() != 0) {
-			player.sendMessage(plugin.getLanguageManager().landInfoE3.replace("{members}",
+			player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE3.replace("{members}",
 					regionData.getMembersName().toString()));
 		}
-		player.sendMessage(
-				plugin.getLanguageManager().landInfoE4.replace("{min}", minBorder).replace("{max}", maxBorder));
-		player.sendMessage(plugin.getLanguageManager().landInfoE5.replace("{time}", formatedTime));
-		player.sendMessage(
-				plugin.getLanguageManager().landInfoE6.replace("{lock}", statusLock).replace("{monster}", statusMonster)
-						.replace("{fire}", statusFire).replace("{pvp}", statusPvP).replace("{tnt}", statusTNT));
+		player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE4.replace("{min}", minBorder).replace("{max}",
+				maxBorder));
+		player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE5.replace("{time}", formatedTime));
+		player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE6.replace("{lock}", statusLock)
+				.replace("{monster}", statusMonster).replace("{fire}", statusFire).replace("{pvp}", statusPvP)
+				.replace("{tnt}", statusTNT));
 
 		if (plugin.getDatabaseManager().isOffered(regionData.getRegionName(), regionData.getWorld())) {
-			player.sendMessage(plugin.getLanguageManager().showOffer.replace("{value}", "" + plugin.getDatabaseManager()
-					.getOfferData(regionData.getRegionName(), regionData.getWorld()).getValue()));
+			player.sendMessage(plugin.getYamlManager().getLanguage().landInfoA2.replace("{value}", "" + plugin
+					.getDatabaseManager().getOfferData(regionData.getRegionName(), regionData.getWorld()).getValue()));
 		}
 		return;
 
@@ -122,9 +126,9 @@ public class InfoLand implements ILandCmd {
 	private void serverInfo(Player player, RegionData regionData) {
 		String minBorder = regionData.getMinPoint();
 		String maxBorder = regionData.getMaxPoint();
-		player.sendMessage(plugin.getLanguageManager().landInfoE2.replace("{owner}", "Server"));
-		player.sendMessage(
-				plugin.getLanguageManager().landInfoE4.replace("{min}", minBorder).replace("{max}", maxBorder));
+		player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}", "Server"));
+		player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE4.replace("{min}", minBorder).replace("{max}",
+				maxBorder));
 		return;
 	}
 
@@ -134,7 +138,7 @@ public class InfoLand implements ILandCmd {
 				loc.getWorld(), true);
 		final String regionID = plugin.getLandManager().buildLandName(loc.getWorld().getName(), chunk.getX(),
 				chunk.getZ());
-		player.sendMessage(plugin.getLanguageManager().landInfoA1
+		player.sendMessage(plugin.getYamlManager().getLanguage().landInfoA1
 				.replace("{cost}", "" + plugin.getVaultManager().formateToEconomy(economyValue))
 				.replace("{regionID}", regionID));
 		return;

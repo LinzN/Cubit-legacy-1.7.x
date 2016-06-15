@@ -28,7 +28,7 @@ public class OfferLand implements ILandCmd {
 	public boolean runCmd(final CommandSender sender, String[] args) {
 		if (!(sender instanceof Player)) {
 			/* This is not possible from the server console */
-			sender.sendMessage(plugin.getLanguageManager().noConsoleMode);
+			sender.sendMessage(plugin.getYamlManager().getLanguage().noConsoleMode);
 			return true;
 		}
 
@@ -37,7 +37,7 @@ public class OfferLand implements ILandCmd {
 
 		/* Permission Check */
 		if (!player.hasPermission(this.permNode)) {
-			sender.sendMessage(plugin.getLanguageManager().errorNoPermission);
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoPermission);
 			return true;
 		}
 
@@ -50,14 +50,14 @@ public class OfferLand implements ILandCmd {
 		 * permissions
 		 */
 		if (!plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId()) && this.isAdmin == false) {
-			sender.sendMessage(plugin.getLanguageManager().errorNoLandPermission.replace("{regionID}",
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
 					regionData.getRegionName()));
 			return true;
 		}
 
 		if (args.length >= 2) {
 			if (!NumberUtils.isNumber(args[1])) {
-				sender.sendMessage(plugin.getLanguageManager().noNumberFound);
+				sender.sendMessage(plugin.getYamlManager().getLanguage().noNumberFound);
 				return true;
 			}
 			double value = Double.parseDouble(args[1]);
@@ -65,12 +65,13 @@ public class OfferLand implements ILandCmd {
 				if (plugin.getDatabaseManager().isOffered(regionData.getRegionName(), loc.getWorld())) {
 					if (!plugin.getDatabaseManager().removeOfferData(regionData.getRegionName(), loc.getWorld())) {
 						/* If this task failed! This should never happen */
-						sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "OFFER-REMOVE"));
-						plugin.getLogger()
-								.warning(plugin.getLanguageManager().errorInTask.replace("{error}", "OFFER-REMOVE"));
+						sender.sendMessage(
+								plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "OFFER-REMOVE"));
+						plugin.getLogger().warning(
+								plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "OFFER-REMOVE"));
 						return true;
 					}
-					sender.sendMessage(plugin.getLanguageManager().offerRemoveSuccess.replace("{regionID}",
+					sender.sendMessage(plugin.getYamlManager().getLanguage().offerRemoveSuccess.replace("{regionID}",
 							regionData.getRegionName()));
 				}
 			} else {
@@ -79,13 +80,15 @@ public class OfferLand implements ILandCmd {
 				offerData.setValue(value);
 				if (!plugin.getDatabaseManager().setOfferData(offerData)) {
 					/* If this task failed! This should never happen */
-					sender.sendMessage(plugin.getLanguageManager().errorInTask.replace("{error}", "OFFER-ADD"));
-					plugin.getLogger().warning(plugin.getLanguageManager().errorInTask.replace("{error}", "OFFER-ADD"));
+					sender.sendMessage(
+							plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "OFFER-ADD"));
+					plugin.getLogger()
+							.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "OFFER-ADD"));
 					return true;
 				}
-				sender.sendMessage(
-						plugin.getLanguageManager().offerAddSuccess.replace("{regionID}", regionData.getRegionName())
-								.replace("{value}", plugin.getVaultManager().formateToEconomy(value)));
+				sender.sendMessage(plugin.getYamlManager().getLanguage().offerAddSuccess
+						.replace("{regionID}", regionData.getRegionName())
+						.replace("{value}", plugin.getVaultManager().formateToEconomy(value)));
 			}
 		}
 

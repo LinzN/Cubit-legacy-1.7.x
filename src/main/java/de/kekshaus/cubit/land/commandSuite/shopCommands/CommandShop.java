@@ -30,16 +30,19 @@ public class CommandShop implements CommandExecutor {
 	@Override
 	public boolean onCommand(final CommandSender sender, Command cmd, String label, final String[] args) {
 		cmdThread.submit(new Runnable() {
+			@Override
 			public void run() {
 				if (args.length == 0) {
 					// help site
 				} else if (getCmdMap().containsKey(args[0])) {
 					String command = args[0];
 					if (!getCmdMap().get(command).runCmd(sender, args)) {
-						sender.sendMessage(plugin.getLanguageManager().errorCommand.replace("{command}", command));
+						sender.sendMessage(
+								plugin.getYamlManager().getLanguage().errorCommand.replace("{command}", command));
 					}
 				} else {
-					sender.sendMessage(plugin.getLanguageManager().errorNoCommand.replace("{command}", "/shop help"));
+					sender.sendMessage(
+							plugin.getYamlManager().getLanguage().errorNoCommand.replace("{command}", "/shop help"));
 				}
 			}
 		});

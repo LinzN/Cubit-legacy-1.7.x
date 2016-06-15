@@ -13,7 +13,6 @@ import de.kekshaus.cubit.land.api.particleAPI.ParticleAPIManager;
 import de.kekshaus.cubit.land.api.regionAPI.RegionAPIManager;
 import de.kekshaus.cubit.land.api.vaultAPI.VaultAPIManager;
 import de.kekshaus.cubit.land.commandSuite.SetupCommands;
-import de.kekshaus.cubit.land.plugin.Language;
 import de.kekshaus.cubit.land.plugin.PermissionNodes;
 import de.kekshaus.cubit.land.plugin.listener.AdditionalPhysicsListener;
 import de.kekshaus.cubit.land.plugin.listener.LoginListener;
@@ -29,7 +28,6 @@ public class Landplugin extends JavaPlugin {
 	private ParticleAPIManager particleMrg;
 	private VaultAPIManager vaultMrg;
 	private DatabaseAPIManager databaseMrg;
-	private Language langMrg;
 	private PermissionNodes permNodes;
 	private YamlConfigurationManager yamlConfiguration;
 
@@ -61,7 +59,6 @@ public class Landplugin extends JavaPlugin {
 		blockMrg = new BlockAPIManager(this);
 		particleMrg = new ParticleAPIManager(this);
 		vaultMrg = new VaultAPIManager(this);
-		langMrg = new Language();
 		permNodes = new PermissionNodes();
 		databaseMrg = new DatabaseAPIManager(this);
 
@@ -89,10 +86,6 @@ public class Landplugin extends JavaPlugin {
 
 	public VaultAPIManager getVaultManager() {
 		return this.vaultMrg;
-	}
-
-	public Language getLanguageManager() {
-		return this.langMrg;
 	}
 
 	public PermissionNodes getPermNodes() {
