@@ -1,4 +1,6 @@
-package de.kekshaus.cubit.land.api.YamlConfigurationAPI.setup;
+package de.kekshaus.cubit.land.api.YamlConfigurationAPI.files;
+
+import de.kekshaus.cubit.land.api.YamlConfigurationAPI.setup.CustomConfig;
 
 public class LanguageYaml {
 
@@ -85,58 +87,55 @@ public class LanguageYaml {
 
 	public void setup() {
 		/* Error MSG */
-		noConsoleMode = this.configFile.getLanguageString("noConsoleMode", "§4Dies ist nicht von der Konsole möglich!");
+		noConsoleMode = this.configFile.getLanguageString("noConsoleMode",
+				"§4Sorry this is not available in console mode!");
 		errorInTask = this.configFile.getLanguageString("errorInTask",
-				"§4Es ist ein Fehler in diesem Task aufgetreten: [§e{error}§4]");
+				"§4An internal error occurred during: [§e{error}§4]");
 		errorCommand = this.configFile.getLanguageString("errorCommand",
-				"§4Es ist ein Fehler bei dem Befehl [§e{command}§4] aufgetreten!");
+				"§4An error occurred during execution command [§e{command}§4] aufgetreten!");
 		errorNoCommand = this.configFile.getLanguageString("errorNoCommand",
-				"§cDiesen Befehl gibt es nicht! Gib §e{command}§c ein!");
+				"§cUnknown command! Use §e{command}§c for help!");
 		errorNoPermission = this.configFile.getLanguageString("errorNoPermission",
-				"§4Du hast dafür leider keine Berechtigungen! :(");
+				"§4You don have access to that command! :(");
 		errorNoLandPermission = this.configFile.getLanguageString("errorNoLandPermission",
-				"§cDu hast für das Land {regionID} keine Berechtigungen! :(");
-		errorNoLandFound = this.configFile.getLanguageString("errorNoLandFound",
-				"§cEs wurde hier kein Land gefunden! :(");
-		noNumberFound = this.configFile.getLanguageString("noNumberFound", "§cDies ist keine Gültige Nummer");
+				"§cYou don have access for region {regionID}! :(");
+		errorNoLandFound = this.configFile.getLanguageString("errorNoLandFound", "§cNo region found here! Sorry :(");
+		noNumberFound = this.configFile.getLanguageString("noNumberFound", "§cThis is not a valid number");
 
 		/* Success MSG */
-		buySuccess = this.configFile.getLanguageString("buySuccess",
-				"§2Du hast das Grundstück §e{regionID}§2 gekauft!");
+		buySuccess = this.configFile.getLanguageString("buySuccess", "§2You bought the region §e{regionID}§2!");
 		sellSuccess = this.configFile.getLanguageString("sellSuccess",
-				"§2Du hast das Grundstück §e{regionID}§2 an den Server verkauft!");
+				"§2You sold the region §e{regionID}§2 to the server!");
 		flagSwitchSuccess = this.configFile.getLanguageString("flagSwitchSuccess",
-				"§2Das System §9§l{flag}-Schutz §2wurde zu §9§l{value} §2gewechselt!");
+				"§2The system §9§l{flag}-Protection §2switched to §9§l{value}§2!");
 		addMemberSuccess = this.configFile.getLanguageString("addMemberSuccess",
-				"§2Du hat {member} dem Grundstück §e{regionID}§2 hinzugefügt!");
+				"§2You added {member} to the region §e{regionID}§2!");
 		removeMemberSuccess = this.configFile.getLanguageString("removeMemberSuccess",
-				"§2Du hat {member} vom Grundstück §e{regionID}§2 entfernt!");
+				"§2You removed {member} from the region §e{regionID}§2!");
 		offerAddSuccess = this.configFile.getLanguageString("offerAddSuccess",
-				"§2Du bietest das Grundstück §e{regionID}§2 für §e{value}§2 an!");
+				"§2You offer the region §e{regionID}§2 for §e{value}§2!");
 		offerRemoveSuccess = this.configFile.getLanguageString("offerRemoveSuccess",
-				"§2Du bietest das Grundstück §e{regionID}§2 nicht mehr an!");
+				"§2You offer the region §e{regionID}§2 no more!");
 		kickedInfo = this.configFile.getLanguageString("kickedInfo",
-				"§6Du wurdest von dem Besitzer des Landes {regionID} verwiesen!");
-		kickInfo = this.configFile.getLanguageString("kickInfo",
-				"§2Alle nicht-Member wurden dem Land {regionID} verwiesen!");
+				"§6You kicked from the region {regionID} by the region owner!");
+		kickInfo = this.configFile.getLanguageString("kickInfo", "§2All non-member kicked from the region {regionID}!");
 		/* UnSuccess MSG */
 		buyIsAlreadyLand = this.configFile.getLanguageString("buyIsAlreadyLand",
-				"§cDieses Grundstück §e{regionID}§c ist nicht mehr frei!");
+				"§cSorry. This region is already §e{regionID}§c bought by someone!");
 		notEnoughMoney = this.configFile.getLanguageString("notEnoughMoney",
-				"§cDas kannst du dir leider nicht leisten. Kosten: §e{cost}§c!");
-		takeOwnLand = this.configFile.getLanguageString("takeOwnLand", "§cDu kannst nicht dein eigenes Land kaufen!");
-		notOffered = this.configFile.getLanguageString("notOffered",
-				"§cDas Land {regionID} wird nicht zum Verkauf angeboten!");
-		wrongArguments = this.configFile.getLanguageString("wrongArguments", "§cFehler im Befehl: Benutze {usage}!");
+				"§cYou can not afford it. Price: §e{cost}§c!");
+		takeOwnLand = this.configFile.getLanguageString("takeOwnLand", "§cYou can not buy your own region!");
+		notOffered = this.configFile.getLanguageString("notOffered", "§cThe region {regionID} is not offered!");
+		wrongArguments = this.configFile.getLanguageString("wrongArguments", "§cWrong arguments: Use {usage}!");
 
 		/* Header for Plugin */
 		landHeader = this.configFile.getLanguageString("theme.general.header",
-				"§6<<<<<<<<<<<<<<<<<<<<<§2§l|GrundStück|§6>>>>>>>>>>>>>>>>>>>>>");
+				"§6<<<<<<<<<<<<<<<<<<<<<§2§l|Region Info|§6>>>>>>>>>>>>>>>>>>>>>");
 
 		/* Land Info Page */
 		landInfoA1 = this.configFile.getLanguageString("theme.landinfo.empty",
 				"§2Dieses Grundstück [§e{regionID}§2] ist noch unbewohnt. \n§2Kaufe es mit §e/land buy §2für §e{cost}§2!");
-		landInfoA2 = this.configFile.getLanguageString("showOffer",
+		landInfoA2 = this.configFile.getLanguageString("theme.landinfo.offered",
 				"§2Dieses Grundstück wird für §e{value}§2 angeboten. Gib §e/land takeoffer §2ein um es zu kaufen!");
 		landInfoE1 = this.configFile.getLanguageString("theme.landinfo.regionID", "§2Grundstück: §9{regionID}");
 		landInfoE1A1 = this.configFile.getLanguageString("theme.landinfo.guildInfo", "§2Gilde: §e{guild}");

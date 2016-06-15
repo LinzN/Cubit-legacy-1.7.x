@@ -2,16 +2,16 @@ package de.kekshaus.cubit.land.api.YamlConfigurationAPI;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import de.kekshaus.cubit.land.api.YamlConfigurationAPI.setup.LanguageYaml;
-import de.kekshaus.cubit.land.api.YamlConfigurationAPI.setup.SettingsYaml;
-import de.kekshaus.cubit.land.api.YamlConfigurationAPI.setup.YamlFileOperator;
+import de.kekshaus.cubit.land.api.YamlConfigurationAPI.files.LanguageYaml;
+import de.kekshaus.cubit.land.api.YamlConfigurationAPI.files.SettingsYaml;
+import de.kekshaus.cubit.land.api.YamlConfigurationAPI.setup.YamlFileSetup;
 
 public class YamlConfigurationManager {
 
-	private YamlFileOperator fileOperator;
+	private YamlFileSetup fileOperator;
 
 	public YamlConfigurationManager(JavaPlugin plugin) {
-		this.fileOperator = new YamlFileOperator(plugin);
+		this.fileOperator = new YamlFileSetup(plugin);
 	}
 
 	public SettingsYaml getSettings() {

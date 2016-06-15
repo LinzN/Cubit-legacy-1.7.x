@@ -1,6 +1,8 @@
-package de.kekshaus.cubit.land.api.YamlConfigurationAPI.setup;
+package de.kekshaus.cubit.land.api.YamlConfigurationAPI.files;
 
 import org.bukkit.Material;
+
+import de.kekshaus.cubit.land.api.YamlConfigurationAPI.setup.CustomConfig;
 
 public class SettingsYaml {
 

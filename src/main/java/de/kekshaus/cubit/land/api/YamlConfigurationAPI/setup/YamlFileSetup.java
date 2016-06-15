@@ -4,12 +4,15 @@ import java.io.File;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class YamlFileOperator {
+import de.kekshaus.cubit.land.api.YamlConfigurationAPI.files.LanguageYaml;
+import de.kekshaus.cubit.land.api.YamlConfigurationAPI.files.SettingsYaml;
+
+public class YamlFileSetup {
 
 	public SettingsYaml settings;
 	public LanguageYaml language;
 
-	public YamlFileOperator(JavaPlugin plugin) {
+	public YamlFileSetup(JavaPlugin plugin) {
 		File configDirectory = new File(plugin.getDataFolder(), "flatfile");
 		if (!configDirectory.exists()) {
 			configDirectory.mkdir();
