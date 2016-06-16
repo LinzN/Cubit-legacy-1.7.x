@@ -1,0 +1,20 @@
+package de.kekshaus.cubit.api.YamlConfigurationAPI.files;
+
+import de.kekshaus.cubit.api.YamlConfigurationAPI.setup.CustomConfig;
+
+public class FlagConfig {
+
+	private CustomConfig configFile;
+
+	public String examplePath;
+
+	public FlagConfig(CustomConfig configFile) {
+		this.configFile = configFile;
+	}
+
+	public void setup() {
+		examplePath = (String) this.configFile.getObjectValue("path", "value");
+
+	}
+
+}

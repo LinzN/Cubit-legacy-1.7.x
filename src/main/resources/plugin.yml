@@ -1,5 +1,5 @@
 name: Cubit
-main : de.kekshaus.cubit.land.Landplugin
+main : de.kekshaus.cubit.plugin.Landplugin
 version: ${project.version}.b${build.number}
 description: Landplugin
 author: Kekshaus
