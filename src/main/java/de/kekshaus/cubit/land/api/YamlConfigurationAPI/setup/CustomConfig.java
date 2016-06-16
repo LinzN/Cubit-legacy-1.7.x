@@ -111,4 +111,12 @@ public class CustomConfig extends YamlConfiguration {
 
 	}
 
+	public Object getObjectValue(String path, Object defaultValue) {
+		if (!this.contains(path)) {
+			this.set(path, defaultValue);
+		}
+		return this.get(path);
+
+	}
+
 }
