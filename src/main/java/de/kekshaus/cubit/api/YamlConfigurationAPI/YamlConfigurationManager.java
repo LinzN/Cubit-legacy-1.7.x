@@ -1,5 +1,6 @@
 package de.kekshaus.cubit.api.YamlConfigurationAPI;
 
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import de.kekshaus.cubit.api.YamlConfigurationAPI.files.LanguageYaml;
@@ -9,9 +10,11 @@ import de.kekshaus.cubit.api.YamlConfigurationAPI.setup.YamlFileSetup;
 public class YamlConfigurationManager {
 
 	private YamlFileSetup fileOperator;
+	private Plugin plugin;
 
 	public YamlConfigurationManager(JavaPlugin plugin) {
-		this.fileOperator = new YamlFileSetup(plugin);
+		this.plugin = plugin;
+		this.fileOperator = new YamlFileSetup(this.plugin);
 	}
 
 	public SettingsYaml getSettings() {

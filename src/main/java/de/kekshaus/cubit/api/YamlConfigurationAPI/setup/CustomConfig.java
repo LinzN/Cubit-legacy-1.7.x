@@ -7,13 +7,13 @@ import java.io.InputStreamReader;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.Plugin;
 
 public class CustomConfig extends YamlConfiguration {
 
 	private File file;
 	private String defaults;
-	private JavaPlugin plugin;
+	private Plugin plugin;
 
 	/**
 	 * Creates new PluginFile, with defaults
@@ -27,11 +27,11 @@ public class CustomConfig extends YamlConfiguration {
 	 * @param defaultsName
 	 *            - Name of the defaults
 	 */
-	public CustomConfig(JavaPlugin plugin, File directory, String fileName) {
+	public CustomConfig(Plugin plugin, File directory, String fileName) {
 		this(plugin, directory, fileName, fileName);
 	}
 
-	public CustomConfig(JavaPlugin plugin, File directory, String fileName, String defaultsName) {
+	public CustomConfig(Plugin plugin, File directory, String fileName, String defaultsName) {
 		this.plugin = plugin;
 		this.defaults = defaultsName;
 		this.file = new File(directory, fileName);
@@ -51,7 +51,7 @@ public class CustomConfig extends YamlConfiguration {
 
 			} catch (IOException exception) {
 				exception.printStackTrace();
-				plugin.getLogger().severe("Error while creating file " + file.getName());
+				this.plugin.getLogger().severe("Error while creating file " + file.getName());
 			}
 
 		}
@@ -60,7 +60,7 @@ public class CustomConfig extends YamlConfiguration {
 			load(file);
 
 			if (defaults != null) {
-				InputStreamReader reader = new InputStreamReader(plugin.getResource(defaults));
+				InputStreamReader reader = new InputStreamReader(this.plugin.getResource(defaults));
 				FileConfiguration defaultsConfig = YamlConfiguration.loadConfiguration(reader);
 
 				setDefaults(defaultsConfig);

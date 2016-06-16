@@ -2,7 +2,7 @@ package de.kekshaus.cubit.api.YamlConfigurationAPI.setup;
 
 import java.io.File;
 
-import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.Plugin;
 
 import de.kekshaus.cubit.api.YamlConfigurationAPI.files.LanguageYaml;
 import de.kekshaus.cubit.api.YamlConfigurationAPI.files.SettingsYaml;
@@ -11,12 +11,14 @@ public class YamlFileSetup {
 
 	public SettingsYaml settings;
 	public LanguageYaml language;
+	private Plugin plugin;
 
-	public YamlFileSetup(JavaPlugin plugin) {
-		File flatfileDirectory = new File(plugin.getDataFolder(), "flatfiles");
+	public YamlFileSetup(Plugin plugin) {
+		this.plugin = plugin;
+		File flatfileDirectory = new File(this.plugin.getDataFolder(), "flatfiles");
 		if (!flatfileDirectory.exists()) {
 			try {
-				boolean setting = flatfileDirectory.mkdir();
+				boolean setting = flatfileDirectory.mkdirs();
 				if (setting) {
 					System.out.println("Created flatfile directory");
 				} else {
@@ -27,10 +29,10 @@ public class YamlFileSetup {
 			}
 		}
 
-		File languageDirectory = new File(plugin.getDataFolder(), "languages");
+		File languageDirectory = new File(this.plugin.getDataFolder(), "languages");
 		if (!languageDirectory.exists()) {
 			try {
-				boolean language = languageDirectory.mkdir();
+				boolean language = languageDirectory.mkdirs();
 				if (language) {
 					System.out.println("Created languages directory");
 				} else {
@@ -41,11 +43,11 @@ public class YamlFileSetup {
 			}
 		}
 
-		CustomConfig languageConfig = new CustomConfig(plugin, languageDirectory, "language.yml");
+		CustomConfig languageConfig = new CustomConfig(this.plugin, languageDirectory, "language.yml");
 		this.language = new LanguageYaml(languageConfig);
 		languageConfig.saveAndReload();
 		/* Configs */
-		CustomConfig settingsConfig = new CustomConfig(plugin, plugin.getDataFolder(), "settings.yml");
+		CustomConfig settingsConfig = new CustomConfig(this.plugin, this.plugin.getDataFolder(), "settings.yml");
 		this.settings = new SettingsYaml(settingsConfig);
 		settingsConfig.saveAndReload();
 
