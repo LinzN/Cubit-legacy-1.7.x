@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import de.kekshaus.cubit.land.Landplugin;
+import de.kekshaus.cubit.land.api.regionAPI.region.LandTypes;
 import de.kekshaus.cubit.land.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.land.commandSuite.ILandCmd;
 
@@ -50,6 +51,12 @@ public class SellLand implements ILandCmd {
 
 		RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 		final String regionID = regionData.getRegionName();
+
+		if (regionData.getLandType() != LandTypes.WORLD) {
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}",
+					LandTypes.WORLD.toString()));
+			return true;
+		}
 
 		if (!plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId()) && this.isAdmin == false) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",

@@ -14,6 +14,7 @@ public class LanguageYaml {
 	public String errorNoPermission;
 	public String errorNoLandPermission;
 	public String errorNoLandFound;
+	public String errorNoValidLandFound;
 	public String noNumberFound;
 
 	/* Success MSG */
@@ -100,6 +101,8 @@ public class LanguageYaml {
 		errorNoLandPermission = this.configFile.getLanguageString("errorNoLandPermission",
 				"§cYou don have access for region {regionID}! :(");
 		errorNoLandFound = this.configFile.getLanguageString("errorNoLandFound", "§cNo region found here! Sorry :(");
+		errorNoValidLandFound = this.configFile.getLanguageString("errorNoLandFound",
+				"§cNo valid {type} region found here! Sorry :(");
 		noNumberFound = this.configFile.getLanguageString("noNumberFound", "§cThis is not a valid number");
 
 		/* Success MSG */

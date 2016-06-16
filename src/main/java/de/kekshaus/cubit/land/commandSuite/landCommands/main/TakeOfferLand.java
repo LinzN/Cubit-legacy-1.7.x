@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 
 import de.kekshaus.cubit.land.Landplugin;
 import de.kekshaus.cubit.land.api.databaseAPI.OfferData;
+import de.kekshaus.cubit.land.api.regionAPI.region.LandTypes;
 import de.kekshaus.cubit.land.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.land.commandSuite.ILandCmd;
 
@@ -46,6 +47,18 @@ public class TakeOfferLand implements ILandCmd {
 		 * Check if the player has permissions for this land or hat landadmin
 		 * permissions
 		 */
+
+		if (!plugin.getLandManager().isLand(loc.getWorld(), chunk.getX(), chunk.getZ())) {
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandFound);
+			return true;
+		}
+
+		if (regionData.getLandType() != LandTypes.WORLD) {
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}",
+					LandTypes.WORLD.toString()));
+			return true;
+		}
+
 		if (plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId())) {
 			player.sendMessage(plugin.getYamlManager().getLanguage().takeOwnLand);
 			return true;

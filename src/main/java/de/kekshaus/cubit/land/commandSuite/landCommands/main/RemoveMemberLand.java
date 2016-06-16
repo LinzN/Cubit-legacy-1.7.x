@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import de.kekshaus.cubit.land.Landplugin;
+import de.kekshaus.cubit.land.api.regionAPI.region.LandTypes;
 import de.kekshaus.cubit.land.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.land.commandSuite.ILandCmd;
 
@@ -43,8 +44,8 @@ public class RemoveMemberLand implements ILandCmd {
 		}
 
 		if (args.length < 2) {
-			sender.sendMessage(plugin.getYamlManager().getLanguage().wrongArguments.replace("{usage}",
-					"/land remove [Mitspieler]"));
+			sender.sendMessage(
+					plugin.getYamlManager().getLanguage().wrongArguments.replace("{usage}", "/land remove [player]"));
 			return true;
 		}
 
@@ -56,6 +57,18 @@ public class RemoveMemberLand implements ILandCmd {
 		 * Check if the player has permissions for this land or hat landadmin
 		 * permissions
 		 */
+
+		if (!plugin.getLandManager().isLand(loc.getWorld(), chunk.getX(), chunk.getZ())) {
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandFound);
+			return true;
+		}
+
+		if (regionData.getLandType() != LandTypes.WORLD) {
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}",
+					LandTypes.WORLD.toString()));
+			return true;
+		}
+
 		if (!plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId()) && this.isAdmin == false) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
 					regionData.getRegionName()));
