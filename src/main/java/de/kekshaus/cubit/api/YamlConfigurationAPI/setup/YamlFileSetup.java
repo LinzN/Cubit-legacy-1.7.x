@@ -4,6 +4,7 @@ import java.io.File;
 
 import org.bukkit.plugin.Plugin;
 
+import de.kekshaus.cubit.api.YamlConfigurationAPI.files.FlatfileYaml;
 import de.kekshaus.cubit.api.YamlConfigurationAPI.files.LanguageYaml;
 import de.kekshaus.cubit.api.YamlConfigurationAPI.files.SettingsYaml;
 
@@ -11,6 +12,7 @@ public class YamlFileSetup {
 
 	public SettingsYaml settings;
 	public LanguageYaml language;
+	public FlatfileYaml flatFileDatabase;
 	private Plugin plugin;
 
 	public YamlFileSetup(Plugin plugin) {
@@ -45,6 +47,9 @@ public class YamlFileSetup {
 
 		CustomConfig languageConfig = new CustomConfig(this.plugin, languageDirectory, "language.yml");
 		this.language = new LanguageYaml(languageConfig);
+
+		CustomConfig flatfileConfig = new CustomConfig(this.plugin, flatfileDirectory, "database.yml");
+		this.flatFileDatabase = new FlatfileYaml(flatfileConfig);
 		/* Configs */
 		CustomConfig settingsConfig = new CustomConfig(this.plugin, this.plugin.getDataFolder(), "settings.yml");
 		this.settings = new SettingsYaml(settingsConfig);

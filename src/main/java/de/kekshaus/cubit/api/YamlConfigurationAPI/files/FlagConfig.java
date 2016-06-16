@@ -13,7 +13,15 @@ public class FlagConfig {
 	}
 
 	public void setup() {
-		examplePath = (String) this.configFile.getObjectValue("path", "value");
+		examplePath = (String) this.getObjectValue("path", "value");
+
+	}
+
+	public Object getObjectValue(String path, Object defaultValue) {
+		if (!this.configFile.contains(path)) {
+			this.configFile.set(path, defaultValue);
+		}
+		return this.configFile.get(path);
 
 	}
 

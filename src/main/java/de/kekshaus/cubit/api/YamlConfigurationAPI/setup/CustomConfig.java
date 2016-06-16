@@ -103,20 +103,4 @@ public class CustomConfig extends YamlConfiguration {
 		reload();
 	}
 
-	public String getLanguageString(String path, String defaultValue) {
-		if (!this.contains(path)) {
-			this.set(path, defaultValue);
-		}
-		return this.getString(path);
-
-	}
-
-	public Object getObjectValue(String path, Object defaultValue) {
-		if (!this.contains(path)) {
-			this.set(path, defaultValue);
-		}
-		return this.get(path);
-
-	}
-
 }
