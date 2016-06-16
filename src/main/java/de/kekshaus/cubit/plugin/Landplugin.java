@@ -53,13 +53,13 @@ public class Landplugin extends JavaPlugin {
 	}
 
 	private void setupManagers() {
-		yamlConfiguration = new YamlConfigurationManager(this);
-		landMrg = new RegionAPIManager(this);
-		blockMrg = new BlockAPIManager(this);
-		particleMrg = new ParticleAPIManager(this);
-		vaultMrg = new VaultAPIManager(this);
-		permNodes = new PermissionNodes();
-		databaseMrg = new DatabaseAPIManager(this);
+		this.yamlConfiguration = new YamlConfigurationManager(this);
+		this.landMrg = new RegionAPIManager(this);
+		this.blockMrg = new BlockAPIManager(this);
+		this.particleMrg = new ParticleAPIManager(this);
+		this.vaultMrg = new VaultAPIManager(this);
+		this.permNodes = new PermissionNodes();
+		this.databaseMrg = new DatabaseAPIManager(this);
 
 	}
 

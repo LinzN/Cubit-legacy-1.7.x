@@ -13,22 +13,33 @@ public class YamlFileSetup {
 	public LanguageYaml language;
 
 	public YamlFileSetup(JavaPlugin plugin) {
-		File configDirectory = new File(plugin.getDataFolder(), "flatfile");
-		if (!configDirectory.exists()) {
-			configDirectory.mkdir();
+		File flatfileDirectory = new File(plugin.getDataFolder().getAbsolutePath() + "/flatfiles");
+		if (!flatfileDirectory.exists()) {
+			boolean setting = flatfileDirectory.mkdir();
+			if (setting) {
+				System.out.println("Created flatfile directory");
+			} else {
+				System.out.println("Error while creating flatfile directory");
+			}
 		}
 
-		File languageDirectory = new File(plugin.getDataFolder(), "languages");
+		File languageDirectory = new File(plugin.getDataFolder().getAbsolutePath() + "/languages");
 		if (!languageDirectory.exists()) {
-			languageDirectory.mkdir();
+			boolean language = languageDirectory.mkdir();
+			if (language) {
+				System.out.println("Created languages directory");
+			} else {
+				System.out.println("Error while creating languages directory");
+			}
 		}
-
-		/* Configs */
-		CustomConfig settingsConfig = new CustomConfig(plugin, plugin.getDataFolder(), "settings.yml");
-		this.settings = new SettingsYaml(settingsConfig);
 
 		CustomConfig languageConfig = new CustomConfig(plugin, languageDirectory, "language.yml");
 		this.language = new LanguageYaml(languageConfig);
+		languageConfig.saveAndReload();
+		/* Configs */
+		CustomConfig settingsConfig = new CustomConfig(plugin, plugin.getDataFolder(), "settings.yml");
+		this.settings = new SettingsYaml(settingsConfig);
+		settingsConfig.saveAndReload();
 
 	}
 }
