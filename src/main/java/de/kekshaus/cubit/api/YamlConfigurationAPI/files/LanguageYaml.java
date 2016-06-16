@@ -84,9 +84,11 @@ public class LanguageYaml {
 
 	public LanguageYaml(CustomConfig configFile) {
 		this.configFile = configFile;
+		setup();
+		this.configFile.saveAndReload();
 	}
 
-	public void setup() {
+	private void setup() {
 		/* Error MSG */
 		noConsoleMode = this.configFile.getLanguageString("noConsoleMode",
 				"§4Sorry this is not available in console mode!");

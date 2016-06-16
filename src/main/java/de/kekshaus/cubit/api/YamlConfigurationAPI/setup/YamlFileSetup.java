@@ -45,7 +45,6 @@ public class YamlFileSetup {
 
 		CustomConfig languageConfig = new CustomConfig(this.plugin, languageDirectory, "language.yml");
 		this.language = new LanguageYaml(languageConfig);
-		languageConfig.saveAndReload();
 		/* Configs */
 		CustomConfig settingsConfig = new CustomConfig(this.plugin, this.plugin.getDataFolder(), "settings.yml");
 		this.settings = new SettingsYaml(settingsConfig);
