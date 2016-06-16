@@ -28,7 +28,7 @@ public class CustomConfig extends YamlConfiguration {
 	 *            - Name of the defaults
 	 */
 	public CustomConfig(Plugin plugin, File directory, String fileName) {
-		this(plugin, directory, fileName, fileName);
+		this(plugin, directory, fileName, null);
 	}
 
 	public CustomConfig(Plugin plugin, File directory, String fileName, String defaultsName) {
