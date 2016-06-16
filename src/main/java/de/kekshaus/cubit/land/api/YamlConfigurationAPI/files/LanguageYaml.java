@@ -134,61 +134,58 @@ public class LanguageYaml {
 
 		/* Land Info Page */
 		landInfoA1 = this.configFile.getLanguageString("theme.landinfo.empty",
-				"§2Dieses Grundstück [§e{regionID}§2] ist noch unbewohnt. \n§2Kaufe es mit §e/land buy §2für §e{cost}§2!");
+				"§2This region [§e{regionID}§2] is buyable. \n§2Buy it with §e/land buy§2. Price §e{cost}§2!");
 		landInfoA2 = this.configFile.getLanguageString("theme.landinfo.offered",
-				"§2Dieses Grundstück wird für §e{value}§2 angeboten. Gib §e/land takeoffer §2ein um es zu kaufen!");
-		landInfoE1 = this.configFile.getLanguageString("theme.landinfo.regionID", "§2Grundstück: §9{regionID}");
-		landInfoE1A1 = this.configFile.getLanguageString("theme.landinfo.guildInfo", "§2Gilde: §e{guild}");
-		landInfoE2 = this.configFile.getLanguageString("theme.landinfo.landOwner", "§2Besitzer: §9{owner}");
-		landInfoE3 = this.configFile.getLanguageString("theme.landinfo.landMember", "§2Mitgleider: §5{members}");
+				"§2This region is offered for §e{value}§2. Type §e/land takeoffer §2if you want to buy it!");
+		landInfoE1 = this.configFile.getLanguageString("theme.landinfo.regionID", "§2Region: §9{regionID}");
+		landInfoE1A1 = this.configFile.getLanguageString("theme.landinfo.guildInfo", "§2Guild: §e{guild}");
+		landInfoE2 = this.configFile.getLanguageString("theme.landinfo.landOwner", "§2Owner: §9{owner}");
+		landInfoE3 = this.configFile.getLanguageString("theme.landinfo.landMember", "§2Members: §5{members}");
 		landInfoE4 = this.configFile.getLanguageString("theme.landinfo.landArea",
-				"§2Grenzen: [§e{min}§2] bis [§e{max}§2]");
+				"§2Destination: From [§e{min}§2] to [§e{max}§2]");
 		landInfoE5 = this.configFile.getLanguageString("theme.landinfo.lastLogin", "§2Zuletzt online: §e{time}");
 		landInfoE6 = this.configFile.getLanguageString("theme.landinfo.flagPackets",
-				"§2Schutz-Systeme: {lock}, {monster}, {fire}, {pvp}, {tnt}");
+				"§2Security-Systems: {lock}, {monster}, {fire}, {pvp}, {tnt}");
 
 		/* Page 1 Help for Land Command */
 		landHelpE1P1 = this.configFile.getLanguageString("theme.helpPage1.header",
-				"§6<<<<<<<<<<<<<<<<<§2§l|GrundStück Hilfe|§6>>>>>>>>>>>>>>>>>");
+				"§6<<<<<<<<<<<<<<<<<§2§l|Region Help|§6>>>>>>>>>>>>>>>>>");
 		landHelpE2P1 = this.configFile.getLanguageString("theme.helpPage1.help1",
-				"§2 Infos zum Grundstück: §e/land info");
+				"§2 Region informations: §e/land info");
 		landHelpE3P1 = this.configFile.getLanguageString("theme.helpPage1.help2",
-				"§2 Liste deiner Grundstücke: §4/land list [SEITE]");
+				"§2 List all your regions: §4/land list [SEITE]");
 		landHelpE4P1 = this.configFile.getLanguageString("theme.helpPage1.help3",
-				"§6§lMehr Befehle auf den folgenden Seiten:");
+				"§6§lMore commands on the following pages:");
 		landHelpE5P1 = this.configFile.getLanguageString("theme.helpPage1.help4",
-				"§2 Seite 2: Kaufen - Verkaufen §a/land help 2");
+				"§2 Page 2: Buy - Sell §a/land help 2");
 		landHelpE6P1 = this.configFile.getLanguageString("theme.helpPage1.help5",
-				"§2 Seite 3: Mitspieler verwalten §a/land help 3");
+				"§2 Page 3: Manage Members §a/land help 3");
 		landHelpE7P1 = this.configFile.getLanguageString("theme.helpPage1.help6",
-				"§2 Seite 4: Grundstücks Einstellungen §a/land help 4");
+				"§2 Page 4: Region flags §a/land help 4");
 
 		/* Page 2 Help for Land Command */
 		landHelpE1P2 = this.configFile.getLanguageString("theme.helpPage2.header", "§6§lKaufen - Verkaufen: [Seite 2]");
-		landHelpE2P2 = this.configFile.getLanguageString("theme.helpPage2.help1",
-				"§2 Grundstück erwerben: §e/land buy");
-		landHelpE3P2 = this.configFile.getLanguageString("theme.helpPage2.help2",
-				"§2 Grundstück verkaufen: §e/land sell");
+		landHelpE2P2 = this.configFile.getLanguageString("theme.helpPage2.help1", "§2 Buy a region: §e/land buy");
+		landHelpE3P2 = this.configFile.getLanguageString("theme.helpPage2.help2", "§2 Sell a region: §e/land sell");
 		landHelpE4P2 = this.configFile.getLanguageString("theme.helpPage2.help3",
-				"§2 Angebotenes Grundstück abkaufen: §4/land takeoffer");
+				"§2 Take a offered region: §4/land takeoffer");
 		landHelpE5P2 = this.configFile.getLanguageString("theme.helpPage2.help4",
-				"§2 Grundstück anbieten: §4/land offer [Preis]");
+				"§2 Offer a region: §4/land offer [Preis]");
 		landHelpE6P2 = this.configFile.getLanguageString("theme.helpPage2.help5",
-				"§2 Inaktives Grundstück aufkaufen: §4/land buyup");
+				"§2 Buyup outdated regions: §4/land buyup");
 		landHelpE7P2 = this.configFile.getLanguageString("theme.helpPage2.help6",
-				"§a§lMehr auf Seite 3 mit §6/land help 3");
+				"§a§lMore on page 3 with §6/land help 3");
 
 		/* Page 3 Help for Land Command */
-		landHelpE1P3 = this.configFile.getLanguageString("theme.helpPage3.header",
-				"§6§lMitspieler verwalten: [Seite 3]");
+		landHelpE1P3 = this.configFile.getLanguageString("theme.helpPage3.header", "§6§lManage Members: [Seite 3]");
 		landHelpE2P3 = this.configFile.getLanguageString("theme.helpPage3.help1",
-				"§2 Mitspieler Bau-Rechte erlauben: §e/land add [Mitspieler]");
+				"§2 Set player build-rights : §e/land add [playername]");
 		landHelpE3P3 = this.configFile.getLanguageString("theme.helpPage3.help2",
-				"§2 Mitspieler Bau-Rechte entfernen: §e/land remove [Mitspieler]");
+				"§2 Unset player build-rights: §e/land remove [playername]");
 		landHelpE4P3 = this.configFile.getLanguageString("theme.helpPage3.help3",
-				"§2 Mitspieler vom Grundstück entfernen: §4/land kick");
+				"§2 Kick non-members from a region (teleporting): §4/land kick");
 		landHelpE5P3 = this.configFile.getLanguageString("theme.helpPage3.help4",
-				"§a§lMehr auf Seite 4 mit §6/land help 4");
+				"§a§lMore on page 4 with §6/land help 4");
 
 		/* Page 4 Help for Land Command */
 		landHelpE1P4 = this.configFile.getLanguageString("theme.helpPage4.header", "§6§lRegion Protection: [Seite 4]");
