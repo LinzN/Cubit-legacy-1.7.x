@@ -13,23 +13,31 @@ public class YamlFileSetup {
 	public LanguageYaml language;
 
 	public YamlFileSetup(JavaPlugin plugin) {
-		File flatfileDirectory = new File(plugin.getDataFolder().getAbsolutePath() + "/flatfiles");
+		File flatfileDirectory = new File(plugin.getDataFolder(), "flatfiles");
 		if (!flatfileDirectory.exists()) {
-			boolean setting = flatfileDirectory.mkdir();
-			if (setting) {
-				System.out.println("Created flatfile directory");
-			} else {
-				System.out.println("Error while creating flatfile directory");
+			try {
+				boolean setting = flatfileDirectory.mkdir();
+				if (setting) {
+					System.out.println("Created flatfile directory");
+				} else {
+					System.out.println("Error while creating flatfile directory");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 
-		File languageDirectory = new File(plugin.getDataFolder().getAbsolutePath() + "/languages");
+		File languageDirectory = new File(plugin.getDataFolder(), "languages");
 		if (!languageDirectory.exists()) {
-			boolean language = languageDirectory.mkdir();
-			if (language) {
-				System.out.println("Created languages directory");
-			} else {
-				System.out.println("Error while creating languages directory");
+			try {
+				boolean language = languageDirectory.mkdir();
+				if (language) {
+					System.out.println("Created languages directory");
+				} else {
+					System.out.println("Error while creating languages directory");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 
