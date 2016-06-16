@@ -142,7 +142,7 @@ public class LanguageYaml {
 		landInfoE2 = this.configFile.getLanguageString("theme.landinfo.landOwner", "§2Owner: §9{owner}");
 		landInfoE3 = this.configFile.getLanguageString("theme.landinfo.landMember", "§2Members: §5{members}");
 		landInfoE4 = this.configFile.getLanguageString("theme.landinfo.landArea",
-				"§2Destination: From [§e{min}§2] to [§e{max}§2]");
+				"§2Area-corner: From [§e{min}§2] to [§e{max}§2]");
 		landInfoE5 = this.configFile.getLanguageString("theme.landinfo.lastLogin", "§2Zuletzt online: §e{time}");
 		landInfoE6 = this.configFile.getLanguageString("theme.landinfo.flagPackets",
 				"§2Security-Systems: {lock}, {monster}, {fire}, {pvp}, {tnt}");
@@ -164,7 +164,7 @@ public class LanguageYaml {
 				"§2 Page 4: Region flags §a/land help 4");
 
 		/* Page 2 Help for Land Command */
-		landHelpE1P2 = this.configFile.getLanguageString("theme.helpPage2.header", "§6§lKaufen - Verkaufen: [Seite 2]");
+		landHelpE1P2 = this.configFile.getLanguageString("theme.helpPage2.header", "§6§lBuy - Sell: [Page 2]");
 		landHelpE2P2 = this.configFile.getLanguageString("theme.helpPage2.help1", "§2 Buy a region: §e/land buy");
 		landHelpE3P2 = this.configFile.getLanguageString("theme.helpPage2.help2", "§2 Sell a region: §e/land sell");
 		landHelpE4P2 = this.configFile.getLanguageString("theme.helpPage2.help3",
@@ -177,7 +177,7 @@ public class LanguageYaml {
 				"§a§lMore on page 3 with §6/land help 3");
 
 		/* Page 3 Help for Land Command */
-		landHelpE1P3 = this.configFile.getLanguageString("theme.helpPage3.header", "§6§lManage Members: [Seite 3]");
+		landHelpE1P3 = this.configFile.getLanguageString("theme.helpPage3.header", "§6§lManage Members: [Page 3]");
 		landHelpE2P3 = this.configFile.getLanguageString("theme.helpPage3.help1",
 				"§2 Set player build-rights : §e/land add [playername]");
 		landHelpE3P3 = this.configFile.getLanguageString("theme.helpPage3.help2",
@@ -188,7 +188,8 @@ public class LanguageYaml {
 				"§a§lMore on page 4 with §6/land help 4");
 
 		/* Page 4 Help for Land Command */
-		landHelpE1P4 = this.configFile.getLanguageString("theme.helpPage4.header", "§6§lRegion Protection: [Seite 4]");
+		landHelpE1P4 = this.configFile.getLanguageString("theme.helpPage4.header",
+				"§6§lRegion Protection-systems: [Page 4]");
 		landHelpE2P4 = this.configFile.getLanguageString("theme.helpPage4.help1",
 				"§2 Fire Protection: §e/land fire (§aON§e/§cOFF§e)");
 		landHelpE3P4 = this.configFile.getLanguageString("theme.helpPage4.help2",
