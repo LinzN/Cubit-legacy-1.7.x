@@ -22,9 +22,9 @@ public class YamlFileSetup {
 			try {
 				boolean setting = flatfileDirectory.mkdirs();
 				if (setting) {
-					System.out.println("Created flatfile directory");
+					this.plugin.getLogger().info("Created flatfile directory");
 				} else {
-					System.out.println("Error while creating flatfile directory");
+					this.plugin.getLogger().severe("Error while creating flatfile directory");
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -36,9 +36,9 @@ public class YamlFileSetup {
 			try {
 				boolean language = languageDirectory.mkdirs();
 				if (language) {
-					System.out.println("Created languages directory");
+					this.plugin.getLogger().info("Created languages directory");
 				} else {
-					System.out.println("Error while creating languages directory");
+					this.plugin.getLogger().severe("Error while creating languages directory");
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -74,4 +74,7 @@ public class SettingsYaml {
 
 	}
 
+	public CustomConfig getFile() {
+		return this.configFile;
+	}
 }

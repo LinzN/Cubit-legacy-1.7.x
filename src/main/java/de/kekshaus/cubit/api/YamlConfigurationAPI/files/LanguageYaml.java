@@ -198,4 +198,8 @@ public class LanguageYaml {
 		return this.configFile.getString(path).replace("&", "§");
 
 	}
+
+	public CustomConfig getFile() {
+		return this.configFile;
+	}
 }

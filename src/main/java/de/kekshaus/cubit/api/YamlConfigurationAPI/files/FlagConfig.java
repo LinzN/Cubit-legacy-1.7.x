@@ -25,4 +25,8 @@ public class FlagConfig {
 
 	}
 
+	public CustomConfig getFile() {
+		return this.configFile;
+	}
+
 }
