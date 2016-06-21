@@ -43,10 +43,13 @@ public class LimitYaml {
 		prevent_creature_spawns = (boolean) this.getObjectValue("properties.prevent-creature-spawns", true);
 		plugin_debug = (boolean) this.getObjectValue("properties.debug-messages", true);
 
-		ignore_metadata = (List<String>) this.getObjectValue("properties.ignore-metadata",
-				new ArrayList<String>().add("shopkeeper"));
-		excluded_worlds = (List<String>) this.getObjectValue("excluded-worlds",
-				new ArrayList<String>().add("world_nether"));
+		List<String> meta = new ArrayList<String>();
+		meta.add("shopkeeper");
+		ignore_metadata = (List<String>) this.getStringList("properties.ignore-metadata", meta);
+
+		List<String> worlds = new ArrayList<String>();
+		worlds.add("world_nether");
+		excluded_worlds = (List<String>) this.getStringList("excluded-worlds", worlds);
 
 		for (SpawnReason reason : SpawnReason.values()) {
 			if (!this.configFile.contains(spawnreason + "." + reason.toString())) {
@@ -72,6 +75,14 @@ public class LimitYaml {
 			this.configFile.set(path, defaultValue);
 		}
 		return this.configFile.get(path);
+
+	}
+
+	public Object getStringList(String path, List<String> list) {
+		if (!this.configFile.contains(path)) {
+			this.configFile.set(path, list);
+		}
+		return this.configFile.getStringList(path);
 
 	}
 
