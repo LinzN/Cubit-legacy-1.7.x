@@ -27,6 +27,8 @@ public class SettingsYaml {
 
 	public boolean entityLimiterUse;
 
+	public boolean physicWaterLavaFlowLand;
+
 	/* Database module */
 	public boolean sqlUse;
 	public boolean sqlUseXeonSuiteSameDatabase;
@@ -68,6 +70,8 @@ public class SettingsYaml {
 		this.sqlPassword = (String) getObjectValue("module.database.password", "mysqlPassword");
 
 		this.entityLimiterUse = (boolean) getObjectValue("module.entityLimiter.use", false);
+
+		this.physicWaterLavaFlowLand = (boolean) getObjectValue("module.physicWaterLavaFlowLand.use", false);
 
 	}
 

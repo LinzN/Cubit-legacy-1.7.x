@@ -41,13 +41,16 @@ public class Landplugin extends JavaPlugin {
 		}
 		setupManagers();
 		this.getServer().getPluginManager().registerEvents(new LoginListener(), this);
-		this.getServer().getPluginManager().registerEvents(new AdditionalPhysicsListener(), this);
+
 		if (!this.databaseMrg.link()) {
 			this.setEnabled(false);
 		}
 		new SetupCommands(this);
 		if (this.getYamlManager().getSettings().entityLimiterUse) {
 			new EntityLimiter(this);
+		}
+		if (this.getYamlManager().getSettings().physicWaterLavaFlowLand) {
+			this.getServer().getPluginManager().registerEvents(new AdditionalPhysicsListener(), this);
 		}
 
 	}
