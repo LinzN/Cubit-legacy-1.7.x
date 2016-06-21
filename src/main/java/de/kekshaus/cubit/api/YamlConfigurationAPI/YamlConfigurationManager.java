@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import de.kekshaus.cubit.api.YamlConfigurationAPI.files.FlatfileYaml;
 import de.kekshaus.cubit.api.YamlConfigurationAPI.files.LanguageYaml;
+import de.kekshaus.cubit.api.YamlConfigurationAPI.files.LimitYaml;
 import de.kekshaus.cubit.api.YamlConfigurationAPI.files.SettingsYaml;
 import de.kekshaus.cubit.api.YamlConfigurationAPI.setup.YamlFileSetup;
 
@@ -28,6 +29,10 @@ public class YamlConfigurationManager {
 
 	public FlatfileYaml getFlatfile() {
 		return this.fileOperator.flatFileDatabase;
+	}
+
+	public LimitYaml getLimit() {
+		return this.fileOperator.limit;
 	}
 
 }

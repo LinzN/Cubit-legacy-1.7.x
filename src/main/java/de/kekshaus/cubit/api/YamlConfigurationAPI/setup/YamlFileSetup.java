@@ -6,12 +6,14 @@ import org.bukkit.plugin.Plugin;
 
 import de.kekshaus.cubit.api.YamlConfigurationAPI.files.FlatfileYaml;
 import de.kekshaus.cubit.api.YamlConfigurationAPI.files.LanguageYaml;
+import de.kekshaus.cubit.api.YamlConfigurationAPI.files.LimitYaml;
 import de.kekshaus.cubit.api.YamlConfigurationAPI.files.SettingsYaml;
 
 public class YamlFileSetup {
 
 	public SettingsYaml settings;
 	public LanguageYaml language;
+	public LimitYaml limit;
 	public FlatfileYaml flatFileDatabase;
 	private Plugin plugin;
 
@@ -25,6 +27,20 @@ public class YamlFileSetup {
 					this.plugin.getLogger().info("Created flatfile directory");
 				} else {
 					this.plugin.getLogger().severe("Error while creating flatfile directory");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		File configDirectory = new File(this.plugin.getDataFolder(), "configs");
+		if (!configDirectory.exists()) {
+			try {
+				boolean limits = configDirectory.mkdirs();
+				if (limits) {
+					this.plugin.getLogger().info("Created config directory");
+				} else {
+					this.plugin.getLogger().severe("Error while creating config directory");
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -51,6 +67,10 @@ public class YamlFileSetup {
 		CustomConfig flatfileConfig = new CustomConfig(this.plugin, flatfileDirectory, "database.yml");
 		this.flatFileDatabase = new FlatfileYaml(flatfileConfig);
 		/* Configs */
+
+		CustomConfig limitConfig = new CustomConfig(this.plugin, configDirectory, "database.yml");
+		this.limit = new LimitYaml(limitConfig);
+
 		CustomConfig settingsConfig = new CustomConfig(this.plugin, this.plugin.getDataFolder(), "settings.yml");
 		this.settings = new SettingsYaml(settingsConfig);
 		settingsConfig.saveAndReload();

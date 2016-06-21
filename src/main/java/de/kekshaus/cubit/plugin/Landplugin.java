@@ -13,6 +13,7 @@ import de.kekshaus.cubit.api.particleAPI.ParticleAPIManager;
 import de.kekshaus.cubit.api.regionAPI.RegionAPIManager;
 import de.kekshaus.cubit.api.vaultAPI.VaultAPIManager;
 import de.kekshaus.cubit.commandSuite.SetupCommands;
+import de.kekshaus.cubit.plugin.entityLimiter.EntityLimiter;
 import de.kekshaus.cubit.plugin.listener.AdditionalPhysicsListener;
 import de.kekshaus.cubit.plugin.listener.LoginListener;
 
@@ -45,6 +46,10 @@ public class Landplugin extends JavaPlugin {
 			this.setEnabled(false);
 		}
 		new SetupCommands(this);
+		if (this.getYamlManager().getSettings().entityLimiterUse) {
+			new EntityLimiter(this);
+		}
+
 	}
 
 	@Override
