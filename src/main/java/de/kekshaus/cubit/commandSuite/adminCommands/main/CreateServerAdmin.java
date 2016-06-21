@@ -39,7 +39,7 @@ public class CreateServerAdmin implements ILandCmd {
 
 		final Location loc = player.getLocation();
 		final Chunk chunk = loc.getChunk();
-		final String regionID = plugin.getLandManager().buildLandName(loc.getWorld().getName(), chunk.getX(),
+		final String regionID = plugin.getLandManager().buildLandName(LandTypes.SERVER.toString(), chunk.getX(),
 				chunk.getZ());
 
 		/* Check if this is a valid buyTask */

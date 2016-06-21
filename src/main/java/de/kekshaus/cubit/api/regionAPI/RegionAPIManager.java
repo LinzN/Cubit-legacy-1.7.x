@@ -49,9 +49,9 @@ public class RegionAPIManager {
 	public boolean isLand(final World world, final int valueX, final int valueZ) {
 
 		RegionManager manager = plugin.getWorldGuardPlugin().getRegionManager(world);
-		String serverName = buildLandName(LandTypes.SERVER.toString(), valueX, valueZ);
-		String shopName = buildLandName(LandTypes.SHOP.toString(), valueX, valueZ);
-		String worldName = buildLandName(world.getName(), valueX, valueZ);
+		String serverName = buildLandName(LandTypes.SERVER.toString().toLowerCase(), valueX, valueZ);
+		String shopName = buildLandName(LandTypes.SHOP.toString().toLowerCase(), valueX, valueZ);
+		String worldName = buildLandName(world.getName().toLowerCase(), valueX, valueZ);
 		if (manager.hasRegion(serverName)) {
 			return true;
 		} else if (manager.hasRegion(shopName)) {
