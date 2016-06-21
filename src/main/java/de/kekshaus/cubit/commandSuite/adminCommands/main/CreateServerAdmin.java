@@ -48,7 +48,7 @@ public class CreateServerAdmin implements ILandCmd {
 			return true;
 		}
 
-		if (!plugin.getLandManager().createLand(loc, player.getUniqueId(), LandTypes.SERVER)) {
+		if (!plugin.getLandManager().createLand(loc, null, LandTypes.SERVER)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-REGION"));
 			plugin.getLogger()

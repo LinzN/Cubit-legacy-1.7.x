@@ -28,10 +28,9 @@ public class ManageRegions {
 		min = new Vector(min2D.getBlockX(), 0, min2D.getBlockZ());
 		max = min.add(15, world.getMaxHeight(), 15);
 
-		OfflinePlayer player = Bukkit.getOfflinePlayer(playerUUID);
-
 		ProtectedRegion region = new ProtectedCuboidRegion(regionName, min.toBlockVector(), max.toBlockVector());
 		if (playerUUID != null) {
+			OfflinePlayer player = Bukkit.getOfflinePlayer(playerUUID);
 			LocalPlayer localplayer = Landplugin.inst().getWorldGuardPlugin().wrapOfflinePlayer(player);
 			DefaultDomain domain = new DefaultDomain();
 			domain.addPlayer(localplayer);
