@@ -54,8 +54,7 @@ public class WorldListener implements Listener {
 
 			chunkTasks.put(event.getChunk(), task);
 		} else if (Landplugin.inst().getYamlManager().getLimit().check_chunk_load) {
-			// Active inspection will check immediately as well, no need to
-			// check twice
+
 			mrg.checkChunk(event.getChunk(), null);
 		}
 	}

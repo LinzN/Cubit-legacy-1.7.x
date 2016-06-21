@@ -1,4 +1,4 @@
-package de.kekshaus.cubit.commandSuite.landCommands.main;
+package de.kekshaus.cubit.commandSuite.adminCommands.main;
 
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -10,16 +10,14 @@ import de.kekshaus.cubit.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.commandSuite.ILandCmd;
 import de.kekshaus.cubit.plugin.Landplugin;
 
-public class SellLand implements ILandCmd {
+public class DeleteServerAdmin implements ILandCmd {
 
 	private Landplugin plugin;
 	private String permNode;
-	private boolean isAdmin;
 
-	public SellLand(Landplugin plugin, boolean isAdmin, String permNode) {
+	public DeleteServerAdmin(Landplugin plugin, String permNode) {
 		this.plugin = plugin;
 		this.permNode = permNode;
-		this.isAdmin = isAdmin;
 
 	}
 
@@ -52,26 +50,9 @@ public class SellLand implements ILandCmd {
 		RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 		final String regionID = regionData.getRegionName();
 
-		if (regionData.getLandType() != LandTypes.WORLD) {
+		if (regionData.getLandType() != LandTypes.SERVER) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}",
-					LandTypes.WORLD.toString()));
-			return true;
-		}
-
-		if (!plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId()) && this.isAdmin == false) {
-			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
-					regionData.getRegionName()));
-			return true;
-		}
-
-		double economyValue = Landplugin.inst().getVaultManager().calculateLandCost(player.getUniqueId(),
-				loc.getWorld(), false);
-
-		if (!plugin.getVaultManager().transferMoney(null, regionData.getOwnerUUID(), economyValue)) {
-			/* If this task failed! This should never happen */
-			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-ECONOMY"));
-			plugin.getLogger()
-					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-ECONOMY"));
+					LandTypes.SERVER.toString()));
 			return true;
 		}
 

@@ -35,16 +35,12 @@ public class EntityLimiter {
 
 	public void loadLimiter() {
 
-		// Register our event listeners.
 		if (Landplugin.inst().getYamlManager().getLimit().watch_creature_spawns) {
-			// Only register events once in the event of a config reload.
 			if (entityListener == null) {
 				entityListener = new EntityListener(this);
 				this.plugin.getServer().getPluginManager().registerEvents(entityListener, this.plugin);
 			}
 		} else if (entityListener != null) {
-			// Disable listeners that are not enabled when configuration is
-			// reloaded.
 			HandlerList.unregisterAll(entityListener);
 			entityListener = null;
 		}
@@ -61,12 +57,8 @@ public class EntityLimiter {
 			worldListener = null;
 		}
 
-		// Warn if no listeners are enabled.
 		if (entityListener == null && worldListener == null) {
-			this.plugin.getLogger().severe("No listeners are enabled, the plugin will do nothing!");
-			this.plugin.getLogger()
-					.severe("Enable creature spawn monitoring, active inspections, or chunk load inspections.");
-			this.plugin.getLogger().severe("Edit your configuration and then run '/csl reload'");
+			this.plugin.getLogger().severe("No spawnreasons are enabled, the entityLimiter will do nothing!");
 		}
 
 		ignoreMetadata = Landplugin.inst().getYamlManager().getLimit().ignore_metadata;
@@ -75,13 +67,13 @@ public class EntityLimiter {
 	}
 
 	public boolean checkChunk(Chunk chunk, Entity entity) {
-		// Stop processing quickly if this world is excluded from limits.
+
 		if (excludedWorlds.contains(chunk.getWorld().getName())) {
 			return false;
 		}
 
 		if (entity != null) {
-			// Quick return conditions for cancelling new spawns
+
 			if (entity instanceof HumanEntity) {
 				return false;
 			}
@@ -98,14 +90,10 @@ public class EntityLimiter {
 
 		nextChunkEntity: for (int i = entities.length - 1; i >= 0; i--) {
 			Entity chunkEntity = entities[i];
-			// Don't include HumanEntities in our summed list at all.
-			// They're either Players or plugin-added and we probably shouldn't
-			// touch them.
 			if (chunkEntity instanceof HumanEntity) {
 				continue;
 			}
 
-			// Ignore any Entity with listed metadata.
 			for (String metadata : ignoreMetadata) {
 				if (chunkEntity.hasMetadata(metadata)) {
 					continue nextChunkEntity;
@@ -198,40 +186,30 @@ public class EntityLimiter {
 
 	public void debug(String mess) {
 		if (Landplugin.inst().getYamlManager().getLimit().plugin_debug) {
-			this.plugin.getLogger().info("[Debug] " + mess);
+			this.plugin.getLogger().info("debug: " + mess);
 		}
 	}
 
 	public static String getMobGroup(Entity entity) {
-		// Determine the general group this mob belongs to.
 		if (entity instanceof Animals) {
-			// Chicken, Cow, MushroomCow, Ocelot, Pig, Sheep, Wolf
 			return "ANIMAL";
 		}
 
 		if (entity instanceof Monster) {
-			// Blaze, CaveSpider, Creeper, Enderman, Giant, PigZombie,
-			// Silverfish, Skeleton, Spider,
-			// Witch, Wither, Zombie
 			return "MONSTER";
 		}
 
 		if (entity instanceof Ambient) {
-			// Bat
 			return "AMBIENT";
 		}
 
 		if (entity instanceof WaterMob) {
-			// Squid
 			return "WATER_MOB";
 		}
 
 		if (entity instanceof NPC) {
-			// Villager
 			return "NPC";
 		}
-
-		// Anything else.
 		return "OTHER";
 	}
 

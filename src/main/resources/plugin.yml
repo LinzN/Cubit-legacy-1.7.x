@@ -15,3 +15,123 @@ commands:
   ladmin:
     description: Admin Command
     aliases: [sadmin, shopadmin, landadmin]
+permissions:
+    cubit.user:
+        description: User main permissions
+        children:
+            cubit.command.user.land: true
+    cubit.admin:
+        description: Admin main permissions
+        children:
+            cubit.command.admin.land: true
+            cubit.bypass.kick: true
+    cubit.command.user.land:
+        description:  User command permissions
+        children:
+            cubit.command.land.info: true
+            cubit.command.land.buy: true
+            cubit.command.land.sell: true
+            cubit.command.land.help: true
+            cubit.command.land.addmember: true
+            cubit.command.land.removemember: true
+            cubit.command.land.offer: true
+            cubit.command.land.takeoffer: true
+            cubit.command.land.kick: true
+            cubit.command.land.flag.pvp: true
+            cubit.command.land.flag.fire: true
+            cubit.command.land.flag.lock: true
+            cubit.command.land.flag.tnt: true
+            cubit.command.land.flag.monster: true
+    cubit.command.admin.land:
+        description: Admin command permissions
+        children:
+            cubit.command.user.land: true
+            cubit.command.admin.sell: true
+            cubit.command.admin.addmember: true
+            cubit.command.admin.removemember: true
+            cubit.command.admin.offer: true
+            cubit.command.admin.createserver: true
+            cubit.command.admin.deleteserver: true
+            cubit.command.admin.flag.pvp: true
+            cubit.command.admin.flag.fire: true
+            cubit.command.admin.flag.lock: true
+            cubit.command.admin.flag.tnt: true
+            cubit.command.admin.flag.monster: true
+    cubit.command.land.info:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.land.buy:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.land.sell:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.land.help:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.land.addmember:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.land.removemember:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.land.offer:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.land.takeoffer:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.land.kick:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.land.flag.pvp:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.land.flag.fire:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.land.flag.lock:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.land.flag.tnt:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.land.flag.monster:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.admin.sell:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.admin.addmember:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.admin.removemember:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.admin.offer:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.admin.createserver:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.admin.deleteserver:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.admin.flag.pvp:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.admin.flag.fire:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.admin.flag.lock:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.admin.flag.tnt:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.admin.flag.monster:
+        description: Haupt-Hilfeseite
+        default: op
+     cubit.bypass.kick:
+        description: Haupt-Hilfeseite
+        default: op

@@ -29,6 +29,7 @@ public class LanguageYaml {
 	public String kickInfo;
 	/* UnSuccess MSG */
 	public String buyIsAlreadyLand;
+	public String isAlreadyLand;
 	public String notEnoughMoney;
 	public String takeOwnLand;
 	public String notOffered;
@@ -122,6 +123,8 @@ public class LanguageYaml {
 		/* UnSuccess MSG */
 		buyIsAlreadyLand = this.getLanguageString("buyIsAlreadyLand",
 				"§cSorry. This region is already §e{regionID}§c bought by someone!");
+
+		isAlreadyLand = this.getLanguageString("isAlreadyLand", "§cHere is already the region §e{regionID}§c!");
 		notEnoughMoney = this.getLanguageString("notEnoughMoney", "§cYou can not afford it. Price: §e{cost}§c!");
 		takeOwnLand = this.getLanguageString("takeOwnLand", "§cYou can not buy your own region!");
 		notOffered = this.getLanguageString("notOffered", "§cThe region {regionID} is not offered!");

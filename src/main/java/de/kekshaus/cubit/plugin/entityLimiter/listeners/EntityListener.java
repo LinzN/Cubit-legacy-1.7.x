@@ -33,8 +33,6 @@ public class EntityListener implements Listener {
 			if (plugin.checkChunk(chunk, event.getEntity())) {
 				event.setCancelled(true);
 			}
-			// If we are preventing new spawns instead of culling, don't cull
-			// surrounding chunks.
 			return;
 		}
 
@@ -46,7 +44,6 @@ public class EntityListener implements Listener {
 		World w = event.getLocation().getWorld();
 		for (; x < endX; x++) {
 			for (; z < endZ; z++) {
-				// Logger.debug("Checking chunk " + x + " " +z);
 				if (!w.isChunkLoaded(x, z)) {
 					continue;
 				}
