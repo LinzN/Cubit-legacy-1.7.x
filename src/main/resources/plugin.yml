@@ -132,6 +132,6 @@ permissions:
     cubit.command.admin.flag.monster:
         description: Haupt-Hilfeseite
         default: op
-     cubit.bypass.kick:
+    cubit.bypass.kick:
         description: Haupt-Hilfeseite
         default: op
