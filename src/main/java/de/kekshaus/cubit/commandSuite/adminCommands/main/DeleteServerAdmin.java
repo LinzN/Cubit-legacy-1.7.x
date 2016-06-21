@@ -64,23 +64,6 @@ public class DeleteServerAdmin implements ILandCmd {
 			return true;
 		}
 
-		if (!plugin.getBlockManager().placeLandBorder(chunk,
-				Landplugin.inst().getYamlManager().getSettings().landSellMaterialBorder)) {
-			/* If this task failed! This should never happen */
-			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-BLOCK"));
-			plugin.getLogger()
-					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-BLOCK"));
-			return true;
-		}
-		if (!plugin.getDatabaseManager().removeOfferData(regionData.getRegionName(), loc.getWorld())) {
-			/* If this task failed! This should never happen */
-			sender.sendMessage(
-					plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "TAKEOFFER-REMOVEOFFER"));
-			plugin.getLogger().warning(
-					plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "TAKEOFFER-REMOVEOFFER"));
-			return true;
-		}
-
 		if (!plugin.getParticleManager().sendSell(player, loc)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-PARTICLE"));
