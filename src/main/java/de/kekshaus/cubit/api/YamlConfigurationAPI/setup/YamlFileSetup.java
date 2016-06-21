@@ -68,7 +68,7 @@ public class YamlFileSetup {
 		this.flatFileDatabase = new FlatfileYaml(flatfileConfig);
 		/* Configs */
 
-		CustomConfig limitConfig = new CustomConfig(this.plugin, configDirectory, "database.yml");
+		CustomConfig limitConfig = new CustomConfig(this.plugin, configDirectory, "entityLimiter.yml");
 		this.limit = new LimitYaml(limitConfig);
 
 		CustomConfig settingsConfig = new CustomConfig(this.plugin, this.plugin.getDataFolder(), "settings.yml");

@@ -27,6 +27,8 @@ public class LimitYaml {
 
 	public LimitYaml(CustomConfig configFile) {
 		this.configFile = configFile;
+		setup();
+		this.configFile.saveAndReload();
 	}
 
 	@SuppressWarnings("unchecked")
