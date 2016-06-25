@@ -1,4 +1,4 @@
-package de.kekshaus.cubit.commandSuite.landCommands.main;
+package de.kekshaus.cubit.commandSuite.universalCommands.main;
 
 import java.util.UUID;
 
@@ -14,13 +14,13 @@ import de.kekshaus.cubit.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.commandSuite.ILandCmd;
 import de.kekshaus.cubit.plugin.Landplugin;
 
-public class RemoveMemberLand implements ILandCmd {
+public class RemoveMemberUniversal implements ILandCmd {
 
 	private Landplugin plugin;
 	private String permNode;
 	private boolean isAdmin;
 
-	public RemoveMemberLand(Landplugin plugin, boolean isAdmin, String permNode) {
+	public RemoveMemberUniversal(Landplugin plugin, boolean isAdmin, String permNode) {
 		this.plugin = plugin;
 		this.isAdmin = isAdmin;
 		this.permNode = permNode;
@@ -63,7 +63,7 @@ public class RemoveMemberLand implements ILandCmd {
 			return true;
 		}
 
-		if (regionData.getLandType() != LandTypes.WORLD) {
+		if (regionData.getLandType() != LandTypes.WORLD && regionData.getLandType() != LandTypes.SHOP) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}",
 					LandTypes.WORLD.toString()));
 			return true;

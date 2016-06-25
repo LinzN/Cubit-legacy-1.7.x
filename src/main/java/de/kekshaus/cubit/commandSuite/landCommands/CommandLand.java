@@ -12,16 +12,16 @@ import org.bukkit.command.CommandSender;
 import com.google.common.collect.Maps;
 
 import de.kekshaus.cubit.commandSuite.ILandCmd;
-import de.kekshaus.cubit.commandSuite.landCommands.main.AddMemberLand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.BuyLand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.FlagLand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.HelpLand;
-import de.kekshaus.cubit.commandSuite.landCommands.main.InfoLand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.KickLand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.OfferLand;
-import de.kekshaus.cubit.commandSuite.landCommands.main.RemoveMemberLand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.SellLand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.TakeOfferLand;
+import de.kekshaus.cubit.commandSuite.universalCommands.main.AddMemberUniversal;
+import de.kekshaus.cubit.commandSuite.universalCommands.main.InfoUniversal;
+import de.kekshaus.cubit.commandSuite.universalCommands.main.RemoveMemberUniversal;
 import de.kekshaus.cubit.plugin.Landplugin;
 import de.kekshaus.cubit.plugin.PermissionNodes;
 
@@ -70,15 +70,15 @@ public class CommandLand implements CommandExecutor {
 		try {
 			PermissionNodes perm = Landplugin.inst().getPermNodes();
 			/* GS Buy/Sell Commands */
-			this.cmdMap.put("info", new InfoLand(this.plugin, perm.infoLand));
+			this.cmdMap.put("info", new InfoUniversal(this.plugin, perm.infoLand));
 			this.cmdMap.put("help", new HelpLand(this.plugin, perm.helpLand));
 			this.cmdMap.put("buy", new BuyLand(this.plugin, perm.buyLand));
 			this.cmdMap.put("sell", new SellLand(this.plugin, false, perm.sellLand));
 			this.cmdMap.put("kaufen", new BuyLand(this.plugin, perm.buyLand));
 			this.cmdMap.put("verkaufen", new SellLand(this.plugin, false, perm.sellLand));
 
-			this.cmdMap.put("add", new AddMemberLand(this.plugin, false, perm.addMemberLand));
-			this.cmdMap.put("remove", new RemoveMemberLand(this.plugin, false, perm.removeMemberLand));
+			this.cmdMap.put("add", new AddMemberUniversal(this.plugin, false, perm.addMemberLand));
+			this.cmdMap.put("remove", new RemoveMemberUniversal(this.plugin, false, perm.removeMemberLand));
 
 			this.cmdMap.put("offer", new OfferLand(this.plugin, false, perm.offerLand));
 

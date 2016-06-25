@@ -1,4 +1,4 @@
-package de.kekshaus.cubit.commandSuite.landCommands.main;
+package de.kekshaus.cubit.commandSuite.universalCommands.main;
 
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -10,12 +10,12 @@ import de.kekshaus.cubit.commandSuite.ILandCmd;
 import de.kekshaus.cubit.plugin.Landplugin;
 import de.nlinz.xeonSuite.guild.objects.Guild;
 
-public class InfoLand implements ILandCmd {
+public class InfoUniversal implements ILandCmd {
 
 	private Landplugin plugin;
 	private String permNode;
 
-	public InfoLand(Landplugin plugin, String permNode) {
+	public InfoUniversal(Landplugin plugin, String permNode) {
 		this.plugin = plugin;
 		this.permNode = permNode;
 	}
