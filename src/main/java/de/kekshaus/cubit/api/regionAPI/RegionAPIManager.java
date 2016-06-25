@@ -13,6 +13,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import de.kekshaus.cubit.api.regionAPI.flags.FirePacket;
 import de.kekshaus.cubit.api.regionAPI.flags.LockPacket;
 import de.kekshaus.cubit.api.regionAPI.flags.MonsterPacket;
+import de.kekshaus.cubit.api.regionAPI.flags.PotionPacket;
 import de.kekshaus.cubit.api.regionAPI.flags.PvPPacket;
 import de.kekshaus.cubit.api.regionAPI.flags.TNTPacket;
 import de.kekshaus.cubit.api.regionAPI.region.LandTypes;
@@ -33,6 +34,7 @@ public class RegionAPIManager {
 	public MonsterPacket monsterPacket;
 	public PvPPacket pvpPacket;
 	public TNTPacket tntPacket;
+	public PotionPacket potionPacket;
 
 	public RegionAPIManager(Landplugin plugin) {
 		this.plugin = plugin;
@@ -44,6 +46,7 @@ public class RegionAPIManager {
 		this.monsterPacket = new MonsterPacket();
 		this.pvpPacket = new PvPPacket();
 		this.tntPacket = new TNTPacket();
+		this.potionPacket = new PotionPacket();
 	}
 
 	public boolean isLand(final World world, final int valueX, final int valueZ) {
@@ -88,6 +91,7 @@ public class RegionAPIManager {
 			regionData = this.pvpPacket.switchState(regionData, true, false);
 			regionData = this.tntPacket.switchState(regionData, true, false);
 			regionData = this.firePacket.switchState(regionData, true, false);
+			regionData = this.potionPacket.switchState(regionData, true, false);
 			saveMrg.save(regionData);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -109,6 +113,7 @@ public class RegionAPIManager {
 			regionData = this.pvpPacket.switchState(regionData, true);
 			regionData = this.tntPacket.switchState(regionData, true);
 			regionData = this.firePacket.switchState(regionData, true);
+			regionData = this.potionPacket.switchState(regionData, true);
 			saveMrg.save(regionData);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -130,6 +135,7 @@ public class RegionAPIManager {
 			regionData = this.pvpPacket.switchState(regionData, true);
 			regionData = this.tntPacket.switchState(regionData, true);
 			regionData = this.firePacket.switchState(regionData, true);
+			regionData = this.potionPacket.switchState(regionData, true);
 			saveMrg.save(regionData);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -153,7 +159,7 @@ public class RegionAPIManager {
 	public boolean addMember(final RegionData regionData, final World world, final UUID playerUUID) {
 		try {
 
-			List<RegionData> list = new ArrayList<RegionData>();
+			List<RegionData> list = new ArrayList<>();
 			list.add(regionData);
 			mRegE.addMember(list, world, playerUUID);
 			saveMrg.save(world);
@@ -167,7 +173,7 @@ public class RegionAPIManager {
 	public boolean removeMember(final RegionData regionData, final World world, final UUID playerUUID) {
 		try {
 
-			List<RegionData> list = new ArrayList<RegionData>();
+			List<RegionData> list = new ArrayList<>();
 			list.add(regionData);
 			mRegE.removeMember(list, world, playerUUID);
 			saveMrg.save(world);
@@ -181,7 +187,7 @@ public class RegionAPIManager {
 	public boolean changeLandOwner(final RegionData regionData, final World world, final UUID playerUUID) {
 		try {
 
-			List<RegionData> list = new ArrayList<RegionData>();
+			List<RegionData> list = new ArrayList<>();
 			list.add(regionData);
 			mRegE.clearMember(list, world);
 			mRegE.clearOwners(list, world);

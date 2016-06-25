@@ -88,6 +88,9 @@ public class InfoLand implements ILandCmd {
 		String statusMonster = plugin.getLandManager().monsterPacket.getStateColor(regionData)
 				+ plugin.getLandManager().monsterPacket.getPacketName();
 
+		String statusPotion = plugin.getLandManager().potionPacket.getStateColor(regionData)
+				+ plugin.getLandManager().potionPacket.getPacketName();
+
 		player.sendMessage(
 				plugin.getYamlManager().getLanguage().landInfoE1.replace("{regionID}", regionData.getRegionName()));
 
@@ -109,7 +112,7 @@ public class InfoLand implements ILandCmd {
 		player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE5.replace("{time}", formatedTime));
 		player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE6.replace("{lock}", statusLock)
 				.replace("{monster}", statusMonster).replace("{fire}", statusFire).replace("{pvp}", statusPvP)
-				.replace("{tnt}", statusTNT));
+				.replace("{tnt}", statusTNT).replace("{potion}", statusPotion));
 
 		if (plugin.getDatabaseManager().isOffered(regionData.getRegionName(), regionData.getWorld())) {
 			player.sendMessage(plugin.getYamlManager().getLanguage().landInfoA2.replace("{value}", "" + plugin

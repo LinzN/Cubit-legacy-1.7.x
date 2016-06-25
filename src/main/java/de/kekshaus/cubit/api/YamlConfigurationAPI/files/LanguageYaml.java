@@ -147,7 +147,7 @@ public class LanguageYaml {
 				"§2Area-corner: From [§e{min}§2] to [§e{max}§2]");
 		landInfoE5 = this.getLanguageString("theme.landinfo.lastLogin", "§2Last login: §e{time}");
 		landInfoE6 = this.getLanguageString("theme.landinfo.flagPackets",
-				"§2Security-Systems: {lock}, {monster}, {fire}, {pvp}, {tnt}");
+				"§2Security-Systems: {lock}, {monster}, {fire}, {pvp}, {tnt}, {potion}");
 
 		/* Page 1 Help for Land Command */
 		landHelpE1P1 = this.getLanguageString("theme.helpPage1.header",

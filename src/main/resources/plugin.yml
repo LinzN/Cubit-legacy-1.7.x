@@ -57,6 +57,7 @@ permissions:
             cubit.command.admin.flag.lock: true
             cubit.command.admin.flag.tnt: true
             cubit.command.admin.flag.monster: true
+            cubit.command.admin.flag.potion: true
     cubit.command.land.info:
         description: Haupt-Hilfeseite
         default: op
@@ -97,6 +98,9 @@ permissions:
         description: Haupt-Hilfeseite
         default: op
     cubit.command.land.flag.monster:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.land.flag.potion:
         description: Haupt-Hilfeseite
         default: op
     cubit.command.admin.sell:

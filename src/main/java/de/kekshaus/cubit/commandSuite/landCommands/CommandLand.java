@@ -96,6 +96,8 @@ public class CommandLand implements CommandExecutor {
 					perm.flagLand + "tnt"));
 			this.cmdMap.put("monster", new FlagLand(this.plugin, Landplugin.inst().getLandManager().monsterPacket,
 					false, perm.flagLand + "monster"));
+			this.cmdMap.put("potion", new FlagLand(this.plugin, Landplugin.inst().getLandManager().potionPacket, false,
+					perm.flagLand + "potion"));
 			this.isLoaded = true;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -9,25 +9,25 @@ import de.kekshaus.cubit.api.regionAPI.IPacket;
 import de.kekshaus.cubit.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.plugin.Landplugin;
 
-public class PvPPacket implements IPacket {
+public class PotionPacket implements IPacket {
 
 	@Override
 	public RegionData enablePacket(RegionData regionData) {
-		regionData.praseWGRegion().setFlag(DefaultFlag.PVP, StateFlag.State.DENY);
+		regionData.praseWGRegion().setFlag(DefaultFlag.POTION_SPLASH, StateFlag.State.DENY);
 		return regionData;
 
 	}
 
 	@Override
 	public RegionData disablePacket(RegionData regionData) {
-		regionData.praseWGRegion().setFlag(DefaultFlag.PVP, StateFlag.State.ALLOW);
+		regionData.praseWGRegion().setFlag(DefaultFlag.POTION_SPLASH, StateFlag.State.ALLOW);
 		return regionData;
 
 	}
 
 	@Override
 	public boolean getState(RegionData regionData) {
-		if (regionData.praseWGRegion().getFlag(DefaultFlag.PVP) == StateFlag.State.DENY) {
+		if (regionData.praseWGRegion().getFlag(DefaultFlag.POTION_SPLASH) == StateFlag.State.DENY) {
 			return true;
 		}
 		return false;
@@ -66,6 +66,6 @@ public class PvPPacket implements IPacket {
 
 	@Override
 	public String getPacketName() {
-		return "PVP";
+		return "POTION";
 	}
 }
