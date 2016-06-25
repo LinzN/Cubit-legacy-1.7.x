@@ -145,7 +145,7 @@ public class LanguageYaml {
 		landInfoE3 = this.getLanguageString("theme.landinfo.landMember", "§2Members: §5{members}");
 		landInfoE4 = this.getLanguageString("theme.landinfo.landArea",
 				"§2Area-corner: From [§e{min}§2] to [§e{max}§2]");
-		landInfoE5 = this.getLanguageString("theme.landinfo.lastLogin", "§2Zuletzt online: §e{time}");
+		landInfoE5 = this.getLanguageString("theme.landinfo.lastLogin", "§2Last login: §e{time}");
 		landInfoE6 = this.getLanguageString("theme.landinfo.flagPackets",
 				"§2Security-Systems: {lock}, {monster}, {fire}, {pvp}, {tnt}");
 
@@ -153,8 +153,7 @@ public class LanguageYaml {
 		landHelpE1P1 = this.getLanguageString("theme.helpPage1.header",
 				"§6<<<<<<<<<<<<<<<<<§2§l|Region Help|§6>>>>>>>>>>>>>>>>>");
 		landHelpE2P1 = this.getLanguageString("theme.helpPage1.help1", "§2 Region informations: §e/land info");
-		landHelpE3P1 = this.getLanguageString("theme.helpPage1.help2",
-				"§2 List all your regions: §4/land list [SEITE]");
+		landHelpE3P1 = this.getLanguageString("theme.helpPage1.help2", "§2 List all your regions: §4/land list [Page]");
 		landHelpE4P1 = this.getLanguageString("theme.helpPage1.help3", "§6§lMore commands on the following pages:");
 		landHelpE5P1 = this.getLanguageString("theme.helpPage1.help4", "§2 Page 2: Buy - Sell §a/land help 2");
 		landHelpE6P1 = this.getLanguageString("theme.helpPage1.help5", "§2 Page 3: Manage Members §a/land help 3");
