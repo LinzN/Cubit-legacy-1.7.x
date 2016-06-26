@@ -11,11 +11,12 @@ import org.bukkit.command.CommandSender;
 
 import com.google.common.collect.Maps;
 
+import de.kekshaus.cubit.api.regionAPI.region.LandTypes;
 import de.kekshaus.cubit.commandSuite.ILandCmd;
-import de.kekshaus.cubit.commandSuite.landCommands.main.KickLand;
 import de.kekshaus.cubit.commandSuite.shopCommands.main.CreateShop;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.AddMemberUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.InfoUniversal;
+import de.kekshaus.cubit.commandSuite.universalCommands.main.KickUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.RemoveMemberUniversal;
 import de.kekshaus.cubit.plugin.Landplugin;
 
@@ -65,9 +66,9 @@ public class CommandShop implements CommandExecutor {
 
 			this.cmdMap.put("info", new InfoUniversal(this.plugin, null));
 
-			this.cmdMap.put("add", new AddMemberUniversal(this.plugin, false, null));
-			this.cmdMap.put("remove", new RemoveMemberUniversal(this.plugin, false, null));
-			this.cmdMap.put("kick", new KickLand(this.plugin, null));
+			this.cmdMap.put("add", new AddMemberUniversal(this.plugin, null, LandTypes.SHOP, false));
+			this.cmdMap.put("remove", new RemoveMemberUniversal(this.plugin, null, LandTypes.SHOP, false));
+			this.cmdMap.put("kick", new KickUniversal(this.plugin, null, LandTypes.SHOP));
 			this.isLoaded = true;
 		} catch (Exception e) {
 			e.printStackTrace();

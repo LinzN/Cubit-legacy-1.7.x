@@ -16,9 +16,10 @@ public class SellLand implements ILandCmd {
 	private String permNode;
 	private boolean isAdmin;
 
-	public SellLand(Landplugin plugin, boolean isAdmin, String permNode) {
+	public SellLand(Landplugin plugin, String permNode, boolean isAdmin) {
 		this.plugin = plugin;
 		this.permNode = permNode;
+
 		this.isAdmin = isAdmin;
 
 	}

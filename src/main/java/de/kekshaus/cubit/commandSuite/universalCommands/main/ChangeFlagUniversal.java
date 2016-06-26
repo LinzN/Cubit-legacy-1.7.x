@@ -1,4 +1,4 @@
-package de.kekshaus.cubit.commandSuite.landCommands.main;
+package de.kekshaus.cubit.commandSuite.universalCommands.main;
 
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -11,18 +11,21 @@ import de.kekshaus.cubit.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.commandSuite.ILandCmd;
 import de.kekshaus.cubit.plugin.Landplugin;
 
-public class FlagLand implements ILandCmd {
+public class ChangeFlagUniversal implements ILandCmd {
 
 	private Landplugin plugin;
 	private IPacket packet;
 	private boolean isAdmin;
 	private String permNode;
+	private LandTypes type;
 
-	public FlagLand(Landplugin plugin, IPacket packet, boolean isAdmin, String permNode) {
+	public ChangeFlagUniversal(Landplugin plugin, IPacket packet, String permNode, LandTypes type, boolean isAdmin) {
 		this.plugin = plugin;
 		this.packet = packet;
 		this.isAdmin = isAdmin;
 		this.permNode = permNode;
+		this.type = type;
+
 	}
 
 	@Override
@@ -55,9 +58,9 @@ public class FlagLand implements ILandCmd {
 			return true;
 		}
 
-		if (regionData.getLandType() != LandTypes.WORLD) {
-			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}",
-					LandTypes.WORLD.toString()));
+		if (regionData.getLandType() != type) {
+			sender.sendMessage(
+					plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}", type.toString()));
 			return true;
 		}
 

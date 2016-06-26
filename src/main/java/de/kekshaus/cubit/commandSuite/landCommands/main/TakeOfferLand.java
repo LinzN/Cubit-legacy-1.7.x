@@ -20,6 +20,7 @@ public class TakeOfferLand implements ILandCmd {
 	public TakeOfferLand(Landplugin plugin, String permNode) {
 		this.plugin = plugin;
 		this.permNode = permNode;
+
 	}
 
 	@Override

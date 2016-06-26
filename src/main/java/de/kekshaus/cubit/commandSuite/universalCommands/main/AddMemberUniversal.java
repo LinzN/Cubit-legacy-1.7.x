@@ -18,12 +18,14 @@ public class AddMemberUniversal implements ILandCmd {
 
 	private Landplugin plugin;
 	private String permNode;
+	private LandTypes type;
 	private boolean isAdmin;
 
-	public AddMemberUniversal(Landplugin plugin, boolean isAdmin, String permNode) {
+	public AddMemberUniversal(Landplugin plugin, String permNode, LandTypes type, boolean isAdmin) {
 		this.plugin = plugin;
 		this.isAdmin = isAdmin;
 		this.permNode = permNode;
+		this.type = type;
 	}
 
 	@Override
@@ -62,9 +64,9 @@ public class AddMemberUniversal implements ILandCmd {
 			return true;
 		}
 
-		if (regionData.getLandType() != LandTypes.WORLD && regionData.getLandType() != LandTypes.SHOP) {
-			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}",
-					LandTypes.WORLD.toString()));
+		if (regionData.getLandType() != type) {
+			sender.sendMessage(
+					plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}", type.toString()));
 			return true;
 		}
 

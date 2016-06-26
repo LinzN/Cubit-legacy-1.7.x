@@ -1,4 +1,4 @@
-package de.kekshaus.cubit.commandSuite.landCommands.main;
+package de.kekshaus.cubit.commandSuite.universalCommands.main;
 
 import java.util.HashSet;
 import java.util.UUID;
@@ -15,14 +15,16 @@ import de.kekshaus.cubit.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.commandSuite.ILandCmd;
 import de.kekshaus.cubit.plugin.Landplugin;
 
-public class KickLand implements ILandCmd {
+public class KickUniversal implements ILandCmd {
 
 	private Landplugin plugin;
 	private String permNode;
+	private LandTypes type;
 
-	public KickLand(Landplugin plugin, String permNode) {
+	public KickUniversal(Landplugin plugin, String permNode, LandTypes type) {
 		this.plugin = plugin;
 		this.permNode = permNode;
+		this.type = type;
 	}
 
 	@Override
@@ -56,9 +58,9 @@ public class KickLand implements ILandCmd {
 			return true;
 		}
 
-		if (regionData.getLandType() != LandTypes.WORLD) {
-			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}",
-					LandTypes.WORLD.toString()));
+		if (regionData.getLandType() != type) {
+			sender.sendMessage(
+					plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}", type.toString()));
 			return true;
 		}
 
@@ -67,7 +69,7 @@ public class KickLand implements ILandCmd {
 					regionData.getRegionName()));
 			return true;
 		}
-		HashSet<UUID> playerMap = new HashSet<UUID>();
+		HashSet<UUID> playerMap = new HashSet<>();
 
 		for (Entity entity : chunk.getEntities()) {
 			if (entity instanceof Player) {

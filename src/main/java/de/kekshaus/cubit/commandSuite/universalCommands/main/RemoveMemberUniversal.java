@@ -19,11 +19,13 @@ public class RemoveMemberUniversal implements ILandCmd {
 	private Landplugin plugin;
 	private String permNode;
 	private boolean isAdmin;
+	private LandTypes type;
 
-	public RemoveMemberUniversal(Landplugin plugin, boolean isAdmin, String permNode) {
+	public RemoveMemberUniversal(Landplugin plugin, String permNode, LandTypes type, boolean isAdmin) {
 		this.plugin = plugin;
 		this.isAdmin = isAdmin;
 		this.permNode = permNode;
+		this.type = type;
 	}
 
 	@Override
@@ -63,9 +65,9 @@ public class RemoveMemberUniversal implements ILandCmd {
 			return true;
 		}
 
-		if (regionData.getLandType() != LandTypes.WORLD && regionData.getLandType() != LandTypes.SHOP) {
-			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}",
-					LandTypes.WORLD.toString()));
+		if (regionData.getLandType() != type) {
+			sender.sendMessage(
+					plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}", type.toString()));
 			return true;
 		}
 

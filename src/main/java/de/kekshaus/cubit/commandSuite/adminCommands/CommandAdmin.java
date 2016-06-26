@@ -11,13 +11,14 @@ import org.bukkit.command.CommandSender;
 
 import com.google.common.collect.Maps;
 
+import de.kekshaus.cubit.api.regionAPI.region.LandTypes;
 import de.kekshaus.cubit.commandSuite.ILandCmd;
 import de.kekshaus.cubit.commandSuite.adminCommands.main.CreateServerAdmin;
 import de.kekshaus.cubit.commandSuite.adminCommands.main.DeleteServerAdmin;
-import de.kekshaus.cubit.commandSuite.landCommands.main.FlagLand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.OfferLand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.SellLand;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.AddMemberUniversal;
+import de.kekshaus.cubit.commandSuite.universalCommands.main.ChangeFlagUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.RemoveMemberUniversal;
 import de.kekshaus.cubit.plugin.Landplugin;
 import de.kekshaus.cubit.plugin.PermissionNodes;
@@ -66,20 +67,25 @@ public class CommandAdmin implements CommandExecutor {
 		try {
 			PermissionNodes perm = Landplugin.inst().getPermNodes();
 			/* Protection AdminCommands */
-			this.cmdMap.put("setpvp", new FlagLand(this.plugin, Landplugin.inst().getLandManager().pvpPacket, true,
-					perm.flagAdminLand + "pvp"));
-			this.cmdMap.put("setfire", new FlagLand(this.plugin, Landplugin.inst().getLandManager().firePacket, true,
-					perm.flagAdminLand + "fire"));
-			this.cmdMap.put("setlock", new FlagLand(this.plugin, Landplugin.inst().getLandManager().lockPacket, true,
-					perm.flagAdminLand + "lock"));
-			this.cmdMap.put("settnt", new FlagLand(this.plugin, Landplugin.inst().getLandManager().tntPacket, true,
-					perm.flagAdminLand + "tnt"));
-			this.cmdMap.put("setmonster", new FlagLand(this.plugin, Landplugin.inst().getLandManager().monsterPacket,
-					true, perm.flagAdminLand + "monster"));
-			this.cmdMap.put("remove", new SellLand(this.plugin, true, perm.sellAdminLand));
-			this.cmdMap.put("addplayer", new AddMemberUniversal(this.plugin, true, perm.addMemberAdminLand));
-			this.cmdMap.put("removeplayer", new RemoveMemberUniversal(this.plugin, true, perm.removeMemberAdminLand));
-			this.cmdMap.put("offer", new OfferLand(this.plugin, true, perm.offerAdminLand));
+			this.cmdMap.put("setpvp", new ChangeFlagUniversal(this.plugin, Landplugin.inst().getLandManager().pvpPacket,
+					perm.flagAdminLand + "pvp", LandTypes.NOTYPE, true));
+			this.cmdMap.put("setfire",
+					new ChangeFlagUniversal(this.plugin, Landplugin.inst().getLandManager().firePacket,
+							perm.flagAdminLand + "fire", LandTypes.NOTYPE, true));
+			this.cmdMap.put("setlock",
+					new ChangeFlagUniversal(this.plugin, Landplugin.inst().getLandManager().lockPacket,
+							perm.flagAdminLand + "lock", LandTypes.NOTYPE, true));
+			this.cmdMap.put("settnt", new ChangeFlagUniversal(this.plugin, Landplugin.inst().getLandManager().tntPacket,
+					perm.flagAdminLand + "tnt", LandTypes.NOTYPE, true));
+			this.cmdMap.put("setmonster",
+					new ChangeFlagUniversal(this.plugin, Landplugin.inst().getLandManager().monsterPacket,
+							perm.flagAdminLand + "monster", LandTypes.NOTYPE, true));
+			this.cmdMap.put("remove", new SellLand(this.plugin, perm.sellAdminLand, true));
+			this.cmdMap.put("addplayer",
+					new AddMemberUniversal(this.plugin, perm.addMemberAdminLand, LandTypes.NOTYPE, true));
+			this.cmdMap.put("removeplayer",
+					new RemoveMemberUniversal(this.plugin, perm.removeMemberAdminLand, LandTypes.NOTYPE, true));
+			this.cmdMap.put("offer", new OfferLand(this.plugin, perm.offerAdminLand, true));
 
 			this.cmdMap.put("createserver", new CreateServerAdmin(this.plugin, perm.createServerAdminLand));
 			this.cmdMap.put("deleteserver", new DeleteServerAdmin(this.plugin, perm.deleteServerAdminLand));

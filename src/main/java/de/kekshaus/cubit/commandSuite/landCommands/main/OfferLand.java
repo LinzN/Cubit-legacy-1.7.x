@@ -19,10 +19,11 @@ public class OfferLand implements ILandCmd {
 	private boolean isAdmin;
 	private String permNode;
 
-	public OfferLand(Landplugin plugin, boolean isAdmin, String permNode) {
+	public OfferLand(Landplugin plugin, String permNode, boolean isAdmin) {
 		this.plugin = plugin;
 		this.isAdmin = isAdmin;
 		this.permNode = permNode;
+
 	}
 
 	@Override
