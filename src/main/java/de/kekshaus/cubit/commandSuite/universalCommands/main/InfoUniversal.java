@@ -6,6 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import de.kekshaus.cubit.api.regionAPI.region.LandTypes;
 import de.kekshaus.cubit.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.commandSuite.ILandCmd;
 import de.kekshaus.cubit.plugin.Landplugin;
@@ -15,10 +16,12 @@ public class InfoUniversal implements ILandCmd {
 
 	private Landplugin plugin;
 	private String permNode;
+	private LandTypes type;
 
-	public InfoUniversal(Landplugin plugin, String permNode) {
+	public InfoUniversal(Landplugin plugin, String permNode, LandTypes type) {
 		this.plugin = plugin;
 		this.permNode = permNode;
+		this.type = type;
 	}
 
 	@Override
@@ -137,15 +140,21 @@ public class InfoUniversal implements ILandCmd {
 	}
 
 	private void noInfo(Player player, RegionData regionData, Location loc, Chunk chunk) {
-		/* Buy-able region */
-		double economyValue = Landplugin.inst().getVaultManager().calculateLandCost(player.getUniqueId(),
-				loc.getWorld(), true);
-		final String regionID = plugin.getLandManager().buildLandName(loc.getWorld().getName(), chunk.getX(),
-				chunk.getZ());
-		player.sendMessage(plugin.getYamlManager().getLanguage().landInfoA1
-				.replace("{cost}", "" + plugin.getVaultManager().formateToEconomy(economyValue))
-				.replace("{regionID}", regionID));
-		return;
+		if (this.type != LandTypes.SHOP) {
+			/* Buy-able region */
+			double economyValue = Landplugin.inst().getVaultManager().calculateLandCost(player.getUniqueId(),
+					loc.getWorld(), true);
+			final String regionID = plugin.getLandManager().buildLandName(loc.getWorld().getName(), chunk.getX(),
+					chunk.getZ());
+			player.sendMessage(plugin.getYamlManager().getLanguage().landInfoA1
+					.replace("{cost}", "" + plugin.getVaultManager().formateToEconomy(economyValue))
+					.replace("{regionID}", regionID));
+			return;
+		} else {
+			player.sendMessage(
+					plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type} ", type.toString()));
+			return;
+		}
 	}
 
 }

@@ -64,7 +64,7 @@ public class CommandShop implements CommandExecutor {
 		try {
 			this.cmdMap.put("buy", new BuyShop(this.plugin, null));
 
-			this.cmdMap.put("info", new InfoUniversal(this.plugin, null));
+			this.cmdMap.put("info", new InfoUniversal(this.plugin, null, LandTypes.SHOP));
 
 			this.cmdMap.put("add", new AddMemberUniversal(this.plugin, null, LandTypes.SHOP, false));
 			this.cmdMap.put("remove", new RemoveMemberUniversal(this.plugin, null, LandTypes.SHOP, false));

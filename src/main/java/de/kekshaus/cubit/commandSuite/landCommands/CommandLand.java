@@ -71,7 +71,7 @@ public class CommandLand implements CommandExecutor {
 		try {
 			PermissionNodes perm = Landplugin.inst().getPermNodes();
 			/* GS Buy/Sell Commands */
-			this.cmdMap.put("info", new InfoUniversal(this.plugin, perm.infoLand));
+
 			this.cmdMap.put("help", new HelpLand(this.plugin, perm.helpLand));
 			this.cmdMap.put("buy", new BuyLand(this.plugin, perm.buyLand));
 			this.cmdMap.put("sell", new SellLand(this.plugin, perm.sellLand, false));
@@ -82,6 +82,7 @@ public class CommandLand implements CommandExecutor {
 			this.cmdMap.put("takeoffer", new TakeOfferLand(this.plugin, perm.takeOfferLand));
 
 			/* Universal Commands */
+			this.cmdMap.put("info", new InfoUniversal(this.plugin, perm.infoLand, LandTypes.WORLD));
 			this.cmdMap.put("kick", new KickUniversal(this.plugin, perm.kickLand, LandTypes.WORLD));
 			this.cmdMap.put("add", new AddMemberUniversal(this.plugin, perm.addMemberLand, LandTypes.WORLD, false));
 			this.cmdMap.put("remove",

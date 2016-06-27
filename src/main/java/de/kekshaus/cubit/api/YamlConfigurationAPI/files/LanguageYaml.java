@@ -94,7 +94,7 @@ public class LanguageYaml {
 		noConsoleMode = this.getLanguageString("noConsoleMode", "§4Sorry this is not available in console mode!");
 		errorInTask = this.getLanguageString("errorInTask", "§4An internal error occurred during: [§e{error}§4]");
 		errorCommand = this.getLanguageString("errorCommand",
-				"§4An error occurred during execution command [§e{command}§4] aufgetreten!");
+				"§4An error occurred during execution command [§e{command}§4]!");
 		errorNoCommand = this.getLanguageString("errorNoCommand", "§cUnknown command! Use §e{command}§c for help!");
 		errorNoPermission = this.getLanguageString("errorNoPermission", "§4You don have access to that command! :(");
 		errorNoLandPermission = this.getLanguageString("errorNoLandPermission",
@@ -164,16 +164,16 @@ public class LanguageYaml {
 		landHelpE2P2 = this.getLanguageString("theme.helpPage2.help1", "§2 Buy a region: §e/land buy");
 		landHelpE3P2 = this.getLanguageString("theme.helpPage2.help2", "§2 Sell a region: §e/land sell");
 		landHelpE4P2 = this.getLanguageString("theme.helpPage2.help3", "§2 Take a offered region: §4/land takeoffer");
-		landHelpE5P2 = this.getLanguageString("theme.helpPage2.help4", "§2 Offer a region: §4/land offer [Preis]");
+		landHelpE5P2 = this.getLanguageString("theme.helpPage2.help4", "§2 Offer a region: §4/land offer [Price]");
 		landHelpE6P2 = this.getLanguageString("theme.helpPage2.help5", "§2 Buyup outdated regions: §4/land buyup");
 		landHelpE7P2 = this.getLanguageString("theme.helpPage2.help6", "§a§lMore on page 3 with §6/land help 3");
 
 		/* Page 3 Help for Land Command */
 		landHelpE1P3 = this.getLanguageString("theme.helpPage3.header", "§6§lManage Members: [Page 3]");
 		landHelpE2P3 = this.getLanguageString("theme.helpPage3.help1",
-				"§2 Set player build-rights : §e/land add [playername]");
+				"§2 Set player build-rights : §e/land add (-all) [player]");
 		landHelpE3P3 = this.getLanguageString("theme.helpPage3.help2",
-				"§2 Unset player build-rights: §e/land remove [playername]");
+				"§2 Unset player build-rights: §e/land remove (-all) [player]");
 		landHelpE4P3 = this.getLanguageString("theme.helpPage3.help3",
 				"§2 Kick non-members from a region (teleporting): §4/land kick");
 		landHelpE5P3 = this.getLanguageString("theme.helpPage3.help4", "§a§lMore on page 4 with §6/land help 4");
