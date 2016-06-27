@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -28,7 +29,7 @@ public class KickUniversal implements ILandCmd {
 	}
 
 	@Override
-	public boolean runCmd(final CommandSender sender, String[] args) {
+	public boolean runCmd(final Command cmd, final CommandSender sender, String[] args) {
 		if (!(sender instanceof Player)) {
 			/* This is not possible from the server console */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().noConsoleMode);
@@ -58,7 +59,7 @@ public class KickUniversal implements ILandCmd {
 			return true;
 		}
 
-		if (regionData.getLandType() != type) {
+		if (regionData.getLandType() != type && type != LandTypes.NOTYPE) {
 			sender.sendMessage(
 					plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}", type.toString()));
 			return true;

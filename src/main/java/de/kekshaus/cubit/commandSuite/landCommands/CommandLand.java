@@ -39,16 +39,16 @@ public class CommandLand implements CommandExecutor {
 	}
 
 	@Override
-	public boolean onCommand(final CommandSender sender, Command cmd, String label, final String[] args) {
+	public boolean onCommand(final CommandSender sender, final Command cmd, String label, final String[] args) {
 		cmdThread.submit(new Runnable() {
 			@Override
 			public void run() {
 				if (args.length == 0) {
 					// help site
-					getCmdMap().get("help").runCmd(sender, args);
+					getCmdMap().get("help").runCmd(cmd, sender, args);
 				} else if (getCmdMap().containsKey(args[0])) {
 					String command = args[0];
-					if (!getCmdMap().get(command).runCmd(sender, args)) {
+					if (!getCmdMap().get(command).runCmd(cmd, sender, args)) {
 						sender.sendMessage(
 								plugin.getYamlManager().getLanguage().errorCommand.replace("{command}", command));
 					}

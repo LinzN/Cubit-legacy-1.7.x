@@ -170,6 +170,44 @@ public class RegionAPIManager {
 		return true;
 	}
 
+	public boolean addMemberAll(final World world, final UUID playerUUID) {
+		try {
+
+			List<RegionData> list = new ArrayList<>();
+
+			for (ProtectedRegion region : mRegE.getAllLands(playerUUID, world)) {
+				RegionData data = new RegionData(world);
+				data.setWGRegion(region);
+				list.add(data);
+			}
+			mRegE.addMember(list, world, playerUUID);
+			saveMrg.save(world);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	public boolean removeMemberAll(final World world, final UUID playerUUID) {
+		try {
+
+			List<RegionData> list = new ArrayList<>();
+
+			for (ProtectedRegion region : mRegE.getAllLands(playerUUID, world)) {
+				RegionData data = new RegionData(world);
+				data.setWGRegion(region);
+				list.add(data);
+			}
+			mRegE.removeMember(list, world, playerUUID);
+			saveMrg.save(world);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
 	public boolean removeMember(final RegionData regionData, final World world, final UUID playerUUID) {
 		try {
 

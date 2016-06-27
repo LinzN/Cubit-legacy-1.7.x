@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -26,10 +27,11 @@ public class RemoveMemberUniversal implements ILandCmd {
 		this.isAdmin = isAdmin;
 		this.permNode = permNode;
 		this.type = type;
+
 	}
 
 	@Override
-	public boolean runCmd(final CommandSender sender, String[] args) {
+	public boolean runCmd(final Command cmd, final CommandSender sender, String[] args) {
 		if (!(sender instanceof Player)) {
 			/* This is not possible from the server console */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().noConsoleMode);
@@ -46,12 +48,37 @@ public class RemoveMemberUniversal implements ILandCmd {
 		}
 
 		if (args.length < 2) {
-			sender.sendMessage(
-					plugin.getYamlManager().getLanguage().wrongArguments.replace("{usage}", "/land remove [player]"));
+			sender.sendMessage(plugin.getYamlManager().getLanguage().wrongArguments.replace("{usage}",
+					"/" + cmd.getLabel() + " " + args[0].toLowerCase() + " [Player]"));
 			return true;
 		}
 
 		final Location loc = player.getLocation();
+		if (args[1].equalsIgnoreCase("-a") || args[1].equalsIgnoreCase("-all")) {
+			if (args.length >= 3) {
+
+				@SuppressWarnings("deprecation")
+				OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(args[2]);
+				UUID uuid = offlinePlayer.getUniqueId();
+				if (!plugin.getLandManager().removeMemberAll(loc.getWorld(), uuid)) {
+					/* If this task failed! This should never happen */
+					sender.sendMessage(
+							plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "REMOVE-MEMBER"));
+					plugin.getLogger().warning(
+							plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "REMOVE-MEMBER"));
+					return true;
+				}
+
+				sender.sendMessage(plugin.getYamlManager().getLanguage().removeMemberSuccess
+						.replace("{regionID}", "ALL").replace("{member}", offlinePlayer.getName()));
+
+				return true;
+			} else {
+				// someting
+				return true;
+			}
+		}
+
 		final Chunk chunk = loc.getChunk();
 		RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 
@@ -65,7 +92,7 @@ public class RemoveMemberUniversal implements ILandCmd {
 			return true;
 		}
 
-		if (regionData.getLandType() != type) {
+		if (regionData.getLandType() != type && type != LandTypes.NOTYPE) {
 			sender.sendMessage(
 					plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}", type.toString()));
 			return true;

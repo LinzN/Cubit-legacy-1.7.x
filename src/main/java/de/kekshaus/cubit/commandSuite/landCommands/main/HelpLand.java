@@ -1,5 +1,6 @@
 package de.kekshaus.cubit.commandSuite.landCommands.main;
 
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -17,7 +18,7 @@ public class HelpLand implements ILandCmd {
 	}
 
 	@Override
-	public boolean runCmd(final CommandSender sender, String[] args) {
+	public boolean runCmd(final Command cmd, final CommandSender sender, String[] args) {
 		if (!(sender instanceof Player)) {
 			/* This is not possible from the server console */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().noConsoleMode);

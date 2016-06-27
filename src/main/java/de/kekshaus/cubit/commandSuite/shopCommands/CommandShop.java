@@ -13,7 +13,7 @@ import com.google.common.collect.Maps;
 
 import de.kekshaus.cubit.api.regionAPI.region.LandTypes;
 import de.kekshaus.cubit.commandSuite.ILandCmd;
-import de.kekshaus.cubit.commandSuite.shopCommands.main.CreateShop;
+import de.kekshaus.cubit.commandSuite.shopCommands.main.BuyShop;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.AddMemberUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.InfoUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.KickUniversal;
@@ -33,7 +33,7 @@ public class CommandShop implements CommandExecutor {
 	}
 
 	@Override
-	public boolean onCommand(final CommandSender sender, Command cmd, String label, final String[] args) {
+	public boolean onCommand(final CommandSender sender, final Command cmd, String label, final String[] args) {
 		cmdThread.submit(new Runnable() {
 			@Override
 			public void run() {
@@ -41,7 +41,7 @@ public class CommandShop implements CommandExecutor {
 					// help site
 				} else if (getCmdMap().containsKey(args[0])) {
 					String command = args[0];
-					if (!getCmdMap().get(command).runCmd(sender, args)) {
+					if (!getCmdMap().get(command).runCmd(cmd, sender, args)) {
 						sender.sendMessage(
 								plugin.getYamlManager().getLanguage().errorCommand.replace("{command}", command));
 					}
@@ -62,7 +62,7 @@ public class CommandShop implements CommandExecutor {
 
 	public void loadCmd() {
 		try {
-			this.cmdMap.put("create", new CreateShop(this.plugin, null));
+			this.cmdMap.put("buy", new BuyShop(this.plugin, null));
 
 			this.cmdMap.put("info", new InfoUniversal(this.plugin, null));
 

@@ -2,6 +2,7 @@ package de.kekshaus.cubit.commandSuite.shopCommands.main;
 
 import org.bukkit.Chunk;
 import org.bukkit.Location;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -11,19 +12,19 @@ import de.kekshaus.cubit.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.commandSuite.ILandCmd;
 import de.kekshaus.cubit.plugin.Landplugin;
 
-public class CreateShop implements ILandCmd {
+public class BuyShop implements ILandCmd {
 
 	private Landplugin plugin;
 
 	private String permNode;
 
-	public CreateShop(Landplugin plugin, String permNode) {
+	public BuyShop(Landplugin plugin, String permNode) {
 		this.plugin = plugin;
 		this.permNode = permNode;
 	}
 
 	@Override
-	public boolean runCmd(final CommandSender sender, String[] args) {
+	public boolean runCmd(final Command cmd, final CommandSender sender, String[] args) {
 		if (!(sender instanceof Player)) {
 			/* This is not possible from the server console */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().noConsoleMode);
