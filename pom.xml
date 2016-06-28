@@ -16,10 +16,7 @@
 				<enabled>true</enabled> <!-- snapshots enabled: we declare a SNAPSHOT repository because we need to download a SNAPSHOT dependency -->
 			</snapshots>
 		</repository>
-		<repository>
-			<id>Bytearray-repo</id>
-			<url>https://repo.bytearray.de/</url>
-		</repository>
+
 		<repository>
 			<id>spigot-repo</id>
 			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
