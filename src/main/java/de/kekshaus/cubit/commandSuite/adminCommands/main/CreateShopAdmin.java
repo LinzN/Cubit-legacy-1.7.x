@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 
 import de.kekshaus.cubit.api.databaseAPI.OfferData;
 import de.kekshaus.cubit.api.regionAPI.region.LandTypes;
-import de.kekshaus.cubit.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.commandSuite.ILandCmd;
 import de.kekshaus.cubit.plugin.Landplugin;
 
@@ -44,6 +43,8 @@ public class CreateShopAdmin implements ILandCmd {
 
 		final Location loc = player.getLocation();
 		final Chunk chunk = loc.getChunk();
+		final String regionName = Landplugin.inst().getLandManager().buildLandName(LandTypes.SHOP.toString(),
+				chunk.getX(), chunk.getZ());
 
 		/*
 		 * Check if the player has permissions for this land or hat landadmin
@@ -57,8 +58,6 @@ public class CreateShopAdmin implements ILandCmd {
 					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-REGION"));
 			return true;
 		}
-
-		RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 
 		if (!plugin.getBlockManager().placeLandBorder(chunk,
 				Landplugin.inst().getYamlManager().getSettings().landBuyMaterialBorder)) {
@@ -87,9 +86,8 @@ public class CreateShopAdmin implements ILandCmd {
 		}
 		System.out.println("OfferValue: " + value);
 
-		OfferData offerData = new OfferData(regionData.getRegionName(), loc.getWorld());
+		OfferData offerData = new OfferData(regionName, loc.getWorld());
 		System.out.println("Test1");
-		offerData.setPlayerUUID(regionData.getOwnerUUID());
 		System.out.println("Test2");
 		offerData.setValue(value);
 		System.out.println("Test3");

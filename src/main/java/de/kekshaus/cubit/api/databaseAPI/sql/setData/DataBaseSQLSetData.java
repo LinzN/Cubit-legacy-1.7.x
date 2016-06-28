@@ -18,17 +18,21 @@ public class DataBaseSQLSetData {
 			PreparedStatement sql = conn.prepareStatement("SELECT value FROM offerManager WHERE regionID = '"
 					+ data.getRegionID() + "' AND world = '" + data.getWorld().getName().toLowerCase() + "';");
 			ResultSet result = sql.executeQuery();
+			String uuidData = "NULL";
+			if (data.getPlayerUUID() != null) {
+				uuidData = data.getPlayerUUID().toString();
+			}
 			if (result.next()) {
 				PreparedStatement update = conn.prepareStatement("UPDATE offerManager SET value = '" + data.getValue()
-						+ "', uuid = '" + data.getPlayerUUID().toString() + "' WHERE regionID = '" + data.getRegionID()
-						+ "' AND world = '" + data.getWorld().getName().toLowerCase() + "';");
+						+ "', uuid = '" + uuidData + "' WHERE regionID = '" + data.getRegionID() + "' AND world = '"
+						+ data.getWorld().getName().toLowerCase() + "';");
 				update.executeUpdate();
 				update.close();
 			} else {
-				PreparedStatement insert = conn.prepareStatement(
-						"INSERT INTO offerManager (regionID, value, world, uuid) VALUES ('" + data.getRegionID()
-								+ "', '" + data.getValue() + "', '" + data.getWorld().getName().toLowerCase() + "', '"
-								+ data.getPlayerUUID().toString() + "');");
+				PreparedStatement insert = conn
+						.prepareStatement("INSERT INTO offerManager (regionID, value, world, uuid) VALUES ('"
+								+ data.getRegionID() + "', '" + data.getValue() + "', '"
+								+ data.getWorld().getName().toLowerCase() + "', '" + uuidData + "');");
 				insert.executeUpdate();
 				insert.close();
 			}
