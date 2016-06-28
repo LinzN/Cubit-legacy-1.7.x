@@ -44,7 +44,6 @@ public class CreateShopAdmin implements ILandCmd {
 
 		final Location loc = player.getLocation();
 		final Chunk chunk = loc.getChunk();
-		RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 
 		/*
 		 * Check if the player has permissions for this land or hat landadmin
@@ -58,7 +57,8 @@ public class CreateShopAdmin implements ILandCmd {
 					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-REGION"));
 			return true;
 		}
-		regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
+
+		RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 
 		if (!plugin.getBlockManager().placeLandBorder(chunk,
 				Landplugin.inst().getYamlManager().getSettings().landBuyMaterialBorder)) {
