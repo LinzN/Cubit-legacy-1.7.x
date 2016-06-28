@@ -85,10 +85,14 @@ public class CreateShopAdmin implements ILandCmd {
 			}
 			value = Double.parseDouble(args[1]);
 		}
+		System.out.println("OfferValue: " + value);
 
 		OfferData offerData = new OfferData(regionData.getRegionName(), loc.getWorld());
+		System.out.println("Test1");
 		offerData.setPlayerUUID(regionData.getOwnerUUID());
+		System.out.println("Test2");
 		offerData.setValue(value);
+		System.out.println("Test3");
 		if (!plugin.getDatabaseManager().setOfferData(offerData)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "OFFER-ADD"));
@@ -96,7 +100,7 @@ public class CreateShopAdmin implements ILandCmd {
 					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "OFFER-ADD"));
 			return true;
 		}
-
+		System.out.println("Test4");
 		sender.sendMessage("Success createt Shop");
 
 		return true;
