@@ -55,6 +55,7 @@ permissions:
         description: Admin command permissions
         children:
             cubit.command.user.land: true
+            cubit.command.user.shop: true
             cubit.command.admin.sell: true
             cubit.command.admin.addmember: true
             cubit.command.admin.removemember: true
