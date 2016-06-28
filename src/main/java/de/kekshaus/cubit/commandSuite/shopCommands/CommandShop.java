@@ -20,6 +20,7 @@ import de.kekshaus.cubit.commandSuite.universalCommands.main.InfoUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.KickUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.RemoveMemberUniversal;
 import de.kekshaus.cubit.plugin.Landplugin;
+import de.kekshaus.cubit.plugin.PermissionNodes;
 
 public class CommandShop implements CommandExecutor {
 
@@ -58,6 +59,8 @@ public class CommandShop implements CommandExecutor {
 						sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoCommand.replace("{command}",
 								"/shop help"));
 					}
+				} else {
+					sender.sendMessage(plugin.getYamlManager().getLanguage().noEnabledWorld);
 				}
 			}
 		});
@@ -72,13 +75,15 @@ public class CommandShop implements CommandExecutor {
 
 	public void loadCmd() {
 		try {
-			this.cmdMap.put("buy", new BuyShop(this.plugin, null));
+			PermissionNodes perm = Landplugin.inst().getPermNodes();
+			this.cmdMap.put("buy", new BuyShop(this.plugin, perm.buyShop));
 
-			this.cmdMap.put("info", new InfoUniversal(this.plugin, null, LandTypes.SHOP));
+			this.cmdMap.put("info", new InfoUniversal(this.plugin, perm.infoShop, LandTypes.SHOP));
 
-			this.cmdMap.put("add", new AddMemberUniversal(this.plugin, null, LandTypes.SHOP, false));
-			this.cmdMap.put("remove", new RemoveMemberUniversal(this.plugin, null, LandTypes.SHOP, false));
-			this.cmdMap.put("kick", new KickUniversal(this.plugin, null, LandTypes.SHOP));
+			this.cmdMap.put("add", new AddMemberUniversal(this.plugin, perm.addMemberShop, LandTypes.SHOP, false));
+			this.cmdMap.put("remove",
+					new RemoveMemberUniversal(this.plugin, perm.removeMemberShop, LandTypes.SHOP, false));
+			this.cmdMap.put("kick", new KickUniversal(this.plugin, perm.kickShop, LandTypes.SHOP));
 			this.isLoaded = true;
 		} catch (Exception e) {
 			e.printStackTrace();

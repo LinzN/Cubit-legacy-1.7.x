@@ -14,6 +14,7 @@ import com.google.common.collect.Maps;
 import de.kekshaus.cubit.api.regionAPI.region.LandTypes;
 import de.kekshaus.cubit.commandSuite.ILandCmd;
 import de.kekshaus.cubit.commandSuite.adminCommands.main.CreateServerAdmin;
+import de.kekshaus.cubit.commandSuite.adminCommands.main.CreateShopAdmin;
 import de.kekshaus.cubit.commandSuite.adminCommands.main.DeleteServerAdmin;
 import de.kekshaus.cubit.commandSuite.landCommands.main.OfferLand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.SellLand;
@@ -50,7 +51,7 @@ public class CommandAdmin implements CommandExecutor {
 					}
 				} else {
 					sender.sendMessage(
-							plugin.getYamlManager().getLanguage().errorNoCommand.replace("{command}", "/ladmin help"));
+							plugin.getYamlManager().getLanguage().errorNoCommand.replace("{command}", "/cadmin help"));
 				}
 			}
 		});
@@ -89,6 +90,7 @@ public class CommandAdmin implements CommandExecutor {
 
 			this.cmdMap.put("createserver", new CreateServerAdmin(this.plugin, perm.createServerAdminLand));
 			this.cmdMap.put("deleteserver", new DeleteServerAdmin(this.plugin, perm.deleteServerAdminLand));
+			this.cmdMap.put("createshop", new CreateShopAdmin(this.plugin, perm.createShopAdminLand));
 
 			this.isLoaded = true;
 		} catch (Exception e) {

@@ -12,14 +12,15 @@ commands:
   shop:
     description: Shop Command
     aliases: [shops]
-  ladmin:
+  cadmin:
     description: Admin Command
-    aliases: [sadmin, shopadmin, landadmin]
+    aliases: [sadmin, ladmin, shopadmin, landadmin]
 permissions:
     cubit.user:
         description: User main permissions
         children:
             cubit.command.user.land: true
+            cubit.command.user.shop: true
     cubit.admin:
         description: Admin main permissions
         children:
@@ -42,6 +43,14 @@ permissions:
             cubit.command.land.flag.lock: true
             cubit.command.land.flag.tnt: true
             cubit.command.land.flag.monster: true
+    cubit.command.user.shop:
+        description:  User command permissions
+        children:
+            cubit.command.shop.buy: true
+            cubit.command.shop.info: true
+            cubit.command.shop.addmember: true
+            cubit.command.shop.removemember: true
+            cubit.command.shop.kick: true
     cubit.command.admin.land:
         description: Admin command permissions
         children:
@@ -52,6 +61,7 @@ permissions:
             cubit.command.admin.offer: true
             cubit.command.admin.createserver: true
             cubit.command.admin.deleteserver: true
+            cubit.command.admin.createshop: true
             cubit.command.admin.flag.pvp: true
             cubit.command.admin.flag.fire: true
             cubit.command.admin.flag.lock: true
@@ -103,6 +113,20 @@ permissions:
     cubit.command.land.flag.potion:
         description: Haupt-Hilfeseite
         default: op
+    cubit.command.shop.buy:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.shop.info:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.shop.addmember:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.shop.removemember:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.shop.kick:
+        description: Haupt-Hilfeseite
     cubit.command.admin.sell:
         description: Haupt-Hilfeseite
         default: op
@@ -119,6 +143,9 @@ permissions:
         description: Haupt-Hilfeseite
         default: op
     cubit.command.admin.deleteserver:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.admin.createshop:
         description: Haupt-Hilfeseite
         default: op
     cubit.command.admin.flag.pvp:

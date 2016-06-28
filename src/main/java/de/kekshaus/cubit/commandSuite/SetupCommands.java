@@ -10,7 +10,7 @@ public class SetupCommands {
 	private Landplugin plugin;
 	private String commandLand = "land";
 	private String commandShop = "shop";
-	private String commandAdmin = "ladmin";
+	private String commandAdmin = "cadmin";
 
 	public SetupCommands(Landplugin plugin) {
 		this.plugin = plugin;
@@ -30,7 +30,7 @@ public class SetupCommands {
 			shopClass.loadCmd();
 		plugin.getCommand(commandShop).setExecutor(shopClass);
 
-		/* Command setup for /ladmin */
+		/* Command setup for /cadmin */
 		CommandAdmin adminClass = new CommandAdmin(this.plugin);
 		if (!adminClass.isLoaded())
 			adminClass.loadCmd();

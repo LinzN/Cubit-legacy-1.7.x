@@ -65,6 +65,8 @@ public class CommandLand implements CommandExecutor {
 						sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoCommand.replace("{command}",
 								"/land help"));
 					}
+				} else {
+					sender.sendMessage(plugin.getYamlManager().getLanguage().noEnabledWorld);
 				}
 			}
 		});
