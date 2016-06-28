@@ -86,7 +86,12 @@ public class RegionAPIManager {
 			int chunkZ = loc.getChunk().getZ();
 			World world = loc.getWorld();
 			String regionName = buildLandName(world.getName(), chunkX, chunkZ);
-			RegionData regionData = mReg.newRegion(chunkX, chunkZ, world, playerUUID, regionName);
+			RegionData regionData;
+			if (isLand(loc.getWorld(), loc.getChunk().getX(), loc.getChunk().getZ())) {
+				regionData = this.praseRegionData(loc.getWorld(), loc.getChunk().getX(), loc.getChunk().getZ());
+			} else {
+				regionData = mReg.newRegion(chunkX, chunkZ, world, null, regionName);
+			}
 			regionData = this.lockPacket.switchState(regionData, true, false);
 			regionData = this.monsterPacket.switchState(regionData, true, false);
 			regionData = this.pvpPacket.switchState(regionData, true, false);
@@ -108,7 +113,12 @@ public class RegionAPIManager {
 			int chunkZ = loc.getChunk().getZ();
 			World world = loc.getWorld();
 			String regionName = buildLandName(LandTypes.SERVER.toString(), chunkX, chunkZ);
-			RegionData regionData = mReg.newRegion(chunkX, chunkZ, world, null, regionName);
+			RegionData regionData;
+			if (isLand(loc.getWorld(), loc.getChunk().getX(), loc.getChunk().getZ())) {
+				regionData = this.praseRegionData(loc.getWorld(), loc.getChunk().getX(), loc.getChunk().getZ());
+			} else {
+				regionData = mReg.newRegion(chunkX, chunkZ, world, null, regionName);
+			}
 			regionData = this.lockPacket.switchState(regionData, true);
 			regionData = this.monsterPacket.switchState(regionData, true);
 			regionData = this.pvpPacket.switchState(regionData, true);
@@ -130,7 +140,12 @@ public class RegionAPIManager {
 			int chunkZ = loc.getChunk().getZ();
 			World world = loc.getWorld();
 			String regionName = buildLandName(LandTypes.SHOP.toString(), chunkX, chunkZ);
-			RegionData regionData = mReg.newRegion(chunkX, chunkZ, world, null, regionName);
+			RegionData regionData;
+			if (isLand(loc.getWorld(), loc.getChunk().getX(), loc.getChunk().getZ())) {
+				regionData = this.praseRegionData(loc.getWorld(), loc.getChunk().getX(), loc.getChunk().getZ());
+			} else {
+				regionData = mReg.newRegion(chunkX, chunkZ, world, null, regionName);
+			}
 			regionData = this.lockPacket.switchState(regionData, true);
 			regionData = this.monsterPacket.switchState(regionData, true);
 			regionData = this.pvpPacket.switchState(regionData, true);

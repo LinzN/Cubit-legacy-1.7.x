@@ -21,10 +21,6 @@ public class ManageRegions {
 	public RegionData newRegion(final int chunkX, final int chunkZ, final World world, final UUID playerUUID,
 			final String regionName) {
 
-		RegionManager manager = Landplugin.inst().getWorldGuardPlugin().getRegionManager(world);
-		if (manager.hasRegion(regionName)) {
-			manager.removeRegion(regionName);
-		}
 		final Vector min;
 		final Vector max;
 		final Vector2D min2D;
