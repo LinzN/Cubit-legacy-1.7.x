@@ -58,6 +58,7 @@ public class CreateShopAdmin implements ILandCmd {
 					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-REGION"));
 			return true;
 		}
+		regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 
 		if (!plugin.getBlockManager().placeLandBorder(chunk,
 				Landplugin.inst().getYamlManager().getSettings().landBuyMaterialBorder)) {
