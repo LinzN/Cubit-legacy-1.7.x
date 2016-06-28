@@ -66,6 +66,7 @@ public class RegionAPIManager {
 	}
 
 	public boolean createLand(final Location loc, final UUID playerUUID, final LandTypes type) {
+
 		switch (type) {
 		case SERVER:
 			return serverLand(loc);

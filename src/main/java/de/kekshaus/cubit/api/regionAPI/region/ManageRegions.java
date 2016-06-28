@@ -20,6 +20,11 @@ public class ManageRegions {
 
 	public RegionData newRegion(final int chunkX, final int chunkZ, final World world, final UUID playerUUID,
 			final String regionName) {
+
+		RegionManager manager = Landplugin.inst().getWorldGuardPlugin().getRegionManager(world);
+		if (manager.hasRegion(regionName)) {
+			manager.removeRegion(regionName);
+		}
 		final Vector min;
 		final Vector max;
 		final Vector2D min2D;
@@ -27,12 +32,8 @@ public class ManageRegions {
 		min2D = new Vector2D(chunkX * 16, chunkZ * 16);
 		min = new Vector(min2D.getBlockX(), 0, min2D.getBlockZ());
 		max = min.add(15, world.getMaxHeight(), 15);
-		ProtectedRegion region;
-		if (!Landplugin.inst().getWorldGuardPlugin().getRegionManager(world).hasRegion(regionName)) {
-			region = new ProtectedCuboidRegion(regionName, min.toBlockVector(), max.toBlockVector());
-		} else {
-			region = Landplugin.inst().getWorldGuardPlugin().getRegionManager(world).getRegion(regionName);
-		}
+		ProtectedRegion region = new ProtectedCuboidRegion(regionName, min.toBlockVector(), max.toBlockVector());
+
 		if (playerUUID != null) {
 			OfflinePlayer player = Bukkit.getOfflinePlayer(playerUUID);
 			LocalPlayer localplayer = Landplugin.inst().getWorldGuardPlugin().wrapOfflinePlayer(player);
