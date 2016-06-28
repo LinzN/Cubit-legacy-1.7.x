@@ -70,10 +70,17 @@ public class BuyShop implements ILandCmd {
 			return true;
 		}
 
+		int shopLimit = Landplugin.inst().getYamlManager().getSettings().shopLimit;
+		if (plugin.getLandManager().hasReachLimit(player.getUniqueId(), loc.getWorld(), LandTypes.SHOP, shopLimit)) {
+			sender.sendMessage(plugin.getYamlManager().getLanguage().reachLimit);
+			return true;
+		}
 		OfferData offerData = plugin.getDatabaseManager().getOfferData(regionData.getRegionName(), loc.getWorld());
+
 		if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), offerData.getValue())) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
 					"" + plugin.getVaultManager().formateToEconomy(offerData.getValue())));
+			return true;
 		}
 
 		if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), regionData.getOwnerUUID(),
@@ -85,7 +92,7 @@ public class BuyShop implements ILandCmd {
 			return true;
 		}
 		/* Change owner and clear Memberlist */
-		if (!plugin.getLandManager().changeLandOwner(regionData, loc.getWorld(), player.getUniqueId())) {
+		if (!plugin.getLandManager().restoreDefaultSettings(regionData, loc.getWorld(), player.getUniqueId())) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(
 					plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SHOP-UPDATEOWNER"));

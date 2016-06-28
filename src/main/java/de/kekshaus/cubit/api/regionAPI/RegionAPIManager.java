@@ -111,12 +111,12 @@ public class RegionAPIManager {
 			String regionName = buildLandName(LandTypes.SERVER.toString(), chunkX, chunkZ);
 			RegionData regionData = mReg.newRegion(chunkX, chunkZ, world, null, regionName);
 
-			regionData = this.lockPacket.switchState(regionData, true);
-			regionData = this.monsterPacket.switchState(regionData, true);
-			regionData = this.pvpPacket.switchState(regionData, true);
-			regionData = this.tntPacket.switchState(regionData, true);
-			regionData = this.firePacket.switchState(regionData, true);
-			regionData = this.potionPacket.switchState(regionData, true);
+			regionData = this.lockPacket.switchState(regionData, true, false);
+			regionData = this.monsterPacket.switchState(regionData, true, false);
+			regionData = this.pvpPacket.switchState(regionData, true, false);
+			regionData = this.tntPacket.switchState(regionData, true, false);
+			regionData = this.firePacket.switchState(regionData, true, false);
+			regionData = this.potionPacket.switchState(regionData, true, false);
 			saveMrg.save(regionData);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -134,12 +134,12 @@ public class RegionAPIManager {
 			String regionName = buildLandName(LandTypes.SHOP.toString(), chunkX, chunkZ);
 			RegionData regionData = mReg.newRegion(chunkX, chunkZ, world, null, regionName);
 
-			regionData = this.lockPacket.switchState(regionData, true);
-			regionData = this.monsterPacket.switchState(regionData, true);
-			regionData = this.pvpPacket.switchState(regionData, true);
-			regionData = this.tntPacket.switchState(regionData, true);
-			regionData = this.firePacket.switchState(regionData, true);
-			regionData = this.potionPacket.switchState(regionData, true);
+			regionData = this.lockPacket.switchState(regionData, true, false);
+			regionData = this.monsterPacket.switchState(regionData, true, false);
+			regionData = this.pvpPacket.switchState(regionData, true, false);
+			regionData = this.tntPacket.switchState(regionData, true, false);
+			regionData = this.firePacket.switchState(regionData, true, false);
+			regionData = this.potionPacket.switchState(regionData, true, false);
 			saveMrg.save(regionData);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -147,6 +147,32 @@ public class RegionAPIManager {
 		}
 		return true;
 
+	}
+
+	public boolean restoreDefaultSettings(final RegionData regionData, final World world, final UUID playerUUID) {
+		try {
+
+			List<RegionData> list = new ArrayList<>();
+			list.add(regionData);
+			this.mRegE.clearMember(list, world);
+			this.mRegE.clearOwners(list, world);
+			if (playerUUID != null) {
+				this.mRegE.setOwner(list, world, playerUUID);
+			}
+
+			this.lockPacket.switchState(regionData, true, false);
+			this.monsterPacket.switchState(regionData, true, false);
+			this.pvpPacket.switchState(regionData, true, false);
+			this.tntPacket.switchState(regionData, true, false);
+			this.firePacket.switchState(regionData, true, false);
+			this.potionPacket.switchState(regionData, true, false);
+
+			saveMrg.save(world);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	public boolean removeLand(final RegionData regionData, final World world) {
@@ -226,23 +252,6 @@ public class RegionAPIManager {
 		return true;
 	}
 
-	public boolean changeLandOwner(final RegionData regionData, final World world, final UUID playerUUID) {
-		try {
-
-			List<RegionData> list = new ArrayList<>();
-			list.add(regionData);
-			mRegE.clearMember(list, world);
-			mRegE.clearOwners(list, world);
-			mRegE.setOwner(list, world, playerUUID);
-
-			saveMrg.save(world);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-
 	public String getStringState(boolean value) {
 		String stateString = "INAKTIV";
 		if (value) {
@@ -284,6 +293,24 @@ public class RegionAPIManager {
 
 	public SaveRegions getRegionSaver() {
 		return this.saveMrg;
+	}
+
+	public boolean hasReachLimit(UUID playerUUID, World world, LandTypes type, int limit) {
+		List<ProtectedRegion> regions = this.mRegE.getAllLands(playerUUID, world);
+		int counter = 0;
+
+		for (ProtectedRegion region : regions) {
+			RegionData regionData = new RegionData(world);
+			regionData.setWGRegion(region);
+			if (regionData.getLandType() == type) {
+				counter++;
+			}
+		}
+		if (counter <= limit - 1) {
+			return false;
+		}
+
+		return true;
 	}
 
 	public boolean hasLandPermission(final RegionData regionData, final UUID uuid) {

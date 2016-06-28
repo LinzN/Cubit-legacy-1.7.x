@@ -127,7 +127,68 @@ public class InfoUniversal implements ILandCmd {
 	}
 
 	private void shopInfo(Player player, RegionData regionData) {
-		return;
+		/* Get RegionData Info */
+		if (regionData.getOwnerUUID() != null) {
+			String formatedTime = plugin.getDatabaseManager().getLastLoginFormated(regionData.getOwnerUUID());
+			String minBorder = regionData.getMinPoint();
+			String maxBorder = regionData.getMaxPoint();
+			String statusLock = plugin.getLandManager().lockPacket.getStateColor(regionData)
+					+ plugin.getLandManager().lockPacket.getPacketName();
+			String statusFire = plugin.getLandManager().firePacket.getStateColor(regionData)
+					+ plugin.getLandManager().firePacket.getPacketName();
+			String statusPvP = plugin.getLandManager().pvpPacket.getStateColor(regionData)
+					+ plugin.getLandManager().pvpPacket.getPacketName();
+			String statusTNT = plugin.getLandManager().tntPacket.getStateColor(regionData)
+					+ plugin.getLandManager().tntPacket.getPacketName();
+			String statusMonster = plugin.getLandManager().monsterPacket.getStateColor(regionData)
+					+ plugin.getLandManager().monsterPacket.getPacketName();
+
+			String statusPotion = plugin.getLandManager().potionPacket.getStateColor(regionData)
+					+ plugin.getLandManager().potionPacket.getPacketName();
+
+			player.sendMessage(
+					plugin.getYamlManager().getLanguage().landInfoE1.replace("{regionID}", regionData.getRegionName()));
+
+			if (this.plugin.isGuildLoaded()) {
+				Guild guild = regionData.getGuild();
+				if (guild != null) {
+					player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE1A1.replace("{guild}",
+							guild.getGuildName()));
+				}
+			}
+			player.sendMessage(
+					plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}", regionData.getOwnerName()));
+			if (regionData.getMembersName().size() != 0) {
+				player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE3.replace("{members}",
+						regionData.getMembersName().toString()));
+			}
+			player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE4.replace("{min}", minBorder)
+					.replace("{max}", maxBorder));
+			player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE5.replace("{time}", formatedTime));
+			player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE6.replace("{lock}", statusLock)
+					.replace("{monster}", statusMonster).replace("{fire}", statusFire).replace("{pvp}", statusPvP)
+					.replace("{tnt}", statusTNT).replace("{potion}", statusPotion));
+			if (plugin.getDatabaseManager().isOffered(regionData.getRegionName(), regionData.getWorld())) {
+				player.sendMessage(
+						plugin.getYamlManager().getLanguage().landInfoA2
+								.replace("{value}",
+										"" + plugin.getVaultManager()
+												.formateToEconomy(plugin.getDatabaseManager()
+														.getOfferData(regionData.getRegionName(), regionData.getWorld())
+														.getValue())));
+			}
+
+		} else {
+
+			String value = plugin.getVaultManager().formateToEconomy(plugin.getDatabaseManager()
+					.getOfferData(regionData.getRegionName(), regionData.getWorld()).getValue());
+
+			player.sendMessage(
+					plugin.getYamlManager().getLanguage().landInfoE1.replace("{regionID}", regionData.getRegionName()));
+			player.sendMessage(plugin.getYamlManager().getLanguage().isFreeAndBuyable
+					.replace("{regionID}", regionData.getRegionName()).replace("{price}", value));
+
+		}
 	}
 
 	private void serverInfo(Player player, RegionData regionData) {

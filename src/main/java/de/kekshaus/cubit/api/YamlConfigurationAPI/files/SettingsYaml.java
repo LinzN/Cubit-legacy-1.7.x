@@ -30,6 +30,7 @@ public class SettingsYaml {
 
 	public List<String> shopEnabledWorlds;
 	public double shopBasePrice;
+	public int shopLimit;
 
 	/* Particle module */
 	public boolean particleUse;
@@ -75,6 +76,7 @@ public class SettingsYaml {
 		shopsEnabledWorlds.add("shops");
 		this.shopEnabledWorlds = (List<String>) this.getStringList("module.shop.enabledWorlds", shopsEnabledWorlds);
 		this.shopBasePrice = (double) this.getObjectValue("module.shop.basePrice", 300D);
+		this.shopLimit = (int) this.getObjectValue("module.shop.shopLimit", 4);
 
 		this.particleUse = (boolean) this.getObjectValue("module.particle.use", true);
 		this.particleUseInventivetalentParticeApi = (boolean) this

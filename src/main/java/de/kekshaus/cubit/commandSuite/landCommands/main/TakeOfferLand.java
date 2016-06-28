@@ -87,7 +87,7 @@ public class TakeOfferLand implements ILandCmd {
 			return true;
 		}
 		/* Change owner and clear Memberlist */
-		if (!plugin.getLandManager().changeLandOwner(regionData, loc.getWorld(), player.getUniqueId())) {
+		if (!plugin.getLandManager().restoreDefaultSettings(regionData, loc.getWorld(), player.getUniqueId())) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(
 					plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "TAKEOFFER-UPDATEOWNER"));

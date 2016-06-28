@@ -51,12 +51,26 @@ public class CreateShopAdmin implements ILandCmd {
 		 * permissions
 		 */
 
-		if (!plugin.getLandManager().createLand(loc, player.getUniqueId(), LandTypes.SHOP)) {
-			/* If this task failed! This should never happen */
-			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-REGION"));
-			plugin.getLogger()
-					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-REGION"));
-			return true;
+		if (!plugin.getLandManager().isLand(loc.getWorld(), chunk.getX(), chunk.getZ())) {
+			if (!plugin.getLandManager().createLand(loc, player.getUniqueId(), LandTypes.SHOP)) {
+				/* If this task failed! This should never happen */
+				sender.sendMessage(
+						plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-REGION"));
+				plugin.getLogger()
+						.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-REGION"));
+				return true;
+			}
+		} else {
+			if (!plugin.getLandManager().restoreDefaultSettings(
+					plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ()), loc.getWorld(),
+					null)) {
+				/* If this task failed! This should never happen */
+				sender.sendMessage(
+						plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "RESTORE-REGION"));
+				plugin.getLogger().warning(
+						plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "RESTORE-REGION"));
+				return true;
+			}
 		}
 
 		if (!plugin.getBlockManager().placeLandBorder(chunk,
@@ -93,6 +107,8 @@ public class CreateShopAdmin implements ILandCmd {
 					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "OFFER-ADD"));
 			return true;
 		}
+
+		sender.sendMessage(plugin.getYamlManager().getLanguage().createShopLand.replace("{regionID}", regionName));
 
 		return true;
 	}
