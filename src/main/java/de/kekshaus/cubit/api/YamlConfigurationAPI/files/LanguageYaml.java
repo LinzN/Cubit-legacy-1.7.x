@@ -16,6 +16,7 @@ public class LanguageYaml {
 	public String errorNoLandFound;
 	public String errorNoValidLandFound;
 	public String noNumberFound;
+	public String noEnabledWorld;
 
 	/* Success MSG */
 	public String buySuccess;
@@ -92,6 +93,8 @@ public class LanguageYaml {
 	private void setup() {
 		/* Error MSG */
 		noConsoleMode = this.getLanguageString("noConsoleMode", "§4Sorry this is not available in console mode!");
+		noEnabledWorld = this.getLanguageString("noEnabledWorld",
+				"§4Sorry but this command is not available in this world!");
 		errorInTask = this.getLanguageString("errorInTask", "§4An internal error occurred during: [§e{error}§4]");
 		errorCommand = this.getLanguageString("errorCommand",
 				"§4An error occurred during execution command [§e{command}§4]!");

@@ -133,9 +133,27 @@ public class InfoUniversal implements ILandCmd {
 	private void serverInfo(Player player, RegionData regionData) {
 		String minBorder = regionData.getMinPoint();
 		String maxBorder = regionData.getMaxPoint();
+
+		String statusLock = plugin.getLandManager().lockPacket.getStateColor(regionData)
+				+ plugin.getLandManager().lockPacket.getPacketName();
+		String statusFire = plugin.getLandManager().firePacket.getStateColor(regionData)
+				+ plugin.getLandManager().firePacket.getPacketName();
+		String statusPvP = plugin.getLandManager().pvpPacket.getStateColor(regionData)
+				+ plugin.getLandManager().pvpPacket.getPacketName();
+		String statusTNT = plugin.getLandManager().tntPacket.getStateColor(regionData)
+				+ plugin.getLandManager().tntPacket.getPacketName();
+		String statusMonster = plugin.getLandManager().monsterPacket.getStateColor(regionData)
+				+ plugin.getLandManager().monsterPacket.getPacketName();
+
+		String statusPotion = plugin.getLandManager().potionPacket.getStateColor(regionData)
+				+ plugin.getLandManager().potionPacket.getPacketName();
+
 		player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}", "Server"));
 		player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE4.replace("{min}", minBorder).replace("{max}",
 				maxBorder));
+		player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE6.replace("{lock}", statusLock)
+				.replace("{monster}", statusMonster).replace("{fire}", statusFire).replace("{pvp}", statusPvP)
+				.replace("{tnt}", statusTNT).replace("{potion}", statusPotion));
 		return;
 	}
 

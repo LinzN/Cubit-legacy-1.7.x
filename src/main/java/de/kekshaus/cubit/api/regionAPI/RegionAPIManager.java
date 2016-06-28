@@ -129,7 +129,7 @@ public class RegionAPIManager {
 			int chunkZ = loc.getChunk().getZ();
 			World world = loc.getWorld();
 			String regionName = buildLandName(LandTypes.SHOP.toString(), chunkX, chunkZ);
-			RegionData regionData = mReg.newRegion(chunkX, chunkZ, world, playerUUID, regionName);
+			RegionData regionData = mReg.newRegion(chunkX, chunkZ, world, null, regionName);
 			regionData = this.lockPacket.switchState(regionData, true);
 			regionData = this.monsterPacket.switchState(regionData, true);
 			regionData = this.pvpPacket.switchState(regionData, true);

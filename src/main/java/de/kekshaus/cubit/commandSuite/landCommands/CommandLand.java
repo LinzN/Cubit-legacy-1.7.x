@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import com.google.common.collect.Maps;
 
@@ -43,18 +44,27 @@ public class CommandLand implements CommandExecutor {
 		cmdThread.submit(new Runnable() {
 			@Override
 			public void run() {
-				if (args.length == 0) {
-					// help site
-					getCmdMap().get("help").runCmd(cmd, sender, args);
-				} else if (getCmdMap().containsKey(args[0])) {
-					String command = args[0];
-					if (!getCmdMap().get(command).runCmd(cmd, sender, args)) {
-						sender.sendMessage(
-								plugin.getYamlManager().getLanguage().errorCommand.replace("{command}", command));
+				String worldName = null;
+				if (sender instanceof Player) {
+					Player player = (Player) sender;
+					worldName = player.getWorld().getName();
+				}
+
+				if (Landplugin.inst().getYamlManager().getSettings().landEnabledWorlds.contains(worldName)
+						|| worldName == null) {
+					if (args.length == 0) {
+						// help site
+						getCmdMap().get("help").runCmd(cmd, sender, args);
+					} else if (getCmdMap().containsKey(args[0])) {
+						String command = args[0];
+						if (!getCmdMap().get(command).runCmd(cmd, sender, args)) {
+							sender.sendMessage(
+									plugin.getYamlManager().getLanguage().errorCommand.replace("{command}", command));
+						}
+					} else {
+						sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoCommand.replace("{command}",
+								"/land help"));
 					}
-				} else {
-					sender.sendMessage(
-							plugin.getYamlManager().getLanguage().errorNoCommand.replace("{command}", "/land help"));
 				}
 			}
 		});

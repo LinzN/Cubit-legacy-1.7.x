@@ -1,5 +1,8 @@
 package de.kekshaus.cubit.api.YamlConfigurationAPI.files;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Material;
 
 import de.kekshaus.cubit.api.YamlConfigurationAPI.setup.CustomConfig;
@@ -11,6 +14,8 @@ public class SettingsYaml {
 	/* Public config values */
 
 	/* Land module */
+
+	public List<String> landEnabledWorlds;
 	public double landBasePrice;
 	public double landTaxAddition;
 	public double landMaxPrice;
@@ -20,6 +25,11 @@ public class SettingsYaml {
 	public boolean landUseMaterialBorder;
 	public Material landBuyMaterialBorder;
 	public Material landSellMaterialBorder;
+
+	/* Shop module */
+
+	public List<String> shopEnabledWorlds;
+	public double shopBasePrice;
 
 	/* Particle module */
 	public boolean particleUse;
@@ -44,7 +54,11 @@ public class SettingsYaml {
 		this.configFile.saveAndReload();
 	}
 
+	@SuppressWarnings("unchecked")
 	private void setup() {
+		List<String> landEnabledWorlds = new ArrayList<>();
+		landEnabledWorlds.add("world");
+		this.landEnabledWorlds = (List<String>) this.getStringList("module.land.enabledWorlds", landEnabledWorlds);
 		this.landBasePrice = (double) this.getObjectValue("module.land.basePrice", 235D);
 		this.landTaxAddition = (double) this.getObjectValue("module.land.taxAddition", 5D);
 		this.landMaxPrice = (double) this.getObjectValue("module.land.maxPrice", 750D);
@@ -56,6 +70,11 @@ public class SettingsYaml {
 				.valueOf((String) this.getObjectValue("module.land.buyMaterialBorder", Material.TORCH.toString()));
 		this.landSellMaterialBorder = Material.valueOf(
 				(String) this.getObjectValue("module.land.sellMaterialBorder", Material.REDSTONE_TORCH_ON.toString()));
+
+		List<String> shopsEnabledWorlds = new ArrayList<>();
+		shopsEnabledWorlds.add("shops");
+		this.shopEnabledWorlds = (List<String>) this.getStringList("module.shop.enabledWorlds", shopsEnabledWorlds);
+		this.shopBasePrice = (double) this.getObjectValue("module.shop.basePrice", 300D);
 
 		this.particleUse = (boolean) this.getObjectValue("module.particle.use", true);
 		this.particleUseInventivetalentParticeApi = (boolean) this
@@ -80,6 +99,14 @@ public class SettingsYaml {
 			this.configFile.set(path, defaultValue);
 		}
 		return this.configFile.get(path);
+
+	}
+
+	public Object getStringList(String path, List<String> list) {
+		if (!this.configFile.contains(path)) {
+			this.configFile.set(path, list);
+		}
+		return this.configFile.getStringList(path);
 
 	}
 
