@@ -109,6 +109,15 @@ public class BuyShop implements ILandCmd {
 					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SHOP-REMOVEOFFER"));
 			return true;
 		}
+
+		if (!plugin.getBlockManager().placeLandBorder(chunk,
+				Landplugin.inst().getYamlManager().getSettings().landBuyMaterialBorder)) {
+			/* If this task failed! This should never happen */
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-BLOCK"));
+			plugin.getLogger()
+					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-BLOCK"));
+			return true;
+		}
 		/* Task was successfully. Send BuyMessage */
 		sender.sendMessage(
 				plugin.getYamlManager().getLanguage().buySuccess.replace("{regionID}", regionData.getRegionName()));
