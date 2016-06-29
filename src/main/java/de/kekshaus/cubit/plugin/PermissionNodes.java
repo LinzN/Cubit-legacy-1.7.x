@@ -16,6 +16,7 @@ public class PermissionNodes {
 	public String kickLand = "cubit.command.land.kick";
 	/* Shop Perms */
 	public String buyShop = "cubit.command.shop.buy";
+	public String helpShop = "cubit.command.shop.help";
 	public String infoShop = "cubit.command.shop.info";
 	public String addMemberShop = "cubit.command.shop.addmember";
 	public String removeMemberShop = "cubit.command.shop.removemember";

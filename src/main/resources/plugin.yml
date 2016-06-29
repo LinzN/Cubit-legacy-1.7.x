@@ -51,6 +51,7 @@ permissions:
             cubit.command.shop.addmember: true
             cubit.command.shop.removemember: true
             cubit.command.shop.kick: true
+            cubit.command.shop.help: true
     cubit.command.admin.land:
         description: Admin command permissions
         children:
@@ -118,6 +119,9 @@ permissions:
         description: Haupt-Hilfeseite
         default: op
     cubit.command.shop.info:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.shop.help:
         description: Haupt-Hilfeseite
         default: op
     cubit.command.shop.addmember:

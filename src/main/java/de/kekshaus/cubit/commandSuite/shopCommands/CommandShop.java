@@ -15,6 +15,7 @@ import com.google.common.collect.Maps;
 import de.kekshaus.cubit.api.regionAPI.region.LandTypes;
 import de.kekshaus.cubit.commandSuite.ILandCmd;
 import de.kekshaus.cubit.commandSuite.shopCommands.main.BuyShop;
+import de.kekshaus.cubit.commandSuite.shopCommands.main.HelpShop;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.AddMemberUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.InfoUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.KickUniversal;
@@ -49,6 +50,7 @@ public class CommandShop implements CommandExecutor {
 						|| worldName == null) {
 					if (args.length == 0) {
 						// help site
+						getCmdMap().get("help").runCmd(cmd, sender, args);
 					} else if (getCmdMap().containsKey(args[0])) {
 						String command = args[0];
 						if (!getCmdMap().get(command).runCmd(cmd, sender, args)) {
@@ -76,6 +78,7 @@ public class CommandShop implements CommandExecutor {
 	public void loadCmd() {
 		try {
 			PermissionNodes perm = Landplugin.inst().getPermNodes();
+			this.cmdMap.put("help", new HelpShop(this.plugin, perm.helpShop));
 			this.cmdMap.put("buy", new BuyShop(this.plugin, perm.buyShop));
 
 			this.cmdMap.put("info", new InfoUniversal(this.plugin, perm.infoShop, LandTypes.SHOP));

@@ -89,6 +89,26 @@ public class LanguageYaml {
 	public String landHelpE6P4;
 	public String landHelpE7P4;
 
+	/* Page 1 Help for Shop Command */
+	public String shopHelpE1P1;
+	public String shopHelpE2P1;
+	public String shopHelpE3P1;
+	public String shopHelpE4P1;
+	public String shopHelpE5P1;
+	public String shopHelpE6P1;
+
+	/* Page 2 Help for Shop Command */
+	public String shopHelpE1P2;
+	public String shopHelpE2P2;
+	public String shopHelpE3P2;
+
+	/* Page 3 Help for Shop Command */
+	public String shopHelpE1P3;
+	public String shopHelpE2P3;
+	public String shopHelpE3P3;
+	public String shopHelpE4P3;
+	public String shopHelpE5P3;
+
 	public LanguageYaml(CustomConfig configFile) {
 		this.configFile = configFile;
 		setup();
@@ -205,6 +225,32 @@ public class LanguageYaml {
 		landHelpE6P4 = this.getLanguageString("theme.helpPage4.help5",
 				"&2 Monster Protection: &e/land monster (&aON&e/&cOFF&e)");
 		landHelpE7P4 = this.getLanguageString("theme.helpPage4.help6", "&a&lBack to page 3 &6/land help 3");
+
+		/* Page 1 Help for Shop Command */
+		shopHelpE1P1 = this.getLanguageString("theme.shopHelpPage1.header",
+				"&6<<<<<<<<<<<<<<<<<&2&l|Shop Help|&6>>>>>>>>>>>>>>>>>");
+		shopHelpE2P1 = this.getLanguageString("theme.shopHelpPage1.help1", "&2 Shop informations: &e/shop info");
+		shopHelpE3P1 = this.getLanguageString("theme.shopHelpPage1.help2",
+				"&2 List all your shops: &4/shop list [Page]");
+		shopHelpE4P1 = this.getLanguageString("theme.shopHelpPage1.help3", "&6&lMore commands on the following pages:");
+		shopHelpE5P1 = this.getLanguageString("theme.shopHelpPage1.help4", "&2 Page 2: Buy - Sell &a/shop help 2");
+		shopHelpE6P1 = this.getLanguageString("theme.shopHelpPage1.help5", "&2 Page 3: Manage Members &a/shop help 3");
+
+		/* Page 2 Help for Shop Command */
+		shopHelpE1P2 = this.getLanguageString("theme.shopHelpPage2.header", "&6&lBuy - Sell: [Page 2]");
+		shopHelpE2P2 = this.getLanguageString("theme.shopHelpPage2.help1", "&2 Buy a shop: &e/shop buy");
+		shopHelpE3P2 = this.getLanguageString("theme.shopHelpPage2.help6", "&a&lMore on page 3 with &6/shop help 3");
+
+		/* Page 3 Help for Land Command */
+		shopHelpE1P3 = this.getLanguageString("theme.shopHelpPage3.header", "&6&lManage Members: [Page 3]");
+		shopHelpE2P3 = this.getLanguageString("theme.shopHelpPage3.help1",
+				"&2 Set player build-rights : &e/shop add (-all) [player]");
+		shopHelpE3P3 = this.getLanguageString("theme.shopHelpPage3.help2",
+				"&2 Unset player build-rights: &e/shop remove (-all) [player]");
+		shopHelpE4P3 = this.getLanguageString("theme.shopHelpPage3.help3",
+				"&2 Kick non-members from a shop (teleporting): &4/shop kick");
+		shopHelpE5P3 = this.getLanguageString("theme.shopHelpPage3.help6", "&a&lBack to page 2 &6/shop help 2");
+
 	}
 
 	public String getLanguageString(String path, String defaultValue) {
