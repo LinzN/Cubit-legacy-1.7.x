@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 
 import com.sk89q.worldguard.protection.managers.RegionManager;
@@ -157,7 +159,8 @@ public class RegionAPIManager {
 			this.mRegE.clearMember(list, world);
 			this.mRegE.clearOwners(list, world);
 			if (playerUUID != null) {
-				this.mRegE.setOwner(list, world, playerUUID);
+				OfflinePlayer player = Bukkit.getOfflinePlayer(playerUUID);
+				this.mRegE.setOwner(list, world, player);
 			}
 
 			this.lockPacket.switchState(regionData, true, false);
@@ -188,10 +191,10 @@ public class RegionAPIManager {
 
 	public boolean addMember(final RegionData regionData, final World world, final UUID playerUUID) {
 		try {
-
+			OfflinePlayer player = Bukkit.getOfflinePlayer(playerUUID);
 			List<RegionData> list = new ArrayList<>();
 			list.add(regionData);
-			mRegE.addMember(list, world, playerUUID);
+			mRegE.addMember(list, world, player);
 			saveMrg.save(world);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -200,17 +203,18 @@ public class RegionAPIManager {
 		return true;
 	}
 
-	public boolean addMemberAll(final World world, final UUID playerUUID) {
+	public boolean addMemberAll(final UUID ownerUUID, final World world, final UUID playerUUID, final LandTypes type) {
 		try {
 
-			List<RegionData> list = new ArrayList<>();
-
-			for (ProtectedRegion region : mRegE.getAllLands(playerUUID, world)) {
+			List<RegionData> list = new ArrayList<RegionData>();
+			OfflinePlayer owner = Bukkit.getOfflinePlayer(ownerUUID);
+			OfflinePlayer member = Bukkit.getOfflinePlayer(playerUUID);
+			for (ProtectedRegion region : mRegE.getRegionList(owner, world, type)) {
 				RegionData data = new RegionData(world);
 				data.setWGRegion(region);
 				list.add(data);
 			}
-			mRegE.addMember(list, world, playerUUID);
+			mRegE.addMember(list, world, member);
 			saveMrg.save(world);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -219,17 +223,19 @@ public class RegionAPIManager {
 		return true;
 	}
 
-	public boolean removeMemberAll(final World world, final UUID playerUUID) {
+	public boolean removeMemberAll(final UUID ownerUUID, final World world, final UUID playerUUID,
+			final LandTypes type) {
 		try {
 
 			List<RegionData> list = new ArrayList<>();
-
-			for (ProtectedRegion region : mRegE.getAllLands(playerUUID, world)) {
+			OfflinePlayer owner = Bukkit.getOfflinePlayer(ownerUUID);
+			OfflinePlayer member = Bukkit.getOfflinePlayer(playerUUID);
+			for (ProtectedRegion region : mRegE.getRegionList(owner, world, type)) {
 				RegionData data = new RegionData(world);
 				data.setWGRegion(region);
 				list.add(data);
 			}
-			mRegE.removeMember(list, world, playerUUID);
+			mRegE.removeMember(list, world, member);
 			saveMrg.save(world);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -240,10 +246,10 @@ public class RegionAPIManager {
 
 	public boolean removeMember(final RegionData regionData, final World world, final UUID playerUUID) {
 		try {
-
+			OfflinePlayer player = Bukkit.getOfflinePlayer(playerUUID);
 			List<RegionData> list = new ArrayList<>();
 			list.add(regionData);
-			mRegE.removeMember(list, world, playerUUID);
+			mRegE.removeMember(list, world, player);
 			saveMrg.save(world);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -296,21 +302,13 @@ public class RegionAPIManager {
 	}
 
 	public boolean hasReachLimit(UUID playerUUID, World world, LandTypes type, int limit) {
-		List<ProtectedRegion> regions = this.mRegE.getAllLands(playerUUID, world);
-		int counter = 0;
-
-		for (ProtectedRegion region : regions) {
-			RegionData regionData = new RegionData(world);
-			regionData.setWGRegion(region);
-			if (regionData.getLandType() == type) {
-				counter++;
-			}
-		}
-		if (counter <= limit - 1) {
-			return false;
+		OfflinePlayer player = Bukkit.getOfflinePlayer(playerUUID);
+		List<ProtectedRegion> regions = this.mRegE.getRegionList(player, world, type);
+		if (regions.size() >= limit) {
+			return true;
 		}
 
-		return true;
+		return false;
 	}
 
 	public boolean hasLandPermission(final RegionData regionData, final UUID uuid) {

@@ -56,11 +56,11 @@ public class AddMemberUniversal implements ILandCmd {
 		final Location loc = player.getLocation();
 
 		if (args[1].equalsIgnoreCase("-a") || args[1].equalsIgnoreCase("-all")) {
-			if (args.length >= 3) {
+			if (args.length >= 3 && !this.isAdmin) {
 				@SuppressWarnings("deprecation")
 				OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(args[2]);
 				UUID uuid = offlinePlayer.getUniqueId();
-				if (!plugin.getLandManager().addMemberAll(loc.getWorld(), uuid)) {
+				if (!plugin.getLandManager().addMemberAll(player.getUniqueId(), loc.getWorld(), uuid, type)) {
 					/* If this task failed! This should never happen */
 					sender.sendMessage(
 							plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "ADD-MEMBER"));

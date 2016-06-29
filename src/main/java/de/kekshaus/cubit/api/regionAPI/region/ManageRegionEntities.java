@@ -3,9 +3,7 @@ package de.kekshaus.cubit.api.regionAPI.region;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
-import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 
@@ -18,8 +16,7 @@ import de.kekshaus.cubit.plugin.Landplugin;
 
 public class ManageRegionEntities {
 
-	public List<RegionData> setOwner(List<RegionData> regionListe, World world, UUID playerUUID) {
-		OfflinePlayer player = Bukkit.getOfflinePlayer(playerUUID);
+	public List<RegionData> setOwner(List<RegionData> regionListe, World world, OfflinePlayer player) {
 		LocalPlayer lPlayer = Landplugin.inst().getWorldGuardPlugin().wrapOfflinePlayer(player);
 		DefaultDomain domain = new DefaultDomain();
 		domain.addPlayer(lPlayer);
@@ -45,8 +42,7 @@ public class ManageRegionEntities {
 
 	}
 
-	public List<RegionData> addMember(List<RegionData> regionListe, World world, UUID playerUUID) {
-		OfflinePlayer player = Bukkit.getOfflinePlayer(playerUUID);
+	public List<RegionData> addMember(List<RegionData> regionListe, World world, OfflinePlayer player) {
 		LocalPlayer lPlayer = Landplugin.inst().getWorldGuardPlugin().wrapOfflinePlayer(player);
 		if (regionListe.size() <= 30) {
 
@@ -70,8 +66,7 @@ public class ManageRegionEntities {
 
 	}
 
-	public List<RegionData> removeMember(List<RegionData> regionListe, World world, UUID playerUUID) {
-		OfflinePlayer player = Bukkit.getOfflinePlayer(playerUUID);
+	public List<RegionData> removeMember(List<RegionData> regionListe, World world, OfflinePlayer player) {
 		LocalPlayer lPlayer = Landplugin.inst().getWorldGuardPlugin().wrapOfflinePlayer(player);
 		if (regionListe.size() <= 30) {
 
@@ -141,15 +136,18 @@ public class ManageRegionEntities {
 
 	}
 
-	public List<ProtectedRegion> getAllLands(UUID playerUUID, World world) {
-		OfflinePlayer player = Bukkit.getOfflinePlayer(playerUUID);
+	public List<ProtectedRegion> getRegionList(OfflinePlayer player, World world, LandTypes type) {
 		LocalPlayer lPlayer = Landplugin.inst().getWorldGuardPlugin().wrapOfflinePlayer(player);
 		RegionManager rm = Landplugin.inst().getWorldGuardPlugin().getRegionManager(world);
 		List<ProtectedRegion> toReturn = new ArrayList<ProtectedRegion>();
 
 		for (Map.Entry<String, ProtectedRegion> entry : rm.getRegions().entrySet()) {
-			if (entry.getValue().getOwners().contains(lPlayer.getUniqueId())) {
-				toReturn.add(entry.getValue());
+			if (entry.getValue().getOwners().contains(lPlayer)) {
+				RegionData regionData = new RegionData(world);
+				regionData.setWGRegion(entry.getValue());
+				if (regionData.getLandType() == type) {
+					toReturn.add(entry.getValue());
+				}
 			}
 		}
 
