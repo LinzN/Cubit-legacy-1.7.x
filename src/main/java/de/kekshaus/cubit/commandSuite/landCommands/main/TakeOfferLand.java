@@ -75,6 +75,7 @@ public class TakeOfferLand implements ILandCmd {
 		if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), offerData.getValue())) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
 					"" + plugin.getVaultManager().formateToEconomy(offerData.getValue())));
+			return true;
 		}
 
 		if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), regionData.getOwnerUUID(),
