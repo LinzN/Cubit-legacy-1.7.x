@@ -198,8 +198,8 @@ public class LanguageYaml {
 		landHelpE1P2 = this.getLanguageString("theme.helpPage2.header", "&6&lBuy - Sell: [Page 2]");
 		landHelpE2P2 = this.getLanguageString("theme.helpPage2.help1", "&2 Buy a region: &e/land buy");
 		landHelpE3P2 = this.getLanguageString("theme.helpPage2.help2", "&2 Sell a region: &e/land sell");
-		landHelpE4P2 = this.getLanguageString("theme.helpPage2.help3", "&2 Take a offered region: &4/land takeoffer");
-		landHelpE5P2 = this.getLanguageString("theme.helpPage2.help4", "&2 Offer a region: &4/land offer [Price]");
+		landHelpE4P2 = this.getLanguageString("theme.helpPage2.help3", "&2 Take a offered region: &e/land takeoffer");
+		landHelpE5P2 = this.getLanguageString("theme.helpPage2.help4", "&2 Offer a region: &e/land offer [Price]");
 		landHelpE6P2 = this.getLanguageString("theme.helpPage2.help5", "&2 Buyup outdated regions: &4/land buyup");
 		landHelpE7P2 = this.getLanguageString("theme.helpPage2.help6", "&a&lMore on page 3 with &6/land help 3");
 
