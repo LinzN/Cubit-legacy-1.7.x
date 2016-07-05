@@ -101,6 +101,7 @@ public class LanguageYaml {
 	public String shopHelpE1P2;
 	public String shopHelpE2P2;
 	public String shopHelpE3P2;
+	public String shopHelpE6P2;
 
 	/* Page 3 Help for Shop Command */
 	public String shopHelpE1P3;
@@ -239,7 +240,8 @@ public class LanguageYaml {
 		/* Page 2 Help for Shop Command */
 		shopHelpE1P2 = this.getLanguageString("theme.shopHelpPage2.header", "&6&lBuy - Sell: [Page 2]");
 		shopHelpE2P2 = this.getLanguageString("theme.shopHelpPage2.help1", "&2 Buy a shop: &e/shop buy");
-		shopHelpE3P2 = this.getLanguageString("theme.shopHelpPage2.help6", "&a&lMore on page 3 with &6/shop help 3");
+		shopHelpE3P2 = this.getLanguageString("theme.shopHelpPage2.help2", "&2 Sell a shop: &e/shop sell");
+		shopHelpE6P2 = this.getLanguageString("theme.shopHelpPage2.help6", "&a&lMore on page 3 with &6/shop help 3");
 
 		/* Page 3 Help for Land Command */
 		shopHelpE1P3 = this.getLanguageString("theme.shopHelpPage3.header", "&6&lManage Members: [Page 3]");

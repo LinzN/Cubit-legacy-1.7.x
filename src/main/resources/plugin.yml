@@ -47,6 +47,7 @@ permissions:
         description:  User command permissions
         children:
             cubit.command.shop.buy: true
+            cubit.command.shop.sell: true
             cubit.command.shop.info: true
             cubit.command.shop.addmember: true
             cubit.command.shop.removemember: true
@@ -116,6 +117,9 @@ permissions:
         description: Haupt-Hilfeseite
         default: op
     cubit.command.shop.buy:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.shop.sell:
         description: Haupt-Hilfeseite
         default: op
     cubit.command.shop.info:

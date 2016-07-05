@@ -58,6 +58,7 @@ public class HelpShop implements ILandCmd {
 		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpE1P2);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpE2P2);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpE3P2);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpE6P2);
 		return true;
 
 	}
