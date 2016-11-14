@@ -9,9 +9,9 @@ import org.bukkit.World;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.kekshaus.cubit.plugin.Landplugin;
-import de.nlinz.xeonSuite.guild.api.InternAPI;
-import de.nlinz.xeonSuite.guild.objects.Guild;
+//import de.kekshaus.cubit.plugin.Landplugin;
+//import de.nlinz.xeonSuite.guild.api.InternAPI;
+//import de.nlinz.xeonSuite.guild.objects.Guild;
 
 public class RegionData {
 	// private String regionID;
@@ -34,14 +34,11 @@ public class RegionData {
 		return this.region;
 	}
 
-	public Guild getGuild() {
-		if (Landplugin.inst().isGuildLoaded()) {
-			Guild guild = InternAPI.getForceGuildPlayer(getOwnerUUID()).getGuild();
-			return guild;
-		}
-		return null;
-	}
-
+	/*
+	 * public Guild getGuild() { if (Landplugin.inst().isGuildLoaded()) { Guild
+	 * guild = InternAPI.getForceGuildPlayer(getOwnerUUID()).getGuild(); return
+	 * guild; } return null; }
+	 */
 	public String getMinPoint() {
 		return this.region.getMinimumPoint().getBlockX() + ", " + this.region.getMinimumPoint().getBlockZ();
 	}

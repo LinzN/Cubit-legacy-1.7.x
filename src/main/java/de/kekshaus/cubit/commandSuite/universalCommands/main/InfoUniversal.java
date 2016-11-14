@@ -10,7 +10,7 @@ import de.kekshaus.cubit.api.regionAPI.region.LandTypes;
 import de.kekshaus.cubit.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.commandSuite.ILandCmd;
 import de.kekshaus.cubit.plugin.Landplugin;
-import de.nlinz.xeonSuite.guild.objects.Guild;
+//import de.nlinz.xeonSuite.guild.objects.Guild;
 
 public class InfoUniversal implements ILandCmd {
 
@@ -98,13 +98,12 @@ public class InfoUniversal implements ILandCmd {
 		player.sendMessage(
 				plugin.getYamlManager().getLanguage().landInfoE1.replace("{regionID}", regionData.getRegionName()));
 
-		if (this.plugin.isGuildLoaded()) {
-			Guild guild = regionData.getGuild();
-			if (guild != null) {
-				player.sendMessage(
-						plugin.getYamlManager().getLanguage().landInfoE1A1.replace("{guild}", guild.getGuildName()));
-			}
-		}
+		/*
+		 * if (this.plugin.isGuildLoaded()) { Guild guild =
+		 * regionData.getGuild(); if (guild != null) { player.sendMessage(
+		 * plugin.getYamlManager().getLanguage().landInfoE1A1.replace("{guild}",
+		 * guild.getGuildName())); } }
+		 */
 		player.sendMessage(
 				plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}", regionData.getOwnerName()));
 		if (regionData.getMembersName().size() != 0) {
@@ -149,13 +148,12 @@ public class InfoUniversal implements ILandCmd {
 			player.sendMessage(
 					plugin.getYamlManager().getLanguage().landInfoE1.replace("{regionID}", regionData.getRegionName()));
 
-			if (this.plugin.isGuildLoaded()) {
-				Guild guild = regionData.getGuild();
-				if (guild != null) {
-					player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE1A1.replace("{guild}",
-							guild.getGuildName()));
-				}
-			}
+			/*
+			 * if (this.plugin.isGuildLoaded()) { Guild guild =
+			 * regionData.getGuild(); if (guild != null) {
+			 * player.sendMessage(plugin.getYamlManager().getLanguage().
+			 * landInfoE1A1.replace("{guild}", guild.getGuildName())); } }
+			 */
 			player.sendMessage(
 					plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}", regionData.getOwnerName()));
 			if (regionData.getMembersName().size() != 0) {
@@ -169,13 +167,9 @@ public class InfoUniversal implements ILandCmd {
 					.replace("{monster}", statusMonster).replace("{fire}", statusFire).replace("{pvp}", statusPvP)
 					.replace("{tnt}", statusTNT).replace("{potion}", statusPotion));
 			if (plugin.getDatabaseManager().isOffered(regionData.getRegionName(), regionData.getWorld())) {
-				player.sendMessage(
-						plugin.getYamlManager().getLanguage().landInfoA2
-								.replace("{value}",
-										"" + plugin.getVaultManager()
-												.formateToEconomy(plugin.getDatabaseManager()
-														.getOfferData(regionData.getRegionName(), regionData.getWorld())
-														.getValue())));
+				player.sendMessage(plugin.getYamlManager().getLanguage().landInfoA2.replace("{value}",
+						"" + plugin.getVaultManager().formateToEconomy(plugin.getDatabaseManager()
+								.getOfferData(regionData.getRegionName(), regionData.getWorld()).getValue())));
 			}
 
 		} else {
