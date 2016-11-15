@@ -42,7 +42,7 @@ public class SettingsYaml {
 
 	/* Database module */
 	public boolean sqlUse;
-	public boolean sqlUseXeonSuiteSameDatabase;
+	//public boolean sqlUseXeonSuiteSameDatabase;
 	public String sqlDataBase;
 	public String sqlHostname;
 	public int sqlPort;
@@ -83,7 +83,7 @@ public class SettingsYaml {
 				.getObjectValue("module.particle.useInventivetalentParticleAPI", false);
 
 		this.sqlUse = (boolean) this.getObjectValue("module.database.useSql", false);
-		this.sqlUseXeonSuiteSameDatabase = (boolean) getObjectValue("module.database.useXeonSuiteSameDatabase", false);
+		//this.sqlUseXeonSuiteSameDatabase = (boolean) getObjectValue("module.database.useXeonSuiteSameDatabase", false);
 		this.sqlDataBase = (String) this.getObjectValue("module.database.databaseName", "databaseName");
 		this.sqlHostname = (String) getObjectValue("module.database.hostName", "localhost");
 		this.sqlPort = (int) getObjectValue("module.database.port", 3306);

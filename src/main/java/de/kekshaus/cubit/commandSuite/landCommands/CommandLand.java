@@ -24,6 +24,7 @@ import de.kekshaus.cubit.commandSuite.universalCommands.main.ChangeFlagUniversal
 import de.kekshaus.cubit.commandSuite.universalCommands.main.InfoUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.KickUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.RemoveMemberUniversal;
+import de.kekshaus.cubit.commandSuite.universalCommands.main.VersionUniversal;
 import de.kekshaus.cubit.plugin.Landplugin;
 import de.kekshaus.cubit.plugin.PermissionNodes;
 
@@ -83,7 +84,7 @@ public class CommandLand implements CommandExecutor {
 		try {
 			PermissionNodes perm = Landplugin.inst().getPermNodes();
 			/* GS Buy/Sell Commands */
-
+			this.cmdMap.put("version", new VersionUniversal(this.plugin, null, null));
 			this.cmdMap.put("help", new HelpLand(this.plugin, perm.helpLand));
 			this.cmdMap.put("buy", new BuyLand(this.plugin, perm.buyLand));
 			this.cmdMap.put("sell", new SellLand(this.plugin, perm.sellLand, false));

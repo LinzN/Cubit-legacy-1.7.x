@@ -19,8 +19,10 @@ import de.kekshaus.cubit.commandSuite.adminCommands.main.DeleteServerAdmin;
 import de.kekshaus.cubit.commandSuite.landCommands.main.OfferLand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.SellLand;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.AddMemberUniversal;
+import de.kekshaus.cubit.commandSuite.universalCommands.main.ChangeBiomeUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.ChangeFlagUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.RemoveMemberUniversal;
+import de.kekshaus.cubit.commandSuite.universalCommands.main.VersionUniversal;
 import de.kekshaus.cubit.plugin.Landplugin;
 import de.kekshaus.cubit.plugin.PermissionNodes;
 
@@ -68,6 +70,7 @@ public class CommandAdmin implements CommandExecutor {
 		try {
 			PermissionNodes perm = Landplugin.inst().getPermNodes();
 			/* Protection AdminCommands */
+			this.cmdMap.put("version", new VersionUniversal(this.plugin, null, null));
 			this.cmdMap.put("setpvp", new ChangeFlagUniversal(this.plugin, Landplugin.inst().getLandManager().pvpPacket,
 					perm.flagAdminLand + "pvp", LandTypes.NOTYPE, true));
 			this.cmdMap.put("setfire",
@@ -91,6 +94,8 @@ public class CommandAdmin implements CommandExecutor {
 			this.cmdMap.put("createserver", new CreateServerAdmin(this.plugin, perm.createServerAdminLand));
 			this.cmdMap.put("deleteserver", new DeleteServerAdmin(this.plugin, perm.deleteServerAdminLand));
 			this.cmdMap.put("createshop", new CreateShopAdmin(this.plugin, perm.createShopAdminLand));
+			
+			this.cmdMap.put("changebiome", new ChangeBiomeUniversal(this.plugin, perm.changeBiomeAdminLand, LandTypes.NOTYPE, true));
 
 			this.isLoaded = true;
 		} catch (Exception e) {

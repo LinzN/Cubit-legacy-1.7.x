@@ -21,6 +21,7 @@ import de.kekshaus.cubit.commandSuite.universalCommands.main.AddMemberUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.InfoUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.KickUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.RemoveMemberUniversal;
+import de.kekshaus.cubit.commandSuite.universalCommands.main.VersionUniversal;
 import de.kekshaus.cubit.plugin.Landplugin;
 import de.kekshaus.cubit.plugin.PermissionNodes;
 
@@ -79,6 +80,7 @@ public class CommandShop implements CommandExecutor {
 	public void loadCmd() {
 		try {
 			PermissionNodes perm = Landplugin.inst().getPermNodes();
+			this.cmdMap.put("version", new VersionUniversal(this.plugin, null, null));
 			this.cmdMap.put("help", new HelpShop(this.plugin, perm.helpShop));
 			this.cmdMap.put("buy", new BuyShop(this.plugin, perm.buyShop));
 			this.cmdMap.put("sell", new SellShop(this.plugin, perm.sellShop));

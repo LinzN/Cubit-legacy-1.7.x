@@ -32,6 +32,7 @@ public class PermissionNodes {
 	public String createServerAdminLand = "cubit.command.admin.createserver";
 	public String deleteServerAdminLand = "cubit.command.admin.deleteserver";
 	public String createShopAdminLand = "cubit.command.admin.createshop";
+	public String changeBiomeAdminLand = "cubit.command.admin.changebiome";
 	public String kickAdminBypass = "cubit.bypass.kick";
 
 }
