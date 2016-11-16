@@ -13,6 +13,7 @@ public class BlockAPIManager {
 	private Landplugin plugin;
 
 	public BlockAPIManager(Landplugin plugin) {
+		plugin.getLogger().info("Loading BlockAPIManager");
 		this.plugin = plugin;
 	}
 

@@ -14,6 +14,7 @@ public class ParticleAPIManager {
 	private Landplugin plugin;
 
 	public ParticleAPIManager(Landplugin plugin) {
+		plugin.getLogger().info("Loading ParticleAPIManager");
 		this.plugin = plugin;
 	}
 

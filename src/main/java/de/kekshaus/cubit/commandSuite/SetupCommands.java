@@ -13,6 +13,7 @@ public class SetupCommands {
 	private String commandAdmin = "cadmin";
 
 	public SetupCommands(Landplugin plugin) {
+		plugin.getLogger().info("Loading CommandSuite");
 		this.plugin = plugin;
 		registerCommands();
 	}
@@ -22,18 +23,21 @@ public class SetupCommands {
 		CommandLand landClass = new CommandLand(this.plugin);
 		if (!landClass.isLoaded())
 			landClass.loadCmd();
+		plugin.getLogger().info("Register command /land");
 		plugin.getCommand(commandLand).setExecutor(landClass);
 
 		/* Command setup for /shop */
 		CommandShop shopClass = new CommandShop(this.plugin);
 		if (!shopClass.isLoaded())
 			shopClass.loadCmd();
+		plugin.getLogger().info("Register command /shop");
 		plugin.getCommand(commandShop).setExecutor(shopClass);
 
 		/* Command setup for /cadmin */
 		CommandAdmin adminClass = new CommandAdmin(this.plugin);
 		if (!adminClass.isLoaded())
 			adminClass.loadCmd();
+		plugin.getLogger().info("Register command /cadmin");
 		plugin.getCommand(commandAdmin).setExecutor(adminClass);
 	}
 

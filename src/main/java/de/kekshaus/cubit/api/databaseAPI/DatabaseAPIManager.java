@@ -17,11 +17,14 @@ public class DatabaseAPIManager {
 	private boolean useSql;
 
 	public DatabaseAPIManager(Landplugin plugin) {
+		plugin.getLogger().info("Loading DatabaseAPIManager");
 		this.plugin = plugin;
 		this.useSql = this.plugin.getYamlManager().getSettings().sqlUse;
 		if (this.useSql) {
+			plugin.getLogger().info("Using MYSQL database");
 			this.databaseProvider = new DatabaseProviderSQL(plugin);
 		} else {
+			plugin.getLogger().info("Using YAML database");
 			this.databaseProvider = new DatabaseProviderYAML(plugin);
 		}
 

@@ -19,6 +19,7 @@ public class VaultAPIManager {
 	private EconomyHook ecoMrg;
 
 	public VaultAPIManager(Landplugin plugin) {
+		plugin.getLogger().info("Loading VaultAPIManager");
 		this.plugin = plugin;
 		setupEconomy();
 		this.ecoMrg = new EconomyHook(plugin, econ);

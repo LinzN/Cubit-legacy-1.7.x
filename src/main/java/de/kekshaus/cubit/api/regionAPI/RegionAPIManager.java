@@ -39,6 +39,7 @@ public class RegionAPIManager {
 	public PotionPacket potionPacket;
 
 	public RegionAPIManager(Landplugin plugin) {
+		plugin.getLogger().info("Loading RegionAPIManager");
 		this.plugin = plugin;
 		this.mReg = new ManageRegions();
 		this.mRegE = new ManageRegionEntities();

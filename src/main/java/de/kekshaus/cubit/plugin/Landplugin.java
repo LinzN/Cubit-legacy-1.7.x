@@ -20,7 +20,6 @@ import de.kekshaus.cubit.plugin.listener.LoginListener;
 public class Landplugin extends JavaPlugin {
 
 	private static Landplugin inst;
-	private boolean isGuildLoaded = false;
 	private WorldGuardPlugin wgPl;
 	private WorldEdit wePl;
 	private RegionAPIManager landMrg;
@@ -36,9 +35,6 @@ public class Landplugin extends JavaPlugin {
 		inst = this;
 		this.wgPl = WorldGuardPlugin.inst();
 		this.wePl = WorldEdit.getInstance();
-		if (this.getServer().getPluginManager().getPlugin("XeonSuiteGuild") != null) {
-			isGuildLoaded = true;
-		}
 		setupManagers();
 		this.getServer().getPluginManager().registerEvents(new LoginListener(), this);
 
@@ -52,6 +48,8 @@ public class Landplugin extends JavaPlugin {
 		if (this.getYamlManager().getSettings().physicWaterLavaFlowLand) {
 			this.getServer().getPluginManager().registerEvents(new AdditionalPhysicsListener(), this);
 		}
+		
+		getLogger().info("Cubit startup finish");
 
 	}
 
@@ -66,7 +64,7 @@ public class Landplugin extends JavaPlugin {
 		this.blockMrg = new BlockAPIManager(this);
 		this.particleMrg = new ParticleAPIManager(this);
 		this.vaultMrg = new VaultAPIManager(this);
-		this.permNodes = new PermissionNodes();
+		this.permNodes = new PermissionNodes(this);
 		this.databaseMrg = new DatabaseAPIManager(this);
 
 	}
@@ -109,10 +107,6 @@ public class Landplugin extends JavaPlugin {
 
 	public YamlConfigurationManager getYamlManager() {
 		return this.yamlConfiguration;
-	}
-
-	public boolean isGuildLoaded() {
-		return this.isGuildLoaded;
 	}
 
 }

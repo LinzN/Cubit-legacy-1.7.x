@@ -1,6 +1,12 @@
 package de.kekshaus.cubit.plugin;
 
+import org.bukkit.plugin.java.JavaPlugin;
+
 public class PermissionNodes {
+	
+	public PermissionNodes (JavaPlugin plugin){
+		plugin.getLogger().info("Loading PermissionNodes");
+	}
 
 	/* User Perms */
 	/* Land Perms */
