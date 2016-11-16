@@ -4,7 +4,6 @@ version: ${project.version}.b${build.number}
 description: Landplugin
 author: Kekshaus
 load: POSTWORLD
-softdepend: [XeonSuiteGuild]
 
 commands:
   land:
