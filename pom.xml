@@ -71,8 +71,10 @@
 		<!--Spigot API -->
 		<dependency>
 			<groupId>org.spigotmc</groupId>
-			<artifactId>spigot-api</artifactId>
+			<artifactId>spigot-server</artifactId>
 			<version>1.10-R0.1-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/../privatRepo/spigotmc/1.10/spigot-1.10.2.jar</systemPath>
 		</dependency>
 		<!--Bukkit API -->
 		<dependency>

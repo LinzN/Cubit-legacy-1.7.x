@@ -19,6 +19,8 @@ public class LanguageYaml {
 	public String noNumberFound;
 	public String noEnabledWorld;
 	public String reachLimit;
+	public String notABiome;
+	public String pageNotFound;
 
 	/* Success MSG */
 	public String buySuccess;
@@ -32,6 +34,7 @@ public class LanguageYaml {
 	public String kickedInfo;
 	public String kickInfo;
 	public String isFreeAndBuyable;
+	public String changedBiome;
 
 	/* UnSuccess MSG */
 	public String buyIsAlreadyLand;
@@ -44,6 +47,11 @@ public class LanguageYaml {
 	/* Header for Plugin */
 	public String landHeader;
 
+	/* Land List Page */
+	public String landListHeader;
+	public String landListEntry;
+	
+	
 	/* Land Info Page */
 	public String landInfoA1;
 	public String landInfoA2;
@@ -56,6 +64,7 @@ public class LanguageYaml {
 	public String landInfoE6;
 
 	/* Page 1 Help for Land Command */
+	public String landHelpHeaderP1;
 	public String landHelpE1P1;
 	public String landHelpE2P1;
 	public String landHelpE3P1;
@@ -65,50 +74,55 @@ public class LanguageYaml {
 	public String landHelpE7P1;
 
 	/* Page 2 Help for Land Command */
+	public String landHelpHeaderP2;
 	public String landHelpE1P2;
 	public String landHelpE2P2;
 	public String landHelpE3P2;
 	public String landHelpE4P2;
 	public String landHelpE5P2;
-	public String landHelpE6P2;
-	public String landHelpE7P2;
+	public String landHelpBottomP2;
 
 	/* Page 3 Help for Land Command */
+	public String landHelpHeaderP3;
 	public String landHelpE1P3;
 	public String landHelpE2P3;
 	public String landHelpE3P3;
-	public String landHelpE4P3;
-	public String landHelpE5P3;
+	public String landHelpBottomP3;
 
 	/* Page 4 Help for Land Command */
+	public String landHelpHeaderP4;
 	public String landHelpE1P4;
 	public String landHelpE2P4;
 	public String landHelpE3P4;
 	public String landHelpE4P4;
 	public String landHelpE5P4;
-	public String landHelpE6P4;
-	public String landHelpE7P4;
+	public String landHelpBottomP4;
+	
+	/* Page 5 Help for Land Command */
+	public String landHelpHeaderP5;
+	public String landHelpE1P5;
+	public String landHelpBottomP5;
 
 	/* Page 1 Help for Shop Command */
+	public String shopHelpHeaderP1;
 	public String shopHelpE1P1;
 	public String shopHelpE2P1;
 	public String shopHelpE3P1;
 	public String shopHelpE4P1;
-	public String shopHelpE5P1;
-	public String shopHelpE6P1;
+	public String shopHelpBottomP1;
 
 	/* Page 2 Help for Shop Command */
+	public String shopHelpHeaderP2;
 	public String shopHelpE1P2;
 	public String shopHelpE2P2;
-	public String shopHelpE3P2;
-	public String shopHelpE6P2;
+	public String shopHelpBottomP2;
 
 	/* Page 3 Help for Shop Command */
+	public String shopHelpHeaderP3;
 	public String shopHelpE1P3;
 	public String shopHelpE2P3;
 	public String shopHelpE3P3;
-	public String shopHelpE4P3;
-	public String shopHelpE5P3;
+	public String shopHelpBottomP3;
 
 	public LanguageYaml(CustomConfig configFile) {
 		this.configFile = configFile;
@@ -133,6 +147,8 @@ public class LanguageYaml {
 				"&cNo valid {type} region found here! Sorry :(");
 		noNumberFound = this.getLanguageString("noNumberFound", "&cThis is not a valid number");
 		reachLimit = this.getLanguageString("reachLimit", "&cSorry you reached the limit for this regionType!");
+		notABiome = this.getLanguageString("notABiome", "&cThis is not a valid biomename: {biome}!");
+		pageNotFound = this.getLanguageString("pageNotfound", "&cThis is not a valid page");
 
 		/* Success MSG */
 		buySuccess = this.getLanguageString("buySuccess", "&2You bought the region &e{regionID}&2!");
@@ -152,6 +168,7 @@ public class LanguageYaml {
 		kickedInfo = this.getLanguageString("kickedInfo",
 				"&6You kicked from the region {regionID} by the region owner!");
 		kickInfo = this.getLanguageString("kickInfo", "&2All non-member kicked from the region {regionID}!");
+		changedBiome = this.getLanguageString("changedBiome", "&2You changed the biome from region {regionID} to {biome}!");
 
 		/* UnSuccess MSG */
 		buyIsAlreadyLand = this.getLanguageString("buyIsAlreadyLand",
@@ -185,74 +202,84 @@ public class LanguageYaml {
 				"&2Security-Systems: {lock}, {monster}, {fire}, {pvp}, {tnt}, {potion}");
 
 		/* Page 1 Help for Land Command */
-		landHelpE1P1 = this.getLanguageString("theme.helpPage1.header",
+		landHelpHeaderP1 = this.getLanguageString("theme.helpPage1.header",
 				"&6<<<<<<<<<<<<<<<<<&2&l|Region Help|&6>>>>>>>>>>>>>>>>>");
-		landHelpE2P1 = this.getLanguageString("theme.helpPage1.help1", "&2 Region informations: &e/land info");
-		landHelpE3P1 = this.getLanguageString("theme.helpPage1.help2", "&2 List all your regions: &4/land list [Page]");
-		landHelpE4P1 = this.getLanguageString("theme.helpPage1.help3", "&6&lMore commands on the following pages:");
-		landHelpE5P1 = this.getLanguageString("theme.helpPage1.help4", "&2 Page 2: Buy - Sell &a/land help 2");
-		landHelpE6P1 = this.getLanguageString("theme.helpPage1.help5", "&2 Page 3: Manage Members &a/land help 3");
-		landHelpE7P1 = this.getLanguageString("theme.helpPage1.help6", "&2 Page 4: Region flags &a/land help 4");
+		landHelpE1P1 = this.getLanguageString("theme.helpPage1.help1", "&2 Region informations: &e/land info");
+		landHelpE2P1 = this.getLanguageString("theme.helpPage1.help2", "&2 List all your regions: &e/land list [Page]");
+		landHelpE3P1 = this.getLanguageString("theme.helpPage1.help3", "&6&lMore commands on the following pages:");
+		landHelpE4P1 = this.getLanguageString("theme.helpPage1.help4", "&2 Page 2: Buy - Sell &a/land help 2");
+		landHelpE5P1 = this.getLanguageString("theme.helpPage1.help5", "&2 Page 3: Manage Members &a/land help 3");
+		landHelpE6P1 = this.getLanguageString("theme.helpPage1.help6", "&2 Page 4: Region flags &a/land help 4");
+		landHelpE7P1 = this.getLanguageString("theme.helpPage1.help7", "&2 Page 5: Land edit &a/land help 5");
 
 		/* Page 2 Help for Land Command */
-		landHelpE1P2 = this.getLanguageString("theme.helpPage2.header", "&6&lBuy - Sell: [Page 2]");
-		landHelpE2P2 = this.getLanguageString("theme.helpPage2.help1", "&2 Buy a region: &e/land buy");
-		landHelpE3P2 = this.getLanguageString("theme.helpPage2.help2", "&2 Sell a region: &e/land sell");
-		landHelpE4P2 = this.getLanguageString("theme.helpPage2.help3", "&2 Take a offered region: &e/land takeoffer");
-		landHelpE5P2 = this.getLanguageString("theme.helpPage2.help4", "&2 Offer a region: &e/land offer [Price]");
-		landHelpE6P2 = this.getLanguageString("theme.helpPage2.help5", "&2 Buyup outdated regions: &4/land buyup");
-		landHelpE7P2 = this.getLanguageString("theme.helpPage2.help6", "&a&lMore on page 3 with &6/land help 3");
+		landHelpHeaderP2 = this.getLanguageString("theme.helpPage2.header", "&6&lBuy - Sell: [Page 2]");
+		landHelpE1P2 = this.getLanguageString("theme.helpPage2.help1", "&2 Buy a region: &e/land buy");
+		landHelpE2P2 = this.getLanguageString("theme.helpPage2.help2", "&2 Sell a region: &e/land sell");
+		landHelpE3P2 = this.getLanguageString("theme.helpPage2.help3", "&2 Take a offered region: &e/land takeoffer");
+		landHelpE4P2 = this.getLanguageString("theme.helpPage2.help4", "&2 Offer a region: &e/land offer [Price]");
+		landHelpE5P2 = this.getLanguageString("theme.helpPage2.help5", "&2 Buyup outdated regions: &4/land buyup");
+		landHelpBottomP2 = this.getLanguageString("theme.helpPage2.bottom", "&a&lMore on page 3 with &6/land help 3");
 
 		/* Page 3 Help for Land Command */
-		landHelpE1P3 = this.getLanguageString("theme.helpPage3.header", "&6&lManage Members: [Page 3]");
-		landHelpE2P3 = this.getLanguageString("theme.helpPage3.help1",
+		landHelpHeaderP3 = this.getLanguageString("theme.helpPage3.header", "&6&lManage Members: [Page 3]");
+		landHelpE1P3 = this.getLanguageString("theme.helpPage3.help1",
 				"&2 Set player build-rights : &e/land add (-all) [player]");
-		landHelpE3P3 = this.getLanguageString("theme.helpPage3.help2",
+		landHelpE2P3 = this.getLanguageString("theme.helpPage3.help2",
 				"&2 Unset player build-rights: &e/land remove (-all) [player]");
-		landHelpE4P3 = this.getLanguageString("theme.helpPage3.help3",
+		landHelpE3P3 = this.getLanguageString("theme.helpPage3.help3",
 				"&2 Kick non-members from a region (teleporting): &4/land kick");
-		landHelpE5P3 = this.getLanguageString("theme.helpPage3.help4", "&a&lMore on page 4 with &6/land help 4");
+		landHelpBottomP3 = this.getLanguageString("theme.helpPage3.bottom", "&a&lMore on page 4 with &6/land help 4");
 
 		/* Page 4 Help for Land Command */
-		landHelpE1P4 = this.getLanguageString("theme.helpPage4.header", "&6&lRegion Protection-systems: [Page 4]");
-		landHelpE2P4 = this.getLanguageString("theme.helpPage4.help1",
+		landHelpHeaderP4 = this.getLanguageString("theme.helpPage4.header", "&6&lRegion Protection-systems: [Page 4]");
+		landHelpE1P4 = this.getLanguageString("theme.helpPage4.help1",
 				"&2 Fire Protection: &e/land fire (&aON&e/&cOFF&e)");
-		landHelpE3P4 = this.getLanguageString("theme.helpPage4.help2",
+		landHelpE2P4 = this.getLanguageString("theme.helpPage4.help2",
 				"&2 Access Protection: &e/land lock (&aON&e/&cOFF&e)");
-		landHelpE4P4 = this.getLanguageString("theme.helpPage4.help3",
+		landHelpE3P4 = this.getLanguageString("theme.helpPage4.help3",
 				"&2 PvP Protection: &e/land pvp (&aON&e/&cOFF&e)");
-		landHelpE5P4 = this.getLanguageString("theme.helpPage4.help4",
+		landHelpE4P4 = this.getLanguageString("theme.helpPage4.help4",
 				"&2 TnT Protection: &e/land tnt (&aON&e/&cOFF&e)");
-		landHelpE6P4 = this.getLanguageString("theme.helpPage4.help5",
+		landHelpE5P4 = this.getLanguageString("theme.helpPage4.help5",
 				"&2 Monster Protection: &e/land monster (&aON&e/&cOFF&e)");
-		landHelpE7P4 = this.getLanguageString("theme.helpPage4.help6", "&a&lBack to page 3 &6/land help 3");
+		landHelpBottomP4 = this.getLanguageString("theme.helpPage4.bottom", "&a&lMore on page 5 with &6/land help 5");
+		
+		/* Page 5 Help for Land Command */
+		landHelpHeaderP5 = this.getLanguageString("theme.helpPage5.header", "&6&lLand edit: [Page 5]");
+		landHelpE1P5 = this.getLanguageString("theme.helpPage5.help1", "&2 Change biome: &e/land changebiome [Biome]");
+		landHelpBottomP5 = this.getLanguageString("theme.helpPage5.bottom", "&a&lBack to page 4 &6/land help 4");
 
 		/* Page 1 Help for Shop Command */
-		shopHelpE1P1 = this.getLanguageString("theme.shopHelpPage1.header",
+		shopHelpHeaderP1 = this.getLanguageString("theme.shopHelpPage1.header",
 				"&6<<<<<<<<<<<<<<<<<&2&l|Shop Help|&6>>>>>>>>>>>>>>>>>");
-		shopHelpE2P1 = this.getLanguageString("theme.shopHelpPage1.help1", "&2 Shop informations: &e/shop info");
-		shopHelpE3P1 = this.getLanguageString("theme.shopHelpPage1.help2",
-				"&2 List all your shops: &4/shop list [Page]");
-		shopHelpE4P1 = this.getLanguageString("theme.shopHelpPage1.help3", "&6&lMore commands on the following pages:");
-		shopHelpE5P1 = this.getLanguageString("theme.shopHelpPage1.help4", "&2 Page 2: Buy - Sell &a/shop help 2");
-		shopHelpE6P1 = this.getLanguageString("theme.shopHelpPage1.help5", "&2 Page 3: Manage Members &a/shop help 3");
+		shopHelpE1P1 = this.getLanguageString("theme.shopHelpPage1.help1", "&2 Shop informations: &e/shop info");
+		shopHelpE2P1 = this.getLanguageString("theme.shopHelpPage1.help2",
+				"&2 List all your shops: &e/shop list [Page]");
+		shopHelpE3P1 = this.getLanguageString("theme.shopHelpPage1.help3", "&6&lMore commands on the following pages:");
+		shopHelpE4P1 = this.getLanguageString("theme.shopHelpPage1.help4", "&2 Page 2: Buy - Sell &a/shop help 2");
+		shopHelpBottomP1 = this.getLanguageString("theme.shopHelpPage1.bottom", "&2 Page 3: Manage Members &a/shop help 3");
 
 		/* Page 2 Help for Shop Command */
-		shopHelpE1P2 = this.getLanguageString("theme.shopHelpPage2.header", "&6&lBuy - Sell: [Page 2]");
-		shopHelpE2P2 = this.getLanguageString("theme.shopHelpPage2.help1", "&2 Buy a shop: &e/shop buy");
-		shopHelpE3P2 = this.getLanguageString("theme.shopHelpPage2.help2", "&2 Sell a shop: &e/shop sell");
-		shopHelpE6P2 = this.getLanguageString("theme.shopHelpPage2.help6", "&a&lMore on page 3 with &6/shop help 3");
+		shopHelpHeaderP2 = this.getLanguageString("theme.shopHelpPage2.header", "&6&lBuy - Sell: [Page 2]");
+		shopHelpE1P2 = this.getLanguageString("theme.shopHelpPage2.help1", "&2 Buy a shop: &e/shop buy");
+		shopHelpE2P2 = this.getLanguageString("theme.shopHelpPage2.help2", "&2 Sell a shop: &e/shop sell");
+		shopHelpBottomP2 = this.getLanguageString("theme.shopHelpPage2.bottom", "&a&lMore on page 3 with &6/shop help 3");
 
 		/* Page 3 Help for Land Command */
-		shopHelpE1P3 = this.getLanguageString("theme.shopHelpPage3.header", "&6&lManage Members: [Page 3]");
-		shopHelpE2P3 = this.getLanguageString("theme.shopHelpPage3.help1",
+		shopHelpHeaderP3 = this.getLanguageString("theme.shopHelpPage3.header", "&6&lManage Members: [Page 3]");
+		shopHelpE1P3 = this.getLanguageString("theme.shopHelpPage3.help1",
 				"&2 Set player build-rights : &e/shop add (-all) [player]");
-		shopHelpE3P3 = this.getLanguageString("theme.shopHelpPage3.help2",
+		shopHelpE2P3 = this.getLanguageString("theme.shopHelpPage3.help2",
 				"&2 Unset player build-rights: &e/shop remove (-all) [player]");
-		shopHelpE4P3 = this.getLanguageString("theme.shopHelpPage3.help3",
+		shopHelpE3P3 = this.getLanguageString("theme.shopHelpPage3.help3",
 				"&2 Kick non-members from a shop (teleporting): &4/shop kick");
-		shopHelpE5P3 = this.getLanguageString("theme.shopHelpPage3.help6", "&a&lBack to page 2 &6/shop help 2");
-
+		shopHelpBottomP3 = this.getLanguageString("theme.shopHelpPage3.bottom", "&a&lBack to page 2 &6/shop help 2");
+		
+		/* Land List Command */
+		landListHeader = this.getLanguageString("theme.landList.header", "&6&lRegion Count: &r&2{count} &6&l- Entries &r&2{entryMin} &6&lfrom &r&2{entryMax}");
+		landListEntry = this.getLanguageString("theme.landList.entry", "&a{counter}. &6{regionID} &a(&efrom &a- &eto&a) [&e{minPoints} &a- &e{maxPoints}&a]");
+		
 	}
 
 	public String getLanguageString(String path, String defaultValue) {

@@ -266,6 +266,22 @@ public class RegionAPIManager {
 		}
 		return stateString;
 	}
+	
+	public List<RegionData> getAllRegionsFromPlayer(final UUID ownerUUID, final World world, final LandTypes type) {
+		List<RegionData> list = new ArrayList<RegionData>();
+		try {
+
+			OfflinePlayer owner = Bukkit.getOfflinePlayer(ownerUUID);
+			for (ProtectedRegion region : mRegE.getRegionList(owner, world, type)) {
+				RegionData data = new RegionData(world);
+				data.setWGRegion(region);
+				list.add(data);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 
 	public RegionData praseRegionData(final World world, final int valueX, final int valueZ) {
 		ProtectedRegion region = praseWGRegion(world, valueX, valueZ);

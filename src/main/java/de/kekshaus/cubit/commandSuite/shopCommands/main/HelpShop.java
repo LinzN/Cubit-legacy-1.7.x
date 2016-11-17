@@ -44,31 +44,31 @@ public class HelpShop implements ILandCmd {
 	}
 
 	private boolean page1(CommandSender sender) {
+		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpHeaderP1);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpE1P1);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpE2P1);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpE3P1);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpE4P1);
-		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpE5P1);
-		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpE6P1);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpBottomP1);
 		return true;
 
 	}
 
 	private boolean page2(CommandSender sender) {
+		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpHeaderP2);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpE1P2);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpE2P2);
-		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpE3P2);
-		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpE6P2);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpBottomP2);
 		return true;
 
 	}
 
 	private boolean page3(CommandSender sender) {
+		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpHeaderP3);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpE1P3);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpE2P3);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpE3P3);
-		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpE4P3);
-		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpE5P3);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().shopHelpBottomP3);
 
 		return true;
 

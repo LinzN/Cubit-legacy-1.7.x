@@ -20,9 +20,11 @@ import de.kekshaus.cubit.commandSuite.landCommands.main.OfferLand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.SellLand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.TakeOfferLand;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.AddMemberUniversal;
+import de.kekshaus.cubit.commandSuite.universalCommands.main.ChangeBiomeUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.ChangeFlagUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.InfoUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.KickUniversal;
+import de.kekshaus.cubit.commandSuite.universalCommands.main.ListUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.RemoveMemberUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.VersionUniversal;
 import de.kekshaus.cubit.plugin.Landplugin;
@@ -96,6 +98,7 @@ public class CommandLand implements CommandExecutor {
 
 			/* Universal Commands */
 			this.cmdMap.put("info", new InfoUniversal(this.plugin, perm.infoLand, LandTypes.WORLD));
+			this.cmdMap.put("list", new ListUniversal(this.plugin, perm.listLand, LandTypes.WORLD));
 			this.cmdMap.put("kick", new KickUniversal(this.plugin, perm.kickLand, LandTypes.WORLD));
 			this.cmdMap.put("add", new AddMemberUniversal(this.plugin, perm.addMemberLand, LandTypes.WORLD, false));
 			this.cmdMap.put("remove",
@@ -115,6 +118,9 @@ public class CommandLand implements CommandExecutor {
 							perm.flagLand + "monster", LandTypes.WORLD, false));
 			this.cmdMap.put("potion", new ChangeFlagUniversal(this.plugin,
 					Landplugin.inst().getLandManager().potionPacket, perm.flagLand + "potion", LandTypes.WORLD, false));
+			
+			this.cmdMap.put("changebiome", new ChangeBiomeUniversal(this.plugin, perm.changeBiomeLand, LandTypes.WORLD, false));
+			
 			this.isLoaded = true;
 		} catch (Exception e) {
 			e.printStackTrace();

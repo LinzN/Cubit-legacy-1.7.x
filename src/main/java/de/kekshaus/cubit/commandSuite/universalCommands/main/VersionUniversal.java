@@ -21,7 +21,7 @@ public class VersionUniversal implements ILandCmd {
 	public boolean runCmd(final Command cmd, final CommandSender sender, String[] args) {
 		sender.sendMessage(plugin.getYamlManager().getLanguage().landHeader);
 		sender.sendMessage(ChatColor.GREEN + "Cubit verion: " + ChatColor.YELLOW + this.plugin.getDescription().getVersion());
-		sender.sendMessage(ChatColor.DARK_PURPLE + "Written and copyleft by Kekshaus");
+		sender.sendMessage(ChatColor.GREEN + "Written and copyleft by Kekshaus");
 		sender.sendMessage(ChatColor.GREEN + "You want cubit too? Visit https://www.EXYLON.de");
 		return true;
 	}

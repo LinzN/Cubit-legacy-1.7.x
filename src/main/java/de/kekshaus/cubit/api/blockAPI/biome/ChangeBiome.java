@@ -6,6 +6,8 @@ import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.plugin.Plugin;
 
+import de.kekshaus.cubit.plugin.Landplugin;
+
 public class ChangeBiome {
 
 	private Plugin plugin;
@@ -37,12 +39,14 @@ public class ChangeBiome {
 			});
 			
 			try {
-				Thread.sleep(100);
+				Thread.sleep(200);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		Landplugin.inst().getBlockManager().getNMSClass().refreshChunk(chunk);
 	}
+	
 
 }
