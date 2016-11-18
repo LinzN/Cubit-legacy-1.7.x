@@ -66,7 +66,7 @@ public class SellLand implements ILandCmd {
 			return true;
 		}
 
-		double economyValue = Landplugin.inst().getVaultManager().calculateLandCost(player.getUniqueId(),
+		double economyValue = plugin.getVaultManager().calculateLandCost(player.getUniqueId(),
 				loc.getWorld(), false);
 
 		if (!plugin.getVaultManager().transferMoney(null, regionData.getOwnerUUID(), economyValue)) {

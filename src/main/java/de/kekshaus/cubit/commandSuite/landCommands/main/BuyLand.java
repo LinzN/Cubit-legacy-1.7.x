@@ -49,7 +49,7 @@ public class BuyLand implements ILandCmd {
 			return true;
 		}
 
-		double economyValue = Landplugin.inst().getVaultManager().calculateLandCost(player.getUniqueId(),
+		double economyValue = plugin.getVaultManager().calculateLandCost(player.getUniqueId(),
 				loc.getWorld(), true);
 		if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), economyValue)) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",

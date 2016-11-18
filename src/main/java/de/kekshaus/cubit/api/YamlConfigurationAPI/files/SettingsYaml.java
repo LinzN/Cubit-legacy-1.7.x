@@ -21,6 +21,7 @@ public class SettingsYaml {
 	public double landTaxAddition;
 	public double landMaxPrice;
 	public double landSellPercent;
+	public double landChangeBiomePrice;
 	public double landDeprecatedMember;
 	public double landDeprecatedOther;
 	public boolean landUseMaterialBorder;
@@ -66,6 +67,7 @@ public class SettingsYaml {
 		this.landTaxAddition = (double) this.getObjectValue("module.land.taxAddition", 5D);
 		this.landMaxPrice = (double) this.getObjectValue("module.land.maxPrice", 750D);
 		this.landSellPercent = (double) this.getObjectValue("module.land.sellPercentInDecimal", 0.4D);
+		this.landChangeBiomePrice = (double) this.getObjectValue("module.land.landChangeBiomePrice", 35D);
 		this.landDeprecatedMember = (double) this.getObjectValue("module.land.deprecatedBuyupMember", 35D);
 		this.landDeprecatedOther = (double) this.getObjectValue("module.land.deprecatedBuyupOther", 45D);
 		this.landUseMaterialBorder = (boolean) this.getObjectValue("module.land.useMaterialBorder", true);
