@@ -114,6 +114,17 @@ public class RemoveMemberUniversal implements ILandCmd {
 			return true;
 		}
 
+		if (!args[1].equalsIgnoreCase("-a") && !args[1].equalsIgnoreCase("-all")) {
+			if (!plugin.getParticleManager().removeMember(player, loc)) {
+				/* If this task failed! This should never happen */
+				sender.sendMessage(
+						plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-PARTICLE"));
+				plugin.getLogger().warning(
+						plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-PARTICLE"));
+				return true;
+			}
+		}
+
 		sender.sendMessage(plugin.getYamlManager().getLanguage().removeMemberSuccess
 				.replace("{regionID}", regionData.getRegionName()).replace("{member}", offlinePlayer.getName()));
 

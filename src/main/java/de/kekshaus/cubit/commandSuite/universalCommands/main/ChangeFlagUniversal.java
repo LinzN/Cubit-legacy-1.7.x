@@ -93,6 +93,15 @@ public class ChangeFlagUniversal implements ILandCmd {
 		/* Switch flag-state to the opposite value */
 		packet.switchState(regionData, true);
 		String stateString = plugin.getLandManager().getStringState(packet.getState(regionData));
+
+		if (!plugin.getParticleManager().changeFlag(player, loc)) {
+			/* If this task failed! This should never happen */
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-PARTICLE"));
+			plugin.getLogger()
+					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-PARTICLE"));
+			return true;
+		}
+
 		sender.sendMessage(plugin.getYamlManager().getLanguage().flagSwitchSuccess
 				.replace("{flag}", packet.getPacketName()).replace("{value}", stateString));
 

@@ -15,13 +15,19 @@ public class ParticleAPIManager {
 
 	public ParticleAPIManager(Landplugin plugin) {
 		plugin.getLogger().info("Loading ParticleAPIManager");
+		if (Bukkit.getPluginManager().getPlugin("ParticleLIB") != null) {
+			plugin.getLogger().info("Using ParticleLIB as provider");
+		} else if (isSpigot()) {
+			plugin.getLogger().info("Using SpigotAPI as provider");
+		} else {
+			plugin.getLogger().info("No provider found. Disable particles");
+		}
 		this.plugin = plugin;
 	}
 
 	public boolean sendBuy(final Player player, final Location loc) {
 		if (Landplugin.inst().getYamlManager().getSettings().particleUse) {
-			if (Landplugin.inst().getYamlManager().getSettings().particleUseInventivetalentParticeApi
-					&& Bukkit.getPluginManager().getPlugin("ParticleLIB") != null) {
+			if (Bukkit.getPluginManager().getPlugin("ParticleLIB") != null) {
 				plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
 					@Override
 					public void run() {
@@ -46,7 +52,7 @@ public class ParticleAPIManager {
 
 	public boolean sendSell(final Player player, final Location loc) {
 		if (Landplugin.inst().getYamlManager().getSettings().particleUse) {
-			if (Landplugin.inst().getYamlManager().getSettings().particleUseInventivetalentParticeApi) {
+			if (Bukkit.getPluginManager().getPlugin("ParticleLIB") != null) {
 				plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
 					@Override
 					public void run() {
@@ -70,7 +76,7 @@ public class ParticleAPIManager {
 
 	public boolean sendInfo(final Player player, final Location loc) {
 		if (Landplugin.inst().getYamlManager().getSettings().particleUse) {
-			if (Landplugin.inst().getYamlManager().getSettings().particleUseInventivetalentParticeApi) {
+			if (Bukkit.getPluginManager().getPlugin("ParticleLIB") != null) {
 				plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
 					@Override
 					public void run() {
@@ -88,6 +94,106 @@ public class ParticleAPIManager {
 					});
 
 				}
+			}
+		}
+		return true;
+	}
+
+	public boolean changeFlag(final Player player, final Location loc) {
+		if (Landplugin.inst().getYamlManager().getSettings().particleUse) {
+			if (Bukkit.getPluginManager().getPlugin("ParticleLIB") != null) {
+				plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+					@Override
+					public void run() {
+						new ParticleSender(player, loc, ParticleEffect.FLAME, ParticleEffect.FIREWORKS_SPARK);
+					}
+				});
+			} else {
+				if (isSpigot()) {
+					plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+						@Override
+						public void run() {
+							new ParticleSender(player, loc, Effect.FLAME, Effect.FIREWORKS_SPARK);
+						}
+
+					});
+				}
+
+			}
+		}
+		return true;
+	}
+
+	public boolean addMember(final Player player, final Location loc) {
+		if (Landplugin.inst().getYamlManager().getSettings().particleUse) {
+			if (Bukkit.getPluginManager().getPlugin("ParticleLIB") != null) {
+				plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+					@Override
+					public void run() {
+						new ParticleSender(player, loc, ParticleEffect.HEART, ParticleEffect.FIREWORKS_SPARK);
+					}
+				});
+			} else {
+				if (isSpigot()) {
+					plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+						@Override
+						public void run() {
+							new ParticleSender(player, loc, Effect.HEART, Effect.FIREWORKS_SPARK);
+						}
+
+					});
+				}
+
+			}
+		}
+		return true;
+	}
+
+	public boolean removeMember(final Player player, final Location loc) {
+		if (Landplugin.inst().getYamlManager().getSettings().particleUse) {
+			if (Bukkit.getPluginManager().getPlugin("ParticleLIB") != null) {
+				plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+					@Override
+					public void run() {
+						new ParticleSender(player, loc, ParticleEffect.VILLAGER_ANGRY, ParticleEffect.FIREWORKS_SPARK);
+					}
+				});
+			} else {
+				if (isSpigot()) {
+					plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+						@Override
+						public void run() {
+							new ParticleSender(player, loc, Effect.VILLAGER_THUNDERCLOUD, Effect.FIREWORKS_SPARK);
+						}
+
+					});
+				}
+
+			}
+		}
+		return true;
+	}
+
+	public boolean changeBiome(final Player player, final Location loc) {
+		if (Landplugin.inst().getYamlManager().getSettings().particleUse) {
+			if (Bukkit.getPluginManager().getPlugin("ParticleLIB") != null) {
+				plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+					@Override
+					public void run() {
+						new ParticleSender(player, loc, ParticleEffect.PORTAL, ParticleEffect.FIREWORKS_SPARK);
+					}
+				});
+			} else {
+				if (isSpigot()) {
+					plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+						@Override
+						public void run() {
+							new ParticleSender(player, loc, Effect.PORTAL, Effect.FIREWORKS_SPARK);
+						}
+
+					});
+				}
+
 			}
 		}
 		return true;

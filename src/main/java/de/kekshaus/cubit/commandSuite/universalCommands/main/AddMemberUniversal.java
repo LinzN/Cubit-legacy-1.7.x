@@ -113,6 +113,16 @@ public class AddMemberUniversal implements ILandCmd {
 					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "ADD-MEMBER"));
 			return true;
 		}
+		if (!args[1].equalsIgnoreCase("-a") && !args[1].equalsIgnoreCase("-all")) {
+			if (!plugin.getParticleManager().addMember(player, loc)) {
+				/* If this task failed! This should never happen */
+				sender.sendMessage(
+						plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-PARTICLE"));
+				plugin.getLogger().warning(
+						plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-PARTICLE"));
+				return true;
+			}
+		}
 
 		sender.sendMessage(plugin.getYamlManager().getLanguage().addMemberSuccess
 				.replace("{regionID}", regionData.getRegionName()).replace("{member}", offlinePlayer.getName()));

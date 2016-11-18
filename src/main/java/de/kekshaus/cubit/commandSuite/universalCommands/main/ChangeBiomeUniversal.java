@@ -83,11 +83,20 @@ public class ChangeBiomeUniversal implements ILandCmd {
 			return true;
 		}
 
+		sender.sendMessage(plugin.getYamlManager().getLanguage().startBiomeChange.replace("{regionID}", regionData.getRegionName()));
 		if (!plugin.getBlockManager().changeBiomeChunk(chunk, biome)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SET-BIOME"));
 			plugin.getLogger()
 					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SET-BIOME"));
+			return true;
+		}
+
+		if (!plugin.getParticleManager().changeBiome(player, loc)) {
+			/* If this task failed! This should never happen */
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-PARTICLE"));
+			plugin.getLogger()
+					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-PARTICLE"));
 			return true;
 		}
 

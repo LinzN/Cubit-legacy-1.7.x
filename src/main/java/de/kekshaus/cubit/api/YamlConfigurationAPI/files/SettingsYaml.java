@@ -34,7 +34,6 @@ public class SettingsYaml {
 
 	/* Particle module */
 	public boolean particleUse;
-	public boolean particleUseInventivetalentParticeApi;
 
 	public boolean entityLimiterUse;
 
@@ -79,8 +78,6 @@ public class SettingsYaml {
 		this.shopLimit = (int) this.getObjectValue("module.shop.shopLimit", 4);
 
 		this.particleUse = (boolean) this.getObjectValue("module.particle.use", true);
-		this.particleUseInventivetalentParticeApi = (boolean) this
-				.getObjectValue("module.particle.useInventivetalentParticleAPI", false);
 
 		this.sqlUse = (boolean) this.getObjectValue("module.database.useSql", false);
 		// this.sqlUseXeonSuiteSameDatabase = (boolean)

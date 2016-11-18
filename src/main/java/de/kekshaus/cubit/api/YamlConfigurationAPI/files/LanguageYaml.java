@@ -4,10 +4,11 @@ import org.bukkit.ChatColor;
 
 import de.kekshaus.cubit.api.YamlConfigurationAPI.setup.CustomConfig;
 
-
 public class LanguageYaml {
 
 	private CustomConfig configFile;
+	/* Info MSG */
+	public String startBiomeChange;
 
 	/* Error MSG */
 	public String noConsoleMode;
@@ -132,6 +133,9 @@ public class LanguageYaml {
 	}
 
 	private void setup() {
+		
+		/* Info MSG */
+		startBiomeChange = this.getLanguageString("startBiomeChange", "&2Starting biome change for region {regionID}!");
 		/* Error MSG */
 		noConsoleMode = this.getLanguageString("noConsoleMode", "&4Sorry this is not available in console mode!");
 		noEnabledWorld = this.getLanguageString("noEnabledWorld",

@@ -4,6 +4,8 @@ version: ${project.version}.b${build.number}
 description: Landplugin
 author: Kekshaus
 load: POSTWORLD
+depend: [WorldEdit, WorldGuard, Vault]
+softdepend: [ParticleLIB]
 
 commands:
   land:
