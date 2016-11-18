@@ -22,7 +22,7 @@ public class DataBaseSQLGetData {
 		long lastlogin = 0;
 		DataBaseSQLConnectionManager manager = DataBaseSQLConnectionManager.DEFAULT;
 		try {
-			Connection conn = manager.getConnection("cookieLand");
+			Connection conn = manager.getConnection("cubitplugin");
 			PreparedStatement sql = conn
 					.prepareStatement("SELECT TIMESTAMP FROM uuidcache WHERE UUID = '" + uuid + "';");
 			ResultSet result = sql.executeQuery();
@@ -31,7 +31,7 @@ public class DataBaseSQLGetData {
 			}
 			result.close();
 			sql.close();
-			manager.release("cookieLand", conn);
+			manager.release("cubitplugin", conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -50,7 +50,7 @@ public class DataBaseSQLGetData {
 		DataBaseSQLConnectionManager manager = DataBaseSQLConnectionManager.DEFAULT;
 		OfferData data = null;
 		try {
-			Connection conn = manager.getConnection("cookieLand");
+			Connection conn = manager.getConnection("cubitplugin");
 			PreparedStatement sql = conn.prepareStatement("SELECT value, uuid FROM offerManager WHERE regionID = '"
 					+ regionID + "' AND world = '" + world.getName().toLowerCase() + "';");
 			ResultSet result = sql.executeQuery();
@@ -66,7 +66,7 @@ public class DataBaseSQLGetData {
 			}
 			result.close();
 			sql.close();
-			manager.release("cookieLand", conn);
+			manager.release("cubitplugin", conn);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -78,7 +78,7 @@ public class DataBaseSQLGetData {
 		boolean isoffered = false;
 		DataBaseSQLConnectionManager manager = DataBaseSQLConnectionManager.DEFAULT;
 		try {
-			Connection conn = manager.getConnection("cookieLand");
+			Connection conn = manager.getConnection("cubitplugin");
 			PreparedStatement sql = conn.prepareStatement(
 					"SELECT uuid FROM offerManager WHERE regionID = '" + regionID + "' AND world = '" + world + "';");
 			ResultSet result = sql.executeQuery();
@@ -87,7 +87,7 @@ public class DataBaseSQLGetData {
 			}
 			result.close();
 			sql.close();
-			manager.release("cookieLand", conn);
+			manager.release("cubitplugin", conn);
 
 		} catch (SQLException e) {
 			e.printStackTrace();

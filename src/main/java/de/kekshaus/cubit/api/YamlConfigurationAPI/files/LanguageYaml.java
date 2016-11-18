@@ -49,6 +49,7 @@ public class LanguageYaml {
 
 	/* Header for Plugin */
 	public String landHeader;
+	public String landBiomeListHeader;
 
 	/* Land List Page */
 	public String landListHeader;
@@ -103,6 +104,7 @@ public class LanguageYaml {
 	/* Page 5 Help for Land Command */
 	public String landHelpHeaderP5;
 	public String landHelpE1P5;
+	public String landHelpE2P5;
 	public String landHelpBottomP5;
 
 	/* Page 1 Help for Shop Command */
@@ -254,7 +256,10 @@ public class LanguageYaml {
 		/* Page 5 Help for Land Command */
 		landHelpHeaderP5 = this.getLanguageString("theme.helpPage5.header", "&6&lLand edit: [Page 5]");
 		landHelpE1P5 = this.getLanguageString("theme.helpPage5.help1", "&2 Change biome: &e/land changebiome [Biome]");
+		landHelpE2P5 = this.getLanguageString("theme.helpPage5.help2", "&2 List biomes: &e/land listbiomes");
 		landHelpBottomP5 = this.getLanguageString("theme.helpPage5.bottom", "&a&lBack to page 4 &6/land help 4");
+		
+		landBiomeListHeader = this.getLanguageString("theme.biomeList.header", "&6&lAll available biomes:");
 
 		/* Page 1 Help for Shop Command */
 		shopHelpHeaderP1 = this.getLanguageString("theme.shopHelpPage1.header",

@@ -46,6 +46,7 @@ permissions:
             cubit.command.land.flag.tnt: true
             cubit.command.land.flag.monster: true
             cubit.command.land.changebiome: true
+            cubit.command.land.listbiomes: true
     cubit.command.user.shop:
         description:  User command permissions
         children:
@@ -58,6 +59,7 @@ permissions:
             cubit.command.shop.help: true
             cubit.command.shop.list: true
             cubit.command.shop.changebiome: true
+            cubit.command.shop.listbiomes: true
     cubit.command.admin.land:
         description: Admin command permissions
         children:
@@ -70,7 +72,9 @@ permissions:
             cubit.command.admin.createserver: true
             cubit.command.admin.deleteserver: true
             cubit.command.admin.createshop: true
+            cubit.command.admin.list: true
             cubit.command.admin.changebiome: true
+            cubit.command.admin.listbiomes: true
             cubit.command.admin.flag.pvp: true
             cubit.command.admin.flag.fire: true
             cubit.command.admin.flag.lock: true
@@ -110,6 +114,9 @@ permissions:
     cubit.command.land.changebiome:
         description: Haupt-Hilfeseite
         default: op
+    cubit.command.land.listbiomes:
+        description: Haupt-Hilfeseite
+        default: op
     cubit.command.land.flag.pvp:
         description: Haupt-Hilfeseite
         default: op
@@ -140,6 +147,12 @@ permissions:
     cubit.command.shop.list:
         description: Haupt-Hilfeseite
         default: op
+    cubit.command.shop.changebiome:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.shop.listbiomes:
+        description: Haupt-Hilfeseite
+        default: op
     cubit.command.shop.help:
         description: Haupt-Hilfeseite
         default: op
@@ -151,8 +164,7 @@ permissions:
         default: op
     cubit.command.shop.kick:
         description: Haupt-Hilfeseite
-    cubit.command.shop.changebiome:
-        description: Haupt-Hilfeseite
+        default: op
     cubit.command.admin.sell:
         description: Haupt-Hilfeseite
         default: op
@@ -163,6 +175,12 @@ permissions:
         description: Haupt-Hilfeseite
         default: op
     cubit.command.admin.offer:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.admin.list:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.admin.listbiomes:
         description: Haupt-Hilfeseite
         default: op
     cubit.command.admin.changebiome:

@@ -21,6 +21,7 @@ import de.kekshaus.cubit.commandSuite.universalCommands.main.AddMemberUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.ChangeBiomeUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.InfoUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.KickUniversal;
+import de.kekshaus.cubit.commandSuite.universalCommands.main.ListBiomesUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.ListUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.RemoveMemberUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.VersionUniversal;
@@ -95,6 +96,8 @@ public class CommandShop implements CommandExecutor {
 			this.cmdMap.put("kick", new KickUniversal(this.plugin, perm.kickShop, LandTypes.SHOP));
 			this.cmdMap.put("changebiome",
 					new ChangeBiomeUniversal(this.plugin, perm.changeBiomeShop, LandTypes.SHOP, false));
+			this.cmdMap.put("listbiomes", new ListBiomesUniversal(this.plugin, perm.listBiomesShop, LandTypes.SHOP));
+
 			this.isLoaded = true;
 		} catch (Exception e) {
 			e.printStackTrace();

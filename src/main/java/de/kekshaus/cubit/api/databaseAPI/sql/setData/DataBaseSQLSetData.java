@@ -14,7 +14,7 @@ public class DataBaseSQLSetData {
 	public void setOffer(OfferData data) {
 		DataBaseSQLConnectionManager manager = DataBaseSQLConnectionManager.DEFAULT;
 		try {
-			Connection conn = manager.getConnection("cookieLand");
+			Connection conn = manager.getConnection("cubitplugin");
 			PreparedStatement sql = conn.prepareStatement("SELECT value FROM offerManager WHERE regionID = '"
 					+ data.getRegionID() + "' AND world = '" + data.getWorld().getName().toLowerCase() + "';");
 			ResultSet result = sql.executeQuery();
@@ -38,7 +38,7 @@ public class DataBaseSQLSetData {
 			}
 			result.close();
 			sql.close();
-			manager.release("cookieLand", conn);
+			manager.release("cubitplugin", conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -48,7 +48,7 @@ public class DataBaseSQLSetData {
 	public void removeOffer(String regionID, String world) {
 		DataBaseSQLConnectionManager manager = DataBaseSQLConnectionManager.DEFAULT;
 		try {
-			Connection conn = manager.getConnection("cookieLand");
+			Connection conn = manager.getConnection("cubitplugin");
 			PreparedStatement sql = conn.prepareStatement(
 					"SELECT value FROM offerManager WHERE regionID = '" + regionID + "' AND world = '" + world + "';");
 			ResultSet result = sql.executeQuery();
@@ -60,7 +60,7 @@ public class DataBaseSQLSetData {
 			}
 			result.close();
 			sql.close();
-			manager.release("cookieLand", conn);
+			manager.release("cubitplugin", conn);
 
 		}
 
@@ -72,7 +72,7 @@ public class DataBaseSQLSetData {
 	public boolean updateProfile(UUID uuid, String player, long time) {
 		DataBaseSQLConnectionManager manager = DataBaseSQLConnectionManager.DEFAULT;
 		try {
-			Connection conn = manager.getConnection("cookieLand");
+			Connection conn = manager.getConnection("cubitplugin");
 			PreparedStatement sql = conn.prepareStatement("SELECT NAME FROM uuidcache WHERE UUID = '" + uuid + "';");
 			ResultSet result = sql.executeQuery();
 			if (result.next()) {
@@ -89,7 +89,7 @@ public class DataBaseSQLSetData {
 			}
 			result.close();
 			sql.close();
-			manager.release("cookieLand", conn);
+			manager.release("cubitplugin", conn);
 			return true;
 
 		} catch (SQLException e) {

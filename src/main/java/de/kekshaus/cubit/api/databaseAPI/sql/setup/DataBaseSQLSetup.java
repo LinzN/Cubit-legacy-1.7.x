@@ -19,7 +19,7 @@ public class DataBaseSQLSetup {
 		String password = Landplugin.inst().getYamlManager().getSettings().sqlPassword;
 		DataBaseSQLConnectionFactory factory = new DataBaseSQLConnectionFactory(url, username, password);
 		DataBaseSQLConnectionManager manager = DataBaseSQLConnectionManager.DEFAULT;
-		DataBaseSQLConnectionHandler handler = manager.getHandler("cookieLand", factory);
+		DataBaseSQLConnectionHandler handler = manager.getHandler("cubitplugin", factory);
 
 		try {
 			Connection connection = handler.getConnection();

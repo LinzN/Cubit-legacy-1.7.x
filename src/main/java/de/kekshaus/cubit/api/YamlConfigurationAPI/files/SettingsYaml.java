@@ -1,6 +1,7 @@
 package de.kekshaus.cubit.api.YamlConfigurationAPI.files;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.bukkit.Material;
@@ -47,6 +48,8 @@ public class SettingsYaml {
 	public int sqlPort;
 	public String sqlUser;
 	public String sqlPassword;
+	
+	public long cubitSetupDate;
 
 	public SettingsYaml(CustomConfig configFile) {
 		this.configFile = configFile;
@@ -91,7 +94,9 @@ public class SettingsYaml {
 		this.entityLimiterUse = (boolean) getObjectValue("module.entityLimiter.use", false);
 
 		this.physicWaterLavaFlowLand = (boolean) getObjectValue("module.physicWaterLavaFlowLand.use", false);
-
+		
+		
+		this.cubitSetupDate = (long) getObjectValue("doNotTouch.cubitSetupDate", new Date().getTime());
 	}
 
 	public Object getObjectValue(String path, Object defaultValue) {

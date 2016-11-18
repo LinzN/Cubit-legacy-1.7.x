@@ -21,6 +21,7 @@ import de.kekshaus.cubit.commandSuite.landCommands.main.SellLand;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.AddMemberUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.ChangeBiomeUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.ChangeFlagUniversal;
+import de.kekshaus.cubit.commandSuite.universalCommands.main.ListBiomesUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.RemoveMemberUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.VersionUniversal;
 import de.kekshaus.cubit.plugin.Landplugin;
@@ -97,6 +98,7 @@ public class CommandAdmin implements CommandExecutor {
 
 			this.cmdMap.put("changebiome",
 					new ChangeBiomeUniversal(this.plugin, perm.changeBiomeAdminLand, LandTypes.NOTYPE, true));
+			this.cmdMap.put("listbiomes", new ListBiomesUniversal(this.plugin, perm.listBiomesAdminLand, LandTypes.NOTYPE));
 
 			this.isLoaded = true;
 		} catch (Exception e) {
