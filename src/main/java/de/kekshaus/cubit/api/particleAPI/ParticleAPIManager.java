@@ -29,13 +29,15 @@ public class ParticleAPIManager {
 					}
 				});
 			} else {
-				plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
-					@Override
-					public void run() {
-						new ParticleSender(player, loc, Effect.HAPPY_VILLAGER, Effect.FIREWORKS_SPARK);
-					}
+				if (isSpigot()) {
+					plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+						@Override
+						public void run() {
+							new ParticleSender(player, loc, Effect.HAPPY_VILLAGER, Effect.FIREWORKS_SPARK);
+						}
 
-				});
+					});
+				}
 
 			}
 		}
@@ -52,14 +54,15 @@ public class ParticleAPIManager {
 					}
 				});
 			} else {
-				plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
-					@Override
-					public void run() {
-						new ParticleSender(player, loc, Effect.WITCH_MAGIC, Effect.FIREWORKS_SPARK);
-					}
+				if (isSpigot()) {
+					plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+						@Override
+						public void run() {
+							new ParticleSender(player, loc, Effect.WITCH_MAGIC, Effect.FIREWORKS_SPARK);
+						}
 
-				});
-
+					});
+				}
 			}
 		}
 		return true;
@@ -75,16 +78,27 @@ public class ParticleAPIManager {
 					}
 				});
 			} else {
-				plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
-					@Override
-					public void run() {
-						new ParticleSender(player, loc, null, Effect.FIREWORKS_SPARK);
-					}
+				if (isSpigot()) {
+					plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+						@Override
+						public void run() {
+							new ParticleSender(player, loc, null, Effect.FIREWORKS_SPARK);
+						}
 
-				});
+					});
 
+				}
 			}
 		}
 		return true;
+	}
+
+	public boolean isSpigot() {
+		try {
+			Class.forName("net.md_5.bungee.api.ChatColor");
+			return true;
+		} catch (final ClassNotFoundException e) {
+			return false;
+		}
 	}
 }

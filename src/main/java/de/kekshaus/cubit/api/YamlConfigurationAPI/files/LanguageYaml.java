@@ -1,7 +1,9 @@
 package de.kekshaus.cubit.api.YamlConfigurationAPI.files;
 
+import org.bukkit.ChatColor;
+
 import de.kekshaus.cubit.api.YamlConfigurationAPI.setup.CustomConfig;
-import net.md_5.bungee.api.ChatColor;
+
 
 public class LanguageYaml {
 
