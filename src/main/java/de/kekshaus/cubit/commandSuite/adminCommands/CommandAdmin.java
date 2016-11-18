@@ -16,6 +16,7 @@ import de.kekshaus.cubit.commandSuite.ILandCmd;
 import de.kekshaus.cubit.commandSuite.adminCommands.main.CreateServerAdmin;
 import de.kekshaus.cubit.commandSuite.adminCommands.main.CreateShopAdmin;
 import de.kekshaus.cubit.commandSuite.adminCommands.main.DeleteServerAdmin;
+import de.kekshaus.cubit.commandSuite.adminCommands.main.HelpAdmin;
 import de.kekshaus.cubit.commandSuite.landCommands.main.OfferLand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.SellLand;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.AddMemberUniversal;
@@ -45,7 +46,7 @@ public class CommandAdmin implements CommandExecutor {
 			@Override
 			public void run() {
 				if (args.length == 0) {
-					// help site
+					getCmdMap().get("help").runCmd(cmd, sender, args);
 				} else if (getCmdMap().containsKey(args[0])) {
 					String command = args[0];
 					if (!getCmdMap().get(command).runCmd(cmd, sender, args)) {
@@ -72,6 +73,7 @@ public class CommandAdmin implements CommandExecutor {
 			PermissionNodes perm = Landplugin.inst().getPermNodes();
 			/* Protection AdminCommands */
 			this.cmdMap.put("version", new VersionUniversal(this.plugin, null, null));
+			this.cmdMap.put("help", new HelpAdmin(this.plugin, perm.helpAdminLand));
 			this.cmdMap.put("setpvp", new ChangeFlagUniversal(this.plugin, Landplugin.inst().getLandManager().pvpPacket,
 					perm.flagAdminLand + "pvp", LandTypes.NOTYPE, true));
 			this.cmdMap.put("setfire",
@@ -90,7 +92,7 @@ public class CommandAdmin implements CommandExecutor {
 					new AddMemberUniversal(this.plugin, perm.addMemberAdminLand, LandTypes.NOTYPE, true));
 			this.cmdMap.put("removeplayer",
 					new RemoveMemberUniversal(this.plugin, perm.removeMemberAdminLand, LandTypes.NOTYPE, true));
-			this.cmdMap.put("offer", new OfferLand(this.plugin, perm.offerAdminLand, true));
+			this.cmdMap.put("setoffer", new OfferLand(this.plugin, perm.offerAdminLand, true));
 
 			this.cmdMap.put("createserver", new CreateServerAdmin(this.plugin, perm.createServerAdminLand));
 			this.cmdMap.put("deleteserver", new DeleteServerAdmin(this.plugin, perm.deleteServerAdminLand));

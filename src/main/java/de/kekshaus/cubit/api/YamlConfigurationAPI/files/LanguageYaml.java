@@ -127,6 +127,52 @@ public class LanguageYaml {
 	public String shopHelpE2P3;
 	public String shopHelpE3P3;
 	public String shopHelpBottomP3;
+	
+	
+	/* Page 1 Help for Admin Command */
+	public String adminHelpHeaderP1;
+	public String adminHelpE1P1;
+	public String adminHelpE2P1;
+	public String adminHelpE3P1;
+	public String adminHelpE4P1;
+	public String adminHelpE5P1;
+	public String adminHelpE6P1;
+
+	
+	
+	/* Page 2 Help for Admin Command */
+	public String adminHelpHeaderP2;
+	public String adminHelpE1P2;
+	public String adminHelpE2P2;
+	public String adminHelpE3P2;
+	public String adminHelpE4P2;
+
+
+	
+	/* Page 3 Help for Admin Command */
+	public String adminHelpHeaderP3;
+	public String adminHelpE1P3;
+	public String adminHelpE2P3;
+	public String adminHelpE3P3;
+	public String adminHelpE4P3;
+	public String adminHelpE5P3;
+
+
+	
+	/* Page 4 Help for Admin Command */
+	public String adminHelpHeaderP4;
+	public String adminHelpE1P4;
+	public String adminHelpE2P4;
+
+
+	
+	/* Page 5 Help for Admin Command */
+	public String adminHelpHeaderP5;
+	public String adminHelpE1P5;
+	public String adminHelpE2P5;
+	public String adminHelpE3P5;
+
+
 
 	public LanguageYaml(CustomConfig configFile) {
 		this.configFile = configFile;
@@ -294,7 +340,66 @@ public class LanguageYaml {
 				"&6&lRegion Count: &r&2{count} &6&l- Entries &r&2{entryMin} &6&lfrom &r&2{entryMax}");
 		landListEntry = this.getLanguageString("theme.landList.entry",
 				"&a{counter}. &6{regionID} &a(&efrom &a- &eto&a) [&e{minPoints} &a- &e{maxPoints}&a]");
+		
+		
+		
+		
+		
+		/* Page 1 Help for Admin Command */
+		adminHelpHeaderP1 = this.getLanguageString("theme.adminHelpPage1.header",
+				"&6<<<<<<<<<<<<<<<<<&2&l|Admin Help|&6>>>>>>>>>>>>>>>>>");
+		adminHelpE1P1 = this.getLanguageString("theme.adminHelpPage1.help1", "&2 List player regions: &4/cadmin list [Player]");
+		adminHelpE2P1 = this.getLanguageString("theme.adminHelpPage1.help2", "&6&lMore commands on the following pages:");
+		adminHelpE3P1 = this.getLanguageString("theme.adminHelpPage1.help3", "&2 Page 2: Manage region &a/cadmin help 2");
+		adminHelpE4P1 = this.getLanguageString("theme.adminHelpPage1.help4", "&2 Page 3: Manage flags &a/cadmin help 3");
+		adminHelpE5P1 = this.getLanguageString("theme.adminHelpPage1.help5", "&2 Page 4: Land edit &a/cadmin help 4");
+		adminHelpE6P1 = this.getLanguageString("theme.adminHelpPage1.help6", "&2 Page 5: Admin regions &a/cadmin help 5");
 
+		
+		/* Page 2 Help for Admin Command */
+		adminHelpHeaderP2 = this.getLanguageString("theme.adminHelpPage2.header", "&6&lManage region: [Page 2]");
+		adminHelpE1P2 = this.getLanguageString("theme.adminHelpPage2.help1",
+				"&2 Remove region: &e/cadmin remove");
+		adminHelpE2P2 = this.getLanguageString("theme.adminHelpPage2.help2",
+				"&2 Offer region: &e/cadmin setoffer (offervalue)");
+		adminHelpE3P2 = this.getLanguageString("theme.adminHelpPage2.help3",
+				"&2 Add player: &e/cadmin addplayer (player)");
+		adminHelpE4P2 = this.getLanguageString("theme.adminHelpPage2.help4",
+				"&2 Remove player: &e/cadmin removeplayer (player)");
+		
+		
+		
+		/* Page 3 Help for Admin Command */
+		adminHelpHeaderP3 = this.getLanguageString("theme.adminHelpPage3.header", "&6&lManage flags: [Page 3]");
+		adminHelpE1P3 = this.getLanguageString("theme.adminHelpPage3.help1",
+				"&2 Fire Protection: &e/cadmin setfire (&aON&e/&cOFF&e)");
+		adminHelpE2P3 = this.getLanguageString("theme.adminHelpPage3.help2",
+				"&2 Access Protection: &e/cadmin setlock (&aON&e/&cOFF&e)");
+		adminHelpE3P3 = this.getLanguageString("theme.adminHelpPage3.help3",
+				"&2 PvP Protection: &e/cadmin setpvp (&aON&e/&cOFF&e)");
+		adminHelpE4P3 = this.getLanguageString("theme.adminHelpPage3.help4",
+				"&2 TnT Protection: &e/cadmin settnt (&aON&e/&cOFF&e)");
+		adminHelpE5P3 = this.getLanguageString("theme.adminHelpPage3.help5",
+				"&2 Monster Protection: &e/cadmin setmonster (&aON&e/&cOFF&e)");
+
+		
+		/* Page 4 Help for Admin Command */
+		adminHelpHeaderP4 = this.getLanguageString("theme.adminHelpPage4.header", "&6&lLand edit: [Page 4]");
+		adminHelpE1P4 = this.getLanguageString("theme.adminHelpPage4.help1",
+				"&2 Change biome: &e/cadmin changebiome (biome)");
+		adminHelpE2P4 = this.getLanguageString("theme.adminHelpPage4.help2",
+				"&2 List available biomes: &e/cadmin listbiomes");
+		
+		/* Page 5 Help for Admin Command */
+		adminHelpHeaderP5 = this.getLanguageString("theme.adminHelpPage5.header", "&6&lAdmin regions: [Page 5]");
+		adminHelpE1P5 = this.getLanguageString("theme.adminHelpPage5.help1",
+				"&2 Create Serverregion: &e/cadmin createserver");
+		adminHelpE2P5 = this.getLanguageString("theme.adminHelpPage5.help2",
+				"&2 Delete Serverregion: &e/cadmin deleteserver");
+		adminHelpE3P5 = this.getLanguageString("theme.adminHelpPage5.help3",
+				"&2 Create Shop: &e/cadmin createshop");
+
+		
 	}
 
 	public String getLanguageString(String path, String defaultValue) {
