@@ -23,7 +23,8 @@ public class NMSLoader {
 			this.nmsMask = this.nmsList.get(getVersion());
 			plugin.getLogger().info("Using " + getVersion() + " for NMS Class");
 		} else {
-			plugin.getLogger().info("No version found for " + getVersion() + "! Fallback to nonNMS");
+			plugin.getLogger().info("No version found for " + getVersion() + "! Fallback to nonNMS. Chunk-Refresh will not work!");
+			this.nmsMask = this.nmsList.get("v0_r1");
 		}
 		
 	}
@@ -33,7 +34,14 @@ public class NMSLoader {
 	}
 	
 	private void addVersions(){
+		this.nmsList.put("v0_r1", new NMS_Fallback(this.plugin));
+		this.nmsList.put("v1_11_R1", new NMS_1_11_R1(this.plugin));
 		this.nmsList.put("v1_10_R1", new NMS_1_10_R1(this.plugin));
+		this.nmsList.put("v1_9_R2", new NMS_1_9_R2(this.plugin));
+		this.nmsList.put("v1_9_R1", new NMS_1_9_R1(this.plugin));
+		this.nmsList.put("v1_8_R3", new NMS_1_8_R3(this.plugin));
+		this.nmsList.put("v1_8_R2", new NMS_1_8_R2(this.plugin));
+		this.nmsList.put("v1_8_R1", new NMS_1_8_R1(this.plugin));
 	}
 	
 	

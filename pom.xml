@@ -71,12 +71,53 @@
 		<!--Spigot API -->
 		<dependency>
 			<groupId>org.spigotmc</groupId>
-			<artifactId>spigot-server</artifactId>
+			<artifactId>spigot-server-7</artifactId>
+			<version>1.11-R0.1-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/../privatRepo/spigotmc/1.11/spigot-1.11.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>org.spigotmc</groupId>
+			<artifactId>spigot-server-6</artifactId>
 			<version>1.10-R0.1-SNAPSHOT</version>
 			<scope>system</scope>
 			<systemPath>${project.basedir}/../privatRepo/spigotmc/1.10/spigot-1.10.2.jar</systemPath>
 		</dependency>
-		<!--Bukkit API -->
+		<dependency>
+			<groupId>org.spigotmc</groupId>
+			<artifactId>spigot-server-5</artifactId>
+			<version>1.9.4-R0.1-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/../privatRepo/spigotmc/1.9/spigot-1.9.4.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>org.spigotmc</groupId>
+			<artifactId>spigot-server-4</artifactId>
+			<version>1.9-R0.1-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/../privatRepo/spigotmc/1.9/spigot-1.9.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>org.spigotmc</groupId>
+			<artifactId>spigot-server-3</artifactId>
+			<version>1.8.8-R0.1-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/../privatRepo/spigotmc/1.8/spigot-1.8.8.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>org.spigotmc</groupId>
+			<artifactId>spigot-server-2</artifactId>
+			<version>1.8.3-R0.1-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/../privatRepo/spigotmc/1.8/spigot-1.8.3.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>org.spigotmc</groupId>
+			<artifactId>spigot-server-1</artifactId>
+			<version>1.8-R0.1-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/../privatRepo/spigotmc/1.8/spigot-1.8.jar</systemPath>
+		</dependency>
 		<dependency>
 			<groupId>net.milkbowl.vault</groupId>
 			<artifactId>VaultAPI</artifactId>
