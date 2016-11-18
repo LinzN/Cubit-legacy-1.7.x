@@ -1,49 +1,48 @@
 package de.kekshaus.cubit.api.blockAPI.nmsPackets;
 
-import java.util.HashMap;
 import java.util.HashSet;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
 public class NMSLoader {
-	
+
 	private HashSet<String> nmsList = new HashSet<String>();
 	private NMSMask nmsMask;
 	private Plugin plugin;
-	
-	public NMSLoader(Plugin plugin){
+
+	public NMSLoader(Plugin plugin) {
 		this.plugin = plugin;
 		addVersions();
 		loadNMSClass();
 	}
 
-	public void loadNMSClass(){
+	public void loadNMSClass() {
 
 		String versionNumber = "v0_R1";
-		if (this.nmsList.contains(getVersion())){
+		if (this.nmsList.contains(getVersion())) {
 			versionNumber = getVersion();
 			plugin.getLogger().info("Using " + getVersion() + " for NMS Class");
 		} else {
-			plugin.getLogger().info("No version found for " + getVersion() + "! Fallback to nonNMS. Chunk-Refresh will not work!");
+			plugin.getLogger().info(
+					"No version found for " + getVersion() + "! Fallback to nonNMS. Chunk-Refresh will not work!");
 		}
-		
+
 		Object obj = null;
 		try {
-			 obj = Class.forName("de.kekshaus.cubit.api.blockAPI.nmsPackets.NMS_" + versionNumber).newInstance();
+			obj = Class.forName("de.kekshaus.cubit.api.blockAPI.nmsPackets.NMS_" + versionNumber).newInstance();
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
-		this.nmsMask = (NMSMask)obj;
+		this.nmsMask = (NMSMask) obj;
 
-		
 	}
-	
-	public NMSMask getNMSClass(){
+
+	public NMSMask getNMSClass() {
 		return this.nmsMask;
 	}
-	
-	private void addVersions(){
+
+	private void addVersions() {
 		this.nmsList.add("v1_11_R1");
 		this.nmsList.add("v1_10_R1");
 		this.nmsList.add("v1_9_R2");
@@ -52,8 +51,7 @@ public class NMSLoader {
 		this.nmsList.add("v1_8_R2");
 		this.nmsList.add("v1_8_R1");
 	}
-	
-	
+
 	private static String getVersion() {
 		String[] array = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",");
 		if (array.length == 4)
@@ -62,6 +60,3 @@ public class NMSLoader {
 	}
 
 }
-
-
-

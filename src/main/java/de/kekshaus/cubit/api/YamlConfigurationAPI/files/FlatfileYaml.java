@@ -57,7 +57,7 @@ public class FlatfileYaml {
 		return true;
 
 	}
-	
+
 	public boolean removeOfferdata(String regionID, World world) {
 		try {
 			this.configFile.set(buildPath(regionID, world), null);

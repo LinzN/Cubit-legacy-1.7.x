@@ -30,9 +30,9 @@ public class BlockAPIManager {
 		}
 		return true;
 	}
-	
-	public boolean changeBiomeChunk(Chunk chunk, Biome biome){
-		
+
+	public boolean changeBiomeChunk(Chunk chunk, Biome biome) {
+
 		try {
 			new ChangeBiome(plugin, chunk, biome).change();
 		} catch (Exception e) {
@@ -41,8 +41,8 @@ public class BlockAPIManager {
 		}
 		return true;
 	}
-	
-	public NMSMask getNMSClass(){
+
+	public NMSMask getNMSClass() {
 		return this.nmsloader.getNMSClass();
 	}
 

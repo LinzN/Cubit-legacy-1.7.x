@@ -118,9 +118,10 @@ public class CommandLand implements CommandExecutor {
 							perm.flagLand + "monster", LandTypes.WORLD, false));
 			this.cmdMap.put("potion", new ChangeFlagUniversal(this.plugin,
 					Landplugin.inst().getLandManager().potionPacket, perm.flagLand + "potion", LandTypes.WORLD, false));
-			
-			this.cmdMap.put("changebiome", new ChangeBiomeUniversal(this.plugin, perm.changeBiomeLand, LandTypes.WORLD, false));
-			
+
+			this.cmdMap.put("changebiome",
+					new ChangeBiomeUniversal(this.plugin, perm.changeBiomeLand, LandTypes.WORLD, false));
+
 			this.isLoaded = true;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -39,20 +39,19 @@ public class ListUniversal implements ILandCmd {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoPermission);
 			return true;
 		}
-		
-		List<RegionData> list = this.plugin.getLandManager().getAllRegionsFromPlayer(player.getUniqueId(), player.getLocation().getWorld(), type);
+
+		List<RegionData> list = this.plugin.getLandManager().getAllRegionsFromPlayer(player.getUniqueId(),
+				player.getLocation().getWorld(), type);
 
 		showList(player, list, args);
 
 		return true;
 	}
-	
-	
-	
-	private void showList(Player player, List<RegionData> regionList, String[] args){
+
+	private void showList(Player player, List<RegionData> regionList, String[] args) {
 		if (args.length <= 2) {
 			int pageNumb = 0;
-			
+
 			try {
 				if (args.length == 2) {
 					int number = Integer.valueOf(args[1]);
@@ -71,25 +70,28 @@ public class ListUniversal implements ILandCmd {
 			}
 
 			int rgCount = regionList.size();
-			
+
 			if (pageNumb * 10 >= rgCount) {
 				player.sendMessage(plugin.getYamlManager().getLanguage().pageNotFound);
 				return;
 			}
-			
-			List<RegionData> subList = regionList.subList(pageNumb * 10, pageNumb * 10 + 10 > rgCount ? rgCount : pageNumb * 10 + 10);
-			
-			player.sendMessage(plugin.getYamlManager().getLanguage().landListHeader.replace("{count}", ""+ rgCount).replace("{entryMin}", "" + (pageNumb * 10 + 1)).replace("{entryMax}", "" + (pageNumb * 10 + 10)));
+
+			List<RegionData> subList = regionList.subList(pageNumb * 10,
+					pageNumb * 10 + 10 > rgCount ? rgCount : pageNumb * 10 + 10);
+
+			player.sendMessage(plugin.getYamlManager().getLanguage().landListHeader.replace("{count}", "" + rgCount)
+					.replace("{entryMin}", "" + (pageNumb * 10 + 1)).replace("{entryMax}", "" + (pageNumb * 10 + 10)));
 
 			int counter = pageNumb * 10 + 1;
-			
+
 			for (RegionData rgData : subList) {
-				player.sendMessage(plugin.getYamlManager().getLanguage().landListEntry.replace("{counter}", "" + counter).replace("{regionID}", rgData.getRegionName()).replace("{minPoints}", rgData.getMinPoint()).replace("{maxPoints}", rgData.getMaxPoint()));
+				player.sendMessage(plugin.getYamlManager().getLanguage().landListEntry
+						.replace("{counter}", "" + counter).replace("{regionID}", rgData.getRegionName())
+						.replace("{minPoints}", rgData.getMinPoint()).replace("{maxPoints}", rgData.getMaxPoint()));
 				counter++;
 			}
-			
+
 		}
 	}
-
 
 }

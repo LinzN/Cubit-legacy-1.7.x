@@ -94,7 +94,7 @@ public class HelpLand implements ILandCmd {
 		return true;
 
 	}
-	
+
 	private boolean page5(CommandSender sender) {
 		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpHeaderP5);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE1P5);

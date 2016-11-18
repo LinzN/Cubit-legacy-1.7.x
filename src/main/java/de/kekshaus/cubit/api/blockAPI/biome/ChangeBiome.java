@@ -26,9 +26,9 @@ public class ChangeBiome {
 		final World world = this.chunk.getWorld();
 
 		for (int x = 0; x < 16; x++) {
-			
+
 			final int cordX = x + chunkX;
-			
+
 			Bukkit.getScheduler().runTask(this.plugin, new Runnable() {
 				public void run() {
 					for (int z = 0; z < 16; z++) {
@@ -37,7 +37,7 @@ public class ChangeBiome {
 				}
 
 			});
-			
+
 			try {
 				Thread.sleep(200);
 			} catch (InterruptedException e) {
@@ -47,6 +47,5 @@ public class ChangeBiome {
 		}
 		Landplugin.inst().getBlockManager().getNMSClass().refreshChunk(chunk);
 	}
-	
 
 }

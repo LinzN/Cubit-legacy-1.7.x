@@ -93,7 +93,8 @@ public class CommandShop implements CommandExecutor {
 			this.cmdMap.put("remove",
 					new RemoveMemberUniversal(this.plugin, perm.removeMemberShop, LandTypes.SHOP, false));
 			this.cmdMap.put("kick", new KickUniversal(this.plugin, perm.kickShop, LandTypes.SHOP));
-			this.cmdMap.put("changebiome", new ChangeBiomeUniversal(this.plugin, perm.changeBiomeShop, LandTypes.SHOP, false));
+			this.cmdMap.put("changebiome",
+					new ChangeBiomeUniversal(this.plugin, perm.changeBiomeShop, LandTypes.SHOP, false));
 			this.isLoaded = true;
 		} catch (Exception e) {
 			e.printStackTrace();

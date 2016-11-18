@@ -8,7 +8,7 @@ import org.bukkit.plugin.Plugin;
 import de.kekshaus.cubit.plugin.Landplugin;
 
 public class NMS_v1_9_R1 implements NMSMask {
-	
+
 	Plugin plugin = Landplugin.inst();
 
 	@Override

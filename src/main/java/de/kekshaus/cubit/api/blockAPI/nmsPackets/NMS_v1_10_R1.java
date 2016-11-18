@@ -11,7 +11,6 @@ public class NMS_v1_10_R1 implements NMSMask {
 
 	Plugin plugin = Landplugin.inst();
 
-
 	@Override
 	@SuppressWarnings("deprecation")
 	public final void refreshChunk(final org.bukkit.Chunk bukkitChunk) {

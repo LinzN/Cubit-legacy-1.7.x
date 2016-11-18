@@ -50,8 +50,7 @@ public class LanguageYaml {
 	/* Land List Page */
 	public String landListHeader;
 	public String landListEntry;
-	
-	
+
 	/* Land Info Page */
 	public String landInfoA1;
 	public String landInfoA2;
@@ -97,7 +96,7 @@ public class LanguageYaml {
 	public String landHelpE4P4;
 	public String landHelpE5P4;
 	public String landHelpBottomP4;
-	
+
 	/* Page 5 Help for Land Command */
 	public String landHelpHeaderP5;
 	public String landHelpE1P5;
@@ -168,7 +167,8 @@ public class LanguageYaml {
 		kickedInfo = this.getLanguageString("kickedInfo",
 				"&6You kicked from the region {regionID} by the region owner!");
 		kickInfo = this.getLanguageString("kickInfo", "&2All non-member kicked from the region {regionID}!");
-		changedBiome = this.getLanguageString("changedBiome", "&2You changed the biome from region {regionID} to {biome}!");
+		changedBiome = this.getLanguageString("changedBiome",
+				"&2You changed the biome from region {regionID} to {biome}!");
 
 		/* UnSuccess MSG */
 		buyIsAlreadyLand = this.getLanguageString("buyIsAlreadyLand",
@@ -244,7 +244,7 @@ public class LanguageYaml {
 		landHelpE5P4 = this.getLanguageString("theme.helpPage4.help5",
 				"&2 Monster Protection: &e/land monster (&aON&e/&cOFF&e)");
 		landHelpBottomP4 = this.getLanguageString("theme.helpPage4.bottom", "&a&lMore on page 5 with &6/land help 5");
-		
+
 		/* Page 5 Help for Land Command */
 		landHelpHeaderP5 = this.getLanguageString("theme.helpPage5.header", "&6&lLand edit: [Page 5]");
 		landHelpE1P5 = this.getLanguageString("theme.helpPage5.help1", "&2 Change biome: &e/land changebiome [Biome]");
@@ -258,13 +258,15 @@ public class LanguageYaml {
 				"&2 List all your shops: &e/shop list [Page]");
 		shopHelpE3P1 = this.getLanguageString("theme.shopHelpPage1.help3", "&6&lMore commands on the following pages:");
 		shopHelpE4P1 = this.getLanguageString("theme.shopHelpPage1.help4", "&2 Page 2: Buy - Sell &a/shop help 2");
-		shopHelpBottomP1 = this.getLanguageString("theme.shopHelpPage1.bottom", "&2 Page 3: Manage Members &a/shop help 3");
+		shopHelpBottomP1 = this.getLanguageString("theme.shopHelpPage1.bottom",
+				"&2 Page 3: Manage Members &a/shop help 3");
 
 		/* Page 2 Help for Shop Command */
 		shopHelpHeaderP2 = this.getLanguageString("theme.shopHelpPage2.header", "&6&lBuy - Sell: [Page 2]");
 		shopHelpE1P2 = this.getLanguageString("theme.shopHelpPage2.help1", "&2 Buy a shop: &e/shop buy");
 		shopHelpE2P2 = this.getLanguageString("theme.shopHelpPage2.help2", "&2 Sell a shop: &e/shop sell");
-		shopHelpBottomP2 = this.getLanguageString("theme.shopHelpPage2.bottom", "&a&lMore on page 3 with &6/shop help 3");
+		shopHelpBottomP2 = this.getLanguageString("theme.shopHelpPage2.bottom",
+				"&a&lMore on page 3 with &6/shop help 3");
 
 		/* Page 3 Help for Land Command */
 		shopHelpHeaderP3 = this.getLanguageString("theme.shopHelpPage3.header", "&6&lManage Members: [Page 3]");
@@ -275,11 +277,13 @@ public class LanguageYaml {
 		shopHelpE3P3 = this.getLanguageString("theme.shopHelpPage3.help3",
 				"&2 Kick non-members from a shop (teleporting): &4/shop kick");
 		shopHelpBottomP3 = this.getLanguageString("theme.shopHelpPage3.bottom", "&a&lBack to page 2 &6/shop help 2");
-		
+
 		/* Land List Command */
-		landListHeader = this.getLanguageString("theme.landList.header", "&6&lRegion Count: &r&2{count} &6&l- Entries &r&2{entryMin} &6&lfrom &r&2{entryMax}");
-		landListEntry = this.getLanguageString("theme.landList.entry", "&a{counter}. &6{regionID} &a(&efrom &a- &eto&a) [&e{minPoints} &a- &e{maxPoints}&a]");
-		
+		landListHeader = this.getLanguageString("theme.landList.header",
+				"&6&lRegion Count: &r&2{count} &6&l- Entries &r&2{entryMin} &6&lfrom &r&2{entryMax}");
+		landListEntry = this.getLanguageString("theme.landList.entry",
+				"&a{counter}. &6{regionID} &a(&efrom &a- &eto&a) [&e{minPoints} &a- &e{maxPoints}&a]");
+
 	}
 
 	public String getLanguageString(String path, String defaultValue) {

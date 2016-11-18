@@ -94,8 +94,9 @@ public class CommandAdmin implements CommandExecutor {
 			this.cmdMap.put("createserver", new CreateServerAdmin(this.plugin, perm.createServerAdminLand));
 			this.cmdMap.put("deleteserver", new DeleteServerAdmin(this.plugin, perm.deleteServerAdminLand));
 			this.cmdMap.put("createshop", new CreateShopAdmin(this.plugin, perm.createShopAdminLand));
-			
-			this.cmdMap.put("changebiome", new ChangeBiomeUniversal(this.plugin, perm.changeBiomeAdminLand, LandTypes.NOTYPE, true));
+
+			this.cmdMap.put("changebiome",
+					new ChangeBiomeUniversal(this.plugin, perm.changeBiomeAdminLand, LandTypes.NOTYPE, true));
 
 			this.isLoaded = true;
 		} catch (Exception e) {

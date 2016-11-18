@@ -52,12 +52,12 @@ public class ChangeBiomeUniversal implements ILandCmd {
 
 		final Location loc = player.getLocation();
 
-		if (!checkBiome(args[1].toUpperCase())){
-			sender.sendMessage(plugin.getYamlManager().getLanguage().notABiome.replace("{biome}", args[1].toUpperCase()));
+		if (!checkBiome(args[1].toUpperCase())) {
+			sender.sendMessage(
+					plugin.getYamlManager().getLanguage().notABiome.replace("{biome}", args[1].toUpperCase()));
 			return true;
 		}
-		
-		
+
 		Biome biome = Biome.valueOf(args[1].toUpperCase());
 		final Chunk chunk = loc.getChunk();
 		RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
@@ -83,7 +83,6 @@ public class ChangeBiomeUniversal implements ILandCmd {
 			return true;
 		}
 
-
 		if (!plugin.getBlockManager().changeBiomeChunk(chunk, biome)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SET-BIOME"));
@@ -97,14 +96,14 @@ public class ChangeBiomeUniversal implements ILandCmd {
 
 		return true;
 	}
-	
-	private boolean checkBiome(String biomename){
-	    for (Biome biome : Biome.values()) {
-	        if (biome.name().equals(biomename)) {
-	            return true;
-	        }
-	    }
-	    return false;
+
+	private boolean checkBiome(String biomename) {
+		for (Biome biome : Biome.values()) {
+			if (biome.name().equals(biomename)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

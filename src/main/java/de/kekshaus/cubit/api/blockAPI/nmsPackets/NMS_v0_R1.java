@@ -20,5 +20,4 @@ public class NMS_v0_R1 implements NMSMask {
 		});
 	}
 
-
 }

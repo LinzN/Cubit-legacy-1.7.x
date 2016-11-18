@@ -266,7 +266,7 @@ public class RegionAPIManager {
 		}
 		return stateString;
 	}
-	
+
 	public List<RegionData> getAllRegionsFromPlayer(final UUID ownerUUID, final World world, final LandTypes type) {
 		List<RegionData> list = new ArrayList<RegionData>();
 		try {
