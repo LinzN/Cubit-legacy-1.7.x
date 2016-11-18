@@ -5,13 +5,11 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-public class NMS_1_8_R3 implements NMSMask {
+import de.kekshaus.cubit.plugin.Landplugin;
 
-	Plugin plugin;
+public class NMS_v1_8_R3 implements NMSMask {
 
-	public NMS_1_8_R3(Plugin plugin) {
-		this.plugin = plugin;
-	}
+	Plugin plugin = Landplugin.inst();
 
 	@Override
 	@SuppressWarnings("deprecation")

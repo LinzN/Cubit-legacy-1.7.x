@@ -5,13 +5,11 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-public class NMS_1_11_R1 implements NMSMask {
+import de.kekshaus.cubit.plugin.Landplugin;
 
-	Plugin plugin;
+public class NMS_v1_8_R2 implements NMSMask {
 
-	public NMS_1_11_R1(Plugin plugin) {
-		this.plugin = plugin;
-	}
+	Plugin plugin = Landplugin.inst();
 
 	@Override
 	@SuppressWarnings("deprecation")
@@ -23,7 +21,7 @@ public class NMS_1_11_R1 implements NMSMask {
 				final int xCord = bukkitChunk.getX();
 				final int zcord = bukkitChunk.getZ();
 
-				final net.minecraft.server.v1_11_R1.Chunk nmsChunk = ((org.bukkit.craftbukkit.v1_11_R1.CraftChunk) bukkitChunk)
+				final net.minecraft.server.v1_8_R2.Chunk nmsChunk = ((org.bukkit.craftbukkit.v1_8_R2.CraftChunk) bukkitChunk)
 						.getHandle();
 				for (final Player player : Bukkit.getOnlinePlayers()) {
 					sendChunkPacket(player, nmsChunk);
@@ -33,9 +31,9 @@ public class NMS_1_11_R1 implements NMSMask {
 		});
 	}
 
-	private final void sendChunkPacket(final Player player, final net.minecraft.server.v1_11_R1.Chunk chunk) {
-		((org.bukkit.craftbukkit.v1_11_R1.entity.CraftPlayer) player).getHandle().playerConnection
-				.sendPacket(new net.minecraft.server.v1_11_R1.PacketPlayOutMapChunk(chunk, 20));
+	private final void sendChunkPacket(final Player player, final net.minecraft.server.v1_8_R2.Chunk chunk) {
+		((org.bukkit.craftbukkit.v1_8_R2.entity.CraftPlayer) player).getHandle().playerConnection
+				.sendPacket(new net.minecraft.server.v1_8_R2.PacketPlayOutMapChunk(chunk, true, 20));
 	}
 
 }

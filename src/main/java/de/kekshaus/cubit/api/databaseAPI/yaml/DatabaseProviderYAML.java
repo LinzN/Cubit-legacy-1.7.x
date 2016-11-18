@@ -18,7 +18,7 @@ public class DatabaseProviderYAML implements IDatabaseProvider {
 
 	@Override
 	public boolean link() {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -28,22 +28,22 @@ public class DatabaseProviderYAML implements IDatabaseProvider {
 
 	@Override
 	public OfferData getOfferData(String regionID, World world) {
-		return null;
+		return plugin.getYamlManager().getFlatfile().getOfferdata(regionID, world);
 	}
 
 	@Override
 	public boolean isOffered(String regionID, World world) {
-		return false;
+		return plugin.getYamlManager().getFlatfile().isOffered(regionID, world);
 	}
 
 	@Override
 	public boolean setOfferData(OfferData data) {
-		return true;
+		return plugin.getYamlManager().getFlatfile().setOfferdata(data);
 	}
 
 	@Override
 	public boolean removeOfferData(String regionID, World world) {
-		return true;
+		return plugin.getYamlManager().getFlatfile().removeOfferdata(regionID, world);
 	}
 
 	@Override

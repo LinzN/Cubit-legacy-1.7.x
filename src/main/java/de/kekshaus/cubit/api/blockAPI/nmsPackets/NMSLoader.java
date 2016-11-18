@@ -1,13 +1,14 @@
 package de.kekshaus.cubit.api.blockAPI.nmsPackets;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
 public class NMSLoader {
 	
-	private HashMap<String, NMSMask> nmsList = new HashMap<String, NMSMask>();
+	private HashSet<String> nmsList = new HashSet<String>();
 	private NMSMask nmsMask;
 	private Plugin plugin;
 	
@@ -18,14 +19,23 @@ public class NMSLoader {
 	}
 
 	public void loadNMSClass(){
-		
-		if (this.nmsList.containsKey(getVersion())){
-			this.nmsMask = this.nmsList.get(getVersion());
+
+		String versionNumber = "v0_R1";
+		if (this.nmsList.contains(getVersion())){
+			versionNumber = getVersion();
 			plugin.getLogger().info("Using " + getVersion() + " for NMS Class");
 		} else {
 			plugin.getLogger().info("No version found for " + getVersion() + "! Fallback to nonNMS. Chunk-Refresh will not work!");
-			this.nmsMask = this.nmsList.get("v0_r1");
 		}
+		
+		Object obj = null;
+		try {
+			 obj = Class.forName("de.kekshaus.cubit.api.blockAPI.nmsPackets.NMS_" + versionNumber).newInstance();
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		this.nmsMask = (NMSMask)obj;
+
 		
 	}
 	
@@ -34,14 +44,13 @@ public class NMSLoader {
 	}
 	
 	private void addVersions(){
-		this.nmsList.put("v0_r1", new NMS_Fallback(this.plugin));
-		this.nmsList.put("v1_11_R1", new NMS_1_11_R1(this.plugin));
-		this.nmsList.put("v1_10_R1", new NMS_1_10_R1(this.plugin));
-		this.nmsList.put("v1_9_R2", new NMS_1_9_R2(this.plugin));
-		this.nmsList.put("v1_9_R1", new NMS_1_9_R1(this.plugin));
-		this.nmsList.put("v1_8_R3", new NMS_1_8_R3(this.plugin));
-		this.nmsList.put("v1_8_R2", new NMS_1_8_R2(this.plugin));
-		this.nmsList.put("v1_8_R1", new NMS_1_8_R1(this.plugin));
+		this.nmsList.add("v1_11_R1");
+		this.nmsList.add("v1_10_R1");
+		this.nmsList.add("v1_9_R2");
+		this.nmsList.add("v1_9_R1");
+		this.nmsList.add("v1_8_R3");
+		this.nmsList.add("v1_8_R2");
+		this.nmsList.add("v1_8_R1");
 	}
 	
 	

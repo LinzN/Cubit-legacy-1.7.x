@@ -3,13 +3,11 @@ package de.kekshaus.cubit.api.blockAPI.nmsPackets;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
-public class NMS_Fallback implements NMSMask {
+import de.kekshaus.cubit.plugin.Landplugin;
 
-	Plugin plugin;
+public class NMS_v0_R1 implements NMSMask {
 
-	public NMS_Fallback(Plugin plugin) {
-		this.plugin = plugin;
-	}
+	Plugin plugin = Landplugin.inst();
 
 	@Override
 	@SuppressWarnings("deprecation")
