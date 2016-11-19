@@ -260,9 +260,9 @@ public class RegionAPIManager {
 	}
 
 	public String getStringState(boolean value) {
-		String stateString = "INAKTIV";
+		String stateString = plugin.getYamlManager().getLanguage().flagStateInactive;
 		if (value) {
-			stateString = "AKTIV";
+			stateString = plugin.getYamlManager().getLanguage().flagStateActive;
 		}
 		return stateString;
 	}

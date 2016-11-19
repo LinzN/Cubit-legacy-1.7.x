@@ -51,6 +51,8 @@ public class LanguageYaml {
 	/* Header for Plugin */
 	public String landHeader;
 	public String landBiomeListHeader;
+	public String flagStateActive;
+	public String flagStateInactive;
 
 	/* Land List Page */
 	public String landListHeader;
@@ -241,6 +243,9 @@ public class LanguageYaml {
 		/* Header for Plugin */
 		landHeader = this.getLanguageString("theme.general.header",
 				"&6<<<<<<<<<<<<<<<<<<<<<&2&l|Region Info|&6>>>>>>>>>>>>>>>>>>>>>");
+		
+		flagStateActive = this.getLanguageString("theme.general.flagStateActive", "ACTIVE");
+		flagStateInactive = this.getLanguageString("theme.general.flagStateInactive", "INACTIVE");
 
 		/* Land Info Page */
 		landInfoA1 = this.getLanguageString("theme.landinfo.empty",
