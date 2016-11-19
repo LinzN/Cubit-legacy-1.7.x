@@ -45,6 +45,7 @@ public class LanguageYaml {
 	public String notEnoughMoney;
 	public String takeOwnLand;
 	public String notOffered;
+	public String noRegionsFound;
 	public String wrongArguments;
 
 	/* Header for Plugin */
@@ -235,6 +236,7 @@ public class LanguageYaml {
 		takeOwnLand = this.getLanguageString("takeOwnLand", "&cYou can not buy your own region!");
 		notOffered = this.getLanguageString("notOffered", "&cThe region {regionID} is not offered!");
 		wrongArguments = this.getLanguageString("wrongArguments", "&cWrong arguments: Use {usage}!");
+		noRegionsFound = this.getLanguageString("noRegionsFound", "&cNo regions found. Sry!");
 
 		/* Header for Plugin */
 		landHeader = this.getLanguageString("theme.general.header",
@@ -259,7 +261,7 @@ public class LanguageYaml {
 		landHelpHeaderP1 = this.getLanguageString("theme.helpPage1.header",
 				"&6<<<<<<<<<<<<<<<<<&2&l|Region Help|&6>>>>>>>>>>>>>>>>>");
 		landHelpE1P1 = this.getLanguageString("theme.helpPage1.help1", "&2 Region informations: &e/land info");
-		landHelpE2P1 = this.getLanguageString("theme.helpPage1.help2", "&2 List all your regions: &e/land list [Page]");
+		landHelpE2P1 = this.getLanguageString("theme.helpPage1.help2", "&2 List all your regions: &e/land list (Page)");
 		landHelpE3P1 = this.getLanguageString("theme.helpPage1.help3", "&6&lMore commands on the following pages:");
 		landHelpE4P1 = this.getLanguageString("theme.helpPage1.help4", "&2 Page 2: Buy - Sell &a/land help 2");
 		landHelpE5P1 = this.getLanguageString("theme.helpPage1.help5", "&2 Page 3: Manage Members &a/land help 3");
@@ -348,7 +350,7 @@ public class LanguageYaml {
 		/* Page 1 Help for Admin Command */
 		adminHelpHeaderP1 = this.getLanguageString("theme.adminHelpPage1.header",
 				"&6<<<<<<<<<<<<<<<<<&2&l|Admin Help|&6>>>>>>>>>>>>>>>>>");
-		adminHelpE1P1 = this.getLanguageString("theme.adminHelpPage1.help1", "&2 List player regions: &4/cadmin list [Player]");
+		adminHelpE1P1 = this.getLanguageString("theme.adminHelpPage1.help1", "&2 List player regions: &e/cadmin list [Player] (page)");
 		adminHelpE2P1 = this.getLanguageString("theme.adminHelpPage1.help2", "&6&lMore commands on the following pages:");
 		adminHelpE3P1 = this.getLanguageString("theme.adminHelpPage1.help3", "&2 Page 2: Manage region &a/cadmin help 2");
 		adminHelpE4P1 = this.getLanguageString("theme.adminHelpPage1.help4", "&2 Page 3: Manage flags &a/cadmin help 3");

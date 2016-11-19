@@ -1,7 +1,9 @@
 package de.kekshaus.cubit.commandSuite.universalCommands.main;
 
 import java.util.List;
+import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -16,11 +18,13 @@ public class ListUniversal implements ILandCmd {
 	private Landplugin plugin;
 	private String permNode;
 	private LandTypes type;
+	private boolean isAdmin;
 
-	public ListUniversal(Landplugin plugin, String permNode, LandTypes type) {
+	public ListUniversal(Landplugin plugin, String permNode, LandTypes type, boolean isAdmin) {
 		this.plugin = plugin;
 		this.permNode = permNode;
 		this.type = type;
+		this.isAdmin = isAdmin;
 	}
 
 	@Override
@@ -40,57 +44,115 @@ public class ListUniversal implements ILandCmd {
 			return true;
 		}
 
-		List<RegionData> list = this.plugin.getLandManager().getAllRegionsFromPlayer(player.getUniqueId(),
-				player.getLocation().getWorld(), type);
-
-		showList(player, list, args);
+		
+		if (!this.isAdmin){
+			listDefault(player, args, cmd);
+		} else {
+			listAdmin(player, args, cmd);
+		}
+		
+		
 
 		return true;
 	}
 
-	private void showList(Player player, List<RegionData> regionList, String[] args) {
-		if (args.length <= 2) {
-			int pageNumb = 0;
+	private void listDefault(Player player, String[] args, Command cmd) {
+		if (args.length >= 1) {
+			List<RegionData> regionList = this.plugin.getLandManager().getAllRegionsFromPlayer(player.getUniqueId(),
+					player.getLocation().getWorld(), type);
+			int pageNumber = 0;
 
 			try {
 				if (args.length == 2) {
-					int number = Integer.valueOf(args[1]);
-					if (number < 1) {
-						pageNumb = 0;
+					int argNumber = Integer.valueOf(args[1]);
+					if (argNumber < 1) {
+						pageNumber = 0;
 					} else {
-						pageNumb = Integer.valueOf(args[1]) - 1;
+						pageNumber = argNumber - 1;
 					}
 
 				} else {
-					pageNumb = 0;
+					pageNumber = 0;
+				}
+			} catch (Exception e) {
+				player.sendMessage(plugin.getYamlManager().getLanguage().noNumberFound);
+				return;
+			}
+			
+			show(player, pageNumber, regionList);
+
+		} else {
+			player.sendMessage(plugin.getYamlManager().getLanguage().wrongArguments.replace("{usage}",
+					"/" + cmd.getLabel() + " " + args[0].toLowerCase() + " (page)"));
+			return;
+		}
+	}
+	
+	
+	private void listAdmin(Player player, String[] args, Command cmd) {
+
+		if (args.length >= 2) {
+			
+			@SuppressWarnings("deprecation")
+			UUID searchUUID = Bukkit.getOfflinePlayer(args[1]).getUniqueId();
+			
+			List<RegionData> regionList = this.plugin.getLandManager().getAllRegionsFromPlayer(searchUUID,
+					player.getLocation().getWorld(), type);
+			
+			int pageNumber = 0;
+
+			try {
+				if (args.length == 3) {
+					int argNumber = Integer.valueOf(args[2]);
+					if (argNumber < 1) {
+						pageNumber = 0;
+					} else {
+						pageNumber = Integer.valueOf(args[2]) - 1;
+					}
+
+				} else {
+					pageNumber = 0;
 				}
 			} catch (Exception e) {
 				player.sendMessage(plugin.getYamlManager().getLanguage().noNumberFound);
 				return;
 			}
 
-			int rgCount = regionList.size();
+			show(player, pageNumber, regionList);
 
-			if (pageNumb * 10 >= rgCount) {
-				player.sendMessage(plugin.getYamlManager().getLanguage().pageNotFound);
-				return;
-			}
+		} else {
+			player.sendMessage(plugin.getYamlManager().getLanguage().wrongArguments.replace("{usage}",
+					"/" + cmd.getLabel() + " " + args[0].toLowerCase() + " [name] (page)"));
+			return;
+		}
+	}
+	
+	private void show(Player player, int pageNumber, List<RegionData> regionList){
+		int regionCount = regionList.size();
+		
+		if (regionCount == 0){
+			player.sendMessage(plugin.getYamlManager().getLanguage().noRegionsFound);
+			return;
+		}
 
-			List<RegionData> subList = regionList.subList(pageNumb * 10,
-					pageNumb * 10 + 10 > rgCount ? rgCount : pageNumb * 10 + 10);
+		if (pageNumber * 10 >= regionCount) {
+			player.sendMessage(plugin.getYamlManager().getLanguage().pageNotFound);
+			return;
+		}
 
-			player.sendMessage(plugin.getYamlManager().getLanguage().landListHeader.replace("{count}", "" + rgCount)
-					.replace("{entryMin}", "" + (pageNumb * 10 + 1)).replace("{entryMax}", "" + (pageNumb * 10 + 10)));
+		List<RegionData> subRegionList = regionList.subList(pageNumber * 10,
+				pageNumber * 10 + 10 > regionCount ? regionCount : pageNumber * 10 + 10);
 
-			int counter = pageNumb * 10 + 1;
+		player.sendMessage(plugin.getYamlManager().getLanguage().landListHeader.replace("{count}", "" + regionCount)
+				.replace("{entryMin}", "" + (pageNumber * 10 + 1)).replace("{entryMax}", "" + (pageNumber * 10 + 10)));
 
-			for (RegionData rgData : subList) {
-				player.sendMessage(plugin.getYamlManager().getLanguage().landListEntry
-						.replace("{counter}", "" + counter).replace("{regionID}", rgData.getRegionName())
-						.replace("{minPoints}", rgData.getMinPoint()).replace("{maxPoints}", rgData.getMaxPoint()));
-				counter++;
-			}
+		int counter = pageNumber * 10 + 1;
 
+		for (RegionData rgData : subRegionList) {
+			player.sendMessage(plugin.getYamlManager().getLanguage().landListEntry
+					.replace("{counter}", "" + counter).replace("{regionID}", rgData.getRegionName())
+					.replace("{minPoints}", rgData.getMinPoint()).replace("{maxPoints}", rgData.getMaxPoint()));
+			counter++;
 		}
 	}
 

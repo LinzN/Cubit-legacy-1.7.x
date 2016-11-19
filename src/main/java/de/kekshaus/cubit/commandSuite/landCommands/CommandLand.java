@@ -99,7 +99,7 @@ public class CommandLand implements CommandExecutor {
 
 			/* Universal Commands */
 			this.cmdMap.put("info", new InfoUniversal(this.plugin, perm.infoLand, LandTypes.WORLD));
-			this.cmdMap.put("list", new ListUniversal(this.plugin, perm.listLand, LandTypes.WORLD));
+			this.cmdMap.put("list", new ListUniversal(this.plugin, perm.listLand, LandTypes.WORLD, false));
 			this.cmdMap.put("kick", new KickUniversal(this.plugin, perm.kickLand, LandTypes.WORLD));
 			this.cmdMap.put("add", new AddMemberUniversal(this.plugin, perm.addMemberLand, LandTypes.WORLD, false));
 			this.cmdMap.put("remove",

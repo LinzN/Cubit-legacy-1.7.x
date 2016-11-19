@@ -267,11 +267,11 @@ public class RegionAPIManager {
 		return stateString;
 	}
 
-	public List<RegionData> getAllRegionsFromPlayer(final UUID ownerUUID, final World world, final LandTypes type) {
+	public List<RegionData> getAllRegionsFromPlayer(final UUID searchUUID, final World world, final LandTypes type) {
 		List<RegionData> list = new ArrayList<RegionData>();
 		try {
 
-			OfflinePlayer owner = Bukkit.getOfflinePlayer(ownerUUID);
+			OfflinePlayer owner = Bukkit.getOfflinePlayer(searchUUID);
 			for (ProtectedRegion region : mRegE.getRegionList(owner, world, type)) {
 				RegionData data = new RegionData(world);
 				data.setWGRegion(region);

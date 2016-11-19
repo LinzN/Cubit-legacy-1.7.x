@@ -145,7 +145,7 @@ public class ManageRegionEntities {
 			if (entry.getValue().getOwners().contains(lPlayer)) {
 				RegionData regionData = new RegionData(world);
 				regionData.setWGRegion(entry.getValue());
-				if (regionData.getLandType() == type) {
+				if (regionData.getLandType() == type || type == LandTypes.NOTYPE) {
 					toReturn.add(entry.getValue());
 				}
 			}
