@@ -1,6 +1,6 @@
 name: Cubit
 main : de.kekshaus.cubit.plugin.Landplugin
-version: ${project.version}.b${build.number}
+version: ${project.version}.${build.number}
 description: Landplugin
 author: Kekshaus
 load: POSTWORLD
