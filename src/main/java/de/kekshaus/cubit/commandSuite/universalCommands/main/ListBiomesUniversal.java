@@ -12,7 +12,6 @@ import de.kekshaus.cubit.api.regionAPI.region.LandTypes;
 import de.kekshaus.cubit.commandSuite.ILandCmd;
 import de.kekshaus.cubit.plugin.Landplugin;
 
-
 public class ListBiomesUniversal implements ILandCmd {
 
 	private Landplugin plugin;
@@ -41,20 +40,16 @@ public class ListBiomesUniversal implements ILandCmd {
 		}
 
 		Biome[] biomes = Biome.values();
-		
+
 		List<String> biomeList = new ArrayList<String>();
-		for (Biome biome : biomes){
+		for (Biome biome : biomes) {
 			biomeList.add(biome.name());
 		}
-		
+
 		sender.sendMessage(plugin.getYamlManager().getLanguage().landBiomeListHeader);
 		sender.sendMessage(biomeList.toString().replace("[", " ").replace("]", " "));
 
-		
-		
 		return true;
 	}
-
-
 
 }

@@ -49,7 +49,7 @@ public class SettingsYaml {
 	public int sqlPort;
 	public String sqlUser;
 	public String sqlPassword;
-	
+
 	public long cubitSetupDate;
 
 	public SettingsYaml(CustomConfig configFile) {
@@ -67,7 +67,7 @@ public class SettingsYaml {
 		this.landTaxAddition = (double) this.getObjectValue("module.land.taxAddition", 5D);
 		this.landMaxPrice = (double) this.getObjectValue("module.land.maxPrice", 750D);
 		this.landSellPercent = (double) this.getObjectValue("module.land.sellPercentInDecimal", 0.4D);
-		this.landChangeBiomePrice = (double) this.getObjectValue("module.land.landChangeBiomePrice", 35D);
+		this.landChangeBiomePrice = (double) this.getObjectValue("module.land.landChangeBiomePrice", 25D);
 		this.landDeprecatedMember = (double) this.getObjectValue("module.land.deprecatedBuyupMember", 35D);
 		this.landDeprecatedOther = (double) this.getObjectValue("module.land.deprecatedBuyupOther", 45D);
 		this.landUseMaterialBorder = (boolean) this.getObjectValue("module.land.useMaterialBorder", true);
@@ -96,8 +96,7 @@ public class SettingsYaml {
 		this.entityLimiterUse = (boolean) getObjectValue("module.entityLimiter.use", false);
 
 		this.physicWaterLavaFlowLand = (boolean) getObjectValue("module.physicWaterLavaFlowLand.use", false);
-		
-		
+
 		this.cubitSetupDate = (long) getObjectValue("doNotTouch.cubitSetupDate", new Date().getTime());
 	}
 

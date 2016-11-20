@@ -101,7 +101,8 @@ public class CommandAdmin implements CommandExecutor {
 
 			this.cmdMap.put("changebiome",
 					new ChangeBiomeUniversal(this.plugin, perm.changeBiomeAdminLand, LandTypes.NOTYPE, true));
-			this.cmdMap.put("listbiomes", new ListBiomesUniversal(this.plugin, perm.listBiomesAdminLand, LandTypes.NOTYPE));
+			this.cmdMap.put("listbiomes",
+					new ListBiomesUniversal(this.plugin, perm.listBiomesAdminLand, LandTypes.NOTYPE));
 			this.cmdMap.put("list", new ListUniversal(this.plugin, perm.listAdminLand, LandTypes.NOTYPE, true));
 
 			this.isLoaded = true;

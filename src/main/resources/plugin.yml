@@ -38,6 +38,7 @@ permissions:
             cubit.command.land.removemember: true
             cubit.command.land.offer: true
             cubit.command.land.takeoffer: true
+            cubit.command.land.buyup: true
             cubit.command.land.kick: true
             cubit.command.land.list: true
             cubit.command.land.flag.pvp: true
@@ -116,6 +117,9 @@ permissions:
         description: Haupt-Hilfeseite
         default: op
     cubit.command.land.listbiomes:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.land.buyup:
         description: Haupt-Hilfeseite
         default: op
     cubit.command.land.flag.pvp:

@@ -11,17 +11,15 @@ import de.kekshaus.cubit.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.commandSuite.ILandCmd;
 import de.kekshaus.cubit.plugin.Landplugin;
 
-public class SellLand implements ILandCmd {
+public class BuyupLand implements ILandCmd {
 
 	private Landplugin plugin;
-	private String permNode;
-	private boolean isAdmin;
 
-	public SellLand(Landplugin plugin, String permNode, boolean isAdmin) {
+	private String permNode;
+
+	public BuyupLand(Landplugin plugin, String permNode) {
 		this.plugin = plugin;
 		this.permNode = permNode;
-
-		this.isAdmin = isAdmin;
 
 	}
 
@@ -44,15 +42,17 @@ public class SellLand implements ILandCmd {
 
 		final Location loc = player.getLocation();
 		final Chunk chunk = loc.getChunk();
+		RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 
-		/* Check if this is a valid sellTask */
+		/*
+		 * Check if the player has permissions for this land or hat landadmin
+		 * permissions
+		 */
+
 		if (!plugin.getLandManager().isLand(loc.getWorld(), chunk.getX(), chunk.getZ())) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandFound);
 			return true;
 		}
-
-		RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
-		final String regionID = regionData.getRegionName();
 
 		if (regionData.getLandType() != LandTypes.WORLD) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}",
@@ -60,15 +60,28 @@ public class SellLand implements ILandCmd {
 			return true;
 		}
 
-		if (!plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId()) && this.isAdmin == false) {
-			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
-					regionData.getRegionName()));
+		if (plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId())) {
+			player.sendMessage(plugin.getYamlManager().getLanguage().takeOwnLand);
+			return true;
+		}
+		boolean isMember = false;
+		if (regionData.getMembersUUID().contains(player.getUniqueId())) {
+			isMember = true;
+		}
+
+		if (!plugin.getLandManager().isToLongOffline(regionData.getOwnerUUID(), isMember)) {
+			sender.sendMessage(plugin.getYamlManager().getLanguage().notToLongOffline);
 			return true;
 		}
 
-		double economyValue = plugin.getVaultManager().calculateLandCost(player.getUniqueId(), loc.getWorld(), false);
+		double economyValue = plugin.getVaultManager().calculateLandCost(player.getUniqueId(), loc.getWorld(), true);
+		if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), economyValue)) {
+			sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
+					"" + plugin.getVaultManager().formateToEconomy(economyValue)));
+			return true;
+		}
 
-		if (!plugin.getVaultManager().transferMoney(null, regionData.getOwnerUUID(), economyValue)) {
+		if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), null, economyValue)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-ECONOMY"));
 			plugin.getLogger()
@@ -76,41 +89,36 @@ public class SellLand implements ILandCmd {
 			return true;
 		}
 
-		if (!plugin.getLandManager().removeLand(regionData, loc.getWorld())) {
+		/* Change owner and clear Memberlist */
+		if (!plugin.getLandManager().restoreDefaultSettings(regionData, loc.getWorld(), player.getUniqueId())) {
 			/* If this task failed! This should never happen */
-			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "DELETE-REGION"));
+			sender.sendMessage(
+					plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "BUYUP-UPDATEOWNER"));
 			plugin.getLogger()
-					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "DELETE-REGION"));
+					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "BUYUP-UPDATEOWNER"));
 			return true;
 		}
-
-		if (!plugin.getBlockManager().placeLandBorder(chunk,
-				Landplugin.inst().getYamlManager().getSettings().landSellMaterialBorder)) {
-			/* If this task failed! This should never happen */
-			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-BLOCK"));
-			plugin.getLogger()
-					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-BLOCK"));
-			return true;
-		}
+		/* Remove offer from Database */
 		if (!plugin.getDatabaseManager().removeOfferData(regionData.getRegionName(), loc.getWorld())) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(
-					plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "TAKEOFFER-REMOVEOFFER"));
-			plugin.getLogger().warning(
-					plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "TAKEOFFER-REMOVEOFFER"));
+					plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "BUYUP-REMOVEOFFER"));
+			plugin.getLogger()
+					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "BUYUP-REMOVEOFFER"));
 			return true;
 		}
 
-		if (!plugin.getParticleManager().sendSell(player, loc)) {
+		if (!plugin.getParticleManager().sendBuy(player, loc)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-PARTICLE"));
 			plugin.getLogger()
 					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-PARTICLE"));
 			return true;
 		}
-
 		/* Task was successfully. Send BuyMessage */
-		sender.sendMessage(plugin.getYamlManager().getLanguage().sellSuccess.replace("{regionID}", regionID));
+		sender.sendMessage(
+				plugin.getYamlManager().getLanguage().buySuccess.replace("{regionID}", regionData.getRegionName()));
+
 		return true;
 	}
 

@@ -10,7 +10,6 @@ import de.kekshaus.cubit.api.regionAPI.region.LandTypes;
 import de.kekshaus.cubit.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.commandSuite.ILandCmd;
 import de.kekshaus.cubit.plugin.Landplugin;
-//import de.nlinz.xeonSuite.guild.objects.Guild;
 
 public class InfoUniversal implements ILandCmd {
 
@@ -98,12 +97,6 @@ public class InfoUniversal implements ILandCmd {
 		player.sendMessage(
 				plugin.getYamlManager().getLanguage().landInfoE1.replace("{regionID}", regionData.getRegionName()));
 
-		/*
-		 * if (this.plugin.isGuildLoaded()) { Guild guild =
-		 * regionData.getGuild(); if (guild != null) { player.sendMessage(
-		 * plugin.getYamlManager().getLanguage().landInfoE1A1.replace("{guild}",
-		 * guild.getGuildName())); } }
-		 */
 		player.sendMessage(
 				plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}", regionData.getOwnerName()));
 		if (regionData.getMembersName().size() != 0) {
@@ -120,6 +113,16 @@ public class InfoUniversal implements ILandCmd {
 		if (plugin.getDatabaseManager().isOffered(regionData.getRegionName(), regionData.getWorld())) {
 			player.sendMessage(plugin.getYamlManager().getLanguage().landInfoA2.replace("{value}", "" + plugin
 					.getDatabaseManager().getOfferData(regionData.getRegionName(), regionData.getWorld()).getValue()));
+		}
+
+		boolean isMember = false;
+
+		if (regionData.getMembersUUID().contains(player.getUniqueId())) {
+			isMember = true;
+		}
+
+		if (plugin.getLandManager().isToLongOffline(regionData.getOwnerUUID(), isMember)) {
+			player.sendMessage(plugin.getYamlManager().getLanguage().landInfoA3);
 		}
 		return;
 
@@ -148,12 +151,6 @@ public class InfoUniversal implements ILandCmd {
 			player.sendMessage(
 					plugin.getYamlManager().getLanguage().landInfoE1.replace("{regionID}", regionData.getRegionName()));
 
-			/*
-			 * if (this.plugin.isGuildLoaded()) { Guild guild =
-			 * regionData.getGuild(); if (guild != null) {
-			 * player.sendMessage(plugin.getYamlManager().getLanguage().
-			 * landInfoE1A1.replace("{guild}", guild.getGuildName())); } }
-			 */
 			player.sendMessage(
 					plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}", regionData.getOwnerName()));
 			if (regionData.getMembersName().size() != 0) {

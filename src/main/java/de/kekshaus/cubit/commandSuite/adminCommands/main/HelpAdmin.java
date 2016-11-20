@@ -38,9 +38,9 @@ public class HelpAdmin implements ILandCmd {
 			return page2(sender);
 		} else if (args[1].toString().equalsIgnoreCase("3")) {
 			return page3(sender);
-		}else if (args[1].toString().equalsIgnoreCase("4")) {
+		} else if (args[1].toString().equalsIgnoreCase("4")) {
 			return page4(sender);
-		}else if (args[1].toString().equalsIgnoreCase("5")) {
+		} else if (args[1].toString().equalsIgnoreCase("5")) {
 			return page5(sender);
 		}
 
@@ -56,7 +56,6 @@ public class HelpAdmin implements ILandCmd {
 		sender.sendMessage(plugin.getYamlManager().getLanguage().adminHelpE5P1);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().adminHelpE6P1);
 
-
 		return true;
 
 	}
@@ -67,7 +66,6 @@ public class HelpAdmin implements ILandCmd {
 		sender.sendMessage(plugin.getYamlManager().getLanguage().adminHelpE2P2);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().adminHelpE3P2);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().adminHelpE4P2);
-
 
 		return true;
 
@@ -81,27 +79,24 @@ public class HelpAdmin implements ILandCmd {
 		sender.sendMessage(plugin.getYamlManager().getLanguage().adminHelpE4P3);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().adminHelpE5P3);
 
-
 		return true;
 
 	}
-	
+
 	private boolean page4(CommandSender sender) {
 		sender.sendMessage(plugin.getYamlManager().getLanguage().adminHelpHeaderP4);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().adminHelpE1P4);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().adminHelpE2P4);
 
-
 		return true;
 
 	}
-	
+
 	private boolean page5(CommandSender sender) {
 		sender.sendMessage(plugin.getYamlManager().getLanguage().adminHelpHeaderP5);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().adminHelpE1P5);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().adminHelpE2P5);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().adminHelpE3P5);
-
 
 		return true;
 

@@ -44,27 +44,33 @@ public class ListUniversal implements ILandCmd {
 			return true;
 		}
 
-		
-		if (!this.isAdmin){
-			listDefault(player, args, cmd);
-		} else {
-			listAdmin(player, args, cmd);
-		}
-		
-		
+		listUni(player, args, cmd);
 
 		return true;
 	}
 
-	private void listDefault(Player player, String[] args, Command cmd) {
-		if (args.length >= 1) {
-			List<RegionData> regionList = this.plugin.getLandManager().getAllRegionsFromPlayer(player.getUniqueId(),
+	@SuppressWarnings("deprecation")
+	private void listUni(Player player, String[] args, Command cmd) {
+		int argForward = 0;
+		UUID searchUUID = player.getUniqueId();
+		String usage = " (page)";
+
+		if (this.isAdmin) {
+			argForward = 1;
+			usage = " [name] (page)";
+			searchUUID = Bukkit.getOfflinePlayer(args[1]).getUniqueId();
+		}
+
+		if (args.length >= 1 + argForward) {
+
+			List<RegionData> regionList = this.plugin.getLandManager().getAllRegionsFromPlayer(searchUUID,
 					player.getLocation().getWorld(), type);
+
 			int pageNumber = 0;
 
 			try {
-				if (args.length == 2) {
-					int argNumber = Integer.valueOf(args[1]);
+				if (args.length == 2 + argForward) {
+					int argNumber = Integer.valueOf(args[1 + argForward]);
 					if (argNumber < 1) {
 						pageNumber = 0;
 					} else {
@@ -78,59 +84,20 @@ public class ListUniversal implements ILandCmd {
 				player.sendMessage(plugin.getYamlManager().getLanguage().noNumberFound);
 				return;
 			}
-			
-			show(player, pageNumber, regionList);
-
-		} else {
-			player.sendMessage(plugin.getYamlManager().getLanguage().wrongArguments.replace("{usage}",
-					"/" + cmd.getLabel() + " " + args[0].toLowerCase() + " (page)"));
-			return;
-		}
-	}
-	
-	
-	private void listAdmin(Player player, String[] args, Command cmd) {
-
-		if (args.length >= 2) {
-			
-			@SuppressWarnings("deprecation")
-			UUID searchUUID = Bukkit.getOfflinePlayer(args[1]).getUniqueId();
-			
-			List<RegionData> regionList = this.plugin.getLandManager().getAllRegionsFromPlayer(searchUUID,
-					player.getLocation().getWorld(), type);
-			
-			int pageNumber = 0;
-
-			try {
-				if (args.length == 3) {
-					int argNumber = Integer.valueOf(args[2]);
-					if (argNumber < 1) {
-						pageNumber = 0;
-					} else {
-						pageNumber = Integer.valueOf(args[2]) - 1;
-					}
-
-				} else {
-					pageNumber = 0;
-				}
-			} catch (Exception e) {
-				player.sendMessage(plugin.getYamlManager().getLanguage().noNumberFound);
-				return;
-			}
 
 			show(player, pageNumber, regionList);
 
 		} else {
 			player.sendMessage(plugin.getYamlManager().getLanguage().wrongArguments.replace("{usage}",
-					"/" + cmd.getLabel() + " " + args[0].toLowerCase() + " [name] (page)"));
+					"/" + cmd.getLabel() + " " + args[0].toLowerCase() + usage));
 			return;
 		}
 	}
-	
-	private void show(Player player, int pageNumber, List<RegionData> regionList){
+
+	private void show(Player player, int pageNumber, List<RegionData> regionList) {
 		int regionCount = regionList.size();
-		
-		if (regionCount == 0){
+
+		if (regionCount == 0) {
 			player.sendMessage(plugin.getYamlManager().getLanguage().noRegionsFound);
 			return;
 		}
@@ -149,9 +116,9 @@ public class ListUniversal implements ILandCmd {
 		int counter = pageNumber * 10 + 1;
 
 		for (RegionData rgData : subRegionList) {
-			player.sendMessage(plugin.getYamlManager().getLanguage().landListEntry
-					.replace("{counter}", "" + counter).replace("{regionID}", rgData.getRegionName())
-					.replace("{minPoints}", rgData.getMinPoint()).replace("{maxPoints}", rgData.getMaxPoint()));
+			player.sendMessage(plugin.getYamlManager().getLanguage().landListEntry.replace("{counter}", "" + counter)
+					.replace("{regionID}", rgData.getRegionName()).replace("{minPoints}", rgData.getMinPoint())
+					.replace("{maxPoints}", rgData.getMaxPoint()));
 			counter++;
 		}
 	}

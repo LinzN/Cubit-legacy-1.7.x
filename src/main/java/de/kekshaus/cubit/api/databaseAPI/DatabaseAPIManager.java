@@ -37,7 +37,7 @@ public class DatabaseAPIManager {
 
 	public long getTimeStamp(UUID uuid) {
 		long timeStamp = databaseProvider.getTimeStamp(uuid);
-		if (timeStamp == 0){
+		if (timeStamp == 0) {
 			timeStamp = this.plugin.getYamlManager().getSettings().cubitSetupDate;
 		}
 		return timeStamp;

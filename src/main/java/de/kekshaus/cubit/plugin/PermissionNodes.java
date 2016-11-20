@@ -18,6 +18,7 @@ public class PermissionNodes {
 	public String removeMemberLand = "cubit.command.land.removemember";
 	public String flagLand = "cubit.command.land.flag.";
 	public String offerLand = "cubit.command.land.offer";
+	public String buyupLand = "cubit.command.land.buyup";
 	public String takeOfferLand = "cubit.command.land.takeoffer";
 	public String kickLand = "cubit.command.land.kick";
 	public String listLand = "cubit.command.land.list";

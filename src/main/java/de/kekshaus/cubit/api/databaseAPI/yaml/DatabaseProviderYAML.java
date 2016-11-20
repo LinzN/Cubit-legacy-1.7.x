@@ -2,6 +2,7 @@ package de.kekshaus.cubit.api.databaseAPI.yaml;
 
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.World;
 
 import de.kekshaus.cubit.api.databaseAPI.IDatabaseProvider;
@@ -23,7 +24,7 @@ public class DatabaseProviderYAML implements IDatabaseProvider {
 
 	@Override
 	public long getTimeStamp(UUID uuid) {
-		return plugin.getServer().getOfflinePlayer(uuid).getLastPlayed();
+		return Bukkit.getOfflinePlayer(uuid).getLastPlayed();
 	}
 
 	@Override

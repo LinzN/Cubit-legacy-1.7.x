@@ -1,9 +1,9 @@
 package de.kekshaus.cubit.api.regionAPI;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
@@ -335,5 +335,24 @@ public class RegionAPIManager {
 		}
 		return false;
 
+	}
+
+	public boolean isToLongOffline(final UUID uuid, final boolean isMember) {
+		long currentTimeStamp = new Date().getTime();
+
+		long lastLogin = plugin.getDatabaseManager().getTimeStamp(uuid);
+		long landDeprecated = (long) (this.plugin.getYamlManager().getSettings().landDeprecatedOther * 24 * 60 * 60
+				* 1000);
+
+		if (isMember) {
+			landDeprecated = (long) (this.plugin.getYamlManager().getSettings().landDeprecatedMember * 24 * 60 * 60
+					* 1000);
+		}
+
+		if (currentTimeStamp - lastLogin < landDeprecated) {
+			return false;
+		}
+
+		return true;
 	}
 }

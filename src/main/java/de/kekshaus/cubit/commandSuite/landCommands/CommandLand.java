@@ -15,6 +15,7 @@ import com.google.common.collect.Maps;
 import de.kekshaus.cubit.api.regionAPI.region.LandTypes;
 import de.kekshaus.cubit.commandSuite.ILandCmd;
 import de.kekshaus.cubit.commandSuite.landCommands.main.BuyLand;
+import de.kekshaus.cubit.commandSuite.landCommands.main.BuyupLand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.HelpLand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.OfferLand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.SellLand;
@@ -96,6 +97,7 @@ public class CommandLand implements CommandExecutor {
 			this.cmdMap.put("offer", new OfferLand(this.plugin, perm.offerLand, false));
 
 			this.cmdMap.put("takeoffer", new TakeOfferLand(this.plugin, perm.takeOfferLand));
+			this.cmdMap.put("buyup", new BuyupLand(this.plugin, perm.buyupLand));
 
 			/* Universal Commands */
 			this.cmdMap.put("info", new InfoUniversal(this.plugin, perm.infoLand, LandTypes.WORLD));
@@ -122,7 +124,7 @@ public class CommandLand implements CommandExecutor {
 
 			this.cmdMap.put("changebiome",
 					new ChangeBiomeUniversal(this.plugin, perm.changeBiomeLand, LandTypes.WORLD, false));
-			
+
 			this.cmdMap.put("listbiomes", new ListBiomesUniversal(this.plugin, perm.listBiomesLand, LandTypes.WORLD));
 
 			this.isLoaded = true;

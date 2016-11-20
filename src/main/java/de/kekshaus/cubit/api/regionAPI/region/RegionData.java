@@ -9,10 +9,6 @@ import org.bukkit.World;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-//import de.kekshaus.cubit.plugin.Landplugin;
-//import de.nlinz.xeonSuite.guild.api.InternAPI;
-//import de.nlinz.xeonSuite.guild.objects.Guild;
-
 public class RegionData {
 	// private String regionID;
 	private ProtectedRegion region;
@@ -34,11 +30,6 @@ public class RegionData {
 		return this.region;
 	}
 
-	/*
-	 * public Guild getGuild() { if (Landplugin.inst().isGuildLoaded()) { Guild
-	 * guild = InternAPI.getForceGuildPlayer(getOwnerUUID()).getGuild(); return
-	 * guild; } return null; }
-	 */
 	public String getMinPoint() {
 		return this.region.getMinimumPoint().getBlockX() + ", " + this.region.getMinimumPoint().getBlockZ();
 	}
@@ -56,7 +47,7 @@ public class RegionData {
 	}
 
 	public String getOwnerName() {
-		return Bukkit.getServer().getOfflinePlayer(getOwnerUUID()).getName();
+		return Bukkit.getOfflinePlayer(getOwnerUUID()).getName();
 	}
 
 	public Set<UUID> getMembersUUID() {
@@ -66,7 +57,7 @@ public class RegionData {
 	public Set<String> getMembersName() {
 		Set<String> list = new HashSet<String>();
 		for (UUID uuid : getMembersUUID()) {
-			list.add(Bukkit.getServer().getOfflinePlayer(uuid).getName());
+			list.add(Bukkit.getOfflinePlayer(uuid).getName());
 		}
 		return list;
 	}

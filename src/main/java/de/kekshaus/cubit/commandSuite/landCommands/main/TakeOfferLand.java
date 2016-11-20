@@ -105,6 +105,14 @@ public class TakeOfferLand implements ILandCmd {
 					plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "TAKEOFFER-REMOVEOFFER"));
 			return true;
 		}
+
+		if (!plugin.getParticleManager().sendBuy(player, loc)) {
+			/* If this task failed! This should never happen */
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-PARTICLE"));
+			plugin.getLogger()
+					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-PARTICLE"));
+			return true;
+		}
 		/* Task was successfully. Send BuyMessage */
 		sender.sendMessage(
 				plugin.getYamlManager().getLanguage().buySuccess.replace("{regionID}", regionData.getRegionName()));
