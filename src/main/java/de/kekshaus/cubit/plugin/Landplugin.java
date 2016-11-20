@@ -1,7 +1,10 @@
 package de.kekshaus.cubit.plugin;
 
+import java.io.IOException;
+
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.mcstats.MetricsLite;
 
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
@@ -48,7 +51,7 @@ public class Landplugin extends JavaPlugin {
 		if (this.getYamlManager().getSettings().physicWaterLavaFlowLand) {
 			this.getServer().getPluginManager().registerEvents(new AdditionalPhysicsListener(), this);
 		}
-
+		runMetrics();
 		getLogger().info("Cubit startup finish");
 
 	}
@@ -67,6 +70,15 @@ public class Landplugin extends JavaPlugin {
 		this.permNodes = new PermissionNodes(this);
 		this.databaseMrg = new DatabaseAPIManager(this);
 
+	}
+	
+	private void runMetrics(){
+	    try {
+	        MetricsLite metrics = new MetricsLite(this);
+	        metrics.start();
+	    } catch (IOException e) {
+	        this.getLogger().warning("Metrics failed to start.");
+	    }
 	}
 
 	public static Landplugin inst() {
