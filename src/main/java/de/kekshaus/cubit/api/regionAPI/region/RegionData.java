@@ -60,7 +60,11 @@ public class RegionData {
 		UUID uuid = getOwnerUUID();
 		OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
 		LocalPlayer wgPlayer = Landplugin.inst().getWorldGuardPlugin().wrapOfflinePlayer(player);
-		return wgPlayer.getName();
+		String name = wgPlayer.getName();
+		if (name == null){
+			name = "Undefined";
+		}
+		return name;
 	}
 
 	public Set<String> getMembersName() {
@@ -68,7 +72,11 @@ public class RegionData {
 		for (UUID uuid : getMembersUUID()) {
 			OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
 			LocalPlayer wgPlayer = Landplugin.inst().getWorldGuardPlugin().wrapOfflinePlayer(player);
-			list.add(wgPlayer.getName());
+			String name = wgPlayer.getName();
+			if (name == null){
+				name = "Undefined";
+			}
+			list.add(name);
 		}
 		return list;
 	}
