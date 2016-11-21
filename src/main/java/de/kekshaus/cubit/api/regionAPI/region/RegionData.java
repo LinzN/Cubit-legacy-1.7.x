@@ -14,7 +14,6 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import de.kekshaus.cubit.plugin.Landplugin;
 
 public class RegionData {
-	// private String regionID;
 	private ProtectedRegion region;
 	private LandTypes type;
 	private World world;
