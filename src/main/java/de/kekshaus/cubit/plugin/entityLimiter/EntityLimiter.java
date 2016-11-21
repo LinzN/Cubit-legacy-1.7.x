@@ -186,7 +186,7 @@ public class EntityLimiter {
 
 	public void debug(String mess) {
 		if (Landplugin.inst().getYamlManager().getLimit().plugin_debug) {
-			this.plugin.getLogger().info("debug: " + mess);
+			this.plugin.getLogger().info("Debug: " + mess);
 		}
 	}
 

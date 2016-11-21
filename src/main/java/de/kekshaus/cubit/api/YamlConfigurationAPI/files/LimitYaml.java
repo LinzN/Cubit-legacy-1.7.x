@@ -41,7 +41,7 @@ public class LimitYaml {
 		check_chunk_unload = (boolean) this.getObjectValue("properties.check-chunk-unload", true);
 		preserve_named_entities = (boolean) this.getObjectValue("properties.preserve-named-entities", true);
 		prevent_creature_spawns = (boolean) this.getObjectValue("properties.prevent-creature-spawns", true);
-		plugin_debug = (boolean) this.getObjectValue("properties.debug-messages", true);
+		plugin_debug = (boolean) this.getObjectValue("properties.debug-messages", false);
 
 		List<String> meta = new ArrayList<String>();
 		meta.add("shopkeeper");

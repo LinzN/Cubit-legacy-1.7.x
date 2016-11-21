@@ -5,9 +5,13 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 
+import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+
+import de.kekshaus.cubit.plugin.Landplugin;
 
 public class RegionData {
 	// private String regionID;
@@ -45,19 +49,26 @@ public class RegionData {
 		}
 		return playerUUID;
 	}
-
-	public String getOwnerName() {
-		return Bukkit.getOfflinePlayer(getOwnerUUID()).getName();
-	}
+	
 
 	public Set<UUID> getMembersUUID() {
 		return praseWGRegion().getMembers().getUniqueIds();
 	}
 
+
+	public String getOwnerName() {
+		UUID uuid = getOwnerUUID();
+		OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
+		LocalPlayer wgPlayer = Landplugin.inst().getWorldGuardPlugin().wrapOfflinePlayer(player);
+		return wgPlayer.getName();
+	}
+
 	public Set<String> getMembersName() {
 		Set<String> list = new HashSet<String>();
 		for (UUID uuid : getMembersUUID()) {
-			list.add(Bukkit.getOfflinePlayer(uuid).getName());
+			OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
+			LocalPlayer wgPlayer = Landplugin.inst().getWorldGuardPlugin().wrapOfflinePlayer(player);
+			list.add(wgPlayer.getName());
 		}
 		return list;
 	}
