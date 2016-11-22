@@ -19,6 +19,11 @@ public class YamlConfigurationManager {
 		this.plugin = plugin;
 		this.fileOperator = new YamlFileSetup(this.plugin);
 	}
+	
+	public void reloadAllConfigs(){
+		plugin.getLogger().info("Reloading all cubit configs");
+		this.fileOperator = new YamlFileSetup(this.plugin);
+	}
 
 	public SettingsYaml getSettings() {
 		return this.fileOperator.settings;

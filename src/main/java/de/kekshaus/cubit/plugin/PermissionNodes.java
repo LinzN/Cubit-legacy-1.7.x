@@ -50,5 +50,6 @@ public class PermissionNodes {
 	public String listAdminLand = "cubit.command.admin.list";
 	public String listBiomesAdminLand = "cubit.command.admin.listbiomes";
 	public String kickAdminBypass = "cubit.bypass.kick";
+	public String reloadCubit = "cubit.command.admin.reloadcubit";
 
 }
