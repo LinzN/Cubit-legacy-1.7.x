@@ -76,7 +76,7 @@ public class KickUniversal implements ILandCmd {
 			if (entity instanceof Player) {
 				if (!entity.hasPermission(plugin.getPermNodes().kickAdminBypass)) {
 					if (!plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId())) {
-						if (!regionData.getMembersUUID().contains(entity.getUniqueId())) {
+						if (!regionData.getMembersUUID().equals(entity.getUniqueId())) {
 							playerMap.add(entity.getUniqueId());
 						}
 					}

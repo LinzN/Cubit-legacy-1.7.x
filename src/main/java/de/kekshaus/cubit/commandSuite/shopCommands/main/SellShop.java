@@ -62,7 +62,7 @@ public class SellShop implements ILandCmd {
 
 		RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 
-		UUID economyOwner = regionData.getOwnerUUID();
+		UUID economyOwner = regionData.getOwnersUUID()[0];
 
 		if (regionData.getLandType() != LandTypes.SHOP) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}",

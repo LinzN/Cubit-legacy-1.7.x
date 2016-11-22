@@ -27,7 +27,7 @@ public class AdditionalPhysicsListener implements Listener {
 			return;
 		}
 
-		if (!Landplugin.inst().getLandManager().hasLandPermission(toLand, fromLand.getOwnerUUID())) {
+		if (!Landplugin.inst().getLandManager().hasLandPermission(toLand, fromLand.getOwnersUUID()[0])) {
 			event.setCancelled(true);
 		}
 	}

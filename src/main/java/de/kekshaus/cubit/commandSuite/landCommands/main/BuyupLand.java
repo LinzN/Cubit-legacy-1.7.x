@@ -65,11 +65,11 @@ public class BuyupLand implements ILandCmd {
 			return true;
 		}
 		boolean isMember = false;
-		if (regionData.getMembersUUID().contains(player.getUniqueId())) {
+		if (regionData.getMembersUUID().equals(player.getUniqueId())) {
 			isMember = true;
 		}
 
-		if (!plugin.getLandManager().isToLongOffline(regionData.getOwnerUUID(), isMember)) {
+		if (!plugin.getLandManager().isToLongOffline(regionData.getOwnersUUID()[0], isMember)) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().notToLongOffline);
 			return true;
 		}

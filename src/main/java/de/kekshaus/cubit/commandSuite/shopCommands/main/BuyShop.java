@@ -83,7 +83,7 @@ public class BuyShop implements ILandCmd {
 			return true;
 		}
 
-		if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), regionData.getOwnerUUID(),
+		if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), regionData.getOwnersUUID()[0],
 				offerData.getValue())) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SHOP-ECONOMY"));

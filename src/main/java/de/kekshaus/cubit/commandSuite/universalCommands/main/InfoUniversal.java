@@ -77,7 +77,7 @@ public class InfoUniversal implements ILandCmd {
 
 	private void landInfo(Player player, RegionData regionData) {
 		/* Get RegionData Info */
-		String formatedTime = plugin.getDatabaseManager().getLastLoginFormated(regionData.getOwnerUUID());
+		String formatedTime = plugin.getDatabaseManager().getLastLoginFormated(regionData.getOwnersUUID()[0]);
 		String minBorder = regionData.getMinPoint();
 		String maxBorder = regionData.getMaxPoint();
 		String statusLock = plugin.getLandManager().lockPacket.getStateColor(regionData)
@@ -98,10 +98,10 @@ public class InfoUniversal implements ILandCmd {
 				plugin.getYamlManager().getLanguage().landInfoE1.replace("{regionID}", regionData.getRegionName()));
 
 		player.sendMessage(
-				plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}", regionData.getOwnerName()));
-		if (regionData.getMembersName().size() != 0) {
+				plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}", plugin.getLandManager().getPlayerNames(regionData.getOwnersUUID()).toString()));
+		if (regionData.getMembersUUID().length != 0) {
 			player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE3.replace("{members}",
-					regionData.getMembersName().toString()));
+					plugin.getLandManager().getPlayerNames(regionData.getMembersUUID()).toString()));
 		}
 		player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE4.replace("{min}", minBorder).replace("{max}",
 				maxBorder));
@@ -117,11 +117,11 @@ public class InfoUniversal implements ILandCmd {
 
 		boolean isMember = false;
 
-		if (regionData.getMembersUUID().contains(player.getUniqueId())) {
+		if (regionData.getMembersUUID().equals(player.getUniqueId())) {
 			isMember = true;
 		}
 
-		if (plugin.getLandManager().isToLongOffline(regionData.getOwnerUUID(), isMember)) {
+		if (plugin.getLandManager().isToLongOffline(regionData.getOwnersUUID()[0], isMember)) {
 			player.sendMessage(plugin.getYamlManager().getLanguage().landInfoA3);
 		}
 		return;
@@ -130,8 +130,8 @@ public class InfoUniversal implements ILandCmd {
 
 	private void shopInfo(Player player, RegionData regionData) {
 		/* Get RegionData Info */
-		if (regionData.getOwnerUUID() != null) {
-			String formatedTime = plugin.getDatabaseManager().getLastLoginFormated(regionData.getOwnerUUID());
+		if (regionData.getOwnersUUID()[0] != null) {
+			String formatedTime = plugin.getDatabaseManager().getLastLoginFormated(regionData.getOwnersUUID()[0]);
 			String minBorder = regionData.getMinPoint();
 			String maxBorder = regionData.getMaxPoint();
 			String statusLock = plugin.getLandManager().lockPacket.getStateColor(regionData)
@@ -152,10 +152,10 @@ public class InfoUniversal implements ILandCmd {
 					plugin.getYamlManager().getLanguage().landInfoE1.replace("{regionID}", regionData.getRegionName()));
 
 			player.sendMessage(
-					plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}", regionData.getOwnerName()));
-			if (regionData.getMembersName().size() != 0) {
+					plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}", plugin.getLandManager().getPlayerNames(regionData.getOwnersUUID()).toString()));
+			if (regionData.getMembersUUID().length != 0) {
 				player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE3.replace("{members}",
-						regionData.getMembersName().toString()));
+						plugin.getLandManager().getPlayerNames(regionData.getMembersUUID()).toString()));
 			}
 			player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE4.replace("{min}", minBorder)
 					.replace("{max}", maxBorder));

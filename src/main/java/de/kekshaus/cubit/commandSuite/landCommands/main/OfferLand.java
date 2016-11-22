@@ -91,7 +91,7 @@ public class OfferLand implements ILandCmd {
 				}
 			} else {
 				OfferData offerData = new OfferData(regionData.getRegionName(), loc.getWorld());
-				offerData.setPlayerUUID(regionData.getOwnerUUID());
+				offerData.setPlayerUUID(regionData.getOwnersUUID()[0]);
 				offerData.setValue(value);
 				if (!plugin.getDatabaseManager().setOfferData(offerData)) {
 					/* If this task failed! This should never happen */

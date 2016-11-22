@@ -68,7 +68,7 @@ public class SellLand implements ILandCmd {
 
 		double economyValue = plugin.getVaultManager().calculateLandCost(player.getUniqueId(), loc.getWorld(), false);
 
-		if (!plugin.getVaultManager().transferMoney(null, regionData.getOwnerUUID(), economyValue)) {
+		if (!plugin.getVaultManager().transferMoney(null, regionData.getOwnersUUID()[0], economyValue)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-ECONOMY"));
 			plugin.getLogger()

@@ -1,17 +1,11 @@
 package de.kekshaus.cubit.api.regionAPI.region;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 
-import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-
-import de.kekshaus.cubit.plugin.Landplugin;
 
 public class RegionData {
 	private ProtectedRegion region;
@@ -41,44 +35,17 @@ public class RegionData {
 		return this.region.getMaximumPoint().getBlockX() + ", " + this.region.getMaximumPoint().getBlockZ();
 	}
 
-	public UUID getOwnerUUID() {
-		UUID playerUUID = null;
-		for (UUID uuid : praseWGRegion().getOwners().getUniqueIds()) {
-			playerUUID = uuid;
-		}
-		return playerUUID;
+	public UUID[] getOwnersUUID() {
+		Set<UUID> uuidSet = praseWGRegion().getOwners().getUniqueIds();
+		return uuidSet.toArray(new UUID[uuidSet.size()]);
 	}
 	
 
-	public Set<UUID> getMembersUUID() {
-		return praseWGRegion().getMembers().getUniqueIds();
+	public UUID[] getMembersUUID() {
+		Set<UUID> uuidSet = praseWGRegion().getMembers().getUniqueIds();
+		return uuidSet.toArray(new UUID[uuidSet.size()]);
 	}
 
-
-	public String getOwnerName() {
-		UUID uuid = getOwnerUUID();
-		OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
-		LocalPlayer wgPlayer = Landplugin.inst().getWorldGuardPlugin().wrapOfflinePlayer(player);
-		String name = wgPlayer.getName();
-		if (name == null){
-			name = "Undefined";
-		}
-		return name;
-	}
-
-	public Set<String> getMembersName() {
-		Set<String> list = new HashSet<String>();
-		for (UUID uuid : getMembersUUID()) {
-			OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
-			LocalPlayer wgPlayer = Landplugin.inst().getWorldGuardPlugin().wrapOfflinePlayer(player);
-			String name = wgPlayer.getName();
-			if (name == null){
-				name = "Undefined";
-			}
-			list.add(name);
-		}
-		return list;
-	}
 
 	public World getWorld() {
 		return this.world;

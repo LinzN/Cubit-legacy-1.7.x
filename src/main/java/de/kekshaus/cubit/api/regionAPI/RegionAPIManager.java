@@ -23,6 +23,7 @@ import de.kekshaus.cubit.api.regionAPI.region.ManageRegionEntities;
 import de.kekshaus.cubit.api.regionAPI.region.ManageRegions;
 import de.kekshaus.cubit.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.api.regionAPI.region.SaveRegions;
+import de.kekshaus.cubit.api.utils.NameCache;
 import de.kekshaus.cubit.plugin.Landplugin;
 
 public class RegionAPIManager {
@@ -31,6 +32,7 @@ public class RegionAPIManager {
 	private ManageRegions mReg;
 	private ManageRegionEntities mRegE;
 	private SaveRegions saveMrg;
+	private NameCache nameCache;
 	public FirePacket firePacket;
 	public LockPacket lockPacket;
 	public MonsterPacket monsterPacket;
@@ -41,6 +43,7 @@ public class RegionAPIManager {
 	public RegionAPIManager(Landplugin plugin) {
 		plugin.getLogger().info("Loading RegionAPIManager");
 		this.plugin = plugin;
+		this.nameCache = new NameCache();
 		this.mReg = new ManageRegions();
 		this.mRegE = new ManageRegionEntities();
 		this.saveMrg = new SaveRegions();
@@ -355,4 +358,16 @@ public class RegionAPIManager {
 
 		return true;
 	}
+	
+	
+	public List<String> getPlayerNames(UUID[] playerUUIDs){
+		List<String> playerNames = new ArrayList<String>();
+		for (int i = 0; i < playerUUIDs.length; i++){
+			playerNames.add(nameCache.getCacheName(playerUUIDs[i]));
+		}
+		
+		return playerNames;
+	}
+	
+
 }
