@@ -19,6 +19,11 @@ public class ReloadAdmin implements ILandCmd {
 
 	@Override
 	public boolean runCmd(final Command cmd, final CommandSender sender, String[] args) {
+		if (!(sender instanceof Player)) {
+			/* This is not possible from the server console */
+			sender.sendMessage(plugin.getYamlManager().getLanguage().noConsoleMode);
+			return true;
+		}
 		/* Build and get all variables */
 		Player player = (Player) sender;
 
