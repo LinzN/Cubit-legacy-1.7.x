@@ -46,7 +46,7 @@ public class SellShop implements ILandCmd {
 
 		final Location loc = player.getLocation();
 		final Chunk chunk = loc.getChunk();
-		final String regionName = Landplugin.inst().getLandManager().buildLandName(LandTypes.SHOP.toString(),
+		final String regionName = Landplugin.inst().getRegionManager().buildLandName(LandTypes.SHOP.toString(),
 				chunk.getX(), chunk.getZ());
 
 		/*
@@ -55,12 +55,12 @@ public class SellShop implements ILandCmd {
 		 */
 
 		/* Check if this is a valid sellTask */
-		if (!plugin.getLandManager().isLand(loc.getWorld(), chunk.getX(), chunk.getZ())) {
+		if (!plugin.getRegionManager().isValidRegion(loc.getWorld(), chunk.getX(), chunk.getZ())) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandFound);
 			return true;
 		}
 
-		RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
+		RegionData regionData = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 
 		UUID economyOwner = regionData.getOwnersUUID()[0];
 
@@ -70,14 +70,14 @@ public class SellShop implements ILandCmd {
 			return true;
 		}
 
-		if (!plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId())) {
+		if (!plugin.getRegionManager().hasLandPermission(regionData, player.getUniqueId())) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
 					regionData.getRegionName()));
 			return true;
 		}
 
-		if (!plugin.getLandManager().restoreDefaultSettings(
-				plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ()), loc.getWorld(),
+		if (!plugin.getRegionManager().restoreDefaultSettings(
+				plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ()), loc.getWorld(),
 				null)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "RESTORE-REGION"));

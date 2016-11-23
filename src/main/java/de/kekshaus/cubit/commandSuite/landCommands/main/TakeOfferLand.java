@@ -43,14 +43,14 @@ public class TakeOfferLand implements ILandCmd {
 
 		final Location loc = player.getLocation();
 		final Chunk chunk = loc.getChunk();
-		RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
+		RegionData regionData = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 
 		/*
 		 * Check if the player has permissions for this land or hat landadmin
 		 * permissions
 		 */
 
-		if (!plugin.getLandManager().isLand(loc.getWorld(), chunk.getX(), chunk.getZ())) {
+		if (!plugin.getRegionManager().isValidRegion(loc.getWorld(), chunk.getX(), chunk.getZ())) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandFound);
 			return true;
 		}
@@ -61,7 +61,7 @@ public class TakeOfferLand implements ILandCmd {
 			return true;
 		}
 
-		if (plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId())) {
+		if (plugin.getRegionManager().hasLandPermission(regionData, player.getUniqueId())) {
 			player.sendMessage(plugin.getYamlManager().getLanguage().takeOwnLand);
 			return true;
 		}
@@ -88,7 +88,7 @@ public class TakeOfferLand implements ILandCmd {
 			return true;
 		}
 		/* Change owner and clear Memberlist */
-		if (!plugin.getLandManager().restoreDefaultSettings(regionData, loc.getWorld(), player.getUniqueId())) {
+		if (!plugin.getRegionManager().restoreDefaultSettings(regionData, loc.getWorld(), player.getUniqueId())) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(
 					plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "TAKEOFFER-UPDATEOWNER"));

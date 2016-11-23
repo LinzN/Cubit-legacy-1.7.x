@@ -40,11 +40,11 @@ public class BuyLand implements ILandCmd {
 
 		final Location loc = player.getLocation();
 		final Chunk chunk = loc.getChunk();
-		final String regionID = plugin.getLandManager().buildLandName(loc.getWorld().getName(), chunk.getX(),
+		final String regionID = plugin.getRegionManager().buildLandName(loc.getWorld().getName(), chunk.getX(),
 				chunk.getZ());
 
 		/* Check if this is a valid buyTask */
-		if (plugin.getLandManager().isLand(loc.getWorld(), chunk.getX(), chunk.getZ())) {
+		if (plugin.getRegionManager().isValidRegion(loc.getWorld(), chunk.getX(), chunk.getZ())) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().buyIsAlreadyLand.replace("{regionID}", regionID));
 			return true;
 		}
@@ -64,7 +64,7 @@ public class BuyLand implements ILandCmd {
 			return true;
 		}
 
-		if (!plugin.getLandManager().createLand(loc, player.getUniqueId(), LandTypes.WORLD)) {
+		if (!plugin.getRegionManager().createRegion(loc, player.getUniqueId(), LandTypes.WORLD)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-REGION"));
 			plugin.getLogger()

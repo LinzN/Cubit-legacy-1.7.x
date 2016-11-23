@@ -79,7 +79,7 @@ public class MonsterPacket implements IPacket {
 			newRegionData = disablePacket(regionData);
 		}
 		if (save) {
-			Landplugin.inst().getLandManager().getRegionSaver().save(regionData.getWorld());
+			Landplugin.inst().getRegionManager().getRegionSaver().save(regionData.getWorld());
 		}
 		return newRegionData;
 	}

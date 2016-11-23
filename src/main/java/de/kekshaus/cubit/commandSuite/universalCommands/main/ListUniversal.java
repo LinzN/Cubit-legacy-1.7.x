@@ -63,7 +63,7 @@ public class ListUniversal implements ILandCmd {
 
 		if (args.length >= 1 + argForward) {
 
-			List<RegionData> regionList = this.plugin.getLandManager().getAllRegionsFromPlayer(searchUUID,
+			List<RegionData> regionList = this.plugin.getRegionManager().getAllRegionsFromPlayer(searchUUID,
 					player.getLocation().getWorld(), type);
 
 			int pageNumber = 0;

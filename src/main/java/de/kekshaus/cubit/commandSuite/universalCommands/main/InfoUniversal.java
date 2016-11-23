@@ -42,7 +42,7 @@ public class InfoUniversal implements ILandCmd {
 
 		final Location loc = player.getLocation();
 		final Chunk chunk = loc.getChunk();
-		RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
+		RegionData regionData = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 
 		/* Send header */
 		sender.sendMessage(plugin.getYamlManager().getLanguage().landHeader);
@@ -80,28 +80,28 @@ public class InfoUniversal implements ILandCmd {
 		String formatedTime = plugin.getDatabaseManager().getLastLoginFormated(regionData.getOwnersUUID()[0]);
 		String minBorder = regionData.getMinPoint();
 		String maxBorder = regionData.getMaxPoint();
-		String statusLock = plugin.getLandManager().lockPacket.getStateColor(regionData)
-				+ plugin.getLandManager().lockPacket.getPacketName();
-		String statusFire = plugin.getLandManager().firePacket.getStateColor(regionData)
-				+ plugin.getLandManager().firePacket.getPacketName();
-		String statusPvP = plugin.getLandManager().pvpPacket.getStateColor(regionData)
-				+ plugin.getLandManager().pvpPacket.getPacketName();
-		String statusTNT = plugin.getLandManager().tntPacket.getStateColor(regionData)
-				+ plugin.getLandManager().tntPacket.getPacketName();
-		String statusMonster = plugin.getLandManager().monsterPacket.getStateColor(regionData)
-				+ plugin.getLandManager().monsterPacket.getPacketName();
+		String statusLock = plugin.getRegionManager().lockPacket.getStateColor(regionData)
+				+ plugin.getRegionManager().lockPacket.getPacketName();
+		String statusFire = plugin.getRegionManager().firePacket.getStateColor(regionData)
+				+ plugin.getRegionManager().firePacket.getPacketName();
+		String statusPvP = plugin.getRegionManager().pvpPacket.getStateColor(regionData)
+				+ plugin.getRegionManager().pvpPacket.getPacketName();
+		String statusTNT = plugin.getRegionManager().tntPacket.getStateColor(regionData)
+				+ plugin.getRegionManager().tntPacket.getPacketName();
+		String statusMonster = plugin.getRegionManager().monsterPacket.getStateColor(regionData)
+				+ plugin.getRegionManager().monsterPacket.getPacketName();
 
-		String statusPotion = plugin.getLandManager().potionPacket.getStateColor(regionData)
-				+ plugin.getLandManager().potionPacket.getPacketName();
+		String statusPotion = plugin.getRegionManager().potionPacket.getStateColor(regionData)
+				+ plugin.getRegionManager().potionPacket.getPacketName();
 
 		player.sendMessage(
 				plugin.getYamlManager().getLanguage().landInfoE1.replace("{regionID}", regionData.getRegionName()));
 
 		player.sendMessage(
-				plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}", plugin.getLandManager().getPlayerNames(regionData.getOwnersUUID()).toString()));
+				plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}", plugin.getRegionManager().getPlayerNames(regionData.getOwnersUUID()).toString()));
 		if (regionData.getMembersUUID().length != 0) {
 			player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE3.replace("{members}",
-					plugin.getLandManager().getPlayerNames(regionData.getMembersUUID()).toString()));
+					plugin.getRegionManager().getPlayerNames(regionData.getMembersUUID()).toString()));
 		}
 		player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE4.replace("{min}", minBorder).replace("{max}",
 				maxBorder));
@@ -121,7 +121,7 @@ public class InfoUniversal implements ILandCmd {
 			isMember = true;
 		}
 
-		if (plugin.getLandManager().isToLongOffline(regionData.getOwnersUUID()[0], isMember)) {
+		if (plugin.getRegionManager().isToLongOffline(regionData.getOwnersUUID()[0], isMember)) {
 			player.sendMessage(plugin.getYamlManager().getLanguage().landInfoA3);
 		}
 		return;
@@ -134,28 +134,28 @@ public class InfoUniversal implements ILandCmd {
 			String formatedTime = plugin.getDatabaseManager().getLastLoginFormated(regionData.getOwnersUUID()[0]);
 			String minBorder = regionData.getMinPoint();
 			String maxBorder = regionData.getMaxPoint();
-			String statusLock = plugin.getLandManager().lockPacket.getStateColor(regionData)
-					+ plugin.getLandManager().lockPacket.getPacketName();
-			String statusFire = plugin.getLandManager().firePacket.getStateColor(regionData)
-					+ plugin.getLandManager().firePacket.getPacketName();
-			String statusPvP = plugin.getLandManager().pvpPacket.getStateColor(regionData)
-					+ plugin.getLandManager().pvpPacket.getPacketName();
-			String statusTNT = plugin.getLandManager().tntPacket.getStateColor(regionData)
-					+ plugin.getLandManager().tntPacket.getPacketName();
-			String statusMonster = plugin.getLandManager().monsterPacket.getStateColor(regionData)
-					+ plugin.getLandManager().monsterPacket.getPacketName();
+			String statusLock = plugin.getRegionManager().lockPacket.getStateColor(regionData)
+					+ plugin.getRegionManager().lockPacket.getPacketName();
+			String statusFire = plugin.getRegionManager().firePacket.getStateColor(regionData)
+					+ plugin.getRegionManager().firePacket.getPacketName();
+			String statusPvP = plugin.getRegionManager().pvpPacket.getStateColor(regionData)
+					+ plugin.getRegionManager().pvpPacket.getPacketName();
+			String statusTNT = plugin.getRegionManager().tntPacket.getStateColor(regionData)
+					+ plugin.getRegionManager().tntPacket.getPacketName();
+			String statusMonster = plugin.getRegionManager().monsterPacket.getStateColor(regionData)
+					+ plugin.getRegionManager().monsterPacket.getPacketName();
 
-			String statusPotion = plugin.getLandManager().potionPacket.getStateColor(regionData)
-					+ plugin.getLandManager().potionPacket.getPacketName();
+			String statusPotion = plugin.getRegionManager().potionPacket.getStateColor(regionData)
+					+ plugin.getRegionManager().potionPacket.getPacketName();
 
 			player.sendMessage(
 					plugin.getYamlManager().getLanguage().landInfoE1.replace("{regionID}", regionData.getRegionName()));
 
 			player.sendMessage(
-					plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}", plugin.getLandManager().getPlayerNames(regionData.getOwnersUUID()).toString()));
+					plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}", plugin.getRegionManager().getPlayerNames(regionData.getOwnersUUID()).toString()));
 			if (regionData.getMembersUUID().length != 0) {
 				player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE3.replace("{members}",
-						plugin.getLandManager().getPlayerNames(regionData.getMembersUUID()).toString()));
+						plugin.getRegionManager().getPlayerNames(regionData.getMembersUUID()).toString()));
 			}
 			player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE4.replace("{min}", minBorder)
 					.replace("{max}", maxBorder));
@@ -186,19 +186,19 @@ public class InfoUniversal implements ILandCmd {
 		String minBorder = regionData.getMinPoint();
 		String maxBorder = regionData.getMaxPoint();
 
-		String statusLock = plugin.getLandManager().lockPacket.getStateColor(regionData)
-				+ plugin.getLandManager().lockPacket.getPacketName();
-		String statusFire = plugin.getLandManager().firePacket.getStateColor(regionData)
-				+ plugin.getLandManager().firePacket.getPacketName();
-		String statusPvP = plugin.getLandManager().pvpPacket.getStateColor(regionData)
-				+ plugin.getLandManager().pvpPacket.getPacketName();
-		String statusTNT = plugin.getLandManager().tntPacket.getStateColor(regionData)
-				+ plugin.getLandManager().tntPacket.getPacketName();
-		String statusMonster = plugin.getLandManager().monsterPacket.getStateColor(regionData)
-				+ plugin.getLandManager().monsterPacket.getPacketName();
+		String statusLock = plugin.getRegionManager().lockPacket.getStateColor(regionData)
+				+ plugin.getRegionManager().lockPacket.getPacketName();
+		String statusFire = plugin.getRegionManager().firePacket.getStateColor(regionData)
+				+ plugin.getRegionManager().firePacket.getPacketName();
+		String statusPvP = plugin.getRegionManager().pvpPacket.getStateColor(regionData)
+				+ plugin.getRegionManager().pvpPacket.getPacketName();
+		String statusTNT = plugin.getRegionManager().tntPacket.getStateColor(regionData)
+				+ plugin.getRegionManager().tntPacket.getPacketName();
+		String statusMonster = plugin.getRegionManager().monsterPacket.getStateColor(regionData)
+				+ plugin.getRegionManager().monsterPacket.getPacketName();
 
-		String statusPotion = plugin.getLandManager().potionPacket.getStateColor(regionData)
-				+ plugin.getLandManager().potionPacket.getPacketName();
+		String statusPotion = plugin.getRegionManager().potionPacket.getStateColor(regionData)
+				+ plugin.getRegionManager().potionPacket.getPacketName();
 
 		player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}", "Server"));
 		player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE4.replace("{min}", minBorder).replace("{max}",
@@ -214,7 +214,7 @@ public class InfoUniversal implements ILandCmd {
 			/* Buy-able region */
 			double economyValue = Landplugin.inst().getVaultManager().calculateLandCost(player.getUniqueId(),
 					loc.getWorld(), true);
-			final String regionID = plugin.getLandManager().buildLandName(loc.getWorld().getName(), chunk.getX(),
+			final String regionID = plugin.getRegionManager().buildLandName(loc.getWorld().getName(), chunk.getX(),
 					chunk.getZ());
 			player.sendMessage(plugin.getYamlManager().getLanguage().landInfoA1
 					.replace("{cost}", "" + plugin.getVaultManager().formateToEconomy(economyValue))

@@ -47,14 +47,14 @@ public class KickUniversal implements ILandCmd {
 
 		final Location loc = player.getLocation();
 		final Chunk chunk = loc.getChunk();
-		final RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(),
+		final RegionData regionData = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(),
 				chunk.getZ());
 
 		/*
 		 * Check if the player has permissions for this land or hat landadmin
 		 * permissions
 		 */
-		if (!plugin.getLandManager().isLand(loc.getWorld(), chunk.getX(), chunk.getZ())) {
+		if (!plugin.getRegionManager().isValidRegion(loc.getWorld(), chunk.getX(), chunk.getZ())) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandFound);
 			return true;
 		}
@@ -65,7 +65,7 @@ public class KickUniversal implements ILandCmd {
 			return true;
 		}
 
-		if (!plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId())) {
+		if (!plugin.getRegionManager().hasLandPermission(regionData, player.getUniqueId())) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
 					regionData.getRegionName()));
 			return true;
@@ -75,7 +75,7 @@ public class KickUniversal implements ILandCmd {
 		for (Entity entity : chunk.getEntities()) {
 			if (entity instanceof Player) {
 				if (!entity.hasPermission(plugin.getPermNodes().kickAdminBypass)) {
-					if (!plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId())) {
+					if (!plugin.getRegionManager().hasLandPermission(regionData, player.getUniqueId())) {
 						if (!regionData.getMembersUUID().equals(entity.getUniqueId())) {
 							playerMap.add(entity.getUniqueId());
 						}

@@ -17,17 +17,17 @@ public class AdditionalPhysicsListener implements Listener {
 		Chunk toChunk = event.getToBlock().getLocation().getChunk();
 
 		/* Maybe later using direct compare insteat of RegionData */
-		RegionData fromLand = Landplugin.inst().getLandManager().praseRegionData(fromChunk.getWorld(), fromChunk.getX(),
+		RegionData fromLand = Landplugin.inst().getRegionManager().praseRegionData(fromChunk.getWorld(), fromChunk.getX(),
 				fromChunk.getZ());
 
-		RegionData toLand = Landplugin.inst().getLandManager().praseRegionData(toChunk.getWorld(), toChunk.getX(),
+		RegionData toLand = Landplugin.inst().getRegionManager().praseRegionData(toChunk.getWorld(), toChunk.getX(),
 				toChunk.getZ());
 
 		if (toLand.getLandType() == LandTypes.NOTYPE) {
 			return;
 		}
 
-		if (!Landplugin.inst().getLandManager().hasLandPermission(toLand, fromLand.getOwnersUUID()[0])) {
+		if (!Landplugin.inst().getRegionManager().hasLandPermission(toLand, fromLand.getOwnersUUID()[0])) {
 			event.setCancelled(true);
 		}
 	}

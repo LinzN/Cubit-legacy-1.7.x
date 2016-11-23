@@ -55,7 +55,7 @@ public class RegionAPIManager {
 		this.potionPacket = new PotionPacket();
 	}
 
-	public boolean isLand(final World world, final int valueX, final int valueZ) {
+	public boolean isValidRegion(final World world, final int valueX, final int valueZ) {
 
 		RegionManager manager = plugin.getWorldGuardPlugin().getRegionManager(world);
 		String serverName = buildLandName(LandTypes.SERVER.toString().toLowerCase(), valueX, valueZ);
@@ -71,22 +71,22 @@ public class RegionAPIManager {
 		return false;
 	}
 
-	public boolean createLand(final Location loc, final UUID playerUUID, final LandTypes type) {
+	public boolean createRegion(final Location loc, final UUID playerUUID, final LandTypes type) {
 
 		switch (type) {
 		case SERVER:
-			return serverLand(loc);
+			return serverRegion(loc);
 		case SHOP:
-			return shopLand(loc, playerUUID);
+			return shopRegion(loc, playerUUID);
 		case WORLD:
-			return defaultLand(loc, playerUUID);
+			return worldRegion(loc, playerUUID);
 		default:
 			System.err.println("No valid LandType!");
 			return false;
 		}
 	}
 
-	private boolean defaultLand(final Location loc, final UUID playerUUID) {
+	private boolean worldRegion(final Location loc, final UUID playerUUID) {
 		try {
 			int chunkX = loc.getChunk().getX();
 			int chunkZ = loc.getChunk().getZ();
@@ -109,7 +109,7 @@ public class RegionAPIManager {
 
 	}
 
-	private boolean serverLand(final Location loc) {
+	private boolean serverRegion(final Location loc) {
 		try {
 			int chunkX = loc.getChunk().getX();
 			int chunkZ = loc.getChunk().getZ();
@@ -132,7 +132,7 @@ public class RegionAPIManager {
 
 	}
 
-	private boolean shopLand(final Location loc, final UUID playerUUID) {
+	private boolean shopRegion(final Location loc, final UUID playerUUID) {
 		try {
 			int chunkX = loc.getChunk().getX();
 			int chunkZ = loc.getChunk().getZ();

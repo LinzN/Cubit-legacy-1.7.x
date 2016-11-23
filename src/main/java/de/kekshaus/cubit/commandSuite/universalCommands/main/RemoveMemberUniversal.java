@@ -60,7 +60,7 @@ public class RemoveMemberUniversal implements ILandCmd {
 				@SuppressWarnings("deprecation")
 				OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(args[2]);
 				UUID uuid = offlinePlayer.getUniqueId();
-				if (!plugin.getLandManager().removeMemberAll(player.getUniqueId(), loc.getWorld(), uuid, type)) {
+				if (!plugin.getRegionManager().removeMemberAll(player.getUniqueId(), loc.getWorld(), uuid, type)) {
 					/* If this task failed! This should never happen */
 					sender.sendMessage(
 							plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "REMOVE-MEMBER"));
@@ -80,14 +80,14 @@ public class RemoveMemberUniversal implements ILandCmd {
 		}
 
 		final Chunk chunk = loc.getChunk();
-		RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
+		RegionData regionData = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 
 		/*
 		 * Check if the player has permissions for this land or hat landadmin
 		 * permissions
 		 */
 
-		if (!plugin.getLandManager().isLand(loc.getWorld(), chunk.getX(), chunk.getZ())) {
+		if (!plugin.getRegionManager().isValidRegion(loc.getWorld(), chunk.getX(), chunk.getZ())) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandFound);
 			return true;
 		}
@@ -98,7 +98,7 @@ public class RemoveMemberUniversal implements ILandCmd {
 			return true;
 		}
 
-		if (!plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId()) && this.isAdmin == false) {
+		if (!plugin.getRegionManager().hasLandPermission(regionData, player.getUniqueId()) && this.isAdmin == false) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
 					regionData.getRegionName()));
 			return true;
@@ -106,7 +106,7 @@ public class RemoveMemberUniversal implements ILandCmd {
 		@SuppressWarnings("deprecation")
 		OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(args[1]);
 		UUID uuid = offlinePlayer.getUniqueId();
-		if (!plugin.getLandManager().removeMember(regionData, loc.getWorld(), uuid)) {
+		if (!plugin.getRegionManager().removeMember(regionData, loc.getWorld(), uuid)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "REMOVE-MEMBER"));
 			plugin.getLogger()

@@ -60,7 +60,7 @@ public class AddMemberUniversal implements ILandCmd {
 				@SuppressWarnings("deprecation")
 				OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(args[2]);
 				UUID uuid = offlinePlayer.getUniqueId();
-				if (!plugin.getLandManager().addMemberAll(player.getUniqueId(), loc.getWorld(), uuid, type)) {
+				if (!plugin.getRegionManager().addMemberAll(player.getUniqueId(), loc.getWorld(), uuid, type)) {
 					/* If this task failed! This should never happen */
 					sender.sendMessage(
 							plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "ADD-MEMBER"));
@@ -80,13 +80,13 @@ public class AddMemberUniversal implements ILandCmd {
 		}
 
 		final Chunk chunk = loc.getChunk();
-		RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
+		RegionData regionData = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 
 		/*
 		 * Check if the player has permissions for this land or hat landadmin
 		 * permissions
 		 */
-		if (!plugin.getLandManager().isLand(loc.getWorld(), chunk.getX(), chunk.getZ())) {
+		if (!plugin.getRegionManager().isValidRegion(loc.getWorld(), chunk.getX(), chunk.getZ())) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandFound);
 			return true;
 		}
@@ -97,7 +97,7 @@ public class AddMemberUniversal implements ILandCmd {
 			return true;
 		}
 
-		if (!plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId()) && this.isAdmin == false) {
+		if (!plugin.getRegionManager().hasLandPermission(regionData, player.getUniqueId()) && this.isAdmin == false) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
 					regionData.getRegionName()));
 			return true;
@@ -106,7 +106,7 @@ public class AddMemberUniversal implements ILandCmd {
 		@SuppressWarnings("deprecation")
 		OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(args[1]);
 		UUID uuid = offlinePlayer.getUniqueId();
-		if (!plugin.getLandManager().addMember(regionData, loc.getWorld(), uuid)) {
+		if (!plugin.getRegionManager().addMember(regionData, loc.getWorld(), uuid)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "ADD-MEMBER"));
 			plugin.getLogger()

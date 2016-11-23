@@ -48,13 +48,13 @@ public class ChangeFlagUniversal implements ILandCmd {
 
 		final Location loc = player.getLocation();
 		final Chunk chunk = loc.getChunk();
-		RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
+		RegionData regionData = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 
 		/*
 		 * Check if the player has permissions for this land or hat landadmin
 		 * permissions
 		 */
-		if (!plugin.getLandManager().isLand(loc.getWorld(), chunk.getX(), chunk.getZ())) {
+		if (!plugin.getRegionManager().isValidRegion(loc.getWorld(), chunk.getX(), chunk.getZ())) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandFound);
 			return true;
 		}
@@ -65,7 +65,7 @@ public class ChangeFlagUniversal implements ILandCmd {
 			return true;
 		}
 
-		if (!plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId()) && this.isAdmin == false) {
+		if (!plugin.getRegionManager().hasLandPermission(regionData, player.getUniqueId()) && this.isAdmin == false) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
 					regionData.getRegionName()));
 			return true;
@@ -76,7 +76,7 @@ public class ChangeFlagUniversal implements ILandCmd {
 		} else if (args[1].toString().equalsIgnoreCase("on")) {
 
 			packet.switchState(regionData, true, true);
-			String stateString = plugin.getLandManager().getStringState(packet.getState(regionData));
+			String stateString = plugin.getRegionManager().getStringState(packet.getState(regionData));
 			sender.sendMessage(plugin.getYamlManager().getLanguage().flagSwitchSuccess
 					.replace("{flag}", packet.getPacketName()).replace("{value}", stateString));
 
@@ -84,7 +84,7 @@ public class ChangeFlagUniversal implements ILandCmd {
 		} else if (args[1].toString().equalsIgnoreCase("off")) {
 
 			packet.switchState(regionData, false, true);
-			String stateString = plugin.getLandManager().getStringState(packet.getState(regionData));
+			String stateString = plugin.getRegionManager().getStringState(packet.getState(regionData));
 			sender.sendMessage(plugin.getYamlManager().getLanguage().flagSwitchSuccess
 					.replace("{flag}", packet.getPacketName()).replace("{value}", stateString));
 
@@ -92,7 +92,7 @@ public class ChangeFlagUniversal implements ILandCmd {
 		}
 		/* Switch flag-state to the opposite value */
 		packet.switchState(regionData, true);
-		String stateString = plugin.getLandManager().getStringState(packet.getState(regionData));
+		String stateString = plugin.getRegionManager().getStringState(packet.getState(regionData));
 
 		if (!plugin.getParticleManager().changeFlag(player, loc)) {
 			/* If this task failed! This should never happen */

@@ -46,12 +46,12 @@ public class SellLand implements ILandCmd {
 		final Chunk chunk = loc.getChunk();
 
 		/* Check if this is a valid sellTask */
-		if (!plugin.getLandManager().isLand(loc.getWorld(), chunk.getX(), chunk.getZ())) {
+		if (!plugin.getRegionManager().isValidRegion(loc.getWorld(), chunk.getX(), chunk.getZ())) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandFound);
 			return true;
 		}
 
-		RegionData regionData = plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
+		RegionData regionData = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 		final String regionID = regionData.getRegionName();
 
 		if (regionData.getLandType() != LandTypes.WORLD) {
@@ -60,7 +60,7 @@ public class SellLand implements ILandCmd {
 			return true;
 		}
 
-		if (!plugin.getLandManager().hasLandPermission(regionData, player.getUniqueId()) && this.isAdmin == false) {
+		if (!plugin.getRegionManager().hasLandPermission(regionData, player.getUniqueId()) && this.isAdmin == false) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
 					regionData.getRegionName()));
 			return true;
@@ -76,7 +76,7 @@ public class SellLand implements ILandCmd {
 			return true;
 		}
 
-		if (!plugin.getLandManager().removeLand(regionData, loc.getWorld())) {
+		if (!plugin.getRegionManager().removeLand(regionData, loc.getWorld())) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "DELETE-REGION"));
 			plugin.getLogger()

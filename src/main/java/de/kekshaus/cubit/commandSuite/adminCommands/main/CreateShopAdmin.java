@@ -43,7 +43,7 @@ public class CreateShopAdmin implements ILandCmd {
 
 		final Location loc = player.getLocation();
 		final Chunk chunk = loc.getChunk();
-		final String regionName = Landplugin.inst().getLandManager().buildLandName(LandTypes.SHOP.toString(),
+		final String regionName = Landplugin.inst().getRegionManager().buildLandName(LandTypes.SHOP.toString(),
 				chunk.getX(), chunk.getZ());
 
 		/*
@@ -51,8 +51,8 @@ public class CreateShopAdmin implements ILandCmd {
 		 * permissions
 		 */
 
-		if (!plugin.getLandManager().isLand(loc.getWorld(), chunk.getX(), chunk.getZ())) {
-			if (!plugin.getLandManager().createLand(loc, player.getUniqueId(), LandTypes.SHOP)) {
+		if (!plugin.getRegionManager().isValidRegion(loc.getWorld(), chunk.getX(), chunk.getZ())) {
+			if (!plugin.getRegionManager().createRegion(loc, player.getUniqueId(), LandTypes.SHOP)) {
 				/* If this task failed! This should never happen */
 				sender.sendMessage(
 						plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-REGION"));
@@ -61,8 +61,8 @@ public class CreateShopAdmin implements ILandCmd {
 				return true;
 			}
 		} else {
-			if (!plugin.getLandManager().restoreDefaultSettings(
-					plugin.getLandManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ()), loc.getWorld(),
+			if (!plugin.getRegionManager().restoreDefaultSettings(
+					plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ()), loc.getWorld(),
 					null)) {
 				/* If this task failed! This should never happen */
 				sender.sendMessage(

@@ -25,7 +25,7 @@ public class Landplugin extends JavaPlugin {
 	private static Landplugin inst;
 	private WorldGuardPlugin wgPl;
 	private WorldEdit wePl;
-	private RegionAPIManager landMrg;
+	private RegionAPIManager regionMrg;
 	private BlockAPIManager blockMrg;
 	private ParticleAPIManager particleMrg;
 	private VaultAPIManager vaultMrg;
@@ -63,7 +63,7 @@ public class Landplugin extends JavaPlugin {
 
 	private void setupManagers() {
 		this.yamlConfiguration = new YamlConfigurationManager(this);
-		this.landMrg = new RegionAPIManager(this);
+		this.regionMrg = new RegionAPIManager(this);
 		this.blockMrg = new BlockAPIManager(this);
 		this.particleMrg = new ParticleAPIManager(this);
 		this.vaultMrg = new VaultAPIManager(this);
@@ -85,8 +85,8 @@ public class Landplugin extends JavaPlugin {
 		return inst;
 	}
 
-	public RegionAPIManager getLandManager() {
-		return this.landMrg;
+	public RegionAPIManager getRegionManager() {
+		return this.regionMrg;
 	}
 
 	public BlockAPIManager getBlockManager() {
