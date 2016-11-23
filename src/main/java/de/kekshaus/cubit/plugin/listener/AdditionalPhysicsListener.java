@@ -17,8 +17,8 @@ public class AdditionalPhysicsListener implements Listener {
 		Chunk toChunk = event.getToBlock().getLocation().getChunk();
 
 		/* Maybe later using direct compare insteat of RegionData */
-		RegionData fromLand = Landplugin.inst().getRegionManager().praseRegionData(fromChunk.getWorld(), fromChunk.getX(),
-				fromChunk.getZ());
+		RegionData fromLand = Landplugin.inst().getRegionManager().praseRegionData(fromChunk.getWorld(),
+				fromChunk.getX(), fromChunk.getZ());
 
 		RegionData toLand = Landplugin.inst().getRegionManager().praseRegionData(toChunk.getWorld(), toChunk.getX(),
 				toChunk.getZ());

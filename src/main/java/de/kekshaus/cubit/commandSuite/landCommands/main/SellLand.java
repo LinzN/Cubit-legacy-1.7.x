@@ -96,8 +96,8 @@ public class SellLand implements ILandCmd {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(
 					plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SELL-REMOVEOFFER"));
-			plugin.getLogger().warning(
-					plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SELL-REMOVEOFFER"));
+			plugin.getLogger()
+					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SELL-REMOVEOFFER"));
 			return true;
 		}
 

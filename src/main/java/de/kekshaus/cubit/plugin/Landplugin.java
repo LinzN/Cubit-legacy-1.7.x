@@ -71,14 +71,14 @@ public class Landplugin extends JavaPlugin {
 		this.databaseMrg = new DatabaseAPIManager(this);
 
 	}
-	
-	private void runMetrics(){
-	    try {
-	        MetricsLite metrics = new MetricsLite(this);
-	        metrics.start();
-	    } catch (IOException e) {
-	        this.getLogger().warning("Metrics failed to start.");
-	    }
+
+	private void runMetrics() {
+		try {
+			MetricsLite metrics = new MetricsLite(this);
+			metrics.start();
+		} catch (IOException e) {
+			this.getLogger().warning("Metrics failed to start.");
+		}
 	}
 
 	public static Landplugin inst() {

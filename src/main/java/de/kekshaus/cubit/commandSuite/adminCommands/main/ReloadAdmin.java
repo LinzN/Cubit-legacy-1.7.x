@@ -32,18 +32,16 @@ public class ReloadAdmin implements ILandCmd {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoPermission);
 			return true;
 		}
-		
-		
+
 		try {
 			this.plugin.getYamlManager().reloadAllConfigs();
 			sender.sendMessage("Cubit configs reloaded!");
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
 		return true;
 
 	}
-
 
 }

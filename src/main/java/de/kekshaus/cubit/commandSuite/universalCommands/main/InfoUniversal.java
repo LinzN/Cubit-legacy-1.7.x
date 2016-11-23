@@ -97,8 +97,8 @@ public class InfoUniversal implements ILandCmd {
 		player.sendMessage(
 				plugin.getYamlManager().getLanguage().landInfoE1.replace("{regionID}", regionData.getRegionName()));
 
-		player.sendMessage(
-				plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}", plugin.getRegionManager().getPlayerNames(regionData.getOwnersUUID()).toString()));
+		player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}",
+				plugin.getRegionManager().getPlayerNames(regionData.getOwnersUUID()).toString()));
 		if (regionData.getMembersUUID().length != 0) {
 			player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE3.replace("{members}",
 					plugin.getRegionManager().getPlayerNames(regionData.getMembersUUID()).toString()));
@@ -151,8 +151,8 @@ public class InfoUniversal implements ILandCmd {
 			player.sendMessage(
 					plugin.getYamlManager().getLanguage().landInfoE1.replace("{regionID}", regionData.getRegionName()));
 
-			player.sendMessage(
-					plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}", plugin.getRegionManager().getPlayerNames(regionData.getOwnersUUID()).toString()));
+			player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}",
+					plugin.getRegionManager().getPlayerNames(regionData.getOwnersUUID()).toString()));
 			if (regionData.getMembersUUID().length != 0) {
 				player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE3.replace("{members}",
 						plugin.getRegionManager().getPlayerNames(regionData.getMembersUUID()).toString()));

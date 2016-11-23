@@ -62,8 +62,8 @@ public class CreateShopAdmin implements ILandCmd {
 			}
 		} else {
 			if (!plugin.getRegionManager().restoreDefaultSettings(
-					plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ()), loc.getWorld(),
-					null)) {
+					plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ()),
+					loc.getWorld(), null)) {
 				/* If this task failed! This should never happen */
 				sender.sendMessage(
 						plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "RESTORE-REGION"));

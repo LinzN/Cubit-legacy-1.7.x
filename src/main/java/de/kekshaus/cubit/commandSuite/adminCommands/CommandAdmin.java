@@ -76,16 +76,18 @@ public class CommandAdmin implements CommandExecutor {
 			/* Protection AdminCommands */
 			this.cmdMap.put("version", new VersionUniversal(this.plugin, null, null));
 			this.cmdMap.put("help", new HelpAdmin(this.plugin, perm.helpAdminLand));
-			this.cmdMap.put("setpvp", new ChangeFlagUniversal(this.plugin, Landplugin.inst().getRegionManager().pvpPacket,
-					perm.flagAdminLand + "pvp", LandTypes.NOTYPE, true));
+			this.cmdMap.put("setpvp",
+					new ChangeFlagUniversal(this.plugin, Landplugin.inst().getRegionManager().pvpPacket,
+							perm.flagAdminLand + "pvp", LandTypes.NOTYPE, true));
 			this.cmdMap.put("setfire",
 					new ChangeFlagUniversal(this.plugin, Landplugin.inst().getRegionManager().firePacket,
 							perm.flagAdminLand + "fire", LandTypes.NOTYPE, true));
 			this.cmdMap.put("setlock",
 					new ChangeFlagUniversal(this.plugin, Landplugin.inst().getRegionManager().lockPacket,
 							perm.flagAdminLand + "lock", LandTypes.NOTYPE, true));
-			this.cmdMap.put("settnt", new ChangeFlagUniversal(this.plugin, Landplugin.inst().getRegionManager().tntPacket,
-					perm.flagAdminLand + "tnt", LandTypes.NOTYPE, true));
+			this.cmdMap.put("settnt",
+					new ChangeFlagUniversal(this.plugin, Landplugin.inst().getRegionManager().tntPacket,
+							perm.flagAdminLand + "tnt", LandTypes.NOTYPE, true));
 			this.cmdMap.put("setmonster",
 					new ChangeFlagUniversal(this.plugin, Landplugin.inst().getRegionManager().monsterPacket,
 							perm.flagAdminLand + "monster", LandTypes.NOTYPE, true));

@@ -358,16 +358,14 @@ public class RegionAPIManager {
 
 		return true;
 	}
-	
-	
-	public List<String> getPlayerNames(UUID[] playerUUIDs){
+
+	public List<String> getPlayerNames(UUID[] playerUUIDs) {
 		List<String> playerNames = new ArrayList<String>();
-		for (int i = 0; i < playerUUIDs.length; i++){
+		for (int i = 0; i < playerUUIDs.length; i++) {
 			playerNames.add(nameCache.getCacheName(playerUUIDs[i]));
 		}
-		
+
 		return playerNames;
 	}
-	
 
 }

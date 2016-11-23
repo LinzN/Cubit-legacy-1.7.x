@@ -110,17 +110,18 @@ public class CommandLand implements CommandExecutor {
 			/* Protection Commands */
 			this.cmdMap.put("pvp", new ChangeFlagUniversal(this.plugin, Landplugin.inst().getRegionManager().pvpPacket,
 					perm.flagLand + "pvp", LandTypes.WORLD, false));
-			this.cmdMap.put("fire", new ChangeFlagUniversal(this.plugin, Landplugin.inst().getRegionManager().firePacket,
-					perm.flagLand + "fire", LandTypes.WORLD, false));
-			this.cmdMap.put("lock", new ChangeFlagUniversal(this.plugin, Landplugin.inst().getRegionManager().lockPacket,
-					perm.flagLand + "lock", LandTypes.WORLD, false));
+			this.cmdMap.put("fire", new ChangeFlagUniversal(this.plugin,
+					Landplugin.inst().getRegionManager().firePacket, perm.flagLand + "fire", LandTypes.WORLD, false));
+			this.cmdMap.put("lock", new ChangeFlagUniversal(this.plugin,
+					Landplugin.inst().getRegionManager().lockPacket, perm.flagLand + "lock", LandTypes.WORLD, false));
 			this.cmdMap.put("tnt", new ChangeFlagUniversal(this.plugin, Landplugin.inst().getRegionManager().tntPacket,
 					perm.flagLand + "tnt", LandTypes.WORLD, false));
 			this.cmdMap.put("monster",
 					new ChangeFlagUniversal(this.plugin, Landplugin.inst().getRegionManager().monsterPacket,
 							perm.flagLand + "monster", LandTypes.WORLD, false));
-			this.cmdMap.put("potion", new ChangeFlagUniversal(this.plugin,
-					Landplugin.inst().getRegionManager().potionPacket, perm.flagLand + "potion", LandTypes.WORLD, false));
+			this.cmdMap.put("potion",
+					new ChangeFlagUniversal(this.plugin, Landplugin.inst().getRegionManager().potionPacket,
+							perm.flagLand + "potion", LandTypes.WORLD, false));
 
 			this.cmdMap.put("changebiome",
 					new ChangeBiomeUniversal(this.plugin, perm.changeBiomeLand, LandTypes.WORLD, false));

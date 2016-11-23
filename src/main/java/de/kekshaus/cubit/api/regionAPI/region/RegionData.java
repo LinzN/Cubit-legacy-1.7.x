@@ -39,13 +39,11 @@ public class RegionData {
 		Set<UUID> uuidSet = praseWGRegion().getOwners().getUniqueIds();
 		return uuidSet.toArray(new UUID[uuidSet.size()]);
 	}
-	
 
 	public UUID[] getMembersUUID() {
 		Set<UUID> uuidSet = praseWGRegion().getMembers().getUniqueIds();
 		return uuidSet.toArray(new UUID[uuidSet.size()]);
 	}
-
 
 	public World getWorld() {
 		return this.world;
