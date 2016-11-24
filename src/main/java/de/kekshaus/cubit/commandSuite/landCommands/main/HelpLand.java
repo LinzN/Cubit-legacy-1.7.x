@@ -4,10 +4,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import de.kekshaus.cubit.commandSuite.ILandCmd;
+import de.kekshaus.cubi.api.classes.interfaces.ICommand;
 import de.kekshaus.cubit.plugin.Landplugin;
 
-public class HelpLand implements ILandCmd {
+public class HelpLand implements ICommand {
 
 	private Landplugin plugin;
 	private String permNode;

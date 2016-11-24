@@ -5,11 +5,11 @@ import org.bukkit.ChatColor;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 
-import de.kekshaus.cubit.api.regionAPI.IPacket;
+import de.kekshaus.cubi.api.classes.interfaces.IProtectionFlag;
 import de.kekshaus.cubit.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.plugin.Landplugin;
 
-public class FirePacket implements IPacket {
+public class FirePacket implements IProtectionFlag {
 
 	@Override
 	public RegionData enablePacket(RegionData regionData) {

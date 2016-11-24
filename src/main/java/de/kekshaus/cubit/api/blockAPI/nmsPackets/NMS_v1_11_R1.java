@@ -5,9 +5,10 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
+import de.kekshaus.cubi.api.classes.interfaces.INMSMask;
 import de.kekshaus.cubit.plugin.Landplugin;
 
-public class NMS_v1_11_R1 implements NMSMask {
+public class NMS_v1_11_R1 implements INMSMask {
 
 	Plugin plugin = Landplugin.inst();
 

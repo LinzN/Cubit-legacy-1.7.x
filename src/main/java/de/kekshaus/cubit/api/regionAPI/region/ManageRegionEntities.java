@@ -12,6 +12,7 @@ import com.sk89q.worldguard.domains.DefaultDomain;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
+import de.kekshaus.cubi.api.classes.enums.LandTypes;
 import de.kekshaus.cubit.plugin.Landplugin;
 
 public class ManageRegionEntities {

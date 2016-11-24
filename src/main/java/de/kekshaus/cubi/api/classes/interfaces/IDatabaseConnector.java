@@ -1,10 +1,12 @@
-package de.kekshaus.cubit.api.databaseAPI;
+package de.kekshaus.cubi.api.classes.interfaces;
 
 import java.util.UUID;
 
 import org.bukkit.World;
 
-public interface IDatabaseProvider {
+import de.kekshaus.cubit.api.databaseAPI.OfferData;
+
+public interface IDatabaseConnector {
 
 	public boolean link();
 

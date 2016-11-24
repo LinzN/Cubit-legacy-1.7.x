@@ -4,14 +4,14 @@ import java.util.UUID;
 
 import org.bukkit.World;
 
-import de.kekshaus.cubit.api.databaseAPI.IDatabaseProvider;
+import de.kekshaus.cubi.api.classes.interfaces.IDatabaseConnector;
 import de.kekshaus.cubit.api.databaseAPI.OfferData;
 import de.kekshaus.cubit.api.databaseAPI.sql.getData.DataBaseSQLGetData;
 import de.kekshaus.cubit.api.databaseAPI.sql.setData.DataBaseSQLSetData;
 import de.kekshaus.cubit.api.databaseAPI.sql.setup.DataBaseSQLSetup;
 import de.kekshaus.cubit.plugin.Landplugin;
 
-public class DatabaseProviderSQL implements IDatabaseProvider {
+public class DatabaseProviderSQL implements IDatabaseConnector {
 
 	private Landplugin plugin;
 	private DataBaseSQLSetData setData;

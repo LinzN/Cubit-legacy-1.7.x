@@ -3,11 +3,12 @@ package de.kekshaus.cubit.commandSuite.universalCommands.main;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import de.kekshaus.cubit.api.regionAPI.region.LandTypes;
-import de.kekshaus.cubit.commandSuite.ILandCmd;
+
+import de.kekshaus.cubi.api.classes.enums.LandTypes;
+import de.kekshaus.cubi.api.classes.interfaces.ICommand;
 import de.kekshaus.cubit.plugin.Landplugin;
 
-public class VersionUniversal implements ILandCmd {
+public class VersionUniversal implements ICommand {
 
 	private Landplugin plugin;
 

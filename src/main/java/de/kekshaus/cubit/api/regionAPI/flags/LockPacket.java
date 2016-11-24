@@ -7,11 +7,11 @@ import com.sk89q.worldguard.protection.flags.RegionGroup;
 import com.sk89q.worldguard.protection.flags.RegionGroupFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 
-import de.kekshaus.cubit.api.regionAPI.IPacket;
+import de.kekshaus.cubi.api.classes.interfaces.IProtectionFlag;
 import de.kekshaus.cubit.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.plugin.Landplugin;
 
-public class LockPacket implements IPacket {
+public class LockPacket implements IProtectionFlag {
 
 	@Override
 	public RegionData enablePacket(RegionData regionData) {

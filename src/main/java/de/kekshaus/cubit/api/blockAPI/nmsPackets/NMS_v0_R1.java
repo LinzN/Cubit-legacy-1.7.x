@@ -3,9 +3,10 @@ package de.kekshaus.cubit.api.blockAPI.nmsPackets;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
+import de.kekshaus.cubi.api.classes.interfaces.INMSMask;
 import de.kekshaus.cubit.plugin.Landplugin;
 
-public class NMS_v0_R1 implements NMSMask {
+public class NMS_v0_R1 implements INMSMask {
 
 	Plugin plugin = Landplugin.inst();
 

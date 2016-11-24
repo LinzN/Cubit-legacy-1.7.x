@@ -1,4 +1,4 @@
-package de.kekshaus.cubit.api.regionAPI.region;
+package de.kekshaus.cubi.api.classes.enums;
 
 import org.bukkit.Bukkit;
 

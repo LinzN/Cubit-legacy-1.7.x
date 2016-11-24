@@ -12,8 +12,8 @@ import org.bukkit.entity.Player;
 
 import com.google.common.collect.Maps;
 
-import de.kekshaus.cubit.api.regionAPI.region.LandTypes;
-import de.kekshaus.cubit.commandSuite.ILandCmd;
+import de.kekshaus.cubi.api.classes.enums.LandTypes;
+import de.kekshaus.cubi.api.classes.interfaces.ICommand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.BuyLand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.BuyupLand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.HelpLand;
@@ -78,9 +78,9 @@ public class CommandLand implements CommandExecutor {
 		return true;
 	}
 
-	private TreeMap<String, ILandCmd> cmdMap = Maps.newTreeMap();
+	private TreeMap<String, ICommand> cmdMap = Maps.newTreeMap();
 
-	public TreeMap<String, ILandCmd> getCmdMap() {
+	public TreeMap<String, ICommand> getCmdMap() {
 		return cmdMap;
 	}
 

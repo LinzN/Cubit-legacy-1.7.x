@@ -8,11 +8,11 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import de.kekshaus.cubit.api.regionAPI.region.LandTypes;
-import de.kekshaus.cubit.commandSuite.ILandCmd;
+import de.kekshaus.cubi.api.classes.enums.LandTypes;
+import de.kekshaus.cubi.api.classes.interfaces.ICommand;
 import de.kekshaus.cubit.plugin.Landplugin;
 
-public class ListBiomesUniversal implements ILandCmd {
+public class ListBiomesUniversal implements ICommand {
 
 	private Landplugin plugin;
 	private String permNode;

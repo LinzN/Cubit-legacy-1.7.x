@@ -5,10 +5,12 @@ import java.util.HashSet;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
+import de.kekshaus.cubi.api.classes.interfaces.INMSMask;
+
 public class NMSLoader {
 
 	private HashSet<String> nmsList = new HashSet<String>();
-	private NMSMask nmsMask;
+	private INMSMask nmsMask;
 	private Plugin plugin;
 
 	public NMSLoader(Plugin plugin) {
@@ -34,11 +36,11 @@ public class NMSLoader {
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
-		this.nmsMask = (NMSMask) obj;
+		this.nmsMask = (INMSMask) obj;
 
 	}
 
-	public NMSMask getNMSClass() {
+	public INMSMask getNMSClass() {
 		return this.nmsMask;
 	}
 

@@ -1,10 +1,10 @@
-package de.kekshaus.cubit.api.regionAPI;
+package de.kekshaus.cubi.api.classes.interfaces;
 
 import org.bukkit.ChatColor;
 
 import de.kekshaus.cubit.api.regionAPI.region.RegionData;
 
-public interface IPacket {
+public interface IProtectionFlag {
 	public abstract RegionData enablePacket(RegionData regionData);
 
 	public abstract RegionData disablePacket(RegionData regionData);

@@ -12,13 +12,13 @@ import org.bukkit.World;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
+import de.kekshaus.cubi.api.classes.enums.LandTypes;
 import de.kekshaus.cubit.api.regionAPI.flags.FirePacket;
 import de.kekshaus.cubit.api.regionAPI.flags.LockPacket;
 import de.kekshaus.cubit.api.regionAPI.flags.MonsterPacket;
 import de.kekshaus.cubit.api.regionAPI.flags.PotionPacket;
 import de.kekshaus.cubit.api.regionAPI.flags.PvPPacket;
 import de.kekshaus.cubit.api.regionAPI.flags.TNTPacket;
-import de.kekshaus.cubit.api.regionAPI.region.LandTypes;
 import de.kekshaus.cubit.api.regionAPI.region.ManageRegionEntities;
 import de.kekshaus.cubit.api.regionAPI.region.ManageRegions;
 import de.kekshaus.cubit.api.regionAPI.region.RegionData;

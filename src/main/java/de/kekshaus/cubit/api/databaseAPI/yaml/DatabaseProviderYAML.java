@@ -5,11 +5,11 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 
-import de.kekshaus.cubit.api.databaseAPI.IDatabaseProvider;
+import de.kekshaus.cubi.api.classes.interfaces.IDatabaseConnector;
 import de.kekshaus.cubit.api.databaseAPI.OfferData;
 import de.kekshaus.cubit.plugin.Landplugin;
 
-public class DatabaseProviderYAML implements IDatabaseProvider {
+public class DatabaseProviderYAML implements IDatabaseConnector {
 
 	private Landplugin plugin;
 

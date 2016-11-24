@@ -7,6 +7,8 @@ import org.bukkit.World;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
+import de.kekshaus.cubi.api.classes.enums.LandTypes;
+
 public class RegionData {
 	private ProtectedRegion region;
 	private LandTypes type;

@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.bukkit.World;
 
+import de.kekshaus.cubi.api.classes.interfaces.IDatabaseConnector;
 import de.kekshaus.cubit.api.databaseAPI.sql.DatabaseProviderSQL;
 import de.kekshaus.cubit.api.databaseAPI.yaml.DatabaseProviderYAML;
 import de.kekshaus.cubit.plugin.Landplugin;
@@ -13,7 +14,7 @@ import de.kekshaus.cubit.plugin.Landplugin;
 public class DatabaseAPIManager {
 
 	private Landplugin plugin;
-	private IDatabaseProvider databaseProvider;
+	private IDatabaseConnector databaseProvider;
 	private boolean useSql;
 
 	public DatabaseAPIManager(Landplugin plugin) {

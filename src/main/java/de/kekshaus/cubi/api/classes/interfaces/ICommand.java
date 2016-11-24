@@ -1,8 +1,8 @@
-package de.kekshaus.cubit.commandSuite;
+package de.kekshaus.cubi.api.classes.interfaces;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-public interface ILandCmd {
+public interface ICommand {
 	public abstract boolean runCmd(Command cmd, CommandSender sender, String[] args);
 }
