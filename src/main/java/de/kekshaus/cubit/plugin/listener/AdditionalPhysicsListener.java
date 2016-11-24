@@ -26,6 +26,10 @@ public class AdditionalPhysicsListener implements Listener {
 		if (toLand.getLandType() == LandTypes.NOTYPE) {
 			return;
 		}
+		
+		if (fromLand.getLandType() == LandTypes.SERVER && toLand.getLandType() == LandTypes.SERVER){
+			return;
+		}
 
 		if (!Landplugin.inst().getRegionManager().hasLandPermission(toLand, fromLand.getOwnersUUID()[0])) {
 			event.setCancelled(true);
