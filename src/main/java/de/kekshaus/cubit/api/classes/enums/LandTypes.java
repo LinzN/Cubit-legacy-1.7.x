@@ -1,4 +1,4 @@
-package de.kekshaus.cubi.api.classes.enums;
+package de.kekshaus.cubit.api.classes.enums;
 
 import org.bukkit.Bukkit;
 

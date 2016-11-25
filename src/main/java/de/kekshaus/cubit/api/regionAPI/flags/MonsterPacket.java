@@ -8,7 +8,7 @@ import org.bukkit.entity.EntityType;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 
-import de.kekshaus.cubi.api.classes.interfaces.IProtectionFlag;
+import de.kekshaus.cubit.api.classes.interfaces.IProtectionFlag;
 import de.kekshaus.cubit.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.plugin.Landplugin;
 

@@ -7,7 +7,7 @@ import com.sk89q.worldguard.protection.flags.RegionGroup;
 import com.sk89q.worldguard.protection.flags.RegionGroupFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 
-import de.kekshaus.cubi.api.classes.interfaces.IProtectionFlag;
+import de.kekshaus.cubit.api.classes.interfaces.IProtectionFlag;
 import de.kekshaus.cubit.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.plugin.Landplugin;
 

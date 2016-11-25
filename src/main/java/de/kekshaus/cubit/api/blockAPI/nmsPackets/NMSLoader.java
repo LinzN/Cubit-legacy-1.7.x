@@ -5,7 +5,7 @@ import java.util.HashSet;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
-import de.kekshaus.cubi.api.classes.interfaces.INMSMask;
+import de.kekshaus.cubit.api.classes.interfaces.INMSMask;
 
 public class NMSLoader {
 

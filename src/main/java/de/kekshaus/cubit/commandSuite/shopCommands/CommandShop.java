@@ -12,8 +12,8 @@ import org.bukkit.entity.Player;
 
 import com.google.common.collect.Maps;
 
-import de.kekshaus.cubi.api.classes.enums.LandTypes;
-import de.kekshaus.cubi.api.classes.interfaces.ICommand;
+import de.kekshaus.cubit.api.classes.enums.LandTypes;
+import de.kekshaus.cubit.api.classes.interfaces.ICommand;
 import de.kekshaus.cubit.commandSuite.shopCommands.main.BuyShop;
 import de.kekshaus.cubit.commandSuite.shopCommands.main.HelpShop;
 import de.kekshaus.cubit.commandSuite.shopCommands.main.SellShop;

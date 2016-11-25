@@ -5,7 +5,7 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 
-import de.kekshaus.cubi.api.classes.interfaces.IDatabaseConnector;
+import de.kekshaus.cubit.api.classes.interfaces.IDatabaseConnector;
 import de.kekshaus.cubit.api.databaseAPI.OfferData;
 import de.kekshaus.cubit.plugin.Landplugin;
 

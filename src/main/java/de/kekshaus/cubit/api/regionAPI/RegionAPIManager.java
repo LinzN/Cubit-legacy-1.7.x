@@ -12,7 +12,7 @@ import org.bukkit.World;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.kekshaus.cubi.api.classes.enums.LandTypes;
+import de.kekshaus.cubit.api.classes.enums.LandTypes;
 import de.kekshaus.cubit.api.regionAPI.flags.FirePacket;
 import de.kekshaus.cubit.api.regionAPI.flags.LockPacket;
 import de.kekshaus.cubit.api.regionAPI.flags.MonsterPacket;

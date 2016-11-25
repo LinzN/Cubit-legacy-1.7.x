@@ -1,4 +1,4 @@
-package de.kekshaus.cubi.api.classes.interfaces;
+package de.kekshaus.cubit.api.classes.interfaces;
 
 import org.bukkit.ChatColor;
 
