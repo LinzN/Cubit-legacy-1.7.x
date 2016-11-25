@@ -5,6 +5,8 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
+import de.kekshaus.cubit.api.blockAPI.fastBlock.BlockUtil;
+import de.kekshaus.cubit.api.blockAPI.fastBlock.LocationUtil;
 import de.kekshaus.cubit.api.classes.interfaces.INMSMask;
 import de.kekshaus.cubit.plugin.Landplugin;
 
@@ -36,5 +38,21 @@ public class NMS_v1_9_R2 implements INMSMask {
 		((org.bukkit.craftbukkit.v1_9_R2.entity.CraftPlayer) player).getHandle().playerConnection
 				.sendPacket(new net.minecraft.server.v1_9_R2.PacketPlayOutMapChunk(chunk, 20));
 	}
+	
+	
+	@Override
+	  public void setBlockFast(World paramWorld, int paramInt1, int paramInt2, int paramInt3, int paramInt4, byte paramByte)
+	  {
+		org.bukkit.craftbukkit.v1_9_R2.CraftWorld localCraftWorld = (org.bukkit.craftbukkit.v1_9_R2.CraftWorld)paramWorld;
+	    net.minecraft.server.v1_9_R2.WorldServer localWorldServer = localCraftWorld.getHandle();
+	    
+	    int[] arrayOfInt = LocationUtil.translateChunkXZ(paramInt1, paramInt3);
+	    net.minecraft.server.v1_9_R2.Chunk localChunk = localWorldServer.getChunkAt(arrayOfInt[0], arrayOfInt[1]);
+	    
+	    net.minecraft.server.v1_9_R2.BlockPosition localBlockPosition = new net.minecraft.server.v1_9_R2.BlockPosition(paramInt1, paramInt2, paramInt3);
+	    net.minecraft.server.v1_9_R2.IBlockData localIBlockData = net.minecraft.server.v1_9_R2.Block.getByCombinedId(BlockUtil.getCombinedID(paramInt4, paramByte));
+	    
+	    localChunk.a(localBlockPosition, localIBlockData);
+	  }
 
 }
