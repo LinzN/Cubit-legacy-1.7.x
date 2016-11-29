@@ -26,8 +26,8 @@ public class AdditionalPhysicsListener implements Listener {
 		if (toLand.getLandType() == LandTypes.NOTYPE) {
 			return;
 		}
-		
-		if (fromLand.getLandType() == LandTypes.SERVER && toLand.getLandType() == LandTypes.SERVER){
+
+		if (fromLand.getLandType() == LandTypes.SERVER && toLand.getLandType() == LandTypes.SERVER) {
 			return;
 		}
 

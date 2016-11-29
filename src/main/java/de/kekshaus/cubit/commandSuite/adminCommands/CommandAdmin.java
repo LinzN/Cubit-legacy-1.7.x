@@ -18,6 +18,7 @@ import de.kekshaus.cubit.commandSuite.adminCommands.main.CreateShopAdmin;
 import de.kekshaus.cubit.commandSuite.adminCommands.main.DeleteServerAdmin;
 import de.kekshaus.cubit.commandSuite.adminCommands.main.HelpAdmin;
 import de.kekshaus.cubit.commandSuite.adminCommands.main.ReloadAdmin;
+import de.kekshaus.cubit.commandSuite.adminCommands.main.TestAdmin;
 import de.kekshaus.cubit.commandSuite.landCommands.main.OfferLand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.SellLand;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.AddMemberUniversal;
@@ -108,6 +109,8 @@ public class CommandAdmin implements CommandExecutor {
 					new ListBiomesUniversal(this.plugin, perm.listBiomesAdminLand, LandTypes.NOTYPE));
 			this.cmdMap.put("list", new ListUniversal(this.plugin, perm.listAdminLand, LandTypes.NOTYPE, true));
 			this.cmdMap.put("reload", new ReloadAdmin(this.plugin, perm.reloadCubit));
+
+			this.cmdMap.put("test", new TestAdmin(this.plugin, perm.testAdmin));
 
 			this.isLoaded = true;
 		} catch (Exception e) {

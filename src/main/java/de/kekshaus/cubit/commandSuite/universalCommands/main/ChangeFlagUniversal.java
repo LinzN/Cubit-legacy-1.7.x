@@ -20,7 +20,8 @@ public class ChangeFlagUniversal implements ICommand {
 	private String permNode;
 	private LandTypes type;
 
-	public ChangeFlagUniversal(Landplugin plugin, IProtectionFlag packet, String permNode, LandTypes type, boolean isAdmin) {
+	public ChangeFlagUniversal(Landplugin plugin, IProtectionFlag packet, String permNode, LandTypes type,
+			boolean isAdmin) {
 		this.plugin = plugin;
 		this.packet = packet;
 		this.isAdmin = isAdmin;

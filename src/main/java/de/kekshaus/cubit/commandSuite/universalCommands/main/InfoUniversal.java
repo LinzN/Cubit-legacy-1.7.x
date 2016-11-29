@@ -225,6 +225,7 @@ public class InfoUniversal implements ICommand {
 					plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type} ", type.toString()));
 			return;
 		}
+
 	}
 
 }

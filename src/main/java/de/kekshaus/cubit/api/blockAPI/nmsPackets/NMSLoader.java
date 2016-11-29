@@ -51,7 +51,6 @@ public class NMSLoader {
 		this.nmsList.add("v1_9_R1");
 		this.nmsList.add("v1_8_R3");
 		this.nmsList.add("v1_8_R2");
-		this.nmsList.add("v1_8_R1");
 	}
 
 	private static String getVersion() {
