@@ -9,6 +9,7 @@ import org.inventivetalent.particle.ParticleEffect;
 import de.kekshaus.cubit.api.particleAPI.border.ParticleSender;
 import de.kekshaus.cubit.plugin.Landplugin;
 
+@SuppressWarnings("deprecation")
 public class ParticleAPIManager {
 
 	private Landplugin plugin;

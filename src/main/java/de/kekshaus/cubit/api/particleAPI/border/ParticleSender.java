@@ -55,6 +55,7 @@ public class ParticleSender {
 		return edgeBlocks;
 	}
 
+	@SuppressWarnings("deprecation")
 	private void sendSpigotParticle() {
 		for (Location edgeBlock : this.edgeBlocks) {
 			edgeBlock.setZ(edgeBlock.getBlockZ() + .5);
