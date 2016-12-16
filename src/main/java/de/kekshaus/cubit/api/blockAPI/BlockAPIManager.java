@@ -47,9 +47,9 @@ public class BlockAPIManager {
 		return true;
 	}
 
-	public boolean pasteSchematic(UUID uuid, Chunk chunk, String regionID) {
+	public boolean pasteSchematic(UUID uuid, Chunk chunk, String regionID, boolean removeFile) {
 		try {
-			this.schematicHandler.pasteSchematic(uuid, chunk, regionID);
+			this.schematicHandler.pasteSchematic(uuid, chunk, regionID, removeFile);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -58,9 +58,9 @@ public class BlockAPIManager {
 
 	}
 	
-	public boolean saveSchematic(UUID uuid, Chunk chunk, String regionID) {
+	public boolean saveSchematic(UUID uuid, Chunk chunk, String regionID, boolean regenerateChunk) {
 		try {
-			this.schematicHandler.saveSchematic(uuid, chunk, regionID);
+			this.schematicHandler.saveSchematic(uuid, chunk, regionID, regenerateChunk);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;

@@ -15,12 +15,21 @@ public class SchematicHandler {
 		this.weFunctions = new WorldEditFunctions(this.plugin);
 	}
 
-	public void pasteSchematic(UUID uuid, Chunk chunk, String schematicName) {
-		this.weFunctions.paste(uuid, schematicName, chunk, false);
+	public void pasteSchematic(UUID uuid, Chunk chunk, String schematicName, boolean removeFile) {
+		this.weFunctions.paste(uuid, schematicName, chunk);
+		if (removeFile){
+			this.weFunctions.removeFile(uuid, schematicName);
+		}
+		this.plugin.getBlockManager().getNMSClass().refreshChunk(chunk);
 	}
 	
-	public void saveSchematic(UUID uuid, Chunk chunk, String schematicName){
+	public void saveSchematic(UUID uuid, Chunk chunk, String schematicName, boolean regenerateChunk){
 		this.weFunctions.save(uuid, chunk, schematicName);
+		
+		if (regenerateChunk){
+			this.weFunctions.regenerateChunk(chunk);
+		}
+		this.plugin.getBlockManager().getNMSClass().refreshChunk(chunk);
 	}
 
 }

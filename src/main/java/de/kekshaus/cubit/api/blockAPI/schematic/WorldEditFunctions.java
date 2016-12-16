@@ -32,11 +32,9 @@ public class WorldEditFunctions {
 			dir.mkdirs();
 	}
 
-
-
 	public void save(UUID uuid, Chunk chunk, String schematicName) {
 		try {
-			
+
 			File schematicFile = getSchematicLocation(uuid, schematicName);
 
 			EditSession editSession = WorldEdit.getInstance().getEditSessionFactory()
@@ -53,28 +51,6 @@ public class WorldEditFunctions {
 
 		} catch (DataException | IOException ex) {
 			ex.printStackTrace();
-		}
-	}
-
-
-	public void paste(final UUID uuid, String schematicName, Chunk chunk, Boolean ignoreAir) {
-		final Location pasteLoc = convertChunkLocation(chunk);
-		if (ignoreAir) {
-			try {
-				File schematicFile = getSchematicLocation(uuid, schematicName);
-				EditSession editSession = new EditSession(new BukkitWorld(pasteLoc.getWorld()), Integer.MAX_VALUE);
-				editSession.enableQueue();
-
-				SchematicFormat schematic = SchematicFormat.getFormat(schematicFile);
-				CuboidClipboard clipboard = schematic.load(schematicFile);
-
-				clipboard.paste(editSession, BukkitUtil.toVector(pasteLoc), true, true);
-				editSession.flushQueue();
-			} catch (MaxChangedBlocksException | DataException | IOException ex) {
-				ex.printStackTrace();
-			}
-		} else {
-			paste(uuid, schematicName, chunk);
 		}
 	}
 
@@ -103,16 +79,33 @@ public class WorldEditFunctions {
 
 	}
 
+	public void regenerateChunk(final Chunk chunk) {
+		Bukkit.getScheduler().runTask(Landplugin.inst(), new Runnable() {
+			@Override
+			public void run() {
+				chunk.getWorld().regenerateChunk(chunk.getX(), chunk.getZ());
+			}
+
+		});
+
+	}
+
 	public Location convertChunkLocation(Chunk chunk) {
 		Location loc = new Location(chunk.getWorld(), chunk.getX() * 16, 0, chunk.getZ() * 16);
 		return loc;
 	}
 	
-	public File getSchematicLocation(UUID uuid, String fileName){
+	public void removeFile(UUID uuid, String schematicName){
+		final File schematicFile = getSchematicLocation(uuid, schematicName);
+		schematicFile.delete();
+		
+	}
+
+	public File getSchematicLocation(UUID uuid, String fileName) {
 		String fullPath = this.schematicFolder + "/" + uuid.toString();
 		File path = new File(fullPath);
 		if (!path.exists())
 			path.mkdirs();
-		return  new File(fullPath, fileName + ".cubit");
+		return new File(fullPath, fileName + ".cubit");
 	}
 }
