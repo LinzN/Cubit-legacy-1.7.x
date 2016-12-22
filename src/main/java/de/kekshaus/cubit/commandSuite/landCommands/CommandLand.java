@@ -130,8 +130,8 @@ public class CommandLand implements CommandExecutor {
 
 			this.cmdMap.put("listbiomes", new ListBiomesUniversal(this.plugin, perm.listBiomesLand, LandTypes.WORLD));
 			
-			this.cmdMap.put("save", new SaveUniversal(this.plugin, "null", LandTypes.WORLD));
-			this.cmdMap.put("restore", new RestoreUniversal(this.plugin, "null", LandTypes.WORLD));
+			//this.cmdMap.put("save", new SaveUniversal(this.plugin, "null", LandTypes.WORLD));
+			//this.cmdMap.put("restore", new RestoreUniversal(this.plugin, "null", LandTypes.WORLD));
 
 			this.isLoaded = true;
 		} catch (Exception e) {
