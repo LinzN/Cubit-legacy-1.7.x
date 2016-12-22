@@ -1,9 +1,10 @@
-package de.kekshaus.cubit.api.blockAPI.schematic;
+package de.kekshaus.cubit.api.blockAPI.snapshot;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -22,20 +23,20 @@ import de.kekshaus.cubit.plugin.Landplugin;
 public class WorldEditFunctions {
 
 	private Landplugin plugin;
-	private String schematicFolder;
+	private String snapshotsDirectory;
 
 	public WorldEditFunctions(Landplugin plugin) {
 		this.plugin = plugin;
-		this.schematicFolder = this.plugin.getDataFolder() + "/schematics";
-		File dir = new File(schematicFolder);
+		this.snapshotsDirectory = this.plugin.getDataFolder() + "/snapshots";
+		File dir = new File(snapshotsDirectory);
 		if (!dir.exists())
 			dir.mkdirs();
 	}
 
-	public void save(UUID uuid, Chunk chunk, String schematicName) {
+	public void save(UUID uuid, Chunk chunk, String snapshotName) {
 		try {
 
-			File schematicFile = getSchematicLocation(uuid, schematicName);
+			File schematicFile = getSnapshotFileLocation(uuid, snapshotName);
 
 			EditSession editSession = WorldEdit.getInstance().getEditSessionFactory()
 					.getEditSession(new BukkitWorld(chunk.getWorld()), 0x3b9ac9ff);
@@ -54,9 +55,9 @@ public class WorldEditFunctions {
 		}
 	}
 
-	public void paste(final UUID uuid, final String schematicName, final Chunk chunk) {
+	public void paste(final UUID uuid, final String snapshotName, final Chunk chunk) {
 		final Location pasteLoc = convertChunkLocation(chunk);
-		final File schematicFile = getSchematicLocation(uuid, schematicName);
+		final File snapshotFile = getSnapshotFileLocation(uuid, snapshotName);
 		Bukkit.getScheduler().runTask(Landplugin.inst(), new Runnable() {
 			@Override
 			public void run() {
@@ -65,8 +66,8 @@ public class WorldEditFunctions {
 					EditSession editSession = new EditSession(new BukkitWorld(pasteLoc.getWorld()), Integer.MAX_VALUE);
 					editSession.enableQueue();
 
-					SchematicFormat schematic = SchematicFormat.getFormat(schematicFile);
-					CuboidClipboard clipboard = schematic.load(schematicFile);
+					SchematicFormat snapshot = SchematicFormat.getFormat(snapshotFile);
+					CuboidClipboard clipboard = snapshot.load(snapshotFile);
 
 					clipboard.paste(editSession, BukkitUtil.toVector(pasteLoc), false, true);
 					editSession.flushQueue();
@@ -94,18 +95,32 @@ public class WorldEditFunctions {
 		Location loc = new Location(chunk.getWorld(), chunk.getX() * 16, 0, chunk.getZ() * 16);
 		return loc;
 	}
-	
-	public void removeFile(UUID uuid, String schematicName){
-		final File schematicFile = getSchematicLocation(uuid, schematicName);
-		schematicFile.delete();
-		
+
+	public void removeFile(final UUID uuid, final String snapshotName) {
+		final File snapshotDirectory = getSnapshotDirectoryLocation(uuid, snapshotName);
+		Bukkit.getScheduler().runTask(Landplugin.inst(), new Runnable() {
+			@Override
+			public void run() {
+				try {
+					FileUtils.deleteDirectory(snapshotDirectory);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+		});
 	}
 
-	public File getSchematicLocation(UUID uuid, String fileName) {
-		String fullPath = this.schematicFolder + "/" + uuid.toString();
+	public File getSnapshotFileLocation(UUID uuid, String fileName) {
+		return new File(getSnapshotDirectoryLocation(uuid, fileName), "snapshot.cubit");
+	}
+	
+	public File getSnapshotDirectoryLocation(UUID uuid, String fileName) {
+		String fullPath = this.snapshotsDirectory + "/" + uuid.toString() +  "/" + fileName;
 		File path = new File(fullPath);
 		if (!path.exists())
 			path.mkdirs();
-		return new File(fullPath, fileName + ".cubit");
+		return path;
 	}
 }

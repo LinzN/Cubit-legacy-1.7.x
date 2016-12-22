@@ -9,7 +9,7 @@ import org.bukkit.block.Biome;
 import de.kekshaus.cubit.api.blockAPI.biome.ChangeBiome;
 import de.kekshaus.cubit.api.blockAPI.border.ChunkBorder;
 import de.kekshaus.cubit.api.blockAPI.nmsPackets.NMSLoader;
-import de.kekshaus.cubit.api.blockAPI.schematic.SchematicHandler;
+import de.kekshaus.cubit.api.blockAPI.snapshot.SnapshotHandler;
 import de.kekshaus.cubit.api.classes.interfaces.INMSMask;
 import de.kekshaus.cubit.plugin.Landplugin;
 
@@ -17,13 +17,13 @@ public class BlockAPIManager {
 
 	private Landplugin plugin;
 	private NMSLoader nmsloader;
-	private SchematicHandler schematicHandler;;
+	private SnapshotHandler snapshotHandler;;
 
 	public BlockAPIManager(Landplugin plugin) {
 		plugin.getLogger().info("Loading BlockAPIManager");
 		this.plugin = plugin;
 		this.nmsloader = new NMSLoader(this.plugin);
-		this.schematicHandler = new SchematicHandler(this.plugin);
+		this.snapshotHandler = new SnapshotHandler(this.plugin);
 	}
 
 	public boolean placeLandBorder(Chunk chunk, Material material) {
@@ -47,9 +47,9 @@ public class BlockAPIManager {
 		return true;
 	}
 
-	public boolean pasteSchematic(UUID uuid, Chunk chunk, String regionID, boolean removeFile) {
+	public boolean restoreSnapshot(UUID uuid, Chunk chunk, String regionID, boolean removeFile) {
 		try {
-			this.schematicHandler.pasteSchematic(uuid, chunk, regionID, removeFile);
+			this.snapshotHandler.restoreSnapshot(uuid, chunk, regionID, removeFile);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -58,9 +58,9 @@ public class BlockAPIManager {
 
 	}
 	
-	public boolean saveSchematic(UUID uuid, Chunk chunk, String regionID, boolean regenerateChunk) {
+	public boolean createSnapshot(UUID uuid, Chunk chunk, String regionID, boolean regenerateChunk) {
 		try {
-			this.schematicHandler.saveSchematic(uuid, chunk, regionID, regenerateChunk);
+			this.snapshotHandler.createSnapshot(uuid, chunk, regionID, regenerateChunk);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
