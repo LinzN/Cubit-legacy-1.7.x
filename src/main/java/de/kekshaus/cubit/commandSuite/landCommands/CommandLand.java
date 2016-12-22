@@ -28,8 +28,8 @@ import de.kekshaus.cubit.commandSuite.universalCommands.main.KickUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.ListBiomesUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.ListUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.RemoveMemberUniversal;
-//import de.kekshaus.cubit.commandSuite.universalCommands.main.RestoreUniversal;
-//import de.kekshaus.cubit.commandSuite.universalCommands.main.SaveUniversal;
+import de.kekshaus.cubit.commandSuite.universalCommands.main.RestoreUniversal;
+import de.kekshaus.cubit.commandSuite.universalCommands.main.SaveUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.VersionUniversal;
 import de.kekshaus.cubit.plugin.Landplugin;
 import de.kekshaus.cubit.plugin.PermissionNodes;
@@ -130,8 +130,8 @@ public class CommandLand implements CommandExecutor {
 
 			this.cmdMap.put("listbiomes", new ListBiomesUniversal(this.plugin, perm.listBiomesLand, LandTypes.WORLD));
 			
-			//this.cmdMap.put("save", new SaveUniversal(this.plugin, "null", LandTypes.WORLD));
-			//this.cmdMap.put("restore", new RestoreUniversal(this.plugin, "null", LandTypes.WORLD));
+			this.cmdMap.put("save", new SaveUniversal(this.plugin, perm.saveLand, LandTypes.WORLD));
+			this.cmdMap.put("restore", new RestoreUniversal(this.plugin, perm.restoreLand, LandTypes.WORLD));
 
 			this.isLoaded = true;
 		} catch (Exception e) {
