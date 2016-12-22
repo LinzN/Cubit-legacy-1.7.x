@@ -24,6 +24,8 @@ public class LanguageYaml {
 	public String reachLimit;
 	public String notABiome;
 	public String pageNotFound;
+	public String noSnapshot;
+	public String alreadySnapshot;
 
 	/* Success MSG */
 	public String buySuccess;
@@ -38,6 +40,8 @@ public class LanguageYaml {
 	public String kickInfo;
 	public String isFreeAndBuyable;
 	public String changedBiome;
+	public String savedSnapshot;
+	public String restoredSnapshot;
 
 	/* UnSuccess MSG */
 	public String buyIsAlreadyLand;
@@ -196,6 +200,8 @@ public class LanguageYaml {
 		reachLimit = this.getLanguageString("reachLimit", "&cSorry you reached the limit for this regionType!");
 		notABiome = this.getLanguageString("notABiome", "&cThis is not a valid biomename: {biome}!");
 		pageNotFound = this.getLanguageString("pageNotfound", "&cThis is not a valid page");
+		noSnapshot = this.getLanguageString("noSnapshot", "&cThere is no snapshot with this name!");
+		alreadySnapshot = this.getLanguageString("noSnapshot", "&cThis snapshot exist already!");
 
 		/* Success MSG */
 		buySuccess = this.getLanguageString("buySuccess", "&2You bought the region &e{regionID}&2!");
@@ -217,6 +223,9 @@ public class LanguageYaml {
 		kickInfo = this.getLanguageString("kickInfo", "&2All non-member kicked from the region {regionID}!");
 		changedBiome = this.getLanguageString("changedBiome",
 				"&2You changed the biome from region {regionID} to {biome}!");
+		
+		savedSnapshot = this.getLanguageString("savedSnapshot", "&2You created a new snapshot from the region {regionID}!");
+		restoredSnapshot = this.getLanguageString("restoredSnapshot", "&2You restored a snapshot named {snapshotName}!");
 
 		/* UnSuccess MSG */
 		buyIsAlreadyLand = this.getLanguageString("buyIsAlreadyLand",
