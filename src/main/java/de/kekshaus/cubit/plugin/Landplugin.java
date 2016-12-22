@@ -67,15 +67,19 @@ public class Landplugin extends JavaPlugin {
 	}
 	
 	private boolean getPluginDepends(){
-		if (this.getServer().getPluginManager().getPlugin("WorldGuard") == null){
-			return false;
-		}
 
 		if (this.getServer().getPluginManager().getPlugin("WorldEdit") == null){
+			this.getLogger().severe("Error: " + "WorldEdit not found!");
+			return false;
+		}
+		
+		if (this.getServer().getPluginManager().getPlugin("WorldGuard") == null){
+			this.getLogger().severe("Error: " + "WorldGuard not found!");
 			return false;
 		}
 		
 		if (this.getServer().getPluginManager().getPlugin("Vault") == null){
+			this.getLogger().severe("Error: " + "Vault not found!");
 			return false;
 		}
 		
