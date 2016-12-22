@@ -48,8 +48,8 @@ permissions:
             cubit.command.land.flag.monster: true
             cubit.command.land.changebiome: true
             cubit.command.land.listbiomes: true
-            cubit.command.land.restoreland: true
-            cubit.command.land.saveland: true
+            cubit.command.land.restoresnapshot: true
+            cubit.command.land.savesnapshot: true
     cubit.command.user.shop:
         description:  User command permissions
         children:
@@ -116,10 +116,10 @@ permissions:
     cubit.command.land.list:
         description: Haupt-Hilfeseite
         default: op
-    cubit.command.land.restoreland:
+    cubit.command.land.restoresnapshot:
         description: Haupt-Hilfeseite
         default: op
-    cubit.command.land.saveland:
+    cubit.command.land.savesnapshot:
         description: Haupt-Hilfeseite
         default: op
     cubit.command.land.changebiome:
