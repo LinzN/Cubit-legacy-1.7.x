@@ -73,7 +73,6 @@ public class NameCache {
 		if (prasedName == null) {
 			prasedName = "Unknown";
 		}
-		System.out.println("Name: " + prasedName);
 		return prasedName;
 	}
 }
