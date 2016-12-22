@@ -24,8 +24,8 @@ public class PermissionNodes {
 	public String listLand = "cubit.command.land.list";
 	public String changeBiomeLand = "cubit.command.land.changebiome";
 	public String listBiomesLand = "cubit.command.land.listbiomes";
-	public String saveLand = "cubit.command.land.saveland";
-	public String restoreLand = "cubit.command.land.restoreland";
+	public String saveLand = "cubit.command.land.savesnapshot";
+	public String restoreLand = "cubit.command.land.restoresnapshot";
 	/* Shop Perms */
 	public String buyShop = "cubit.command.shop.buy";
 	public String sellShop = "cubit.command.shop.sell";

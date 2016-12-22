@@ -99,6 +99,9 @@ public class HelpLand implements ICommand {
 		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpHeaderP5);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE1P5);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE2P5);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE3P5);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE4P5);
+		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpE5P5);
 		sender.sendMessage(plugin.getYamlManager().getLanguage().landHelpBottomP5);
 		return true;
 

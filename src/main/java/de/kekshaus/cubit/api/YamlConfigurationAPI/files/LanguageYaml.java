@@ -98,7 +98,7 @@ public class LanguageYaml {
 	public String landHelpHeaderP3;
 	public String landHelpE1P3;
 	public String landHelpE2P3;
-	public String landHelpE3P3;
+	public String landHelpE3P3; 
 	public String landHelpBottomP3;
 
 	/* Page 4 Help for Land Command */
@@ -114,6 +114,9 @@ public class LanguageYaml {
 	public String landHelpHeaderP5;
 	public String landHelpE1P5;
 	public String landHelpE2P5;
+	public String landHelpE3P5;
+	public String landHelpE4P5;
+	public String landHelpE5P5;
 	public String landHelpBottomP5;
 
 	/* Page 1 Help for Shop Command */
@@ -311,6 +314,9 @@ public class LanguageYaml {
 		landHelpHeaderP5 = this.getLanguageString("theme.helpPage5.header", "&6&lLand edit: [Page 5]");
 		landHelpE1P5 = this.getLanguageString("theme.helpPage5.help1", "&2 Change biome: &e/land changebiome [Biome]");
 		landHelpE2P5 = this.getLanguageString("theme.helpPage5.help2", "&2 List biomes: &e/land listbiomes");
+		landHelpE3P5 = this.getLanguageString("theme.helpPage5.help3", "&2 Save snapshot: &e/land save");
+		landHelpE4P5 = this.getLanguageString("theme.helpPage5.help4", "&2 Restore snapshot: &e/land restore [Snapshot]");
+		landHelpE5P5 = this.getLanguageString("theme.helpPage5.help5", "&2 List snapshots: &4/land listsaves");
 		landHelpBottomP5 = this.getLanguageString("theme.helpPage5.bottom", "&a&lBack to page 4 &6/land help 4");
 
 		landBiomeListHeader = this.getLanguageString("theme.biomeList.header", "&6&lAll available biomes:");
