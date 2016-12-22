@@ -201,7 +201,7 @@ public class LanguageYaml {
 		notABiome = this.getLanguageString("notABiome", "&cThis is not a valid biomename: {biome}!");
 		pageNotFound = this.getLanguageString("pageNotfound", "&cThis is not a valid page");
 		noSnapshot = this.getLanguageString("noSnapshot", "&cThere is no snapshot with this name!");
-		alreadySnapshot = this.getLanguageString("noSnapshot", "&cThis snapshot exist already!");
+		alreadySnapshot = this.getLanguageString("alreadySnapshot", "&cThis snapshot exist already!");
 
 		/* Success MSG */
 		buySuccess = this.getLanguageString("buySuccess", "&2You bought the region &e{regionID}&2!");
