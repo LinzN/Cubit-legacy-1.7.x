@@ -18,6 +18,7 @@ public class EconomyHook {
 	}
 
 	public boolean hasEnoughToBuy(UUID playerUUID, double value) {
+
 		OfflinePlayer player = Bukkit.getOfflinePlayer(playerUUID);
 		if ((econ.getBalance(player) - value) >= 0) {
 			return true;
@@ -26,6 +27,7 @@ public class EconomyHook {
 	}
 
 	public void transferMoney(UUID senderUUID, UUID recieverUUID, double value) {
+
 		if (senderUUID != null) {
 			OfflinePlayer sender = Bukkit.getOfflinePlayer(senderUUID);
 			econ.withdrawPlayer(sender, value);
@@ -35,10 +37,13 @@ public class EconomyHook {
 			econ.depositPlayer(reciever, value);
 
 		}
+
 	}
 
 	public String formateToEconomy(double value) {
+
 		return econ.format(value);
+
 	}
 
 }

@@ -17,6 +17,7 @@ public class SettingsYaml {
 	/* Land module */
 
 	public List<String> landEnabledWorlds;
+	public boolean landEnableEconomy;
 	public double landBasePrice;
 	public double landTaxAddition;
 	public double landMaxPrice;
@@ -63,6 +64,7 @@ public class SettingsYaml {
 		List<String> landEnabledWorlds = new ArrayList<>();
 		landEnabledWorlds.add("world");
 		this.landEnabledWorlds = (List<String>) this.getStringList("module.land.enabledWorlds", landEnabledWorlds);
+		this.landEnableEconomy = (boolean) this.getObjectValue("module.land.enableEconomy", true);
 		this.landBasePrice = (double) this.getObjectValue("module.land.basePrice", 235D);
 		this.landTaxAddition = (double) this.getObjectValue("module.land.taxAddition", 5D);
 		this.landMaxPrice = (double) this.getObjectValue("module.land.maxPrice", 750D);

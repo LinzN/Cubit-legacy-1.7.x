@@ -16,22 +16,28 @@ public class VaultAPIManager {
 
 	private Landplugin plugin;
 	private Economy econ = null;
-	private EconomyHook ecoMrg;
+	private EconomyHook ecoMrg = null;
 
 	public VaultAPIManager(Landplugin plugin) {
 		plugin.getLogger().info("Loading VaultAPIManager");
 		this.plugin = plugin;
-		setupEconomy();
-		this.ecoMrg = new EconomyHook(plugin, econ);
+		if (setupEconomy()) {
+			this.ecoMrg = new EconomyHook(plugin, econ);
+		}
 
 	}
 
 	private boolean setupEconomy() {
+		if (!Landplugin.inst().getYamlManager().getSettings().landEnableEconomy) {
+			this.plugin.getLogger().info("Economy is in config disabled!");
+			return false;
+		}
 		if (plugin.getServer().getPluginManager().getPlugin("Vault") == null) {
 			return false;
 		}
 		RegisteredServiceProvider<Economy> rsp = plugin.getServer().getServicesManager().getRegistration(Economy.class);
 		if (rsp == null) {
+			this.plugin.getLogger().info("No valid economy plugin found. Economy is disabled.");
 			return false;
 		}
 		econ = rsp.getProvider();
@@ -39,16 +45,21 @@ public class VaultAPIManager {
 	}
 
 	public boolean hasEnougToBuy(UUID playerUUID, double value) {
-		return this.ecoMrg.hasEnoughToBuy(playerUUID, Math.abs(value));
+		if (this.econ != null) {
+			return this.ecoMrg.hasEnoughToBuy(playerUUID, Math.abs(value));
+		}
+		return true;
 
 	}
 
 	public boolean transferMoney(UUID senderUUID, UUID recieverUUID, double value) {
-		try {
-			ecoMrg.transferMoney(senderUUID, recieverUUID, Math.abs(value));
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
+		if (this.econ != null) {
+			try {
+				ecoMrg.transferMoney(senderUUID, recieverUUID, Math.abs(value));
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
 		}
 		return true;
 	}
@@ -82,7 +93,10 @@ public class VaultAPIManager {
 	}
 
 	public String formateToEconomy(double value) {
-		return ecoMrg.formateToEconomy(value);
+		if (this.econ != null) {
+			return ecoMrg.formateToEconomy(value);
+		}
+		return "0.00";
 	}
 
 }
