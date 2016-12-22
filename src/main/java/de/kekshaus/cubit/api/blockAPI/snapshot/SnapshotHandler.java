@@ -15,21 +15,36 @@ public class SnapshotHandler {
 		this.weFunctions = new WorldEditFunctions(this.plugin);
 	}
 
-	public void restoreSnapshot(UUID uuid, Chunk chunk, String snapshotName, boolean removeFile) {
-		this.weFunctions.paste(uuid, snapshotName, chunk);
-		if (removeFile){
-			this.weFunctions.removeFile(uuid, snapshotName);
+	public boolean restoreSnapshot(UUID uuid, Chunk chunk, String snapshotName, boolean removeFile) {
+		try {
+			this.weFunctions.paste(uuid, snapshotName, chunk);
+			if (removeFile) {
+				this.weFunctions.removeFile(uuid, snapshotName);
+			}
+			this.plugin.getBlockManager().getNMSHandler().refreshChunk(chunk);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
 		}
-		this.plugin.getBlockManager().getNMSClass().refreshChunk(chunk);
+		return true;
+
 	}
-	
-	public void createSnapshot(UUID uuid, Chunk chunk, String snapshotName, boolean regenerateChunk){
-		this.weFunctions.save(uuid, chunk, snapshotName);
-		
-		if (regenerateChunk){
-			this.weFunctions.regenerateChunk(chunk);
+
+	public boolean createSnapshot(UUID uuid, Chunk chunk, String snapshotName, boolean regenerateChunk) {
+		try {
+
+			this.weFunctions.save(uuid, chunk, snapshotName);
+
+			if (regenerateChunk) {
+				this.weFunctions.regenerateChunk(chunk);
+			}
+			this.plugin.getBlockManager().getNMSHandler().refreshChunk(chunk);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
 		}
-		this.plugin.getBlockManager().getNMSClass().refreshChunk(chunk);
+		return true;
+
 	}
 
 }

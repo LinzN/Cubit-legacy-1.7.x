@@ -45,7 +45,7 @@ public class ChangeBiome {
 				e.printStackTrace();
 			}
 		}
-		Landplugin.inst().getBlockManager().getNMSClass().refreshChunk(chunk);
+		Landplugin.inst().getBlockManager().getNMSHandler().refreshChunk(chunk);
 	}
 
 }

@@ -1,12 +1,8 @@
 package de.kekshaus.cubit.api.blockAPI;
 
-import java.util.UUID;
-
 import org.bukkit.Chunk;
 import org.bukkit.Material;
-import org.bukkit.block.Biome;
-
-import de.kekshaus.cubit.api.blockAPI.biome.ChangeBiome;
+import de.kekshaus.cubit.api.blockAPI.biome.BiomeHandler;
 import de.kekshaus.cubit.api.blockAPI.border.ChunkBorder;
 import de.kekshaus.cubit.api.blockAPI.nmsPackets.NMSLoader;
 import de.kekshaus.cubit.api.blockAPI.snapshot.SnapshotHandler;
@@ -17,13 +13,15 @@ public class BlockAPIManager {
 
 	private Landplugin plugin;
 	private NMSLoader nmsloader;
-	private SnapshotHandler snapshotHandler;;
+	private SnapshotHandler snapshotHandler;
+	private BiomeHandler biomeHandler;
 
 	public BlockAPIManager(Landplugin plugin) {
 		plugin.getLogger().info("Loading BlockAPIManager");
 		this.plugin = plugin;
 		this.nmsloader = new NMSLoader(this.plugin);
 		this.snapshotHandler = new SnapshotHandler(this.plugin);
+		this.biomeHandler = new BiomeHandler(this.plugin);
 	}
 
 	public boolean placeLandBorder(Chunk chunk, Material material) {
@@ -36,41 +34,18 @@ public class BlockAPIManager {
 		return true;
 	}
 
-	public boolean changeBiomeChunk(Chunk chunk, Biome biome) {
 
-		try {
-			new ChangeBiome(plugin, chunk, biome).change();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-
-	public boolean restoreSnapshot(UUID uuid, Chunk chunk, String regionID, boolean removeFile) {
-		try {
-			this.snapshotHandler.restoreSnapshot(uuid, chunk, regionID, removeFile);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-
+	
+	public SnapshotHandler getSnapshotHandler(){
+		return this.snapshotHandler;
 	}
 	
-	public boolean createSnapshot(UUID uuid, Chunk chunk, String regionID, boolean regenerateChunk) {
-		try {
-			this.snapshotHandler.createSnapshot(uuid, chunk, regionID, regenerateChunk);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-
+	public BiomeHandler getBiomeHandler(){
+		return this.biomeHandler;
 	}
 
-	public INMSMask getNMSClass() {
-		return this.nmsloader.getNMSClass();
+	public INMSMask getNMSHandler() {
+		return this.nmsloader.nmsHandler();
 	}
 
 }

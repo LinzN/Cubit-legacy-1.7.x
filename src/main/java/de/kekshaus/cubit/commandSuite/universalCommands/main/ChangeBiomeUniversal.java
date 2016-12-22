@@ -103,7 +103,7 @@ public class ChangeBiomeUniversal implements ICommand {
 
 		sender.sendMessage(plugin.getYamlManager().getLanguage().startBiomeChange.replace("{regionID}",
 				regionData.getRegionName()));
-		if (!plugin.getBlockManager().changeBiomeChunk(chunk, biome)) {
+		if (!plugin.getBlockManager().getBiomeHandler().changeBiomeChunk(chunk, biome)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SET-BIOME"));
 			plugin.getLogger()

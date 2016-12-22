@@ -40,7 +40,7 @@ public class NMSLoader {
 
 	}
 
-	public INMSMask getNMSClass() {
+	public INMSMask nmsHandler() {
 		return this.nmsMask;
 	}
 
