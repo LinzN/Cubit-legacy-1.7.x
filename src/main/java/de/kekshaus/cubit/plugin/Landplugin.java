@@ -36,9 +36,14 @@ public class Landplugin extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		inst = this;
-		this.wgPl = WorldGuardPlugin.inst();
-		this.wePl = WorldEdit.getInstance();
-		setupManagers();
+		if (!getPluginDepends()){
+			this.setEnabled(false);
+			return;
+		}
+		if (!setupManagers()){
+			this.setEnabled(false);
+			return;
+		}
 		this.getServer().getPluginManager().registerEvents(new LoginListener(), this);
 
 		if (!this.databaseMrg.link()) {
@@ -60,8 +65,27 @@ public class Landplugin extends JavaPlugin {
 	public void onDisable() {
 		HandlerList.unregisterAll(Landplugin.inst());
 	}
+	
+	private boolean getPluginDepends(){
+		if (this.getServer().getPluginManager().getPlugin("WorldGuard") == null){
+			return false;
+		}
 
-	private void setupManagers() {
+		if (this.getServer().getPluginManager().getPlugin("WorldEdit") == null){
+			return false;
+		}
+		
+		if (this.getServer().getPluginManager().getPlugin("Vault") == null){
+			return false;
+		}
+		
+		this.wgPl = WorldGuardPlugin.inst();
+		this.wePl = WorldEdit.getInstance();
+		
+		return true;
+	}
+
+	private boolean setupManagers() {
 		this.yamlConfiguration = new YamlConfigurationManager(this);
 		this.regionMrg = new RegionAPIManager(this);
 		this.blockMrg = new BlockAPIManager(this);
@@ -69,6 +93,7 @@ public class Landplugin extends JavaPlugin {
 		this.vaultMrg = new VaultAPIManager(this);
 		this.permNodes = new PermissionNodes(this);
 		this.databaseMrg = new DatabaseAPIManager(this);
+		return true;
 
 	}
 

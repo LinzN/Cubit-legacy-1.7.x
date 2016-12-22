@@ -46,5 +46,10 @@ public class SnapshotHandler {
 		return true;
 
 	}
+	
+	public boolean hasSnapshot(UUID uuid, String snapshotName){
+		return this.weFunctions.isSnapshotDorectory(uuid, snapshotName);
+	}
+	
 
 }
