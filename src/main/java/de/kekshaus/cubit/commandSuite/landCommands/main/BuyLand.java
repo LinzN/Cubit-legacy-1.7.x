@@ -72,7 +72,7 @@ public class BuyLand implements ICommand {
 			return true;
 		}
 
-		if (!plugin.getBlockManager().placeLandBorder(chunk,
+		if (!plugin.getBlockManager().getBlockHandler().placeLandBorder(chunk,
 				Landplugin.inst().getYamlManager().getSettings().landBuyMaterialBorder)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-BLOCK"));

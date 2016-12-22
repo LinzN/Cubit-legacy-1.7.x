@@ -1,4 +1,4 @@
-package de.kekshaus.cubit.api.blockAPI.border;
+package de.kekshaus.cubit.api.blockAPI.block;
 
 import org.bukkit.Chunk;
 import org.bukkit.Location;
