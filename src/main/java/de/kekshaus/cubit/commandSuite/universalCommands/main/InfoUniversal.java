@@ -130,7 +130,8 @@ public class InfoUniversal implements ICommand {
 
 	private void shopInfo(Player player, RegionData regionData) {
 		/* Get RegionData Info */
-		if (regionData.getOwnersUUID()[0] != null) {
+		System.out.println("tets 1");
+		if (regionData.getOwnersUUID().length != 0) {
 			String formatedTime = plugin.getDatabaseManager().getLastLoginFormated(regionData.getOwnersUUID()[0]);
 			String minBorder = regionData.getMinPoint();
 			String maxBorder = regionData.getMaxPoint();
@@ -170,7 +171,6 @@ public class InfoUniversal implements ICommand {
 			}
 
 		} else {
-
 			String value = plugin.getVaultManager().formateToEconomy(plugin.getDatabaseManager()
 					.getOfferData(regionData.getRegionName(), regionData.getWorld()).getValue());
 
