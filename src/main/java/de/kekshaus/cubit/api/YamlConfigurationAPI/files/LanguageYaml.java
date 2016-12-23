@@ -26,6 +26,8 @@ public class LanguageYaml {
 	public String pageNotFound;
 	public String noSnapshot;
 	public String alreadySnapshot;
+	public String noValidWEAdapter;
+	public String disabledSnapshots;
 
 	/* Success MSG */
 	public String buySuccess;
@@ -205,7 +207,8 @@ public class LanguageYaml {
 		pageNotFound = this.getLanguageString("pageNotfound", "&cThis is not a valid page");
 		noSnapshot = this.getLanguageString("noSnapshot", "&cThere is no snapshot with this name!");
 		alreadySnapshot = this.getLanguageString("alreadySnapshot", "&cThis snapshot exist already!");
-
+		noValidWEAdapter =  this.getLanguageString("noValidWEAdapter", "&cWorldEdit has no valid bukkit adapter for this server. Please update WorldEdit!");
+		disabledSnapshots =  this.getLanguageString("disabledSnapshots", "&cSnapshots are disabled in settings!");
 		/* Success MSG */
 		buySuccess = this.getLanguageString("buySuccess", "&2You bought the region &e{regionID}&2!");
 		isFreeAndBuyable = this.getLanguageString("isFreeAndBuyable",

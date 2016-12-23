@@ -51,5 +51,9 @@ public class SnapshotHandler {
 		return this.weFunctions.isSnapshotDorectory(uuid, snapshotName);
 	}
 	
+	public boolean hasValidAdapter(){
+		return this.weFunctions.hasValidAdapter;
+	}
+	
 
 }

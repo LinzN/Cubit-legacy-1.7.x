@@ -25,7 +25,7 @@ public class WorldEditFunctions {
 
 	private Landplugin plugin;
 	private String snapshotsDirectory;
-	private boolean hasValidAdapter;
+	public boolean hasValidAdapter;
 
 	public WorldEditFunctions(Landplugin plugin) {
 		this.plugin = plugin;

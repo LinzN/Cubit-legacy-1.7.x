@@ -33,6 +33,16 @@ public class SaveUniversal implements ICommand {
 
 		/* Build and get all variables */
 		Player player = (Player) sender;
+		
+		if (!this.plugin.getYamlManager().getSettings().landUseSnapshots){
+			sender.sendMessage(plugin.getYamlManager().getLanguage().disabledSnapshots);
+			return true;
+		}
+		
+		if (!this.plugin.getBlockManager().getSnapshotHandler().hasValidAdapter()){
+			sender.sendMessage(plugin.getYamlManager().getLanguage().noValidWEAdapter);
+			return true;
+		}
 
 		/* Permission Check */
 		if (!player.hasPermission(this.permNode)) {
@@ -73,7 +83,7 @@ public class SaveUniversal implements ICommand {
 			return true;
 		}
 		
-		double economyValue = plugin.getYamlManager().getSettings().landSaveSnapshot;
+		double economyValue = plugin.getYamlManager().getSettings().landSaveSnapshotPrice;
 		
 		if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), economyValue)) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
