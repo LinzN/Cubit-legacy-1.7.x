@@ -130,7 +130,6 @@ public class InfoUniversal implements ICommand {
 
 	private void shopInfo(Player player, RegionData regionData) {
 		/* Get RegionData Info */
-		System.out.println("tets 1");
 		if (regionData.getOwnersUUID().length != 0) {
 			String formatedTime = plugin.getDatabaseManager().getLastLoginFormated(regionData.getOwnersUUID()[0]);
 			String minBorder = regionData.getMinPoint();
