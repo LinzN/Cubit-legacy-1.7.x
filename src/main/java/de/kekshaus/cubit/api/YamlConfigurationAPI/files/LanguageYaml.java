@@ -414,7 +414,7 @@ public class LanguageYaml {
 		adminHelpE2P5 = this.getLanguageString("theme.adminHelpPage5.help2",
 				"&2 Delete Serverregion: &e/cadmin deleteserver");
 		adminHelpE3P5 = this.getLanguageString("theme.adminHelpPage5.help3", "&2 Create Shop: &e/cadmin createshop");
-		adminHelpE4P5 = this.getLanguageString("theme.adminHelpPage5.help4", "&2 Delete Shop: &e/cadmin delete");
+		adminHelpE4P5 = this.getLanguageString("theme.adminHelpPage5.help4", "&2 Delete Shop: &e/cadmin deleteshop");
 
 	}
 
