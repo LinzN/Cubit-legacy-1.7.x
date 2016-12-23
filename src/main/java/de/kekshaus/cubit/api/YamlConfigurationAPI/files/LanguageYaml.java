@@ -32,6 +32,7 @@ public class LanguageYaml {
 	/* Success MSG */
 	public String buySuccess;
 	public String createShopLand;
+	public String deleteShopLand;
 	public String sellSuccess;
 	public String flagSwitchSuccess;
 	public String addMemberSuccess;
@@ -171,11 +172,13 @@ public class LanguageYaml {
 	public String adminHelpE1P4;
 	public String adminHelpE2P4;
 
+
 	/* Page 5 Help for Admin Command */
 	public String adminHelpHeaderP5;
 	public String adminHelpE1P5;
 	public String adminHelpE2P5;
 	public String adminHelpE3P5;
+	public String adminHelpE4P5;
 
 	public LanguageYaml(CustomConfig configFile) {
 		this.configFile = configFile;
@@ -238,6 +241,7 @@ public class LanguageYaml {
 				"&cSorry. This region is already &e{regionID}&c bought by someone!");
 
 		createShopLand = this.getLanguageString("createShop", "&a You created region {regionID}!");
+		deleteShopLand = this.getLanguageString("deleteShop", "&a You deleted region {regionID}!");
 
 		isAlreadyLand = this.getLanguageString("isAlreadyLand", "&cHere is already the region &e{regionID}&c!");
 		notEnoughMoney = this.getLanguageString("notEnoughMoney", "&cYou can not afford it. Price: &e{cost}&c!");
@@ -410,6 +414,7 @@ public class LanguageYaml {
 		adminHelpE2P5 = this.getLanguageString("theme.adminHelpPage5.help2",
 				"&2 Delete Serverregion: &e/cadmin deleteserver");
 		adminHelpE3P5 = this.getLanguageString("theme.adminHelpPage5.help3", "&2 Create Shop: &e/cadmin createshop");
+		adminHelpE4P5 = this.getLanguageString("theme.adminHelpPage5.help4", "&2 Delete Shop: &e/cadmin delete");
 
 	}
 

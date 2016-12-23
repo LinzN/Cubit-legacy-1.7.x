@@ -75,6 +75,7 @@ permissions:
             cubit.command.admin.createserver: true
             cubit.command.admin.deleteserver: true
             cubit.command.admin.createshop: true
+            cubit.command.admin.deleteshop: true
             cubit.command.admin.list: true
             cubit.command.admin.help: true
             cubit.command.admin.changebiome: true
@@ -210,6 +211,9 @@ permissions:
         description: Haupt-Hilfeseite
         default: op
     cubit.command.admin.createshop:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.admin.deleteshop:
         description: Haupt-Hilfeseite
         default: op
     cubit.command.admin.flag.pvp:

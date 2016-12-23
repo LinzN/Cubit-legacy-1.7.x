@@ -100,6 +100,7 @@ public class CreateShopAdmin implements ICommand {
 		}
 		OfferData offerData = new OfferData(regionName, loc.getWorld());
 		offerData.setValue(value);
+		offerData.setPlayerUUID(player.getUniqueId());
 		if (!plugin.getDatabaseManager().setOfferData(offerData)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "OFFER-ADD"));
