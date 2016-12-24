@@ -8,19 +8,21 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import de.kekshaus.cubit.api.blockAPI.snapshot.Snapshot;
 import de.kekshaus.cubit.api.classes.enums.LandTypes;
 import de.kekshaus.cubit.api.classes.interfaces.ICommand;
 import de.kekshaus.cubit.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.plugin.Landplugin;
 
-public class ListUniversal implements ICommand {
+@SuppressWarnings("unused")
+public class ListSnapshotsUniversal implements ICommand {
 
 	private Landplugin plugin;
 	private String permNode;
 	private LandTypes type;
 	private boolean isAdmin;
 
-	public ListUniversal(Landplugin plugin, String permNode, LandTypes type, boolean isAdmin) {
+	public ListSnapshotsUniversal(Landplugin plugin, String permNode, LandTypes type, boolean isAdmin) {
 		this.plugin = plugin;
 		this.permNode = permNode;
 		this.type = type;
@@ -66,8 +68,7 @@ public class ListUniversal implements ICommand {
 				searchUUID = Bukkit.getOfflinePlayer(args[1]).getUniqueId();
 			}
 
-			List<RegionData> regionList = this.plugin.getRegionManager().getAllRegionsFromPlayer(searchUUID,
-					player.getLocation().getWorld(), type);
+			List<Snapshot> snapshotList = this.plugin.getBlockManager().getSnapshotHandler().getSnapshots(searchUUID);
 
 			int pageNumber = 0;
 
@@ -88,7 +89,7 @@ public class ListUniversal implements ICommand {
 				return;
 			}
 
-			show(player, pageNumber, regionList);
+			show(player, pageNumber, snapshotList);
 
 		} else {
 			player.sendMessage(plugin.getYamlManager().getLanguage().wrongArguments.replace("{usage}",
@@ -97,31 +98,29 @@ public class ListUniversal implements ICommand {
 		}
 	}
 
-	private void show(Player player, int pageNumber, List<RegionData> regionList) {
-		int regionCount = regionList.size();
+	private void show(Player player, int pageNumber, List<Snapshot> snapshotList) {
+		int snapshotCount = snapshotList.size();
 
-		if (regionCount == 0) {
-			player.sendMessage(plugin.getYamlManager().getLanguage().noRegionsFound);
+		if (snapshotCount == 0) {
+			player.sendMessage(plugin.getYamlManager().getLanguage().noSnapshotsFound);
 			return;
 		}
 
-		if (pageNumber * 10 >= regionCount) {
+		if (pageNumber * 10 >= snapshotCount) {
 			player.sendMessage(plugin.getYamlManager().getLanguage().pageNotFound);
 			return;
 		}
 
-		List<RegionData> subRegionList = regionList.subList(pageNumber * 10,
-				pageNumber * 10 + 10 > regionCount ? regionCount : pageNumber * 10 + 10);
+		List<Snapshot> subRegionList = snapshotList.subList(pageNumber * 10,
+				pageNumber * 10 + 10 > snapshotCount ? snapshotCount : pageNumber * 10 + 10);
 
-		player.sendMessage(plugin.getYamlManager().getLanguage().landListHeader.replace("{count}", "" + regionCount)
+		player.sendMessage(plugin.getYamlManager().getLanguage().landListsnapshotsHeader.replace("{count}", "" + snapshotCount)
 				.replace("{entryMin}", "" + (pageNumber * 10 + 1)).replace("{entryMax}", "" + (pageNumber * 10 + 10)));
 
 		int counter = pageNumber * 10 + 1;
 
-		for (RegionData rgData : subRegionList) {
-			player.sendMessage(plugin.getYamlManager().getLanguage().landListEntry.replace("{counter}", "" + counter)
-					.replace("{regionID}", rgData.getRegionName()).replace("{minPoints}", rgData.getMinPoint())
-					.replace("{maxPoints}", rgData.getMaxPoint()));
+		for (Snapshot snapshotObject : subRegionList) {
+			player.sendMessage(plugin.getYamlManager().getLanguage().landListsnapshotsEntry.replace("{counter}", "" + counter).replace("{snapshotName}", snapshotObject.getSnapshotId()).replace("{biome}", "NULL"));
 			counter++;
 		}
 	}

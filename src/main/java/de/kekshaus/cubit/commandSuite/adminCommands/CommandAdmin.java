@@ -26,6 +26,7 @@ import de.kekshaus.cubit.commandSuite.universalCommands.main.AddMemberUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.ChangeBiomeUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.ChangeFlagUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.ListBiomesUniversal;
+import de.kekshaus.cubit.commandSuite.universalCommands.main.ListSnapshotsUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.ListUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.RemoveMemberUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.VersionUniversal;
@@ -112,6 +113,7 @@ public class CommandAdmin implements CommandExecutor {
 			this.cmdMap.put("list", new ListUniversal(this.plugin, perm.listAdminLand, LandTypes.NOTYPE, true));
 			this.cmdMap.put("reload", new ReloadAdmin(this.plugin, perm.reloadCubit));
 
+			this.cmdMap.put("listsaves", new ListSnapshotsUniversal(this.plugin, perm.listSavesAdmin, LandTypes.NOTYPE, true));
 			this.cmdMap.put("test", new TestAdmin(this.plugin, perm.testAdmin));
 
 			this.isLoaded = true;

@@ -1,5 +1,8 @@
 package de.kekshaus.cubit.api.blockAPI.snapshot;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Chunk;
@@ -46,14 +49,25 @@ public class SnapshotHandler {
 		return true;
 
 	}
-	
-	public boolean hasSnapshot(UUID uuid, String snapshotName){
+
+	public boolean isSnapshot(UUID uuid, String snapshotName) {
 		return this.weFunctions.isSnapshotDorectory(uuid, snapshotName);
 	}
-	
-	public boolean hasValidAdapter(){
+
+	public List<Snapshot> getSnapshots(UUID playerUUID) {
+		List<Snapshot> snapshots = new ArrayList<Snapshot>();
+		HashSet<String> names = this.weFunctions.getSnapshotNames(playerUUID);
+
+		for (String snapshotName : names) {
+			Snapshot snapshot = new Snapshot(playerUUID, snapshotName);
+			snapshots.add(snapshot);
+		}
+
+		return snapshots;
+	}
+
+	public boolean hasValidAdapter() {
 		return this.weFunctions.hasValidAdapter;
 	}
-	
 
 }

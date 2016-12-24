@@ -26,6 +26,7 @@ public class PermissionNodes {
 	public String listBiomesLand = "cubit.command.land.listbiomes";
 	public String saveLand = "cubit.command.land.savesnapshot";
 	public String restoreLand = "cubit.command.land.restoresnapshot";
+	public String listSavesLand = "cubit.command.land.listsnapshots";
 	/* Shop Perms */
 	public String buyShop = "cubit.command.shop.buy";
 	public String sellShop = "cubit.command.shop.sell";
@@ -54,6 +55,7 @@ public class PermissionNodes {
 	public String listBiomesAdminLand = "cubit.command.admin.listbiomes";
 	public String kickAdminBypass = "cubit.bypass.kick";
 	public String reloadCubit = "cubit.command.admin.reloadcubit";
+	public String listSavesAdmin = "cubit.command.admin.listsnapshots";
 	public String testAdmin = "cubit.command.admin.testadmin";
 
 }

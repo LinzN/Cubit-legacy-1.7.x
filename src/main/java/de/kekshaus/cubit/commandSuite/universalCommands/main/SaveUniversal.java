@@ -78,7 +78,7 @@ public class SaveUniversal implements ICommand {
 		
 		String snapshotName = regionData.getRegionName().toLowerCase();
 		
-		if (plugin.getBlockManager().getSnapshotHandler().hasSnapshot(player.getUniqueId(), snapshotName)){
+		if (plugin.getBlockManager().getSnapshotHandler().isSnapshot(player.getUniqueId(), snapshotName)){
 			sender.sendMessage(plugin.getYamlManager().getLanguage().alreadySnapshot);
 			return true;
 		}

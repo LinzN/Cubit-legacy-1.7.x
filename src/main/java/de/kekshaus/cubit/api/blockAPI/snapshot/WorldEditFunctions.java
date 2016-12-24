@@ -2,6 +2,7 @@ package de.kekshaus.cubit.api.blockAPI.snapshot;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
@@ -134,32 +135,48 @@ public class WorldEditFunctions {
 			path.mkdirs();
 		return path;
 	}
-	
-	public boolean isSnapshotDorectory(UUID uuid, String snapshotName){
+
+	public boolean isSnapshotDorectory(UUID uuid, String snapshotName) {
 		String fullPath = this.snapshotsDirectory + "/" + uuid.toString() + "/" + snapshotName;
 		File path = new File(fullPath);
 		return path.exists();
 	}
 
+	public HashSet<String> getSnapshotNames(UUID playerUUID) {
+		HashSet<String> snapshotNames = new HashSet<String>();
+		String path = this.snapshotsDirectory + "/" + playerUUID.toString();
+		File filePath = new File(path);
+		filePath.listFiles();
+		for (File file : filePath.listFiles()) {
+			if (file.isDirectory()) {
+				snapshotNames.add(file.getName());
+			}
+		}
+
+		return snapshotNames;
+	}
+
 	public boolean checkWorldEditAdapter() {
 		String className = "com.sk89q.worldedit.bukkit.adapter.impl.";
 		try {
-			Class<?> cls = Class.forName(className + "Spigot_"+ getVersion());
+			Class<?> cls = Class.forName(className + "Spigot_" + getVersion());
 			if (!BukkitImplAdapter.class.isAssignableFrom(cls)) {
 				this.plugin.getLogger().warning("WARN: WorldEdit has no valid bukkit adapter for this server version!");
-				this.plugin.getLogger().warning("WARN: All Snapshot actions like /land save or /land restore are disabled!");
+				this.plugin.getLogger()
+						.warning("WARN: All Snapshot actions like /land save or /land restore are disabled!");
 				this.plugin.getLogger().warning("WARN: Please update your worldedit for full support!");
 				return false;
 			}
 		} catch (ClassNotFoundException e) {
 			this.plugin.getLogger().warning("WARN: WorldEdit has no valid bukkit adapter for this server version!");
-			this.plugin.getLogger().warning("WARN: All Snapshot actions like /land save or /land restore are disabled!");
+			this.plugin.getLogger()
+					.warning("WARN: All Snapshot actions like /land save or /land restore are disabled!");
 			this.plugin.getLogger().warning("WARN: Please update your worldedit for full support!");
 			return false;
 		}
 		return true;
 	}
-	
+
 	private static String getVersion() {
 		String[] array = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",");
 		if (array.length == 4)

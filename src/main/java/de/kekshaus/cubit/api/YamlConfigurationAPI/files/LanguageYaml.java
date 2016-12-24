@@ -54,6 +54,7 @@ public class LanguageYaml {
 	public String takeOwnLand;
 	public String notOffered;
 	public String noRegionsFound;
+	public String noSnapshotsFound;
 	public String wrongArguments;
 
 	/* Header for Plugin */
@@ -171,6 +172,7 @@ public class LanguageYaml {
 	public String adminHelpHeaderP4;
 	public String adminHelpE1P4;
 	public String adminHelpE2P4;
+	public String adminHelpE3P4;
 
 
 	/* Page 5 Help for Admin Command */
@@ -179,6 +181,11 @@ public class LanguageYaml {
 	public String adminHelpE2P5;
 	public String adminHelpE3P5;
 	public String adminHelpE4P5;
+	
+	
+	/* Snapshots List */
+	public String landListsnapshotsHeader;
+	public String landListsnapshotsEntry;
 
 	public LanguageYaml(CustomConfig configFile) {
 		this.configFile = configFile;
@@ -249,6 +256,7 @@ public class LanguageYaml {
 		notOffered = this.getLanguageString("notOffered", "&cThe region {regionID} is not offered!");
 		wrongArguments = this.getLanguageString("wrongArguments", "&cWrong arguments: Use {usage}!");
 		noRegionsFound = this.getLanguageString("noRegionsFound", "&cNo regions found. Sry!");
+		noSnapshotsFound = this.getLanguageString("noSnapshotsFound", "&cNo snapshots found. Sry!");
 		notToLongOffline = this.getLanguageString("notToLongOffline", "&cThis player is not long enough offline!");
 		/* Header for Plugin */
 		landHeader = this.getLanguageString("theme.general.header",
@@ -323,7 +331,7 @@ public class LanguageYaml {
 		landHelpE2P5 = this.getLanguageString("theme.helpPage5.help2", "&2 List biomes: &e/land listbiomes");
 		landHelpE3P5 = this.getLanguageString("theme.helpPage5.help3", "&2 Save snapshot: &e/land save");
 		landHelpE4P5 = this.getLanguageString("theme.helpPage5.help4", "&2 Restore snapshot: &e/land restore [Snapshot]");
-		landHelpE5P5 = this.getLanguageString("theme.helpPage5.help5", "&2 List snapshots: &4/land listsaves");
+		landHelpE5P5 = this.getLanguageString("theme.helpPage5.help5", "&2 List snapshots: &e/land listsaves");
 		landHelpBottomP5 = this.getLanguageString("theme.helpPage5.bottom", "&a&lBack to page 4 &6/land help 4");
 
 		landBiomeListHeader = this.getLanguageString("theme.biomeList.header", "&6&lAll available biomes:");
@@ -361,6 +369,12 @@ public class LanguageYaml {
 				"&6&lRegion Count: &r&2{count} &6&l- Entries &r&2{entryMin} &6&lfrom &r&2{entryMax}");
 		landListEntry = this.getLanguageString("theme.landList.entry",
 				"&a{counter}. &6{regionID} &a(&efrom &a- &eto&a) [&e{minPoints} &a- &e{maxPoints}&a]");
+		
+		/* List snapshots Command */
+		landListsnapshotsHeader = this.getLanguageString("theme.listsnapshots.header",
+				"&6&lSnapshots Count: &r&2{count} &6&l- Entries &r&2{entryMin} &6&lfrom &r&2{entryMax}");
+		landListsnapshotsEntry = this.getLanguageString("theme.listsnapshots.entry",
+				"&a{counter}. &6{snapshotName} &a [&e{biome}&a]");
 
 		/* Page 1 Help for Admin Command */
 		adminHelpHeaderP1 = this.getLanguageString("theme.adminHelpPage1.header",
@@ -405,7 +419,9 @@ public class LanguageYaml {
 		adminHelpE1P4 = this.getLanguageString("theme.adminHelpPage4.help1",
 				"&2 Change biome: &e/cadmin changebiome (biome)");
 		adminHelpE2P4 = this.getLanguageString("theme.adminHelpPage4.help2",
-				"&2 List available biomes: &e/cadmin listbiomes");
+				"&2 List available biomes: &e/cadmin listbiomes");	
+		adminHelpE3P4 = this.getLanguageString("theme.adminHelpPage4.help3",
+				"&2 List snapshots: &e/cadmin listsaves [Player] (page)");
 
 		/* Page 5 Help for Admin Command */
 		adminHelpHeaderP5 = this.getLanguageString("theme.adminHelpPage5.header", "&6&lAdmin regions: [Page 5]");

@@ -88,7 +88,7 @@ public class RestoreUniversal implements ICommand {
 		
 		String snapshotName = args[1].toLowerCase();
 		
-		if (!plugin.getBlockManager().getSnapshotHandler().hasSnapshot(player.getUniqueId(), snapshotName)){
+		if (!plugin.getBlockManager().getSnapshotHandler().isSnapshot(player.getUniqueId(), snapshotName)){
 			sender.sendMessage(plugin.getYamlManager().getLanguage().noSnapshot);
 			return true;
 		}

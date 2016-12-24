@@ -26,6 +26,7 @@ import de.kekshaus.cubit.commandSuite.universalCommands.main.ChangeFlagUniversal
 import de.kekshaus.cubit.commandSuite.universalCommands.main.InfoUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.KickUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.ListBiomesUniversal;
+import de.kekshaus.cubit.commandSuite.universalCommands.main.ListSnapshotsUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.ListUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.RemoveMemberUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.RestoreUniversal;
@@ -129,6 +130,7 @@ public class CommandLand implements CommandExecutor {
 					new ChangeBiomeUniversal(this.plugin, perm.changeBiomeLand, LandTypes.WORLD, false));
 
 			this.cmdMap.put("listbiomes", new ListBiomesUniversal(this.plugin, perm.listBiomesLand, LandTypes.WORLD));
+			this.cmdMap.put("listsaves", new ListSnapshotsUniversal(this.plugin, perm.listSavesLand, LandTypes.WORLD, false));
 			
 			this.cmdMap.put("save", new SaveUniversal(this.plugin, perm.saveLand, LandTypes.WORLD));
 			this.cmdMap.put("restore", new RestoreUniversal(this.plugin, perm.restoreLand, LandTypes.WORLD));
