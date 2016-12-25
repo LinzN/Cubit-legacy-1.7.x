@@ -46,6 +46,7 @@ permissions:
             cubit.command.land.flag.lock: true
             cubit.command.land.flag.tnt: true
             cubit.command.land.flag.monster: true
+            cubit.command.land.flag.potion: true
             cubit.command.land.changebiome: true
             cubit.command.land.listbiomes: true
             cubit.command.land.restoresnapshot: true
