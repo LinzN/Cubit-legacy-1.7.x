@@ -94,12 +94,12 @@ public class RegionAPIManager {
 			String regionName = buildLandName(world.getName(), chunkX, chunkZ);
 			RegionData regionData = mReg.newRegion(chunkX, chunkZ, world, playerUUID, regionName);
 
-			regionData = this.lockPacket.switchState(regionData, true, false);
-			regionData = this.monsterPacket.switchState(regionData, true, false);
-			regionData = this.pvpPacket.switchState(regionData, true, false);
-			regionData = this.tntPacket.switchState(regionData, true, false);
-			regionData = this.firePacket.switchState(regionData, true, false);
-			regionData = this.potionPacket.switchState(regionData, true, false);
+			regionData = this.lockPacket.switchState(regionData, this.plugin.getYamlManager().getFlag().worldRegionPacketLock, false);
+			regionData = this.monsterPacket.switchState(regionData, this.plugin.getYamlManager().getFlag().worldRegionPacketMonster, false);
+			regionData = this.pvpPacket.switchState(regionData, this.plugin.getYamlManager().getFlag().worldRegionPacketPVP, false);
+			regionData = this.tntPacket.switchState(regionData, this.plugin.getYamlManager().getFlag().worldRegionPacketTNT, false);
+			regionData = this.firePacket.switchState(regionData, this.plugin.getYamlManager().getFlag().worldRegionPacketFire, false);
+			regionData = this.potionPacket.switchState(regionData, this.plugin.getYamlManager().getFlag().worldRegionPacketPotion, false);
 			saveMrg.save(regionData);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -117,12 +117,12 @@ public class RegionAPIManager {
 			String regionName = buildLandName(LandTypes.SERVER.toString(), chunkX, chunkZ);
 			RegionData regionData = mReg.newRegion(chunkX, chunkZ, world, null, regionName);
 
-			regionData = this.lockPacket.switchState(regionData, true, false);
-			regionData = this.monsterPacket.switchState(regionData, true, false);
-			regionData = this.pvpPacket.switchState(regionData, true, false);
-			regionData = this.tntPacket.switchState(regionData, true, false);
-			regionData = this.firePacket.switchState(regionData, true, false);
-			regionData = this.potionPacket.switchState(regionData, true, false);
+			regionData = this.lockPacket.switchState(regionData, this.plugin.getYamlManager().getFlag().serverRegionPacketLock, false);
+			regionData = this.monsterPacket.switchState(regionData, this.plugin.getYamlManager().getFlag().serverRegionPacketMonster, false);
+			regionData = this.pvpPacket.switchState(regionData, this.plugin.getYamlManager().getFlag().serverRegionPacketPVP, false);
+			regionData = this.tntPacket.switchState(regionData, this.plugin.getYamlManager().getFlag().serverRegionPacketTNT, false);
+			regionData = this.firePacket.switchState(regionData, this.plugin.getYamlManager().getFlag().serverRegionPacketFire, false);
+			regionData = this.potionPacket.switchState(regionData, this.plugin.getYamlManager().getFlag().serverRegionPacketPotion, false);
 			saveMrg.save(regionData);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -140,12 +140,12 @@ public class RegionAPIManager {
 			String regionName = buildLandName(LandTypes.SHOP.toString(), chunkX, chunkZ);
 			RegionData regionData = mReg.newRegion(chunkX, chunkZ, world, null, regionName);
 
-			regionData = this.lockPacket.switchState(regionData, true, false);
-			regionData = this.monsterPacket.switchState(regionData, true, false);
-			regionData = this.pvpPacket.switchState(regionData, true, false);
-			regionData = this.tntPacket.switchState(regionData, true, false);
-			regionData = this.firePacket.switchState(regionData, true, false);
-			regionData = this.potionPacket.switchState(regionData, true, false);
+			regionData = this.lockPacket.switchState(regionData, this.plugin.getYamlManager().getFlag().shopRegionPacketLock, false);
+			regionData = this.monsterPacket.switchState(regionData, this.plugin.getYamlManager().getFlag().shopRegionPacketMonster, false);
+			regionData = this.pvpPacket.switchState(regionData, this.plugin.getYamlManager().getFlag().shopRegionPacketPVP, false);
+			regionData = this.tntPacket.switchState(regionData, this.plugin.getYamlManager().getFlag().shopRegionPacketTNT, false);
+			regionData = this.firePacket.switchState(regionData, this.plugin.getYamlManager().getFlag().shopRegionPacketFire, false);
+			regionData = this.potionPacket.switchState(regionData, this.plugin.getYamlManager().getFlag().shopRegionPacketPotion, false);
 			saveMrg.save(regionData);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -167,12 +167,12 @@ public class RegionAPIManager {
 				this.mRegE.setOwner(list, world, player);
 			}
 
-			this.lockPacket.switchState(regionData, true, false);
-			this.monsterPacket.switchState(regionData, true, false);
-			this.pvpPacket.switchState(regionData, true, false);
-			this.tntPacket.switchState(regionData, true, false);
-			this.firePacket.switchState(regionData, true, false);
-			this.potionPacket.switchState(regionData, true, false);
+			this.lockPacket.switchState(regionData, this.plugin.getYamlManager().getFlag().worldRegionPacketLock, false);
+			this.monsterPacket.switchState(regionData, this.plugin.getYamlManager().getFlag().worldRegionPacketMonster, false);
+			this.pvpPacket.switchState(regionData, this.plugin.getYamlManager().getFlag().worldRegionPacketPVP, false);
+			this.tntPacket.switchState(regionData, this.plugin.getYamlManager().getFlag().worldRegionPacketTNT, false);
+			this.firePacket.switchState(regionData, this.plugin.getYamlManager().getFlag().worldRegionPacketFire, false);
+			this.potionPacket.switchState(regionData, this.plugin.getYamlManager().getFlag().worldRegionPacketPotion, false);
 
 			saveMrg.save(world);
 		} catch (Exception e) {

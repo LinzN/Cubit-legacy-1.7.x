@@ -3,6 +3,7 @@ package de.kekshaus.cubit.api.YamlConfigurationAPI;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import de.kekshaus.cubit.api.YamlConfigurationAPI.files.FlagProtectionsYaml;
 import de.kekshaus.cubit.api.YamlConfigurationAPI.files.FlatfileYaml;
 import de.kekshaus.cubit.api.YamlConfigurationAPI.files.LanguageYaml;
 import de.kekshaus.cubit.api.YamlConfigurationAPI.files.LimitYaml;
@@ -39,6 +40,10 @@ public class YamlConfigurationManager {
 
 	public LimitYaml getLimit() {
 		return this.fileOperator.limit;
+	}
+	
+	public FlagProtectionsYaml getFlag() {
+		return this.fileOperator.flag;
 	}
 
 }

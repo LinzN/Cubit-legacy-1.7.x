@@ -4,6 +4,7 @@ import java.io.File;
 
 import org.bukkit.plugin.Plugin;
 
+import de.kekshaus.cubit.api.YamlConfigurationAPI.files.FlagProtectionsYaml;
 import de.kekshaus.cubit.api.YamlConfigurationAPI.files.FlatfileYaml;
 import de.kekshaus.cubit.api.YamlConfigurationAPI.files.LanguageYaml;
 import de.kekshaus.cubit.api.YamlConfigurationAPI.files.LimitYaml;
@@ -14,6 +15,7 @@ public class YamlFileSetup {
 	public SettingsYaml settings;
 	public LanguageYaml language;
 	public LimitYaml limit;
+	public FlagProtectionsYaml flag;
 	public FlatfileYaml flatFileDatabase;
 	private Plugin plugin;
 
@@ -66,14 +68,16 @@ public class YamlFileSetup {
 
 		CustomConfig flatfileConfig = new CustomConfig(this.plugin, flatfileDirectory, "database.yml");
 		this.flatFileDatabase = new FlatfileYaml(flatfileConfig);
-		/* Configs */
 
 		CustomConfig limitConfig = new CustomConfig(this.plugin, configDirectory, "entityLimiter.yml");
 		this.limit = new LimitYaml(limitConfig);
+		
+		CustomConfig flagConfig = new CustomConfig(this.plugin, configDirectory, "defaultProtections.yml");
+		this.flag = new FlagProtectionsYaml(flagConfig);
 
 		CustomConfig settingsConfig = new CustomConfig(this.plugin, this.plugin.getDataFolder(), "settings.yml");
 		this.settings = new SettingsYaml(settingsConfig);
-		settingsConfig.saveAndReload();
+
 
 	}
 }
