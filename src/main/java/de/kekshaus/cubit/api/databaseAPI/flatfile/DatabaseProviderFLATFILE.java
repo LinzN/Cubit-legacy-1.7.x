@@ -1,4 +1,4 @@
-package de.kekshaus.cubit.api.databaseAPI.yaml;
+package de.kekshaus.cubit.api.databaseAPI.flatfile;
 
 import java.util.UUID;
 
@@ -9,11 +9,11 @@ import de.kekshaus.cubit.api.classes.interfaces.IDatabaseConnector;
 import de.kekshaus.cubit.api.databaseAPI.OfferData;
 import de.kekshaus.cubit.plugin.Landplugin;
 
-public class DatabaseProviderYAML implements IDatabaseConnector {
+public class DatabaseProviderFLATFILE implements IDatabaseConnector {
 
 	private Landplugin plugin;
 
-	public DatabaseProviderYAML(Landplugin plugin) {
+	public DatabaseProviderFLATFILE(Landplugin plugin) {
 		this.plugin = plugin;
 	}
 

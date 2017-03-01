@@ -7,8 +7,8 @@ import java.util.UUID;
 import org.bukkit.World;
 
 import de.kekshaus.cubit.api.classes.interfaces.IDatabaseConnector;
+import de.kekshaus.cubit.api.databaseAPI.flatfile.DatabaseProviderFLATFILE;
 import de.kekshaus.cubit.api.databaseAPI.sql.DatabaseProviderSQL;
-import de.kekshaus.cubit.api.databaseAPI.yaml.DatabaseProviderYAML;
 import de.kekshaus.cubit.plugin.Landplugin;
 
 public class DatabaseAPIManager {
@@ -25,8 +25,8 @@ public class DatabaseAPIManager {
 			plugin.getLogger().info("Using MYSQL database");
 			this.databaseProvider = new DatabaseProviderSQL(plugin);
 		} else {
-			plugin.getLogger().info("Using YAML database");
-			this.databaseProvider = new DatabaseProviderYAML(plugin);
+			plugin.getLogger().info("Using FLATFILE database");
+			this.databaseProvider = new DatabaseProviderFLATFILE(plugin);
 		}
 
 	}
