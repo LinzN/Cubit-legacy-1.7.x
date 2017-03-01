@@ -32,10 +32,9 @@ public class NameCache {
 			playerCache.put(uuid, currentNameData.name);
 			return currentNameData.name;
 		} catch (Exception e) {
-			e.printStackTrace();
+			return null;
 		}
 
-		return null;
 	}
 
 	private String fetchBukkitName(UUID uuid) {
