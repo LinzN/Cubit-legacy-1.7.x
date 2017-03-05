@@ -5,7 +5,7 @@ import java.util.UUID;
 import org.bukkit.World;
 
 import de.kekshaus.cubit.api.YamlConfigurationAPI.setup.CustomConfig;
-import de.kekshaus.cubit.api.databaseAPI.OfferData;
+import de.kekshaus.cubit.api.database.OfferData;
 
 public class FlatfileYaml {
 

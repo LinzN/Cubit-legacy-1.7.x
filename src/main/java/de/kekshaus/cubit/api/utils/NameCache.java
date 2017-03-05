@@ -15,6 +15,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mojang.util.UUIDTypeAdapter;
 
+import de.kekshaus.cubit.plugin.Landplugin;
+
 public class NameCache {
 	private Gson gson = new GsonBuilder().registerTypeAdapter(UUID.class, new UUIDTypeAdapter()).create();
 	private final String NAME_URL = "https://api.mojang.com/user/profiles/%s/names";
@@ -53,12 +55,20 @@ public class NameCache {
 		return null;
 
 	}
+	
+	private String fetchDatabaseName(UUID uuid){
+		return Landplugin.inst().getDatabaseManager().getProfileName(uuid);
+		
+	}
 
 	public String getCacheName(UUID uuid) {
 		String prasedName = null;
 
 		if (playerCache.containsKey(uuid)) {
 			prasedName = playerCache.get(uuid);
+		}
+		if (prasedName == null){
+			prasedName = fetchDatabaseName(uuid);
 		}
 
 		if (prasedName == null) {

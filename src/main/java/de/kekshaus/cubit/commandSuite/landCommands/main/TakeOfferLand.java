@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 import de.kekshaus.cubit.api.classes.enums.LandTypes;
 import de.kekshaus.cubit.api.classes.interfaces.ICommand;
-import de.kekshaus.cubit.api.databaseAPI.OfferData;
+import de.kekshaus.cubit.api.database.OfferData;
 import de.kekshaus.cubit.api.regionAPI.region.RegionData;
 import de.kekshaus.cubit.plugin.Landplugin;
 

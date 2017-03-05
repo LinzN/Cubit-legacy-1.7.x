@@ -11,7 +11,7 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 import de.kekshaus.cubit.api.YamlConfigurationAPI.YamlConfigurationManager;
 import de.kekshaus.cubit.api.blockAPI.BlockAPIManager;
-import de.kekshaus.cubit.api.databaseAPI.DatabaseAPIManager;
+import de.kekshaus.cubit.api.database.DatabaseManager;
 import de.kekshaus.cubit.api.particleAPI.ParticleAPIManager;
 import de.kekshaus.cubit.api.regionAPI.RegionAPIManager;
 import de.kekshaus.cubit.api.vaultAPI.VaultAPIManager;
@@ -29,7 +29,7 @@ public class Landplugin extends JavaPlugin {
 	private BlockAPIManager blockMrg;
 	private ParticleAPIManager particleMrg;
 	private VaultAPIManager vaultMrg;
-	private DatabaseAPIManager databaseMrg;
+	private DatabaseManager databaseMrg;
 	private PermissionNodes permNodes;
 	private YamlConfigurationManager yamlConfiguration;
 
@@ -46,9 +46,6 @@ public class Landplugin extends JavaPlugin {
 		}
 		this.getServer().getPluginManager().registerEvents(new LoginListener(), this);
 
-		if (!this.databaseMrg.link()) {
-			this.setEnabled(false);
-		}
 		new SetupCommands(this);
 		if (this.getYamlManager().getSettings().entityLimiterUse) {
 			new EntityLimiter(this);
@@ -96,7 +93,7 @@ public class Landplugin extends JavaPlugin {
 		this.particleMrg = new ParticleAPIManager(this);
 		this.vaultMrg = new VaultAPIManager(this);
 		this.permNodes = new PermissionNodes(this);
-		this.databaseMrg = new DatabaseAPIManager(this);
+		this.databaseMrg = new DatabaseManager(this);
 		return true;
 
 	}
@@ -126,7 +123,7 @@ public class Landplugin extends JavaPlugin {
 		return this.particleMrg;
 	}
 
-	public DatabaseAPIManager getDatabaseManager() {
+	public DatabaseManager getDatabaseManager() {
 		return this.databaseMrg;
 	}
 

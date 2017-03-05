@@ -13,15 +13,12 @@ public class LoginListener implements Listener {
 
 	@EventHandler
 	public void onPlayerJoin(final PlayerLoginEvent event) {
-		// if
-		// (!Landplugin.inst().getYamlManager().getSettings().sqlUseXeonSuiteSameDatabase)
-		// {
 		Bukkit.getScheduler().runTaskAsynchronously(Landplugin.inst(), new Runnable() {
 
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
-				Landplugin.inst().getDatabaseManager().updatePlayer(event.getPlayer().getUniqueId(),
+
+				Landplugin.inst().getDatabaseManager().updateProfile(event.getPlayer().getUniqueId(),
 						event.getPlayer().getName(), new Date().getTime());
 
 			}
