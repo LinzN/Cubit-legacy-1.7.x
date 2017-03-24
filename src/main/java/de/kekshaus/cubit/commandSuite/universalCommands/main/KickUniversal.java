@@ -72,17 +72,21 @@ public class KickUniversal implements ICommand {
 		}
 		HashSet<UUID> playerMap = new HashSet<>();
 
-		for (Entity entity : chunk.getEntities()) {
-			if (entity instanceof Player) {
-				if (!entity.hasPermission(plugin.getPermNodes().kickAdminBypass)) {
-					if (!plugin.getRegionManager().hasLandPermission(regionData, player.getUniqueId())) {
-						if (!regionData.getMembersUUID().equals(entity.getUniqueId())) {
-							playerMap.add(entity.getUniqueId());
-						}
-					}
-				}
-			}
-		}
+        for (Entity entity : chunk.getEntities()) {
+            if (!(entity instanceof Player)) {
+                continue;
+            }
+            if (entity.hasPermission(plugin.getPermNodes().kickAdminBypass)) {
+                continue;
+            }
+            if (plugin.getRegionManager().hasLandPermission(regionData, entity.getUniqueId())) {
+                continue;
+            }
+            if (regionData.getMembersUUID().equals(entity.getUniqueId())) {
+                continue;
+            }
+            playerMap.add(entity.getUniqueId());
+        }
 
 		for (UUID uuid : playerMap) {
 			final Player kickedPlayer = Bukkit.getPlayer(uuid);
