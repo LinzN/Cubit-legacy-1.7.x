@@ -1,10 +1,8 @@
 package de.kekshaus.cubit.plugin;
 
-import java.io.IOException;
-
+import org.bstats.Metrics;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.mcstats.MetricsLite;
 
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
@@ -99,12 +97,7 @@ public class Landplugin extends JavaPlugin {
 	}
 
 	private void runMetrics() {
-		try {
-			MetricsLite metrics = new MetricsLite(this);
-			metrics.start();
-		} catch (IOException e) {
-			this.getLogger().warning("Metrics failed to start.");
-		}
+		new Metrics(this);
 	}
 
 	public static Landplugin inst() {
