@@ -51,7 +51,7 @@ public class Landplugin extends JavaPlugin {
 		if (this.getYamlManager().getSettings().physicWaterLavaFlowLand) {
 			this.getServer().getPluginManager().registerEvents(new AdditionalPhysicsListener(), this);
 		}
-		runMetrics();
+        new Metrics(this);
 		getLogger().info("Cubit startup finish");
 
 	}
@@ -96,9 +96,6 @@ public class Landplugin extends JavaPlugin {
 
 	}
 
-	private void runMetrics() {
-		new Metrics(this);
-	}
 
 	public static Landplugin inst() {
 		return inst;
