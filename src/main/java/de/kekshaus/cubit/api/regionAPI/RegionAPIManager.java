@@ -367,5 +367,9 @@ public class RegionAPIManager {
 
 		return playerNames;
 	}
+	
+	public String getPlayerName(UUID playerUUID){
+		return nameCache.getCacheName(playerUUID);
+	}
 
 }

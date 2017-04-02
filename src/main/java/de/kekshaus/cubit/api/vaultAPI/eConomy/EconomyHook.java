@@ -11,9 +11,11 @@ import net.milkbowl.vault.economy.Economy;
 public class EconomyHook {
 
 	private Economy econ;
+	private Landplugin plugin;
 
 	public EconomyHook(Landplugin plugin, Economy econ) {
 		this.econ = econ;
+		this.plugin = plugin;
 
 	}
 
@@ -26,15 +28,24 @@ public class EconomyHook {
 		return false;
 	}
 
+	@SuppressWarnings("deprecation")
 	public void transferMoney(UUID senderUUID, UUID recieverUUID, double value) {
 
 		if (senderUUID != null) {
 			OfflinePlayer sender = Bukkit.getOfflinePlayer(senderUUID);
-			econ.withdrawPlayer(sender, value);
+			if (sender.getName() != null){
+				econ.withdrawPlayer(sender, value);
+			} else {
+				econ.withdrawPlayer(this.plugin.getRegionManager().getPlayerName(senderUUID), value);
+			}
 		}
 		if (recieverUUID != null) {
 			OfflinePlayer reciever = Bukkit.getOfflinePlayer(recieverUUID);
-			econ.depositPlayer(reciever, value);
+			if (reciever.getName() != null){
+				econ.depositPlayer(reciever, value);
+			} else {
+				econ.depositPlayer(this.plugin.getRegionManager().getPlayerName(recieverUUID), value);
+			}
 
 		}
 
