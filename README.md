@@ -55,5 +55,5 @@ Here you find the sourcecode of cubit.
 
 
 
-#### [Buildserver](https://jenkins.exylon.de/job/cubit/)
+#### [Buildserver](https://jenkins.enigmar.de/job/cubit/)
 If you want to test development builds.
