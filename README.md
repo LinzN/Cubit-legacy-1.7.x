@@ -1,4 +1,4 @@
-![](https://www.enigmar.de/content/images/cubit.png)
+![](https://files.enigmar.de/plugins/cubit-logo.png)
 
 
 ### Cubit the regionmanager
