@@ -22,7 +22,7 @@ public class VersionUniversal implements ICommand {
 		sender.sendMessage(
 				ChatColor.GREEN + "Cubit version: " + ChatColor.YELLOW + this.plugin.getDescription().getVersion());
 		sender.sendMessage(ChatColor.GREEN + "Written and copyleft by Kekshaus");
-		sender.sendMessage(ChatColor.GREEN + "You want cubit too? Visit https://www.EXYLON.de");
+		sender.sendMessage(ChatColor.GREEN + "You want more informations? Visit https://Public.Enigmar.de");
 		return true;
 	}
 
