@@ -134,6 +134,7 @@ public class CommandLand implements CommandExecutor {
 			
 			this.cmdMap.put("save", new SaveUniversal(this.plugin, perm.saveLand, LandTypes.WORLD));
 			this.cmdMap.put("restore", new RestoreUniversal(this.plugin, perm.restoreLand, LandTypes.WORLD));
+			this.cmdMap.put("reset", new RestoreUniversal(this.plugin, perm.resetLand, LandTypes.WORLD));
 
 			this.isLoaded = true;
 		} catch (Exception e) {

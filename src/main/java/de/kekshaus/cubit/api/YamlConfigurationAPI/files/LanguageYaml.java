@@ -45,6 +45,7 @@ public class LanguageYaml {
 	public String changedBiome;
 	public String savedSnapshot;
 	public String restoredSnapshot;
+	public String resetSnapshot;
 
 	/* UnSuccess MSG */
 	public String buyIsAlreadyLand;
@@ -242,6 +243,7 @@ public class LanguageYaml {
 		
 		savedSnapshot = this.getLanguageString("savedSnapshot", "&2You created a new snapshot from the region {regionID}!");
 		restoredSnapshot = this.getLanguageString("restoredSnapshot", "&2You restored a snapshot named {snapshotName}!");
+		resetSnapshot = this.getLanguageString("resetSnapshot", "&2You reseted the region {regionID}!");
 
 		/* UnSuccess MSG */
 		buyIsAlreadyLand = this.getLanguageString("buyIsAlreadyLand",

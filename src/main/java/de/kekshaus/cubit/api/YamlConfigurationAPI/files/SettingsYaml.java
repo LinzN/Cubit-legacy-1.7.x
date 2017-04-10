@@ -26,6 +26,7 @@ public class SettingsYaml {
 	public boolean landUseSnapshots;
 	public double landSaveSnapshotPrice;
 	public double landRestoreSnapshotPrice;
+	public double landResetSnapshotPrice;
 	public double landDeprecatedMember;
 	public double landDeprecatedOther;
 	public boolean landUseMaterialBorder;
@@ -76,6 +77,7 @@ public class SettingsYaml {
 		this.landUseSnapshots = (boolean) this.getObjectValue("module.land.landUseSnapshots", true);
 		this.landSaveSnapshotPrice = (double) this.getObjectValue("module.land.landSaveSnapshot", 350D);
 		this.landRestoreSnapshotPrice = (double) this.getObjectValue("module.land.landRestoreSnapshot", 150D);
+		this.landResetSnapshotPrice = (double) this.getObjectValue("module.land.landResetSnapshotPrice", 50D); 
 		this.landDeprecatedMember = (double) this.getObjectValue("module.land.deprecatedBuyupMember", 35D);
 		this.landDeprecatedOther = (double) this.getObjectValue("module.land.deprecatedBuyupOther", 45D);
 		this.landUseMaterialBorder = (boolean) this.getObjectValue("module.land.useMaterialBorder", true);
