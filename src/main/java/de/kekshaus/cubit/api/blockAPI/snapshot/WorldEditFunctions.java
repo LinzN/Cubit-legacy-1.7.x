@@ -9,6 +9,10 @@ import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+
 import com.sk89q.worldedit.CuboidClipboard;
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.MaxChangedBlocksException;
@@ -58,6 +62,12 @@ public class WorldEditFunctions {
 			} catch (DataException | IOException ex) {
 				ex.printStackTrace();
 			}
+			for(Entity entity : chunk.getEntities()) {
+			    if(entity instanceof LivingEntity){
+			    	moveEntityToTop(entity);
+			    }
+
+			}
 		}
 	}
 
@@ -82,6 +92,12 @@ public class WorldEditFunctions {
 					} catch (MaxChangedBlocksException | DataException | IOException ex) {
 						ex.printStackTrace();
 					}
+					for(Entity entity : chunk.getEntities()) {
+					    if(entity instanceof LivingEntity){
+					    	moveEntityToTop(entity);
+					    }
+
+					}
 				}
 
 			});
@@ -90,10 +106,17 @@ public class WorldEditFunctions {
 
 	public void regenerateChunk(final Chunk chunk) {
 		if (this.hasValidAdapter) {
+			
 			Bukkit.getScheduler().runTask(Landplugin.inst(), new Runnable() {
 				@Override
 				public void run() {
 					chunk.getWorld().regenerateChunk(chunk.getX(), chunk.getZ());
+					for(Entity entity : chunk.getEntities()) {
+					    if(entity instanceof LivingEntity){
+					    	moveEntityToTop(entity);
+					    }
+
+					}
 				}
 
 			});
@@ -136,7 +159,7 @@ public class WorldEditFunctions {
 		return path;
 	}
 
-	public boolean isSnapshotDorectory(UUID uuid, String snapshotName) {
+	public boolean isSnapshotDirectory(UUID uuid, String snapshotName) {
 		String fullPath = this.snapshotsDirectory + "/" + uuid.toString() + "/" + snapshotName;
 		File path = new File(fullPath);
 		return path.exists();
@@ -154,6 +177,18 @@ public class WorldEditFunctions {
 		}
 
 		return snapshotNames;
+	}
+	
+	private void moveEntityToTop(Entity entity){
+    	double x, z;
+    	x = entity.getLocation().getX();
+    	z = entity.getLocation().getZ();
+    	if (entity instanceof Player){
+    		if (((Player) entity).isFlying()){
+    			return;
+    		}
+    	}
+    	entity.teleport(new Location(entity.getLocation().getWorld(), x, entity.getLocation().getWorld().getHighestBlockYAt((int)x, (int)z), z));
 	}
 
 	public boolean checkWorldEditAdapter() {

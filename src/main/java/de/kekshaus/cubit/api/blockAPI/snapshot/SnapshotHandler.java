@@ -51,7 +51,7 @@ public class SnapshotHandler {
 	}
 
 	public boolean isSnapshot(UUID uuid, String snapshotName) {
-		return this.weFunctions.isSnapshotDorectory(uuid, snapshotName);
+		return this.weFunctions.isSnapshotDirectory(uuid, snapshotName);
 	}
 
 	public List<Snapshot> getSnapshots(UUID playerUUID) {
@@ -64,6 +64,11 @@ public class SnapshotHandler {
 		}
 
 		return snapshots;
+	}
+	
+	public boolean resetChunk(Chunk chunk){
+		this.weFunctions.regenerateChunk(chunk);
+		return true;
 	}
 
 	public boolean hasValidAdapter() {
