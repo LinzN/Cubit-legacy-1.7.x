@@ -1,8 +1,8 @@
 package de.kekshaus.cubit.plugin;
 
-import org.bstats.Metrics;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.eMetrics.EMetrics;
 
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
@@ -51,7 +51,8 @@ public class Landplugin extends JavaPlugin {
 		if (this.getYamlManager().getSettings().physicWaterLavaFlowLand) {
 			this.getServer().getPluginManager().registerEvents(new AdditionalPhysicsListener(), this);
 		}
-        new Metrics(this);
+       // new Metrics(this);
+        new EMetrics(this);
 		getLogger().info("Cubit startup finish");
 
 	}

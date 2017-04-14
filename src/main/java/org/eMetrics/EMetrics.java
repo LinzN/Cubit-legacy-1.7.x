@@ -1,4 +1,4 @@
-package org.bstats;
+package org.eMetrics;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -26,18 +26,17 @@ import java.util.logging.Level;
 import java.util.zip.GZIPOutputStream;
 
 /**
- * bStats collects some data for plugin authors.
+ * eMetrics collects some data for plugin authors.
  *
- * Check out https://bStats.org/ to learn more about bStats!
+ * Check out https://metrics.enigmar.de/ to learn more about eMetrics!
  */
-@SuppressWarnings("unchecked")
-public class Metrics {
+public class EMetrics {
 
-    // The version of this bStats class
-    public static final int B_STATS_VERSION = 1;
+    // The version of this eMetrics class
+    public static final int E_STATS_VERSION = 1;
 
     // The url to which the data is sent
-    private static final String URL = "https://bStats.org/submitData/bukkit";
+    private static final String URL = "https://metrics.enigmar.de/submitData/bukkit";
 
     // Should failed requests be logged?
     private static boolean logFailedRequests;
@@ -56,15 +55,15 @@ public class Metrics {
      *
      * @param plugin The plugin which stats should be submitted.
      */
-    public Metrics(JavaPlugin plugin) {
+    public EMetrics(JavaPlugin plugin) {
         if (plugin == null) {
             throw new IllegalArgumentException("Plugin cannot be null!");
         }
         this.plugin = plugin;
 
         // Get the config file
-        File bStatsFolder = new File(plugin.getDataFolder().getParentFile(), "bStats");
-        File configFile = new File(bStatsFolder, "config.yml");
+        File eMetricsFolder = new File(plugin.getDataFolder().getParentFile(), "eMetrics");
+        File configFile = new File(eMetricsFolder, "config.yml");
         YamlConfiguration config = YamlConfiguration.loadConfiguration(configFile);
 
         // Check if the config file exists
@@ -77,12 +76,12 @@ public class Metrics {
             // Should failed request be logged?
             config.addDefault("logFailedRequests", false);
 
-            // Inform the server owners about bStats
+            // Inform the server owners about eMetrics
             config.options().header(
-                    "bStats collects some data for plugin authors like how many servers are using their plugins.\n" +
+                    "eMetrics collects some data for plugin authors like how many servers are using their plugins.\n" +
                             "To honor their work, you should not disable it.\n" +
                             "This has nearly no effect on the server performance!\n" +
-                            "Check out https://bStats.org/ to learn more :)"
+                            "Check out https://metrics.enigmar.de/ to learn more :)"
             ).copyDefaults(true);
             try {
                 config.save(configFile);
@@ -94,16 +93,16 @@ public class Metrics {
         logFailedRequests = config.getBoolean("logFailedRequests", false);
         if (config.getBoolean("enabled", true)) {
             boolean found = false;
-            // Search for all other bStats Metrics classes to see if we are the first one
+            // Search for all other eMetrics Metrics classes to see if we are the first one
             for (Class<?> service : Bukkit.getServicesManager().getKnownServices()) {
                 try {
-                    service.getField("B_STATS_VERSION"); // Our identifier :)
+                    service.getField("E_STATS_VERSION"); // Our identifier :)
                     found = true; // We aren't the first
                     break;
                 } catch (NoSuchFieldException ignored) { }
             }
             // Register our service
-            Bukkit.getServicesManager().register(Metrics.class, this, plugin, ServicePriority.Normal);
+            Bukkit.getServicesManager().register(EMetrics.class, this, plugin, ServicePriority.Normal);
             if (!found) {
                 // We are the first!
                 startSubmitting();
@@ -136,7 +135,7 @@ public class Metrics {
                     return;
                 }
                 // Nevertheless we want our code to run in the Bukkit main thread, so we have to use the Bukkit scheduler
-                // Don't be afraid! The connection to the bStats server is still async, only the stats collection is sync ;)
+                // Don't be afraid! The connection to the eMetrics server is still async, only the stats collection is sync ;)
                 Bukkit.getScheduler().runTask(plugin, new Runnable() {
                     @Override
                     public void run() {
@@ -156,8 +155,7 @@ public class Metrics {
      *
      * @return The plugin specific data.
      */
-
-	public JSONObject getPluginData() {
+    public JSONObject getPluginData() {
         JSONObject data = new JSONObject();
 
         String pluginName = plugin.getDescription().getName();
@@ -222,10 +220,10 @@ public class Metrics {
         final JSONObject data = getServerData();
 
         JSONArray pluginData = new JSONArray();
-        // Search for all other bStats Metrics classes to get their plugin data
+        // Search for all other eMetrics Metrics classes to get their plugin data
         for (Class<?> service : Bukkit.getServicesManager().getKnownServices()) {
             try {
-                service.getField("B_STATS_VERSION"); // Our identifier :)
+                service.getField("E_STATS_VERSION"); // Our identifier :)
             } catch (NoSuchFieldException ignored) {
                 continue; // Continue "searching"
             }
@@ -237,7 +235,7 @@ public class Metrics {
 
         data.put("plugins", pluginData);
 
-        // Create a new thread for the connection to the bStats server
+        // Create a new thread for the connection to the eMetrics server
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -255,7 +253,7 @@ public class Metrics {
     }
 
     /**
-     * Sends the data to the bStats server.
+     * Sends the data to the eMetrics server.
      *
      * @param data The data to send.
      * @throws Exception If the request failed.
@@ -279,7 +277,7 @@ public class Metrics {
         connection.addRequestProperty("Content-Encoding", "gzip"); // We gzip our request
         connection.addRequestProperty("Content-Length", String.valueOf(compressedData.length));
         connection.setRequestProperty("Content-Type", "application/json"); // We send our data in JSON format
-        connection.setRequestProperty("User-Agent", "MC-Server/" + B_STATS_VERSION);
+        connection.setRequestProperty("User-Agent", "MC-Server/" + E_STATS_VERSION);
 
         // Send data
         connection.setDoOutput(true);
@@ -709,7 +707,7 @@ public class Metrics {
     public enum Country {
 
         /**
-         * bStats will use the country of the server.
+         * eMetrics will use the country of the server.
          */
         AUTO_DETECT("AUTO", "Auto Detected"),
 
@@ -1017,5 +1015,6 @@ public class Metrics {
         }
 
     }
+
 
 }
