@@ -114,6 +114,7 @@ public class WorldEditFunctions {
 					for(Entity entity : chunk.getEntities()) {
 					    if(entity instanceof LivingEntity){
 					    	moveEntityToTop(entity);
+					    	System.out.println("Move Entity to Top...");
 					    }
 
 					}
@@ -184,11 +185,15 @@ public class WorldEditFunctions {
     	x = entity.getLocation().getX();
     	z = entity.getLocation().getZ();
     	if (entity instanceof Player){
-    		if (((Player) entity).isFlying()){
+    		Player player = (Player) entity;
+    		if (player.isFlying()){
     			return;
     		}
+    		player.teleport(new Location(player.getLocation().getWorld(), x, player.getLocation().getWorld().getHighestBlockYAt((int)x, (int)z), z));
+    	} else {
+    		entity.teleport(new Location(entity.getLocation().getWorld(), x, entity.getLocation().getWorld().getHighestBlockYAt((int)x, (int)z), z));
     	}
-    	entity.teleport(new Location(entity.getLocation().getWorld(), x, entity.getLocation().getWorld().getHighestBlockYAt((int)x, (int)z), z));
+    	
 	}
 
 	public boolean checkWorldEditAdapter() {
@@ -198,7 +203,7 @@ public class WorldEditFunctions {
 			if (!BukkitImplAdapter.class.isAssignableFrom(cls)) {
 				this.plugin.getLogger().warning("WARN: WorldEdit has no valid bukkit adapter for this server version!");
 				this.plugin.getLogger()
-						.warning("WARN: All Snapshot actions like /land save or /land restore are disabled!");
+						.warning("WARN: All Snapshot actions like /land save, /land restore and /land reset are disabled!");
 				this.plugin.getLogger().warning("WARN: Please update your worldedit for full support!");
 				return false;
 			}
