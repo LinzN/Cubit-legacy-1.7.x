@@ -91,7 +91,9 @@ public class Landplugin extends JavaPlugin {
 	private void runOutgoingStreams(){
 		getLogger().info("Run outgoing streams.");
         this.eMetrics = new EMetrics(this);
-        this.spigetCheck = new SpigetCheck(this);
+        if (this.yamlConfiguration.getSettings().updateCheck){
+            this.spigetCheck = new SpigetCheck(this);
+        }
         
         
 	}

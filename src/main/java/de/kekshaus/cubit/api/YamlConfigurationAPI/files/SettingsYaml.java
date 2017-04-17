@@ -55,6 +55,8 @@ public class SettingsYaml {
 	public String sqlUser;
 	public String sqlPassword;
 
+	public boolean updateCheck;
+	
 	public long cubitSetupDate;
 
 	public SettingsYaml(CustomConfig configFile) {
@@ -107,7 +109,10 @@ public class SettingsYaml {
 
 		this.physicWaterLavaFlowLand = (boolean) getObjectValue("module.physicWaterLavaFlowLand.use", false);
 
+		this.updateCheck = (boolean) getObjectValue("module.updateCheck", true);
+		
 		this.cubitSetupDate = (long) getObjectValue("doNotTouch.cubitSetupDate", new Date().getTime());
+		
 	}
 
 	public Object getObjectValue(String path, Object defaultValue) {
