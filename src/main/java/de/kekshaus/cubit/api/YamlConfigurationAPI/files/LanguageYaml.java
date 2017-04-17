@@ -237,13 +237,13 @@ public class LanguageYaml {
 				"&2You offer the region &e{regionID}&2 no more!");
 		kickedInfo = this.getLanguageString("kickedInfo",
 				"&6You kicked from the region {regionID} by the region owner!");
-		kickInfo = this.getLanguageString("kickInfo", "&2All non-member kicked from the region {regionID}!");
+		kickInfo = this.getLanguageString("kickInfo", "&2All non-member kicked from the region &e{regionID}&2!");
 		changedBiome = this.getLanguageString("changedBiome",
-				"&2You changed the biome from region {regionID} to {biome}!");
+				"&2You changed the biome from region &e{regionID} &2to &e{biome}&2!");
 		
-		savedSnapshot = this.getLanguageString("savedSnapshot", "&2You created a new snapshot from the region {regionID}!");
-		restoredSnapshot = this.getLanguageString("restoredSnapshot", "&2You restored a snapshot named {snapshotName}!");
-		resetSnapshot = this.getLanguageString("resetSnapshot", "&2You reseted the region {regionID}!");
+		savedSnapshot = this.getLanguageString("savedSnapshot", "&2You created a new snapshot from the region &e{regionID}&2!");
+		restoredSnapshot = this.getLanguageString("restoredSnapshot", "&2You restored a snapshot named &e{snapshotName}&2!");
+		resetSnapshot = this.getLanguageString("resetSnapshot", "&2You reseted the region &e{regionID}&2!");
 
 		/* UnSuccess MSG */
 		buyIsAlreadyLand = this.getLanguageString("buyIsAlreadyLand",
