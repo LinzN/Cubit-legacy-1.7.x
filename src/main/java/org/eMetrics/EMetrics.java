@@ -30,6 +30,7 @@ import java.util.zip.GZIPOutputStream;
  *
  * Check out https://metrics.enigmar.de/ to learn more about eMetrics!
  */
+@SuppressWarnings("unchecked")
 public class EMetrics {
 
     // The version of this eMetrics class
@@ -155,7 +156,7 @@ public class EMetrics {
      *
      * @return The plugin specific data.
      */
-    public JSONObject getPluginData() {
+	public JSONObject getPluginData() {
         JSONObject data = new JSONObject();
 
         String pluginName = plugin.getDescription().getName();
