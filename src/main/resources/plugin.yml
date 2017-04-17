@@ -27,6 +27,7 @@ permissions:
         children:
             cubit.command.admin.land: true
             cubit.bypass.kick: true
+            cubit.admin.checkupdate: true
     cubit.command.user.land:
         description:  User command permissions
         children:
@@ -248,5 +249,8 @@ permissions:
         description: Haupt-Hilfeseite
         default: op
     cubit.bypass.kick:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.admin.checkupdate:
         description: Haupt-Hilfeseite
         default: op

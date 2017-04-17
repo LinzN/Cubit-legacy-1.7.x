@@ -19,7 +19,6 @@ import de.kekshaus.cubit.commandSuite.adminCommands.main.DeleteServerAdmin;
 import de.kekshaus.cubit.commandSuite.adminCommands.main.DeleteShopAdmin;
 import de.kekshaus.cubit.commandSuite.adminCommands.main.HelpAdmin;
 import de.kekshaus.cubit.commandSuite.adminCommands.main.ReloadAdmin;
-import de.kekshaus.cubit.commandSuite.adminCommands.main.TestAdmin;
 import de.kekshaus.cubit.commandSuite.landCommands.main.OfferLand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.SellLand;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.AddMemberUniversal;
@@ -114,7 +113,6 @@ public class CommandAdmin implements CommandExecutor {
 			this.cmdMap.put("reload", new ReloadAdmin(this.plugin, perm.reloadCubit));
 
 			this.cmdMap.put("listsaves", new ListSnapshotsUniversal(this.plugin, perm.listSavesAdmin, LandTypes.NOTYPE, true));
-			this.cmdMap.put("test", new TestAdmin(this.plugin, perm.testAdmin));
 
 			this.isLoaded = true;
 		} catch (Exception e) {

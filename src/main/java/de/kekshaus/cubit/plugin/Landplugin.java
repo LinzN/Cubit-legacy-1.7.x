@@ -3,6 +3,7 @@ package de.kekshaus.cubit.plugin;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.eMetrics.EMetrics;
+import org.inventivetalent.update.spiget.SpigetCheck;
 
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
@@ -30,6 +31,8 @@ public class Landplugin extends JavaPlugin {
 	private DatabaseManager databaseMrg;
 	private PermissionNodes permNodes;
 	private YamlConfigurationManager yamlConfiguration;
+	private EMetrics eMetrics;
+	private SpigetCheck spigetCheck;
 
 	@Override
 	public void onEnable() {
@@ -51,8 +54,8 @@ public class Landplugin extends JavaPlugin {
 		if (this.getYamlManager().getSettings().physicWaterLavaFlowLand) {
 			this.getServer().getPluginManager().registerEvents(new AdditionalPhysicsListener(), this);
 		}
-       // new Metrics(this);
-        new EMetrics(this);
+		runOutgoingStreams();
+
 		getLogger().info("Cubit startup finish");
 
 	}
@@ -83,6 +86,14 @@ public class Landplugin extends JavaPlugin {
 		this.wePl = WorldEdit.getInstance();
 		
 		return true;
+	}
+	
+	private void runOutgoingStreams(){
+		getLogger().info("Run outgoing streams.");
+        this.eMetrics = new EMetrics(this);
+        this.spigetCheck = new SpigetCheck(this);
+        
+        
 	}
 
 	private boolean setupManagers() {
@@ -132,6 +143,14 @@ public class Landplugin extends JavaPlugin {
 
 	public WorldEdit getWorldEdit() {
 		return this.wePl;
+	}
+	
+	public EMetrics getEMetrics(){
+		return this.eMetrics;
+	}
+	
+	public SpigetCheck getSpigetCheck(){
+		return this.spigetCheck;
 	}
 
 	public YamlConfigurationManager getYamlManager() {
