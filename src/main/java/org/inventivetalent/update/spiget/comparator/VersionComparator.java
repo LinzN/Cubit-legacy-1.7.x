@@ -46,10 +46,8 @@ public abstract class VersionComparator {
 	public static final VersionComparator SEM_VER = new VersionComparator() {
 		@Override
 		public boolean isNewer(String currentVersion, String checkVersion) {
-			currentVersion = currentVersion.replace(".", "");
-			currentVersion = currentVersion.replace("SNAPSHOT", "");
-			currentVersion = currentVersion.replace("release", "");
-			checkVersion = checkVersion.replace(".", "");
+			currentVersion = currentVersion.replace(".", "").replaceAll("[^0-9.]", "");;
+			checkVersion = checkVersion.replace(".", "").replaceAll("[^0-9.]", "");;
 
 			try {
 				int current = Integer.parseInt(currentVersion);
