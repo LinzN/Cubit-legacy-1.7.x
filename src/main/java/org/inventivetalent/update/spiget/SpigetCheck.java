@@ -18,7 +18,7 @@ public class SpigetCheck {
 			public void run() {
 				Landplugin.inst().getLogger().info("Run spiget update checker");
 				checker();
-			}}, 20*60*2, 20*60*60);
+			}}, 20*30, 20*60*30);
 	}
 	
 	private void checker(){

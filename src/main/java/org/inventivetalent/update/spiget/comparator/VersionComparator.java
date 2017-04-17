@@ -47,6 +47,8 @@ public abstract class VersionComparator {
 		@Override
 		public boolean isNewer(String currentVersion, String checkVersion) {
 			currentVersion = currentVersion.replace(".", "");
+			currentVersion = currentVersion.replace("SNAPSHOT", "");
+			currentVersion = currentVersion.replace("release", "");
 			checkVersion = checkVersion.replace(".", "");
 
 			try {

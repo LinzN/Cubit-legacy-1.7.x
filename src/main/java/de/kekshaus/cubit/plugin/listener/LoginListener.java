@@ -3,6 +3,7 @@ package de.kekshaus.cubit.plugin.listener;
 import java.util.Date;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
@@ -22,7 +23,7 @@ public class LoginListener implements Listener {
 						event.getPlayer().getName(), new Date().getTime());
 				if (event.getPlayer().hasPermission(Landplugin.inst().getPermNodes().checkUpdateAdmin)){
 					if (Landplugin.inst().getSpigetCheck().isAvailable){
-						event.getPlayer().sendMessage("A new update for Cubit is avaiable. Check out the new version " + Landplugin.inst().getSpigetCheck().version + ".");
+						event.getPlayer().sendMessage(ChatColor.GREEN + "A new update for Cubit is avaiable. Check out the new version " + Landplugin.inst().getSpigetCheck().version + "!");
 					}
 				}
 
