@@ -114,7 +114,6 @@ public class WorldEditFunctions {
 					for(Entity entity : chunk.getEntities()) {
 					    if(entity instanceof LivingEntity){
 					    	moveEntityToTop(entity);
-					    	System.out.println("Move Entity to Top...");
 					    }
 
 					}
