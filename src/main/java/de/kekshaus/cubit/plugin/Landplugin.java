@@ -1,8 +1,9 @@
 package de.kekshaus.cubit.plugin;
 
+import org.bstats.Metrics;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.eMetrics.EMetrics;
+
 import org.inventivetalent.update.spiget.SpigetCheck;
 
 import com.sk89q.worldedit.WorldEdit;
@@ -31,7 +32,7 @@ public class Landplugin extends JavaPlugin {
 	private DatabaseManager databaseMrg;
 	private PermissionNodes permNodes;
 	private YamlConfigurationManager yamlConfiguration;
-	private EMetrics eMetrics;
+	private Metrics metrics;
 	private SpigetCheck spigetCheck;
 
 	@Override
@@ -90,7 +91,7 @@ public class Landplugin extends JavaPlugin {
 	
 	private void runOutgoingStreams(){
 		getLogger().info("Run outgoing streams.");
-        this.eMetrics = new EMetrics(this);
+        this.metrics = new Metrics(this);
         if (this.yamlConfiguration.getSettings().updateCheck){
             this.spigetCheck = new SpigetCheck(this);
         }
@@ -147,8 +148,8 @@ public class Landplugin extends JavaPlugin {
 		return this.wePl;
 	}
 	
-	public EMetrics getEMetrics(){
-		return this.eMetrics;
+	public Metrics getEMetrics(){
+		return this.metrics;
 	}
 	
 	public SpigetCheck getSpigetCheck(){
