@@ -85,6 +85,13 @@
 		<!--Spigot API -->
 		<dependency>
 			<groupId>org.spigotmc</groupId>
+			<artifactId>spigot-server-8</artifactId>
+			<version>1.12-R0.1-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/../privatRepo/spigotmc/1.12/spigot-1.12.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot-server-7</artifactId>
 			<version>1.11-R0.1-SNAPSHOT</version>
 			<scope>system</scope>
