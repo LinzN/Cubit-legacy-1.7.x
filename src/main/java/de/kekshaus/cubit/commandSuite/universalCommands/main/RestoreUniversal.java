@@ -33,14 +33,13 @@ public class RestoreUniversal implements ICommand {
 
 		/* Build and get all variables */
 		Player player = (Player) sender;
-		
-		
-		if (!this.plugin.getYamlManager().getSettings().landUseSnapshots){
+
+		if (!this.plugin.getYamlManager().getSettings().landUseSnapshots) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().disabledSnapshots);
 			return true;
 		}
-		
-		if (!this.plugin.getBlockManager().getSnapshotHandler().hasValidAdapter()){
+
+		if (!this.plugin.getBlockManager().getSnapshotHandler().hasValidAdapter()) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().noValidWEAdapter);
 			return true;
 		}
@@ -60,14 +59,13 @@ public class RestoreUniversal implements ICommand {
 		 * Check if the player has permissions for this land or hat landadmin
 		 * permissions
 		 */
-		
+
 		if (args.length < 2) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().wrongArguments.replace("{usage}",
 					"/" + cmd.getLabel() + " " + args[0].toLowerCase() + " [SnapshotName]"));
 			return true;
 		}
-		
-		
+
 		if (!plugin.getRegionManager().isValidRegion(loc.getWorld(), chunk.getX(), chunk.getZ())) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandFound);
 			return true;
@@ -84,17 +82,16 @@ public class RestoreUniversal implements ICommand {
 					regionData.getRegionName()));
 			return true;
 		}
-		
-		
+
 		String snapshotName = args[1].toLowerCase();
-		
-		if (!plugin.getBlockManager().getSnapshotHandler().isSnapshot(player.getUniqueId(), snapshotName)){
+
+		if (!plugin.getBlockManager().getSnapshotHandler().isSnapshot(player.getUniqueId(), snapshotName)) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().noSnapshot);
 			return true;
 		}
-		
+
 		double economyValue = plugin.getYamlManager().getSettings().landRestoreSnapshotPrice;
-		
+
 		if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), economyValue)) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
 					"" + plugin.getVaultManager().formateToEconomy(economyValue)));
@@ -109,19 +106,21 @@ public class RestoreUniversal implements ICommand {
 			return true;
 		}
 
-		
-		if (!this.plugin.getBlockManager().getSnapshotHandler().restoreSnapshot(player.getUniqueId(), chunk, snapshotName , true)){
+		if (!this.plugin.getBlockManager().getSnapshotHandler().restoreSnapshot(player.getUniqueId(), chunk,
+				snapshotName, true)) {
 			/* If this task failed! This should never happen */
-			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "RESTORE-SNAPSHOT"));
+			sender.sendMessage(
+					plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "RESTORE-SNAPSHOT"));
 			plugin.getLogger()
 					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "RESTORE-SNAPSHOT"));
 			return true;
 		}
-		
-		sender.sendMessage(plugin.getYamlManager().getLanguage().restoredSnapshot.replace("{snapshotName}", snapshotName));
-		
+
+		sender.sendMessage(
+				plugin.getYamlManager().getLanguage().restoredSnapshot.replace("{snapshotName}", snapshotName));
+
 		return true;
-	
+
 	}
 
 }

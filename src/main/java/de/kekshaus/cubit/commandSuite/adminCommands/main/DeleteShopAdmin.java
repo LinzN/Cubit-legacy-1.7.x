@@ -56,8 +56,7 @@ public class DeleteShopAdmin implements ICommand {
 					LandTypes.SHOP.toString()));
 			return true;
 		}
-		
-		
+
 		/* Remove offer from Database */
 		if (!plugin.getDatabaseManager().removeOfferData(regionData.getRegionName(), loc.getWorld())) {
 			/* If this task failed! This should never happen */
@@ -67,7 +66,7 @@ public class DeleteShopAdmin implements ICommand {
 					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SHOP-REMOVEOFFER"));
 			return true;
 		}
-		
+
 		if (!plugin.getRegionManager().removeLand(regionData, loc.getWorld())) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "DELETE-REGION"));

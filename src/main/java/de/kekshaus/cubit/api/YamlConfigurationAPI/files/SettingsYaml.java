@@ -56,7 +56,7 @@ public class SettingsYaml {
 	public String sqlPassword;
 
 	public boolean updateCheck;
-	
+
 	public long cubitSetupDate;
 
 	public SettingsYaml(CustomConfig configFile) {
@@ -79,7 +79,7 @@ public class SettingsYaml {
 		this.landUseSnapshots = (boolean) this.getObjectValue("module.land.landUseSnapshots", true);
 		this.landSaveSnapshotPrice = (double) this.getObjectValue("module.land.landSaveSnapshot", 350D);
 		this.landRestoreSnapshotPrice = (double) this.getObjectValue("module.land.landRestoreSnapshot", 150D);
-		this.landResetSnapshotPrice = (double) this.getObjectValue("module.land.landResetSnapshotPrice", 50D); 
+		this.landResetSnapshotPrice = (double) this.getObjectValue("module.land.landResetSnapshotPrice", 50D);
 		this.landDeprecatedMember = (double) this.getObjectValue("module.land.deprecatedBuyupMember", 35D);
 		this.landDeprecatedOther = (double) this.getObjectValue("module.land.deprecatedBuyupOther", 45D);
 		this.landUseMaterialBorder = (boolean) this.getObjectValue("module.land.useMaterialBorder", true);
@@ -110,9 +110,9 @@ public class SettingsYaml {
 		this.physicWaterLavaFlowLand = (boolean) getObjectValue("module.physicWaterLavaFlowLand.use", false);
 
 		this.updateCheck = (boolean) getObjectValue("module.updateCheck", true);
-		
+
 		this.cubitSetupDate = (long) getObjectValue("doNotTouch.cubitSetupDate", new Date().getTime());
-		
+
 	}
 
 	public Object getObjectValue(String path, Object defaultValue) {

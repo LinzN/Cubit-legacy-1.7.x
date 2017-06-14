@@ -13,7 +13,7 @@ public class BiomeHandler {
 		this.plugin = plugin;
 
 	}
-	
+
 	public boolean changeBiomeChunk(Chunk chunk, Biome biome) {
 
 		try {
@@ -24,6 +24,5 @@ public class BiomeHandler {
 		}
 		return true;
 	}
-
 
 }

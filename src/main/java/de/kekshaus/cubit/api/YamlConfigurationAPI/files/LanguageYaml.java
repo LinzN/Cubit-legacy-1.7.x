@@ -103,7 +103,7 @@ public class LanguageYaml {
 	public String landHelpHeaderP3;
 	public String landHelpE1P3;
 	public String landHelpE2P3;
-	public String landHelpE3P3; 
+	public String landHelpE3P3;
 	public String landHelpBottomP3;
 
 	/* Page 4 Help for Land Command */
@@ -175,15 +175,13 @@ public class LanguageYaml {
 	public String adminHelpE2P4;
 	public String adminHelpE3P4;
 
-
 	/* Page 5 Help for Admin Command */
 	public String adminHelpHeaderP5;
 	public String adminHelpE1P5;
 	public String adminHelpE2P5;
 	public String adminHelpE3P5;
 	public String adminHelpE4P5;
-	
-	
+
 	/* Snapshots List */
 	public String landListsnapshotsHeader;
 	public String landListsnapshotsEntry;
@@ -218,8 +216,9 @@ public class LanguageYaml {
 		pageNotFound = this.getLanguageString("pageNotfound", "&cThis is not a valid page");
 		noSnapshot = this.getLanguageString("noSnapshot", "&cThere is no snapshot with this name!");
 		alreadySnapshot = this.getLanguageString("alreadySnapshot", "&cThis snapshot exist already!");
-		noValidWEAdapter =  this.getLanguageString("noValidWEAdapter", "&cWorldEdit has no valid bukkit adapter for this server. Please update WorldEdit!");
-		disabledSnapshots =  this.getLanguageString("disabledSnapshots", "&cSnapshots are disabled in settings!");
+		noValidWEAdapter = this.getLanguageString("noValidWEAdapter",
+				"&cWorldEdit has no valid bukkit adapter for this server. Please update WorldEdit!");
+		disabledSnapshots = this.getLanguageString("disabledSnapshots", "&cSnapshots are disabled in settings!");
 		/* Success MSG */
 		buySuccess = this.getLanguageString("buySuccess", "&2You bought the region &e{regionID}&2!");
 		isFreeAndBuyable = this.getLanguageString("isFreeAndBuyable",
@@ -240,9 +239,11 @@ public class LanguageYaml {
 		kickInfo = this.getLanguageString("kickInfo", "&2All non-member kicked from the region &e{regionID}&2!");
 		changedBiome = this.getLanguageString("changedBiome",
 				"&2You changed the biome from region &e{regionID} &2to &e{biome}&2!");
-		
-		savedSnapshot = this.getLanguageString("savedSnapshot", "&2You created a new snapshot from the region &e{regionID}&2!");
-		restoredSnapshot = this.getLanguageString("restoredSnapshot", "&2You restored a snapshot named &e{snapshotName}&2!");
+
+		savedSnapshot = this.getLanguageString("savedSnapshot",
+				"&2You created a new snapshot from the region &e{regionID}&2!");
+		restoredSnapshot = this.getLanguageString("restoredSnapshot",
+				"&2You restored a snapshot named &e{snapshotName}&2!");
 		resetSnapshot = this.getLanguageString("resetSnapshot", "&2You reseted the region &e{regionID}&2!");
 
 		/* UnSuccess MSG */
@@ -332,7 +333,8 @@ public class LanguageYaml {
 		landHelpE1P5 = this.getLanguageString("theme.helpPage5.help1", "&2 Change biome: &e/land changebiome [Biome]");
 		landHelpE2P5 = this.getLanguageString("theme.helpPage5.help2", "&2 List biomes: &e/land listbiomes");
 		landHelpE3P5 = this.getLanguageString("theme.helpPage5.help3", "&2 Save snapshot: &e/land save");
-		landHelpE4P5 = this.getLanguageString("theme.helpPage5.help4", "&2 Restore snapshot: &e/land restore [Snapshot]");
+		landHelpE4P5 = this.getLanguageString("theme.helpPage5.help4",
+				"&2 Restore snapshot: &e/land restore [Snapshot]");
 		landHelpE5P5 = this.getLanguageString("theme.helpPage5.help5", "&2 List snapshots: &e/land listsaves");
 		landHelpBottomP5 = this.getLanguageString("theme.helpPage5.bottom", "&a&lBack to page 4 &6/land help 4");
 
@@ -371,7 +373,7 @@ public class LanguageYaml {
 				"&6&lRegion Count: &r&2{count} &6&l- Entries &r&2{entryMin} &6&lfrom &r&2{entryMax}");
 		landListEntry = this.getLanguageString("theme.landList.entry",
 				"&a{counter}. &6{regionID} &a(&efrom &a- &eto&a) [&e{minPoints} &a- &e{maxPoints}&a]");
-		
+
 		/* List snapshots Command */
 		landListsnapshotsHeader = this.getLanguageString("theme.listsnapshots.header",
 				"&6&lSnapshots Count: &r&2{count} &6&l- Entries &r&2{entryMin} &6&lfrom &r&2{entryMax}");
@@ -421,7 +423,7 @@ public class LanguageYaml {
 		adminHelpE1P4 = this.getLanguageString("theme.adminHelpPage4.help1",
 				"&2 Change biome: &e/cadmin changebiome (biome)");
 		adminHelpE2P4 = this.getLanguageString("theme.adminHelpPage4.help2",
-				"&2 List available biomes: &e/cadmin listbiomes");	
+				"&2 List available biomes: &e/cadmin listbiomes");
 		adminHelpE3P4 = this.getLanguageString("theme.adminHelpPage4.help3",
 				"&2 List snapshots: &e/cadmin listsaves [Player] (page)");
 

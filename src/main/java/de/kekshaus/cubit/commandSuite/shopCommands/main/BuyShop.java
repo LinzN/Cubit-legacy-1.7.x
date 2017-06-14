@@ -83,8 +83,7 @@ public class BuyShop implements ICommand {
 			return true;
 		}
 
-		if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), null,
-				offerData.getValue())) {
+		if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), null, offerData.getValue())) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SHOP-ECONOMY"));
 			plugin.getLogger()

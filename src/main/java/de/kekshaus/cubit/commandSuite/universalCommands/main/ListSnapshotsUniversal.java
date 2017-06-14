@@ -63,8 +63,8 @@ public class ListSnapshotsUniversal implements ICommand {
 		}
 
 		if (args.length >= 1 + argForward) {
-			
-			if (this.isAdmin){
+
+			if (this.isAdmin) {
 				searchUUID = Bukkit.getOfflinePlayer(args[1]).getUniqueId();
 			}
 
@@ -114,13 +114,16 @@ public class ListSnapshotsUniversal implements ICommand {
 		List<Snapshot> subRegionList = snapshotList.subList(pageNumber * 10,
 				pageNumber * 10 + 10 > snapshotCount ? snapshotCount : pageNumber * 10 + 10);
 
-		player.sendMessage(plugin.getYamlManager().getLanguage().landListsnapshotsHeader.replace("{count}", "" + snapshotCount)
-				.replace("{entryMin}", "" + (pageNumber * 10 + 1)).replace("{entryMax}", "" + (pageNumber * 10 + 10)));
+		player.sendMessage(plugin.getYamlManager().getLanguage().landListsnapshotsHeader
+				.replace("{count}", "" + snapshotCount).replace("{entryMin}", "" + (pageNumber * 10 + 1))
+				.replace("{entryMax}", "" + (pageNumber * 10 + 10)));
 
 		int counter = pageNumber * 10 + 1;
 
 		for (Snapshot snapshotObject : subRegionList) {
-			player.sendMessage(plugin.getYamlManager().getLanguage().landListsnapshotsEntry.replace("{counter}", "" + counter).replace("{snapshotName}", snapshotObject.getSnapshotId()).replace("{biome}", "NULL"));
+			player.sendMessage(
+					plugin.getYamlManager().getLanguage().landListsnapshotsEntry.replace("{counter}", "" + counter)
+							.replace("{snapshotName}", snapshotObject.getSnapshotId()).replace("{biome}", "NULL"));
 			counter++;
 		}
 	}

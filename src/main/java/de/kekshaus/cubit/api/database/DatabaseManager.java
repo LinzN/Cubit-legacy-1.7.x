@@ -13,7 +13,7 @@ public class DatabaseManager {
 
 	private Landplugin plugin;
 	private boolean useSql;
-	
+
 	private SQLIEngine engine;
 	private DatabaseInputOutput databaseIO;
 
@@ -25,22 +25,22 @@ public class DatabaseManager {
 		String host = Landplugin.inst().getYamlManager().getSettings().sqlHostname;
 		String username = Landplugin.inst().getYamlManager().getSettings().sqlUser;
 		String password = Landplugin.inst().getYamlManager().getSettings().sqlPassword;
-		
+
 		this.useSql = this.plugin.getYamlManager().getSettings().sqlUse;
-		
-		if (this.useSql){
-			this.engine = new SQLIEngine("jdbc:mysql://" + host + ":" + port + "/" + database + "?useSSL=false", username, password, this.useSql);
+
+		if (this.useSql) {
+			this.engine = new SQLIEngine("jdbc:mysql://" + host + ":" + port + "/" + database + "?useSSL=false",
+					username, password, this.useSql);
 		} else {
-			this.engine = new SQLIEngine("jdbc:sqlite:" + plugin.getDataFolder().getAbsolutePath() + "/database.db", username, password, this.useSql);
+			this.engine = new SQLIEngine("jdbc:sqlite:" + plugin.getDataFolder().getAbsolutePath() + "/database.db",
+					username, password, this.useSql);
 		}
 		this.databaseIO = new DatabaseInputOutput(this.engine);
 	}
 
-	
-	public boolean useSQL(){
+	public boolean useSQL() {
 		return this.useSql;
 	}
-
 
 	public long getTimeStamp(UUID uuid) {
 		long timeStamp = this.databaseIO.get_last_login_profile(uuid);
@@ -80,7 +80,7 @@ public class DatabaseManager {
 		this.databaseIO.set_update_profile(uuid, player, time);
 
 	}
-	
+
 	public String getProfileName(UUID uuid) {
 		return this.databaseIO.get_profile_name(uuid);
 

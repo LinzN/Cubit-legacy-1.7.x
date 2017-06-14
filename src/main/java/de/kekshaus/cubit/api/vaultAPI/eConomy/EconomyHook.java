@@ -33,7 +33,7 @@ public class EconomyHook {
 
 		if (senderUUID != null) {
 			OfflinePlayer sender = Bukkit.getOfflinePlayer(senderUUID);
-			if (sender.getName() != null){
+			if (sender.getName() != null) {
 				econ.withdrawPlayer(sender, value);
 			} else {
 				econ.withdrawPlayer(this.plugin.getRegionManager().getPlayerName(senderUUID), value);
@@ -41,7 +41,7 @@ public class EconomyHook {
 		}
 		if (recieverUUID != null) {
 			OfflinePlayer reciever = Bukkit.getOfflinePlayer(recieverUUID);
-			if (reciever.getName() != null){
+			if (reciever.getName() != null) {
 				econ.depositPlayer(reciever, value);
 			} else {
 				econ.depositPlayer(this.plugin.getRegionManager().getPlayerName(recieverUUID), value);

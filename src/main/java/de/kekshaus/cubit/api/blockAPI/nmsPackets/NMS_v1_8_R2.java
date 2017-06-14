@@ -12,7 +12,6 @@ import net.minecraft.server.v1_8_R2.PacketPlayOutTitle;
 
 public class NMS_v1_8_R2 implements INMSMask {
 
-
 	public void refreshChunk(org.bukkit.Chunk paramChunk) {
 		PacketPlayOutMapChunk localPacketPlayOutMapChunk = new PacketPlayOutMapChunk(
 				((CraftChunk) paramChunk).getHandle(), true, 65535);
@@ -36,7 +35,5 @@ public class NMS_v1_8_R2 implements INMSMask {
 		((CraftPlayer) paramPlayer).getHandle().playerConnection.sendPacket(localPacketPlayOutTitle3);
 		((CraftPlayer) paramPlayer).getHandle().playerConnection.sendPacket(localPacketPlayOutTitle2);
 	}
-
-	
 
 }

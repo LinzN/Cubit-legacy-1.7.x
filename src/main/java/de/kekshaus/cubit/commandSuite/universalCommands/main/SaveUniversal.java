@@ -33,13 +33,13 @@ public class SaveUniversal implements ICommand {
 
 		/* Build and get all variables */
 		Player player = (Player) sender;
-		
-		if (!this.plugin.getYamlManager().getSettings().landUseSnapshots){
+
+		if (!this.plugin.getYamlManager().getSettings().landUseSnapshots) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().disabledSnapshots);
 			return true;
 		}
-		
-		if (!this.plugin.getBlockManager().getSnapshotHandler().hasValidAdapter()){
+
+		if (!this.plugin.getBlockManager().getSnapshotHandler().hasValidAdapter()) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().noValidWEAdapter);
 			return true;
 		}
@@ -75,16 +75,16 @@ public class SaveUniversal implements ICommand {
 					regionData.getRegionName()));
 			return true;
 		}
-		
+
 		String snapshotName = regionData.getRegionName().toLowerCase();
-		
-		if (plugin.getBlockManager().getSnapshotHandler().isSnapshot(player.getUniqueId(), snapshotName)){
+
+		if (plugin.getBlockManager().getSnapshotHandler().isSnapshot(player.getUniqueId(), snapshotName)) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().alreadySnapshot);
 			return true;
 		}
-		
+
 		double economyValue = plugin.getYamlManager().getSettings().landSaveSnapshotPrice;
-		
+
 		if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), economyValue)) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
 					"" + plugin.getVaultManager().formateToEconomy(economyValue)));
@@ -98,17 +98,18 @@ public class SaveUniversal implements ICommand {
 					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SAVE-ECONOMY"));
 			return true;
 		}
-		
-		
-		if (!this.plugin.getBlockManager().getSnapshotHandler().createSnapshot(player.getUniqueId(), chunk, snapshotName, true)){
+
+		if (!this.plugin.getBlockManager().getSnapshotHandler().createSnapshot(player.getUniqueId(), chunk,
+				snapshotName, true)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SAVE-SNAPSHOT"));
 			plugin.getLogger()
 					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SAVE-SNAPSHOT"));
 			return true;
 		}
-	
-		sender.sendMessage(plugin.getYamlManager().getLanguage().savedSnapshot.replace("{regionID}", regionData.getRegionName()));
+
+		sender.sendMessage(
+				plugin.getYamlManager().getLanguage().savedSnapshot.replace("{regionID}", regionData.getRegionName()));
 
 		return true;
 	}

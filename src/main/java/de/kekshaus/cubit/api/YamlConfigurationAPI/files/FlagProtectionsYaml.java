@@ -12,14 +12,14 @@ public class FlagProtectionsYaml {
 	public boolean worldRegionPacketPotion;
 	public boolean worldRegionPacketPVP;
 	public boolean worldRegionPacketTNT;
-	
+
 	public boolean shopRegionPacketFire;
 	public boolean shopRegionPacketLock;
 	public boolean shopRegionPacketMonster;
 	public boolean shopRegionPacketPotion;
 	public boolean shopRegionPacketPVP;
 	public boolean shopRegionPacketTNT;
-	
+
 	public boolean serverRegionPacketFire;
 	public boolean serverRegionPacketLock;
 	public boolean serverRegionPacketMonster;
@@ -40,14 +40,14 @@ public class FlagProtectionsYaml {
 		worldRegionPacketPotion = (boolean) this.getObjectValue("flags.worldregion.defaultProtection.potion", true);
 		worldRegionPacketPVP = (boolean) this.getObjectValue("flags.worldregion.defaultProtection.pvp", true);
 		worldRegionPacketTNT = (boolean) this.getObjectValue("flags.worldregion.defaultProtection.tnt", true);
-		
+
 		shopRegionPacketFire = (boolean) this.getObjectValue("flags.shopregion.defaultProtection.fire", true);
 		shopRegionPacketLock = (boolean) this.getObjectValue("flags.shopregion.defaultProtection.lock", true);
 		shopRegionPacketMonster = (boolean) this.getObjectValue("flags.shopregion.defaultProtection.monster", true);
 		shopRegionPacketPotion = (boolean) this.getObjectValue("flags.shopregion.defaultProtection.potion", true);
 		shopRegionPacketPVP = (boolean) this.getObjectValue("flags.shopregion.defaultProtection.pvp", true);
 		shopRegionPacketTNT = (boolean) this.getObjectValue("flags.shopregion.defaultProtection.tnt", true);
-		
+
 		serverRegionPacketFire = (boolean) this.getObjectValue("flags.serverregion.defaultProtection.fire", true);
 		serverRegionPacketLock = (boolean) this.getObjectValue("flags.serverregion.defaultProtection.lock", true);
 		serverRegionPacketMonster = (boolean) this.getObjectValue("flags.serverregion.defaultProtection.monster", true);

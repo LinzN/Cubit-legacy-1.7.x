@@ -12,32 +12,31 @@ public class SQLIEngine {
 	private String url;
 	private String username;
 	private String password;
-	
-	public SQLIEngine(String url, String username, String password, boolean useSQL){
+
+	public SQLIEngine(String url, String username, String password, boolean useSQL) {
 		this.useSQL = useSQL;
 		this.url = url;
 		this.username = username;
 		this.password = password;
 	}
-	
-	public boolean setupSQLI(String[] tableArray){
-		for (String table : tableArray){
+
+	public boolean setupSQLI(String[] tableArray) {
+		for (String table : tableArray) {
 			runUpdateTask(table);
 			System.out.println("SQLIEngine: " + table);
 		}
-		
+
 		return true;
 	}
-	
-	public boolean useSQL(){
+
+	public boolean useSQL() {
 		return this.useSQL;
 	}
-	
-	
-	private Connection refreshConnection(){
+
+	private Connection refreshConnection() {
 		try {
-			if (this.connection == null || this.connection.isClosed()){
-				if (this.useSQL){
+			if (this.connection == null || this.connection.isClosed()) {
+				if (this.useSQL) {
 					this.connection = DriverManager.getConnection(this.url, this.username, this.password);
 				} else {
 					this.connection = DriverManager.getConnection(this.url);
@@ -48,8 +47,8 @@ public class SQLIEngine {
 		}
 		return this.connection;
 	}
-	
-	public void runUpdateTask(String command){
+
+	public void runUpdateTask(String command) {
 		refreshConnection();
 		try {
 			Statement state = connection.createStatement();
@@ -59,19 +58,18 @@ public class SQLIEngine {
 			e.printStackTrace();
 		}
 	}
-	
-	public ResultSet runQueryResult(String command){
+
+	public ResultSet runQueryResult(String command) {
 		refreshConnection();
 		try {
 
 			Statement state = connection.createStatement();
 			return state.executeQuery(command);
- 
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
-	
 
 }

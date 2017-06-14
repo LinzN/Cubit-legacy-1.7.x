@@ -10,26 +10,26 @@ import org.bukkit.World;
 import de.kekshaus.cubit.api.database.engine.SQLIEngine;
 
 public class DatabaseInputOutput {
-	
+
 	private SQLIEngine engine;
-	
-	public DatabaseInputOutput(SQLIEngine engine){
+
+	public DatabaseInputOutput(SQLIEngine engine) {
 		this.engine = engine;
 		createTables();
 	}
-	
-	private void createTables(){
+
+	private void createTables() {
 		String table1 = "CREATE TABLE IF NOT EXISTS offerManager (Id INTEGER PRIMARY KEY   AUTOINCREMENT, regionID text, world text, uuid text, value double);";
 		String table2 = "CREATE TABLE IF NOT EXISTS uuidcache (Id INTEGER PRIMARY KEY   AUTOINCREMENT, UUID text, NAME text, TIMESTAMP bigint);";
-		if (this.engine.useSQL()){
-			 table1 = "CREATE TABLE IF NOT EXISTS offerManager (Id int NOT NULL AUTO_INCREMENT, regionID text, world text, uuid text, value double, PRIMARY KEY (Id));";
-			 table2 = "CREATE TABLE IF NOT EXISTS uuidcache (Id int NOT NULL AUTO_INCREMENT, UUID text, NAME text, TIMESTAMP bigint, PRIMARY KEY (id));";
+		if (this.engine.useSQL()) {
+			table1 = "CREATE TABLE IF NOT EXISTS offerManager (Id int NOT NULL AUTO_INCREMENT, regionID text, world text, uuid text, value double, PRIMARY KEY (Id));";
+			table2 = "CREATE TABLE IF NOT EXISTS uuidcache (Id int NOT NULL AUTO_INCREMENT, UUID text, NAME text, TIMESTAMP bigint, PRIMARY KEY (id));";
 		}
-		String [] tableArray = {table1, table2};
+		String[] tableArray = { table1, table2 };
 		this.engine.setupSQLI(tableArray);
 	}
-	
-	//Input
+
+	// Input
 
 	public boolean set_create_offer(OfferData data) {
 		try {
@@ -40,13 +40,13 @@ public class DatabaseInputOutput {
 				uuidData = data.getPlayerUUID().toString();
 			}
 			if (result.next()) {
-				this.engine.runUpdateTask("UPDATE offerManager SET value = '" + data.getValue()
-						+ "', uuid = '" + uuidData + "' WHERE regionID = '" + data.getRegionID() + "' AND world = '"
+				this.engine.runUpdateTask("UPDATE offerManager SET value = '" + data.getValue() + "', uuid = '"
+						+ uuidData + "' WHERE regionID = '" + data.getRegionID() + "' AND world = '"
 						+ data.getWorld().getName().toLowerCase() + "';");
 			} else {
 				this.engine.runUpdateTask("INSERT INTO offerManager (regionID, value, world, uuid) VALUES ('"
-								+ data.getRegionID() + "', '" + data.getValue() + "', '"
-								+ data.getWorld().getName().toLowerCase() + "', '" + uuidData + "');");
+						+ data.getRegionID() + "', '" + data.getValue() + "', '"
+						+ data.getWorld().getName().toLowerCase() + "', '" + uuidData + "');");
 			}
 			result.close();
 		} catch (SQLException e) {
@@ -59,12 +59,12 @@ public class DatabaseInputOutput {
 
 	public boolean set_remove_offer(String regionID, World world) {
 		try {
-			ResultSet result = this.engine.runQueryResult(
-					"SELECT value FROM offerManager WHERE regionID = '" + regionID + "' AND world = '" + world.getName() + "';");
+			ResultSet result = this.engine.runQueryResult("SELECT value FROM offerManager WHERE regionID = '" + regionID
+					+ "' AND world = '" + world.getName() + "';");
 
 			if (result.next()) {
-				this.engine.runUpdateTask(
-						"DELETE FROM offerManager WHERE regionID = '" + regionID + "' AND world = '" + world.getName() + "';");
+				this.engine.runUpdateTask("DELETE FROM offerManager WHERE regionID = '" + regionID + "' AND world = '"
+						+ world.getName() + "';");
 			}
 			result.close();
 
@@ -84,11 +84,11 @@ public class DatabaseInputOutput {
 
 			if (result.next()) {
 
-				this.engine.runUpdateTask("UPDATE uuidcache SET NAME = '" + player
-						+ "', TIMESTAMP = '" + time + "' WHERE UUID = '" + uuid.toString() + "';");
+				this.engine.runUpdateTask("UPDATE uuidcache SET NAME = '" + player + "', TIMESTAMP = '" + time
+						+ "' WHERE UUID = '" + uuid.toString() + "';");
 			} else {
-				this.engine.runUpdateTask("INSERT INTO uuidcache (UUID, NAME, TIMESTAMP) VALUES ('"
-						+ uuid.toString() + "', '" + player + "', '" + time + "');");
+				this.engine.runUpdateTask("INSERT INTO uuidcache (UUID, NAME, TIMESTAMP) VALUES ('" + uuid.toString()
+						+ "', '" + player + "', '" + time + "');");
 
 			}
 			result.close();
@@ -99,17 +99,14 @@ public class DatabaseInputOutput {
 			return false;
 		}
 	}
-	
-	
-	
-	
+
 	// Output
-	
 
 	public long get_last_login_profile(UUID uuid) {
 		long lastlogin = 0;
 		try {
-			ResultSet result = this.engine.runQueryResult("SELECT TIMESTAMP FROM uuidcache WHERE UUID = '" + uuid + "';");
+			ResultSet result = this.engine
+					.runQueryResult("SELECT TIMESTAMP FROM uuidcache WHERE UUID = '" + uuid + "';");
 			if (result.next()) {
 				lastlogin = result.getLong(1);
 			}
@@ -120,7 +117,7 @@ public class DatabaseInputOutput {
 		return lastlogin;
 
 	}
-	
+
 	public String get_profile_name(UUID uuid) {
 		String name = null;
 		try {
@@ -170,8 +167,8 @@ public class DatabaseInputOutput {
 	public boolean get_is_offer(String regionID, World world) {
 		boolean isoffered = false;
 		try {
-			ResultSet result = this.engine.runQueryResult(
-					"SELECT uuid FROM offerManager WHERE regionID = '" + regionID + "' AND world = '" + world.getName() + "';");
+			ResultSet result = this.engine.runQueryResult("SELECT uuid FROM offerManager WHERE regionID = '" + regionID
+					+ "' AND world = '" + world.getName() + "';");
 
 			if (result.next()) {
 				isoffered = true;
@@ -183,6 +180,5 @@ public class DatabaseInputOutput {
 		}
 		return isoffered;
 	}
-
 
 }

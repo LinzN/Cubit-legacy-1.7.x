@@ -61,8 +61,8 @@ public class ListUniversal implements ICommand {
 		}
 
 		if (args.length >= 1 + argForward) {
-			
-			if (this.isAdmin){
+
+			if (this.isAdmin) {
 				searchUUID = Bukkit.getOfflinePlayer(args[1]).getUniqueId();
 			}
 

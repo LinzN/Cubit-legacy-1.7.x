@@ -65,8 +65,8 @@ public class SnapshotHandler {
 
 		return snapshots;
 	}
-	
-	public boolean resetChunk(Chunk chunk){
+
+	public boolean resetChunk(Chunk chunk) {
 		this.weFunctions.regenerateChunk(chunk);
 		return true;
 	}

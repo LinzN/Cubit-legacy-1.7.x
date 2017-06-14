@@ -24,19 +24,17 @@ public class BlockAPIManager {
 		this.blockHandler = new BlockHandler(this.plugin);
 	}
 
-	
-	public SnapshotHandler getSnapshotHandler(){
+	public SnapshotHandler getSnapshotHandler() {
 		return this.snapshotHandler;
 	}
-	
-	public BiomeHandler getBiomeHandler(){
+
+	public BiomeHandler getBiomeHandler() {
 		return this.biomeHandler;
 	}
-	
-	public BlockHandler getBlockHandler(){
+
+	public BlockHandler getBlockHandler() {
 		return this.blockHandler;
 	}
-	
 
 	public INMSMask getNMSHandler() {
 		return this.nmsloader.nmsHandler();

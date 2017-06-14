@@ -55,10 +55,10 @@ public class NameCache {
 		return null;
 
 	}
-	
-	private String fetchDatabaseName(UUID uuid){
+
+	private String fetchDatabaseName(UUID uuid) {
 		return Landplugin.inst().getDatabaseManager().getProfileName(uuid);
-		
+
 	}
 
 	public String getCacheName(UUID uuid) {
@@ -67,7 +67,7 @@ public class NameCache {
 		if (playerCache.containsKey(uuid)) {
 			prasedName = playerCache.get(uuid);
 		}
-		if (prasedName == null){
+		if (prasedName == null) {
 			prasedName = fetchDatabaseName(uuid);
 		}
 

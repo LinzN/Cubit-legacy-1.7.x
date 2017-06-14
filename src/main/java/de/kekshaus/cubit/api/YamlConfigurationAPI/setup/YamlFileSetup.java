@@ -71,13 +71,12 @@ public class YamlFileSetup {
 
 		CustomConfig limitConfig = new CustomConfig(this.plugin, configDirectory, "entityLimiter.yml");
 		this.limit = new LimitYaml(limitConfig);
-		
+
 		CustomConfig flagConfig = new CustomConfig(this.plugin, configDirectory, "defaultProtections.yml");
 		this.flag = new FlagProtectionsYaml(flagConfig);
 
 		CustomConfig settingsConfig = new CustomConfig(this.plugin, this.plugin.getDataFolder(), "settings.yml");
 		this.settings = new SettingsYaml(settingsConfig);
-
 
 	}
 }

@@ -112,7 +112,8 @@ public class CommandAdmin implements CommandExecutor {
 			this.cmdMap.put("list", new ListUniversal(this.plugin, perm.listAdminLand, LandTypes.NOTYPE, true));
 			this.cmdMap.put("reload", new ReloadAdmin(this.plugin, perm.reloadCubit));
 
-			this.cmdMap.put("listsaves", new ListSnapshotsUniversal(this.plugin, perm.listSavesAdmin, LandTypes.NOTYPE, true));
+			this.cmdMap.put("listsaves",
+					new ListSnapshotsUniversal(this.plugin, perm.listSavesAdmin, LandTypes.NOTYPE, true));
 
 			this.isLoaded = true;
 		} catch (Exception e) {

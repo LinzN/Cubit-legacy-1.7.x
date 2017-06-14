@@ -21,9 +21,12 @@ public class LoginListener implements Listener {
 
 				Landplugin.inst().getDatabaseManager().updateProfile(event.getPlayer().getUniqueId(),
 						event.getPlayer().getName(), new Date().getTime());
-				if (event.getPlayer().hasPermission(Landplugin.inst().getPermNodes().checkUpdateAdmin)){
-					if (Landplugin.inst().getSpigetCheck().isAvailable){
-						event.getPlayer().sendMessage(ChatColor.GREEN + "A new update for Cubit is avaiable. Check out the new version " + Landplugin.inst().getSpigetCheck().version + "!");
+				if (event.getPlayer().hasPermission(Landplugin.inst().getPermNodes().checkUpdateAdmin)) {
+					if (Landplugin.inst().getSpigetCheck().isAvailable) {
+						event.getPlayer()
+								.sendMessage(ChatColor.GREEN
+										+ "A new update for Cubit is avaiable. Check out the new version "
+										+ Landplugin.inst().getSpigetCheck().version + "!");
 					}
 				}
 

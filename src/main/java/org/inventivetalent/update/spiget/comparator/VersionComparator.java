@@ -41,13 +41,18 @@ public abstract class VersionComparator {
 	};
 
 	/**
-	 * Compares versions by their Sematic Version (<code>Major.Minor.Patch</code>, <a href="http://semver.org/">semver.org</a>). Removes dots and compares the resulting Integer values
+	 * Compares versions by their Sematic Version
+	 * (<code>Major.Minor.Patch</code>,
+	 * <a href="http://semver.org/">semver.org</a>). Removes dots and compares
+	 * the resulting Integer values
 	 */
 	public static final VersionComparator SEM_VER = new VersionComparator() {
 		@Override
 		public boolean isNewer(String currentVersion, String checkVersion) {
-			currentVersion = currentVersion.replace(".", "").replaceAll("[^0-9.]", "");;
-			checkVersion = checkVersion.replace(".", "").replaceAll("[^0-9.]", "");;
+			currentVersion = currentVersion.replace(".", "").replaceAll("[^0-9.]", "");
+			;
+			checkVersion = checkVersion.replace(".", "").replaceAll("[^0-9.]", "");
+			;
 
 			try {
 				int current = Integer.parseInt(currentVersion);
@@ -55,7 +60,8 @@ public abstract class VersionComparator {
 
 				return check > current;
 			} catch (NumberFormatException e) {
-				System.err.println("[SpigetUpdate] Invalid SemVer versions specified [" + currentVersion + "] [" + checkVersion + "]");
+				System.err.println("[SpigetUpdate] Invalid SemVer versions specified [" + currentVersion + "] ["
+						+ checkVersion + "]");
 			}
 			return false;
 		}
@@ -64,8 +70,10 @@ public abstract class VersionComparator {
 	/**
 	 * Called to check if a version is newer
 	 *
-	 * @param currentVersion Current version of the plugin
-	 * @param checkVersion   Version to check
+	 * @param currentVersion
+	 *            Current version of the plugin
+	 * @param checkVersion
+	 *            Version to check
 	 * @return <code>true</code> if the checked version is newer
 	 */
 	public abstract boolean isNewer(String currentVersion, String checkVersion);

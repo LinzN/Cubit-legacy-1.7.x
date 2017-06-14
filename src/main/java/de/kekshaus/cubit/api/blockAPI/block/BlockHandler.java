@@ -12,7 +12,7 @@ public class BlockHandler {
 		this.plugin = plugin;
 
 	}
-	
+
 	public boolean placeLandBorder(Chunk chunk, Material material) {
 		try {
 			new ChunkBorder(plugin, chunk, material);
@@ -22,6 +22,5 @@ public class BlockHandler {
 		}
 		return true;
 	}
-
 
 }

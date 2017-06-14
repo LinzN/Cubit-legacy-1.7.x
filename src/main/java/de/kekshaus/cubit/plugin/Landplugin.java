@@ -38,11 +38,11 @@ public class Landplugin extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		inst = this;
-		if (!getPluginDepends()){
+		if (!getPluginDepends()) {
 			this.setEnabled(false);
 			return;
 		}
-		if (!setupManagers()){
+		if (!setupManagers()) {
 			this.setEnabled(false);
 			return;
 		}
@@ -65,38 +65,37 @@ public class Landplugin extends JavaPlugin {
 	public void onDisable() {
 		HandlerList.unregisterAll(Landplugin.inst());
 	}
-	
-	private boolean getPluginDepends(){
 
-		if (this.getServer().getPluginManager().getPlugin("WorldEdit") == null){
+	private boolean getPluginDepends() {
+
+		if (this.getServer().getPluginManager().getPlugin("WorldEdit") == null) {
 			this.getLogger().severe("Error: " + "WorldEdit not found!");
 			return false;
 		}
-		
-		if (this.getServer().getPluginManager().getPlugin("WorldGuard") == null){
+
+		if (this.getServer().getPluginManager().getPlugin("WorldGuard") == null) {
 			this.getLogger().severe("Error: " + "WorldGuard not found!");
 			return false;
 		}
-		
-		if (this.getServer().getPluginManager().getPlugin("Vault") == null){
+
+		if (this.getServer().getPluginManager().getPlugin("Vault") == null) {
 			this.getLogger().severe("Error: " + "Vault not found!");
 			return false;
 		}
-		
+
 		this.wgPl = WorldGuardPlugin.inst();
 		this.wePl = WorldEdit.getInstance();
-		
+
 		return true;
 	}
-	
-	private void runOutgoingStreams(){
+
+	private void runOutgoingStreams() {
 		getLogger().info("Run outgoing streams.");
-        this.metrics = new Metrics(this);
-        if (this.yamlConfiguration.getSettings().updateCheck){
-            this.spigetCheck = new SpigetCheck(this);
-        }
-        
-        
+		this.metrics = new Metrics(this);
+		if (this.yamlConfiguration.getSettings().updateCheck) {
+			this.spigetCheck = new SpigetCheck(this);
+		}
+
 	}
 
 	private boolean setupManagers() {
@@ -110,7 +109,6 @@ public class Landplugin extends JavaPlugin {
 		return true;
 
 	}
-
 
 	public static Landplugin inst() {
 		return inst;
@@ -147,12 +145,12 @@ public class Landplugin extends JavaPlugin {
 	public WorldEdit getWorldEdit() {
 		return this.wePl;
 	}
-	
-	public Metrics getEMetrics(){
+
+	public Metrics getEMetrics() {
 		return this.metrics;
 	}
-	
-	public SpigetCheck getSpigetCheck(){
+
+	public SpigetCheck getSpigetCheck() {
 		return this.spigetCheck;
 	}
 

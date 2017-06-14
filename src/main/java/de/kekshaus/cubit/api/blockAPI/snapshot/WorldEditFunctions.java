@@ -62,10 +62,10 @@ public class WorldEditFunctions {
 			} catch (DataException | IOException ex) {
 				ex.printStackTrace();
 			}
-			for(Entity entity : chunk.getEntities()) {
-			    if(entity instanceof LivingEntity){
-			    	moveEntityToTop(entity);
-			    }
+			for (Entity entity : chunk.getEntities()) {
+				if (entity instanceof LivingEntity) {
+					moveEntityToTop(entity);
+				}
 
 			}
 		}
@@ -92,10 +92,10 @@ public class WorldEditFunctions {
 					} catch (MaxChangedBlocksException | DataException | IOException ex) {
 						ex.printStackTrace();
 					}
-					for(Entity entity : chunk.getEntities()) {
-					    if(entity instanceof LivingEntity){
-					    	moveEntityToTop(entity);
-					    }
+					for (Entity entity : chunk.getEntities()) {
+						if (entity instanceof LivingEntity) {
+							moveEntityToTop(entity);
+						}
 
 					}
 				}
@@ -106,15 +106,15 @@ public class WorldEditFunctions {
 
 	public void regenerateChunk(final Chunk chunk) {
 		if (this.hasValidAdapter) {
-			
+
 			Bukkit.getScheduler().runTask(Landplugin.inst(), new Runnable() {
 				@Override
 				public void run() {
 					chunk.getWorld().regenerateChunk(chunk.getX(), chunk.getZ());
-					for(Entity entity : chunk.getEntities()) {
-					    if(entity instanceof LivingEntity){
-					    	moveEntityToTop(entity);
-					    }
+					for (Entity entity : chunk.getEntities()) {
+						if (entity instanceof LivingEntity) {
+							moveEntityToTop(entity);
+						}
 
 					}
 				}
@@ -178,21 +178,23 @@ public class WorldEditFunctions {
 
 		return snapshotNames;
 	}
-	
-	private void moveEntityToTop(Entity entity){
-    	double x, z;
-    	x = entity.getLocation().getX();
-    	z = entity.getLocation().getZ();
-    	if (entity instanceof Player){
-    		Player player = (Player) entity;
-    		if (player.isFlying()){
-    			return;
-    		}
-    		player.teleport(new Location(player.getLocation().getWorld(), x, player.getLocation().getWorld().getHighestBlockYAt((int)x, (int)z), z));
-    	} else {
-    		entity.teleport(new Location(entity.getLocation().getWorld(), x, entity.getLocation().getWorld().getHighestBlockYAt((int)x, (int)z), z));
-    	}
-    	
+
+	private void moveEntityToTop(Entity entity) {
+		double x, z;
+		x = entity.getLocation().getX();
+		z = entity.getLocation().getZ();
+		if (entity instanceof Player) {
+			Player player = (Player) entity;
+			if (player.isFlying()) {
+				return;
+			}
+			player.teleport(new Location(player.getLocation().getWorld(), x,
+					player.getLocation().getWorld().getHighestBlockYAt((int) x, (int) z), z));
+		} else {
+			entity.teleport(new Location(entity.getLocation().getWorld(), x,
+					entity.getLocation().getWorld().getHighestBlockYAt((int) x, (int) z), z));
+		}
+
 	}
 
 	public boolean checkWorldEditAdapter() {
@@ -201,8 +203,8 @@ public class WorldEditFunctions {
 			Class<?> cls = Class.forName(className + "Spigot_" + getVersion());
 			if (!BukkitImplAdapter.class.isAssignableFrom(cls)) {
 				this.plugin.getLogger().warning("WARN: WorldEdit has no valid bukkit adapter for this server version!");
-				this.plugin.getLogger()
-						.warning("WARN: All Snapshot actions like /land save, /land restore and /land reset are disabled!");
+				this.plugin.getLogger().warning(
+						"WARN: All Snapshot actions like /land save, /land restore and /land reset are disabled!");
 				this.plugin.getLogger().warning("WARN: Please update your worldedit for full support!");
 				return false;
 			}

@@ -33,14 +33,13 @@ public class ResetUniversal implements ICommand {
 
 		/* Build and get all variables */
 		Player player = (Player) sender;
-		
-		
-		if (!this.plugin.getYamlManager().getSettings().landUseSnapshots){
+
+		if (!this.plugin.getYamlManager().getSettings().landUseSnapshots) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().disabledSnapshots);
 			return true;
 		}
-		
-		if (!this.plugin.getBlockManager().getSnapshotHandler().hasValidAdapter()){
+
+		if (!this.plugin.getBlockManager().getSnapshotHandler().hasValidAdapter()) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().noValidWEAdapter);
 			return true;
 		}
@@ -60,14 +59,13 @@ public class ResetUniversal implements ICommand {
 		 * Check if the player has permissions for this land or hat landadmin
 		 * permissions
 		 */
-		
+
 		if (args.length < 1) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().wrongArguments.replace("{usage}",
 					"/" + cmd.getLabel() + " " + args[0].toLowerCase()));
 			return true;
 		}
-		
-		
+
 		if (!plugin.getRegionManager().isValidRegion(loc.getWorld(), chunk.getX(), chunk.getZ())) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandFound);
 			return true;
@@ -84,10 +82,9 @@ public class ResetUniversal implements ICommand {
 					regionData.getRegionName()));
 			return true;
 		}
-		
 
 		double economyValue = plugin.getYamlManager().getSettings().landResetSnapshotPrice;
-		
+
 		if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), economyValue)) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
 					"" + plugin.getVaultManager().formateToEconomy(economyValue)));
@@ -102,19 +99,19 @@ public class ResetUniversal implements ICommand {
 			return true;
 		}
 
-		
-		if (!this.plugin.getBlockManager().getSnapshotHandler().resetChunk(chunk)){
+		if (!this.plugin.getBlockManager().getSnapshotHandler().resetChunk(chunk)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "RESET-SNAPSHOT"));
 			plugin.getLogger()
 					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "RESET-SNAPSHOT"));
 			return true;
 		}
-		
-		sender.sendMessage(plugin.getYamlManager().getLanguage().resetSnapshot.replace("{regionID}", regionData.getRegionName()));
-		
+
+		sender.sendMessage(
+				plugin.getYamlManager().getLanguage().resetSnapshot.replace("{regionID}", regionData.getRegionName()));
+
 		return true;
-	
+
 	}
 
 }

@@ -15,7 +15,6 @@ public class NMS_v0_R1 implements INMSMask {
 
 	}
 
-
 	@SuppressWarnings("deprecation")
 	@Override
 	public void sendTitle(Player paramPlayer, String paramString) {
