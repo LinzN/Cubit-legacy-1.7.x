@@ -6,18 +6,18 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import de.kekshaus.cubit.api.classes.enums.LandTypes;
-import de.kekshaus.cubit.api.classes.interfaces.ICommand;
-import de.kekshaus.cubit.api.regionAPI.region.RegionData;
-import de.kekshaus.cubit.plugin.Landplugin;
+import de.kekshaus.cubit.commandSuite.ICommand;
+import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.internal.regionMgr.LandTypes;
+import de.linzn.cubit.internal.regionMgr.region.RegionData;
 
 public class DeleteShopAdmin implements ICommand {
 
-	private Landplugin plugin;
+	private CubitBukkitPlugin plugin;
 
 	private String permNode;
 
-	public DeleteShopAdmin(Landplugin plugin, String permNode) {
+	public DeleteShopAdmin(CubitBukkitPlugin plugin, String permNode) {
 		this.plugin = plugin;
 		this.permNode = permNode;
 
@@ -42,7 +42,7 @@ public class DeleteShopAdmin implements ICommand {
 
 		final Location loc = player.getLocation();
 		final Chunk chunk = loc.getChunk();
-		final String regionName = Landplugin.inst().getRegionManager().buildLandName(LandTypes.SHOP.toString(),
+		final String regionName = CubitBukkitPlugin.inst().getRegionManager().buildLandName(LandTypes.SHOP.toString(),
 				chunk.getX(), chunk.getZ());
 
 		/*

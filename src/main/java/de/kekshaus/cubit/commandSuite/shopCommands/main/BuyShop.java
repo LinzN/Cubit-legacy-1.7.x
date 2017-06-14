@@ -6,19 +6,19 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import de.kekshaus.cubit.api.classes.enums.LandTypes;
-import de.kekshaus.cubit.api.classes.interfaces.ICommand;
-import de.kekshaus.cubit.api.database.OfferData;
-import de.kekshaus.cubit.api.regionAPI.region.RegionData;
-import de.kekshaus.cubit.plugin.Landplugin;
+import de.kekshaus.cubit.commandSuite.ICommand;
+import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.internal.databaseMgr.OfferData;
+import de.linzn.cubit.internal.regionMgr.LandTypes;
+import de.linzn.cubit.internal.regionMgr.region.RegionData;
 
 public class BuyShop implements ICommand {
 
-	private Landplugin plugin;
+	private CubitBukkitPlugin plugin;
 
 	private String permNode;
 
-	public BuyShop(Landplugin plugin, String permNode) {
+	public BuyShop(CubitBukkitPlugin plugin, String permNode) {
 		this.plugin = plugin;
 		this.permNode = permNode;
 	}
@@ -70,7 +70,7 @@ public class BuyShop implements ICommand {
 			return true;
 		}
 
-		int shopLimit = Landplugin.inst().getYamlManager().getSettings().shopLimit;
+		int shopLimit = CubitBukkitPlugin.inst().getYamlManager().getSettings().shopLimit;
 		if (plugin.getRegionManager().hasReachLimit(player.getUniqueId(), loc.getWorld(), LandTypes.SHOP, shopLimit)) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().reachLimit);
 			return true;
@@ -110,7 +110,7 @@ public class BuyShop implements ICommand {
 		}
 
 		if (!plugin.getBlockManager().getBlockHandler().placeLandBorder(chunk,
-				Landplugin.inst().getYamlManager().getSettings().landBuyMaterialBorder)) {
+				CubitBukkitPlugin.inst().getYamlManager().getSettings().landBuyMaterialBorder)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-BLOCK"));
 			plugin.getLogger()

@@ -6,18 +6,18 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import de.kekshaus.cubit.api.classes.enums.LandTypes;
-import de.kekshaus.cubit.api.classes.interfaces.ICommand;
-import de.kekshaus.cubit.api.regionAPI.region.RegionData;
-import de.kekshaus.cubit.plugin.Landplugin;
+import de.kekshaus.cubit.commandSuite.ICommand;
+import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.internal.regionMgr.LandTypes;
+import de.linzn.cubit.internal.regionMgr.region.RegionData;
 
 public class SellLand implements ICommand {
 
-	private Landplugin plugin;
+	private CubitBukkitPlugin plugin;
 	private String permNode;
 	private boolean isAdmin;
 
-	public SellLand(Landplugin plugin, String permNode, boolean isAdmin) {
+	public SellLand(CubitBukkitPlugin plugin, String permNode, boolean isAdmin) {
 		this.plugin = plugin;
 		this.permNode = permNode;
 
@@ -85,7 +85,7 @@ public class SellLand implements ICommand {
 		}
 
 		if (!plugin.getBlockManager().getBlockHandler().placeLandBorder(chunk,
-				Landplugin.inst().getYamlManager().getSettings().landSellMaterialBorder)) {
+				CubitBukkitPlugin.inst().getYamlManager().getSettings().landSellMaterialBorder)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-BLOCK"));
 			plugin.getLogger()

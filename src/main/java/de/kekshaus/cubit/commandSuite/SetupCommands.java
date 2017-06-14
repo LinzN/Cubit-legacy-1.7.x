@@ -3,16 +3,16 @@ package de.kekshaus.cubit.commandSuite;
 import de.kekshaus.cubit.commandSuite.adminCommands.CommandAdmin;
 import de.kekshaus.cubit.commandSuite.landCommands.CommandLand;
 import de.kekshaus.cubit.commandSuite.shopCommands.CommandShop;
-import de.kekshaus.cubit.plugin.Landplugin;
+import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
 
 public class SetupCommands {
 
-	private Landplugin plugin;
+	private CubitBukkitPlugin plugin;
 	private String commandLand = "land";
 	private String commandShop = "shop";
 	private String commandAdmin = "cadmin";
 
-	public SetupCommands(Landplugin plugin) {
+	public SetupCommands(CubitBukkitPlugin plugin) {
 		plugin.getLogger().info("Loading CommandSuite");
 		this.plugin = plugin;
 		registerCommands();

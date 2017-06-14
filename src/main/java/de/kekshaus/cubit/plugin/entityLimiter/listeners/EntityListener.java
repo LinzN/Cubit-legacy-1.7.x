@@ -6,7 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
-import de.kekshaus.cubit.plugin.Landplugin;
+import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
 import de.kekshaus.cubit.plugin.entityLimiter.EntityLimiter;
 
 public class EntityListener implements Listener {
@@ -22,14 +22,14 @@ public class EntityListener implements Listener {
 
 		String reason = event.getSpawnReason().toString();
 
-		if (!Landplugin.inst().getYamlManager().getLimit().getSpawnreasonValue(reason)) {
+		if (!CubitBukkitPlugin.inst().getYamlManager().getLimit().getSpawnreasonValue(reason)) {
 			plugin.debug("Ignoring " + event.getEntity().getType().toString() + " due to spawnreason " + reason);
 			return;
 		}
 
 		Chunk chunk = event.getLocation().getChunk();
 
-		if (Landplugin.inst().getYamlManager().getLimit().prevent_creature_spawns) {
+		if (CubitBukkitPlugin.inst().getYamlManager().getLimit().prevent_creature_spawns) {
 			if (plugin.checkChunk(chunk, event.getEntity())) {
 				event.setCancelled(true);
 			}

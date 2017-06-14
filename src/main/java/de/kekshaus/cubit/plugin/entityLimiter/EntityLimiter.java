@@ -17,7 +17,7 @@ import org.bukkit.entity.WaterMob;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.Plugin;
 
-import de.kekshaus.cubit.plugin.Landplugin;
+import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
 import de.kekshaus.cubit.plugin.entityLimiter.listeners.EntityListener;
 import de.kekshaus.cubit.plugin.entityLimiter.listeners.WorldListener;
 
@@ -35,7 +35,7 @@ public class EntityLimiter {
 
 	public void loadLimiter() {
 
-		if (Landplugin.inst().getYamlManager().getLimit().watch_creature_spawns) {
+		if (CubitBukkitPlugin.inst().getYamlManager().getLimit().watch_creature_spawns) {
 			if (entityListener == null) {
 				entityListener = new EntityListener(this);
 				this.plugin.getServer().getPluginManager().registerEvents(entityListener, this.plugin);
@@ -44,9 +44,9 @@ public class EntityLimiter {
 			HandlerList.unregisterAll(entityListener);
 			entityListener = null;
 		}
-		if (Landplugin.inst().getYamlManager().getLimit().active_inspections
-				|| Landplugin.inst().getYamlManager().getLimit().check_chunk_load
-				|| Landplugin.inst().getYamlManager().getLimit().check_chunk_unload) {
+		if (CubitBukkitPlugin.inst().getYamlManager().getLimit().active_inspections
+				|| CubitBukkitPlugin.inst().getYamlManager().getLimit().check_chunk_load
+				|| CubitBukkitPlugin.inst().getYamlManager().getLimit().check_chunk_unload) {
 			if (worldListener == null) {
 				worldListener = new WorldListener(this, this.plugin);
 				this.plugin.getServer().getPluginManager().registerEvents(worldListener, this.plugin);
@@ -61,8 +61,8 @@ public class EntityLimiter {
 			this.plugin.getLogger().severe("No spawnreasons are enabled, the entityLimiter will do nothing!");
 		}
 
-		ignoreMetadata = Landplugin.inst().getYamlManager().getLimit().ignore_metadata;
-		excludedWorlds = Landplugin.inst().getYamlManager().getLimit().excluded_worlds;
+		ignoreMetadata = CubitBukkitPlugin.inst().getYamlManager().getLimit().ignore_metadata;
+		excludedWorlds = CubitBukkitPlugin.inst().getYamlManager().getLimit().excluded_worlds;
 
 	}
 
@@ -103,14 +103,14 @@ public class EntityLimiter {
 			String eType = chunkEntity.getType().name();
 			String eGroup = getMobGroup(chunkEntity);
 
-			if (Landplugin.inst().getYamlManager().getLimit().containsEntityGroup(eType)) {
+			if (CubitBukkitPlugin.inst().getYamlManager().getLimit().containsEntityGroup(eType)) {
 				if (!types.containsKey(eType)) {
 					types.put(eType, new ArrayList<Entity>());
 				}
 				types.get(eType).add(chunkEntity);
 			}
 
-			if (Landplugin.inst().getYamlManager().getLimit().containsEntityGroup(eGroup)) {
+			if (CubitBukkitPlugin.inst().getYamlManager().getLimit().containsEntityGroup(eGroup)) {
 				if (!types.containsKey(eGroup)) {
 					types.put(eGroup, new ArrayList<Entity>());
 				}
@@ -122,28 +122,28 @@ public class EntityLimiter {
 
 			String eType = entity.getType().name();
 
-			if (Landplugin.inst().getYamlManager().getLimit().containsEntityGroup(eType)) {
+			if (CubitBukkitPlugin.inst().getYamlManager().getLimit().containsEntityGroup(eType)) {
 				int typeCount;
 				if (types.containsKey(eType)) {
 					typeCount = types.get(eType).size() + 1;
 				} else {
 					typeCount = 1;
 				}
-				if (typeCount > Landplugin.inst().getYamlManager().getLimit().getEntityGroupValue(eType)) {
+				if (typeCount > CubitBukkitPlugin.inst().getYamlManager().getLimit().getEntityGroupValue(eType)) {
 					return true;
 				}
 			}
 
 			String eGroup = getMobGroup(entity);
 
-			if (Landplugin.inst().getYamlManager().getLimit().containsEntityGroup(eGroup)) {
+			if (CubitBukkitPlugin.inst().getYamlManager().getLimit().containsEntityGroup(eGroup)) {
 				int typeCount;
 				if (types.containsKey(eGroup)) {
 					typeCount = types.get(eGroup).size() + 1;
 				} else {
 					typeCount = 1;
 				}
-				return typeCount > Landplugin.inst().getYamlManager().getLimit().getEntityGroupValue(eGroup);
+				return typeCount > CubitBukkitPlugin.inst().getYamlManager().getLimit().getEntityGroupValue(eGroup);
 			}
 
 		}
@@ -151,7 +151,7 @@ public class EntityLimiter {
 		for (Entry<String, ArrayList<Entity>> entry : types.entrySet()) {
 
 			String eType = entry.getKey();
-			int limit = Landplugin.inst().getYamlManager().getLimit().getEntityGroupValue(eType);
+			int limit = CubitBukkitPlugin.inst().getYamlManager().getLimit().getEntityGroupValue(eType);
 
 			if (entry.getValue().size() < limit) {
 				continue;
@@ -160,7 +160,7 @@ public class EntityLimiter {
 			debug("Removing " + (entry.getValue().size() - limit) + " " + eType + " @ " + chunk.getX() + " "
 					+ chunk.getZ());
 
-			boolean skipNamed = Landplugin.inst().getYamlManager().getLimit().preserve_named_entities;
+			boolean skipNamed = CubitBukkitPlugin.inst().getYamlManager().getLimit().preserve_named_entities;
 			int toRemove = entry.getValue().size() - limit;
 			int index = entry.getValue().size() - 1;
 			while (toRemove > 0 && index >= 0) {
@@ -185,7 +185,7 @@ public class EntityLimiter {
 	}
 
 	public void debug(String mess) {
-		if (Landplugin.inst().getYamlManager().getLimit().plugin_debug) {
+		if (CubitBukkitPlugin.inst().getYamlManager().getLimit().plugin_debug) {
 			this.plugin.getLogger().info("Debug: " + mess);
 		}
 	}

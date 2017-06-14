@@ -6,18 +6,18 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import de.kekshaus.cubit.api.classes.enums.LandTypes;
-import de.kekshaus.cubit.api.classes.interfaces.ICommand;
-import de.kekshaus.cubit.api.regionAPI.region.RegionData;
-import de.kekshaus.cubit.plugin.Landplugin;
+import de.kekshaus.cubit.commandSuite.ICommand;
+import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.internal.regionMgr.LandTypes;
+import de.linzn.cubit.internal.regionMgr.region.RegionData;
 
 public class InfoUniversal implements ICommand {
 
-	private Landplugin plugin;
+	private CubitBukkitPlugin plugin;
 	private String permNode;
 	private LandTypes type;
 
-	public InfoUniversal(Landplugin plugin, String permNode, LandTypes type) {
+	public InfoUniversal(CubitBukkitPlugin plugin, String permNode, LandTypes type) {
 		this.plugin = plugin;
 		this.permNode = permNode;
 		this.type = type;
@@ -211,7 +211,7 @@ public class InfoUniversal implements ICommand {
 	private void noInfo(Player player, RegionData regionData, Location loc, Chunk chunk) {
 		if (this.type != LandTypes.SHOP) {
 			/* Buy-able region */
-			double economyValue = Landplugin.inst().getVaultManager().calculateLandCost(player.getUniqueId(),
+			double economyValue = CubitBukkitPlugin.inst().getVaultManager().calculateLandCost(player.getUniqueId(),
 					loc.getWorld(), true);
 			final String regionID = plugin.getRegionManager().buildLandName(loc.getWorld().getName(), chunk.getX(),
 					chunk.getZ());

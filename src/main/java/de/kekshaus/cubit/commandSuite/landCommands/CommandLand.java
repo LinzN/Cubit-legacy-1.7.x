@@ -12,8 +12,7 @@ import org.bukkit.entity.Player;
 
 import com.google.common.collect.Maps;
 
-import de.kekshaus.cubit.api.classes.enums.LandTypes;
-import de.kekshaus.cubit.api.classes.interfaces.ICommand;
+import de.kekshaus.cubit.commandSuite.ICommand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.BuyLand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.BuyupLand;
 import de.kekshaus.cubit.commandSuite.landCommands.main.HelpLand;
@@ -33,16 +32,17 @@ import de.kekshaus.cubit.commandSuite.universalCommands.main.ResetUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.RestoreUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.SaveUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.VersionUniversal;
-import de.kekshaus.cubit.plugin.Landplugin;
+import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
 import de.kekshaus.cubit.plugin.PermissionNodes;
+import de.linzn.cubit.internal.regionMgr.LandTypes;
 
 public class CommandLand implements CommandExecutor {
 
-	private Landplugin plugin;
+	private CubitBukkitPlugin plugin;
 	private boolean isLoaded = false;
 	public ThreadPoolExecutor cmdThread;
 
-	public CommandLand(Landplugin plugin) {
+	public CommandLand(CubitBukkitPlugin plugin) {
 		this.plugin = plugin;
 		this.cmdThread = new ThreadPoolExecutor(1, 1, 250L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
 
@@ -59,7 +59,7 @@ public class CommandLand implements CommandExecutor {
 					worldName = player.getWorld().getName();
 				}
 
-				if (Landplugin.inst().getYamlManager().getSettings().landEnabledWorlds.contains(worldName)
+				if (CubitBukkitPlugin.inst().getYamlManager().getSettings().landEnabledWorlds.contains(worldName)
 						|| worldName == null) {
 					if (args.length == 0) {
 						// help site
@@ -90,7 +90,7 @@ public class CommandLand implements CommandExecutor {
 
 	public void loadCmd() {
 		try {
-			PermissionNodes perm = Landplugin.inst().getPermNodes();
+			PermissionNodes perm = CubitBukkitPlugin.inst().getPermNodes();
 			/* GS Buy/Sell Commands */
 			this.cmdMap.put("version", new VersionUniversal(this.plugin, null, null));
 			this.cmdMap.put("help", new HelpLand(this.plugin, perm.helpLand));
@@ -112,19 +112,19 @@ public class CommandLand implements CommandExecutor {
 					new RemoveMemberUniversal(this.plugin, perm.removeMemberLand, LandTypes.WORLD, false));
 
 			/* Protection Commands */
-			this.cmdMap.put("pvp", new ChangeFlagUniversal(this.plugin, Landplugin.inst().getRegionManager().pvpPacket,
+			this.cmdMap.put("pvp", new ChangeFlagUniversal(this.plugin, CubitBukkitPlugin.inst().getRegionManager().pvpPacket,
 					perm.flagLand + "pvp", LandTypes.WORLD, false));
 			this.cmdMap.put("fire", new ChangeFlagUniversal(this.plugin,
-					Landplugin.inst().getRegionManager().firePacket, perm.flagLand + "fire", LandTypes.WORLD, false));
+					CubitBukkitPlugin.inst().getRegionManager().firePacket, perm.flagLand + "fire", LandTypes.WORLD, false));
 			this.cmdMap.put("lock", new ChangeFlagUniversal(this.plugin,
-					Landplugin.inst().getRegionManager().lockPacket, perm.flagLand + "lock", LandTypes.WORLD, false));
-			this.cmdMap.put("tnt", new ChangeFlagUniversal(this.plugin, Landplugin.inst().getRegionManager().tntPacket,
+					CubitBukkitPlugin.inst().getRegionManager().lockPacket, perm.flagLand + "lock", LandTypes.WORLD, false));
+			this.cmdMap.put("tnt", new ChangeFlagUniversal(this.plugin, CubitBukkitPlugin.inst().getRegionManager().tntPacket,
 					perm.flagLand + "tnt", LandTypes.WORLD, false));
 			this.cmdMap.put("monster",
-					new ChangeFlagUniversal(this.plugin, Landplugin.inst().getRegionManager().monsterPacket,
+					new ChangeFlagUniversal(this.plugin, CubitBukkitPlugin.inst().getRegionManager().monsterPacket,
 							perm.flagLand + "monster", LandTypes.WORLD, false));
 			this.cmdMap.put("potion",
-					new ChangeFlagUniversal(this.plugin, Landplugin.inst().getRegionManager().potionPacket,
+					new ChangeFlagUniversal(this.plugin, CubitBukkitPlugin.inst().getRegionManager().potionPacket,
 							perm.flagLand + "potion", LandTypes.WORLD, false));
 
 			this.cmdMap.put("changebiome",

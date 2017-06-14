@@ -12,8 +12,7 @@ import org.bukkit.entity.Player;
 
 import com.google.common.collect.Maps;
 
-import de.kekshaus.cubit.api.classes.enums.LandTypes;
-import de.kekshaus.cubit.api.classes.interfaces.ICommand;
+import de.kekshaus.cubit.commandSuite.ICommand;
 import de.kekshaus.cubit.commandSuite.shopCommands.main.BuyShop;
 import de.kekshaus.cubit.commandSuite.shopCommands.main.HelpShop;
 import de.kekshaus.cubit.commandSuite.shopCommands.main.SellShop;
@@ -25,16 +24,17 @@ import de.kekshaus.cubit.commandSuite.universalCommands.main.ListBiomesUniversal
 import de.kekshaus.cubit.commandSuite.universalCommands.main.ListUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.RemoveMemberUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.VersionUniversal;
-import de.kekshaus.cubit.plugin.Landplugin;
+import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
 import de.kekshaus.cubit.plugin.PermissionNodes;
+import de.linzn.cubit.internal.regionMgr.LandTypes;
 
 public class CommandShop implements CommandExecutor {
 
-	private Landplugin plugin;
+	private CubitBukkitPlugin plugin;
 	private boolean isLoaded = false;
 	public ThreadPoolExecutor cmdThread;
 
-	public CommandShop(Landplugin plugin) {
+	public CommandShop(CubitBukkitPlugin plugin) {
 		this.plugin = plugin;
 		this.cmdThread = new ThreadPoolExecutor(1, 1, 250L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
 
@@ -51,7 +51,7 @@ public class CommandShop implements CommandExecutor {
 					worldName = player.getWorld().getName();
 				}
 
-				if (Landplugin.inst().getYamlManager().getSettings().shopEnabledWorlds.contains(worldName)
+				if (CubitBukkitPlugin.inst().getYamlManager().getSettings().shopEnabledWorlds.contains(worldName)
 						|| worldName == null) {
 					if (args.length == 0) {
 						// help site
@@ -82,7 +82,7 @@ public class CommandShop implements CommandExecutor {
 
 	public void loadCmd() {
 		try {
-			PermissionNodes perm = Landplugin.inst().getPermNodes();
+			PermissionNodes perm = CubitBukkitPlugin.inst().getPermNodes();
 			this.cmdMap.put("version", new VersionUniversal(this.plugin, null, null));
 			this.cmdMap.put("help", new HelpShop(this.plugin, perm.helpShop));
 			this.cmdMap.put("buy", new BuyShop(this.plugin, perm.buyShop));

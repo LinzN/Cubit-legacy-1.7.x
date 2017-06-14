@@ -5,9 +5,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockFromToEvent;
 
-import de.kekshaus.cubit.api.classes.enums.LandTypes;
-import de.kekshaus.cubit.api.regionAPI.region.RegionData;
-import de.kekshaus.cubit.plugin.Landplugin;
+import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.internal.regionMgr.LandTypes;
+import de.linzn.cubit.internal.regionMgr.region.RegionData;
 
 public class AdditionalPhysicsListener implements Listener {
 
@@ -17,10 +17,10 @@ public class AdditionalPhysicsListener implements Listener {
 		Chunk toChunk = event.getToBlock().getLocation().getChunk();
 
 		/* Maybe later using direct compare insteat of RegionData */
-		RegionData fromLand = Landplugin.inst().getRegionManager().praseRegionData(fromChunk.getWorld(),
+		RegionData fromLand = CubitBukkitPlugin.inst().getRegionManager().praseRegionData(fromChunk.getWorld(),
 				fromChunk.getX(), fromChunk.getZ());
 
-		RegionData toLand = Landplugin.inst().getRegionManager().praseRegionData(toChunk.getWorld(), toChunk.getX(),
+		RegionData toLand = CubitBukkitPlugin.inst().getRegionManager().praseRegionData(toChunk.getWorld(), toChunk.getX(),
 				toChunk.getZ());
 
 		if (toLand.getLandType() == LandTypes.NOTYPE) {
@@ -31,7 +31,7 @@ public class AdditionalPhysicsListener implements Listener {
 			return;
 		}
 
-		if (!Landplugin.inst().getRegionManager().hasLandPermission(toLand, fromLand.getOwnersUUID()[0])) {
+		if (!CubitBukkitPlugin.inst().getRegionManager().hasLandPermission(toLand, fromLand.getOwnersUUID()[0])) {
 			event.setCancelled(true);
 		}
 	}

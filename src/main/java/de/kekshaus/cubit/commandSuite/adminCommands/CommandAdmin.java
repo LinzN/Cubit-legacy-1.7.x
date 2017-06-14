@@ -11,8 +11,7 @@ import org.bukkit.command.CommandSender;
 
 import com.google.common.collect.Maps;
 
-import de.kekshaus.cubit.api.classes.enums.LandTypes;
-import de.kekshaus.cubit.api.classes.interfaces.ICommand;
+import de.kekshaus.cubit.commandSuite.ICommand;
 import de.kekshaus.cubit.commandSuite.adminCommands.main.CreateServerAdmin;
 import de.kekshaus.cubit.commandSuite.adminCommands.main.CreateShopAdmin;
 import de.kekshaus.cubit.commandSuite.adminCommands.main.DeleteServerAdmin;
@@ -29,16 +28,17 @@ import de.kekshaus.cubit.commandSuite.universalCommands.main.ListSnapshotsUniver
 import de.kekshaus.cubit.commandSuite.universalCommands.main.ListUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.RemoveMemberUniversal;
 import de.kekshaus.cubit.commandSuite.universalCommands.main.VersionUniversal;
-import de.kekshaus.cubit.plugin.Landplugin;
+import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
 import de.kekshaus.cubit.plugin.PermissionNodes;
+import de.linzn.cubit.internal.regionMgr.LandTypes;
 
 public class CommandAdmin implements CommandExecutor {
 
-	private Landplugin plugin;
+	private CubitBukkitPlugin plugin;
 	private boolean isLoaded = false;
 	public ThreadPoolExecutor cmdThread;
 
-	public CommandAdmin(Landplugin plugin) {
+	public CommandAdmin(CubitBukkitPlugin plugin) {
 		this.plugin = plugin;
 		this.cmdThread = new ThreadPoolExecutor(1, 1, 250L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
 
@@ -74,24 +74,24 @@ public class CommandAdmin implements CommandExecutor {
 
 	public void loadCmd() {
 		try {
-			PermissionNodes perm = Landplugin.inst().getPermNodes();
+			PermissionNodes perm = CubitBukkitPlugin.inst().getPermNodes();
 			/* Protection AdminCommands */
 			this.cmdMap.put("version", new VersionUniversal(this.plugin, null, null));
 			this.cmdMap.put("help", new HelpAdmin(this.plugin, perm.helpAdminLand));
 			this.cmdMap.put("setpvp",
-					new ChangeFlagUniversal(this.plugin, Landplugin.inst().getRegionManager().pvpPacket,
+					new ChangeFlagUniversal(this.plugin, CubitBukkitPlugin.inst().getRegionManager().pvpPacket,
 							perm.flagAdminLand + "pvp", LandTypes.NOTYPE, true));
 			this.cmdMap.put("setfire",
-					new ChangeFlagUniversal(this.plugin, Landplugin.inst().getRegionManager().firePacket,
+					new ChangeFlagUniversal(this.plugin, CubitBukkitPlugin.inst().getRegionManager().firePacket,
 							perm.flagAdminLand + "fire", LandTypes.NOTYPE, true));
 			this.cmdMap.put("setlock",
-					new ChangeFlagUniversal(this.plugin, Landplugin.inst().getRegionManager().lockPacket,
+					new ChangeFlagUniversal(this.plugin, CubitBukkitPlugin.inst().getRegionManager().lockPacket,
 							perm.flagAdminLand + "lock", LandTypes.NOTYPE, true));
 			this.cmdMap.put("settnt",
-					new ChangeFlagUniversal(this.plugin, Landplugin.inst().getRegionManager().tntPacket,
+					new ChangeFlagUniversal(this.plugin, CubitBukkitPlugin.inst().getRegionManager().tntPacket,
 							perm.flagAdminLand + "tnt", LandTypes.NOTYPE, true));
 			this.cmdMap.put("setmonster",
-					new ChangeFlagUniversal(this.plugin, Landplugin.inst().getRegionManager().monsterPacket,
+					new ChangeFlagUniversal(this.plugin, CubitBukkitPlugin.inst().getRegionManager().monsterPacket,
 							perm.flagAdminLand + "monster", LandTypes.NOTYPE, true));
 			this.cmdMap.put("remove", new SellLand(this.plugin, perm.sellAdminLand, true));
 			this.cmdMap.put("addplayer",

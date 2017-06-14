@@ -6,21 +6,21 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import de.kekshaus.cubit.api.classes.enums.LandTypes;
-import de.kekshaus.cubit.api.classes.interfaces.ICommand;
-import de.kekshaus.cubit.api.classes.interfaces.IProtectionFlag;
-import de.kekshaus.cubit.api.regionAPI.region.RegionData;
-import de.kekshaus.cubit.plugin.Landplugin;
+import de.kekshaus.cubit.commandSuite.ICommand;
+import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.internal.regionMgr.IProtectionFlag;
+import de.linzn.cubit.internal.regionMgr.LandTypes;
+import de.linzn.cubit.internal.regionMgr.region.RegionData;
 
 public class ChangeFlagUniversal implements ICommand {
 
-	private Landplugin plugin;
+	private CubitBukkitPlugin plugin;
 	private IProtectionFlag packet;
 	private boolean isAdmin;
 	private String permNode;
 	private LandTypes type;
 
-	public ChangeFlagUniversal(Landplugin plugin, IProtectionFlag packet, String permNode, LandTypes type,
+	public ChangeFlagUniversal(CubitBukkitPlugin plugin, IProtectionFlag packet, String permNode, LandTypes type,
 			boolean isAdmin) {
 		this.plugin = plugin;
 		this.packet = packet;

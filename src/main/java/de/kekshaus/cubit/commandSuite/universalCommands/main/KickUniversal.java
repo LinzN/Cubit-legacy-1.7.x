@@ -11,18 +11,18 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
-import de.kekshaus.cubit.api.classes.enums.LandTypes;
-import de.kekshaus.cubit.api.classes.interfaces.ICommand;
-import de.kekshaus.cubit.api.regionAPI.region.RegionData;
-import de.kekshaus.cubit.plugin.Landplugin;
+import de.kekshaus.cubit.commandSuite.ICommand;
+import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.internal.regionMgr.LandTypes;
+import de.linzn.cubit.internal.regionMgr.region.RegionData;
 
 public class KickUniversal implements ICommand {
 
-	private Landplugin plugin;
+	private CubitBukkitPlugin plugin;
 	private String permNode;
 	private LandTypes type;
 
-	public KickUniversal(Landplugin plugin, String permNode, LandTypes type) {
+	public KickUniversal(CubitBukkitPlugin plugin, String permNode, LandTypes type) {
 		this.plugin = plugin;
 		this.permNode = permNode;
 		this.type = type;

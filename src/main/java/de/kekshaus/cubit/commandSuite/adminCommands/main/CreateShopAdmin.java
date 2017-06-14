@@ -7,18 +7,18 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import de.kekshaus.cubit.api.classes.enums.LandTypes;
-import de.kekshaus.cubit.api.classes.interfaces.ICommand;
-import de.kekshaus.cubit.api.database.OfferData;
-import de.kekshaus.cubit.plugin.Landplugin;
+import de.kekshaus.cubit.commandSuite.ICommand;
+import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.internal.databaseMgr.OfferData;
+import de.linzn.cubit.internal.regionMgr.LandTypes;
 
 public class CreateShopAdmin implements ICommand {
 
-	private Landplugin plugin;
+	private CubitBukkitPlugin plugin;
 
 	private String permNode;
 
-	public CreateShopAdmin(Landplugin plugin, String permNode) {
+	public CreateShopAdmin(CubitBukkitPlugin plugin, String permNode) {
 		this.plugin = plugin;
 		this.permNode = permNode;
 
@@ -43,7 +43,7 @@ public class CreateShopAdmin implements ICommand {
 
 		final Location loc = player.getLocation();
 		final Chunk chunk = loc.getChunk();
-		final String regionName = Landplugin.inst().getRegionManager().buildLandName(LandTypes.SHOP.toString(),
+		final String regionName = CubitBukkitPlugin.inst().getRegionManager().buildLandName(LandTypes.SHOP.toString(),
 				chunk.getX(), chunk.getZ());
 
 		/*
@@ -74,7 +74,7 @@ public class CreateShopAdmin implements ICommand {
 		}
 
 		if (!plugin.getBlockManager().getBlockHandler().placeLandBorder(chunk,
-				Landplugin.inst().getYamlManager().getSettings().landSellMaterialBorder)) {
+				CubitBukkitPlugin.inst().getYamlManager().getSettings().landSellMaterialBorder)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-BLOCK"));
 			plugin.getLogger()
@@ -90,7 +90,7 @@ public class CreateShopAdmin implements ICommand {
 			return true;
 		}
 
-		double value = Landplugin.inst().getYamlManager().getSettings().shopBasePrice;
+		double value = CubitBukkitPlugin.inst().getYamlManager().getSettings().shopBasePrice;
 		if (args.length >= 2) {
 			if (!NumberUtils.isNumber(args[1])) {
 				sender.sendMessage(plugin.getYamlManager().getLanguage().noNumberFound);

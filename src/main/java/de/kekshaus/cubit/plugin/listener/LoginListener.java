@@ -8,25 +8,25 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 
-import de.kekshaus.cubit.plugin.Landplugin;
+import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
 
 public class LoginListener implements Listener {
 
 	@EventHandler
 	public void onPlayerJoin(final PlayerLoginEvent event) {
-		Bukkit.getScheduler().runTaskAsynchronously(Landplugin.inst(), new Runnable() {
+		Bukkit.getScheduler().runTaskAsynchronously(CubitBukkitPlugin.inst(), new Runnable() {
 
 			@Override
 			public void run() {
 
-				Landplugin.inst().getDatabaseManager().updateProfile(event.getPlayer().getUniqueId(),
+				CubitBukkitPlugin.inst().getDatabaseManager().updateProfile(event.getPlayer().getUniqueId(),
 						event.getPlayer().getName(), new Date().getTime());
-				if (event.getPlayer().hasPermission(Landplugin.inst().getPermNodes().checkUpdateAdmin)) {
-					if (Landplugin.inst().getSpigetCheck().isAvailable) {
+				if (event.getPlayer().hasPermission(CubitBukkitPlugin.inst().getPermNodes().checkUpdateAdmin)) {
+					if (CubitBukkitPlugin.inst().getSpigetCheck().isAvailable) {
 						event.getPlayer()
 								.sendMessage(ChatColor.GREEN
 										+ "A new update for Cubit is avaiable. Check out the new version "
-										+ Landplugin.inst().getSpigetCheck().version + "!");
+										+ CubitBukkitPlugin.inst().getSpigetCheck().version + "!");
 					}
 				}
 

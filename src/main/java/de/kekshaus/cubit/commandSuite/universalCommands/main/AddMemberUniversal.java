@@ -10,19 +10,19 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import de.kekshaus.cubit.api.classes.enums.LandTypes;
-import de.kekshaus.cubit.api.classes.interfaces.ICommand;
-import de.kekshaus.cubit.api.regionAPI.region.RegionData;
-import de.kekshaus.cubit.plugin.Landplugin;
+import de.kekshaus.cubit.commandSuite.ICommand;
+import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.internal.regionMgr.LandTypes;
+import de.linzn.cubit.internal.regionMgr.region.RegionData;
 
 public class AddMemberUniversal implements ICommand {
 
-	private Landplugin plugin;
+	private CubitBukkitPlugin plugin;
 	private String permNode;
 	private LandTypes type;
 	private boolean isAdmin;
 
-	public AddMemberUniversal(Landplugin plugin, String permNode, LandTypes type, boolean isAdmin) {
+	public AddMemberUniversal(CubitBukkitPlugin plugin, String permNode, LandTypes type, boolean isAdmin) {
 		this.plugin = plugin;
 		this.isAdmin = isAdmin;
 

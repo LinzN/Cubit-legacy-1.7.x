@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mojang.util.UUIDTypeAdapter;
 
-import de.kekshaus.cubit.plugin.Landplugin;
+import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
 
 public class NameCache {
 	private Gson gson = new GsonBuilder().registerTypeAdapter(UUID.class, new UUIDTypeAdapter()).create();
@@ -57,7 +57,7 @@ public class NameCache {
 	}
 
 	private String fetchDatabaseName(UUID uuid) {
-		return Landplugin.inst().getDatabaseManager().getProfileName(uuid);
+		return CubitBukkitPlugin.inst().getDatabaseManager().getProfileName(uuid);
 
 	}
 

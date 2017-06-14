@@ -2,21 +2,21 @@ package org.inventivetalent.update.spiget;
 
 import org.inventivetalent.update.spiget.comparator.VersionComparator;
 
-import de.kekshaus.cubit.plugin.Landplugin;
+import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
 
 public class SpigetCheck {
-	private Landplugin plugin;
+	private CubitBukkitPlugin plugin;
 	public boolean isAvailable;
 	public String version;
 
-	public SpigetCheck(Landplugin plugin) {
+	public SpigetCheck(CubitBukkitPlugin plugin) {
 		this.plugin = plugin;
 
 		this.plugin.getServer().getScheduler().runTaskTimerAsynchronously(this.plugin, new Runnable() {
 
 			@Override
 			public void run() {
-				Landplugin.inst().getLogger().info("Run spiget update checker");
+				CubitBukkitPlugin.inst().getLogger().info("Run spiget update checker");
 				checker();
 			}
 		}, 20 * 30, 20 * 60 * 30);

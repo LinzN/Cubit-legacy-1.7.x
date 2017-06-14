@@ -1,8 +1,8 @@
 name: Cubit
-main : de.kekshaus.cubit.plugin.Landplugin
+main : de.kekshaus.cubit.plugin.CubitBukkitPlugin
 version: ${project.version}.${build.number}
 description: A worldguard region manager for bukkit servers
-author: Kekshaus
+author: Niklas Linz
 load: POSTWORLD
 depend: [WorldEdit, WorldGuard, Vault]
 softdepend: [ParticleLIB]

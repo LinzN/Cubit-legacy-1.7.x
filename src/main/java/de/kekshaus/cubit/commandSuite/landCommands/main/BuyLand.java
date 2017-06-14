@@ -6,16 +6,16 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import de.kekshaus.cubit.api.classes.enums.LandTypes;
-import de.kekshaus.cubit.api.classes.interfaces.ICommand;
-import de.kekshaus.cubit.plugin.Landplugin;
+import de.kekshaus.cubit.commandSuite.ICommand;
+import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.internal.regionMgr.LandTypes;
 
 public class BuyLand implements ICommand {
 
-	private Landplugin plugin;
+	private CubitBukkitPlugin plugin;
 	private String permNode;
 
-	public BuyLand(Landplugin plugin, String permNode) {
+	public BuyLand(CubitBukkitPlugin plugin, String permNode) {
 		this.plugin = plugin;
 		this.permNode = permNode;
 
@@ -73,7 +73,7 @@ public class BuyLand implements ICommand {
 		}
 
 		if (!plugin.getBlockManager().getBlockHandler().placeLandBorder(chunk,
-				Landplugin.inst().getYamlManager().getSettings().landBuyMaterialBorder)) {
+				CubitBukkitPlugin.inst().getYamlManager().getSettings().landBuyMaterialBorder)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-BLOCK"));
 			plugin.getLogger()

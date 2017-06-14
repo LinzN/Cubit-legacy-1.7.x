@@ -4,15 +4,15 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-import de.kekshaus.cubit.api.classes.enums.LandTypes;
-import de.kekshaus.cubit.api.classes.interfaces.ICommand;
-import de.kekshaus.cubit.plugin.Landplugin;
+import de.kekshaus.cubit.commandSuite.ICommand;
+import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.internal.regionMgr.LandTypes;
 
 public class VersionUniversal implements ICommand {
 
-	private Landplugin plugin;
+	private CubitBukkitPlugin plugin;
 
-	public VersionUniversal(Landplugin plugin, String permNode, LandTypes type) {
+	public VersionUniversal(CubitBukkitPlugin plugin, String permNode, LandTypes type) {
 		this.plugin = plugin;
 	}
 

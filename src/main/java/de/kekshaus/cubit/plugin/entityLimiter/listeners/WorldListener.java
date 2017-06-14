@@ -11,7 +11,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
-import de.kekshaus.cubit.plugin.Landplugin;
+import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
 import de.kekshaus.cubit.plugin.entityLimiter.EntityLimiter;
 
 public class WorldListener implements Listener {
@@ -48,12 +48,12 @@ public class WorldListener implements Listener {
 	@EventHandler
 	public void onChunkLoadEvent(final ChunkLoadEvent event) {
 		mrg.debug("ChunkLoadEvent " + event.getChunk().getX() + " " + event.getChunk().getZ());
-		if (Landplugin.inst().getYamlManager().getLimit().active_inspections) {
+		if (CubitBukkitPlugin.inst().getYamlManager().getLimit().active_inspections) {
 			BukkitTask task = new InspectTask(event.getChunk()).runTaskTimer(plugin, 0,
-					Landplugin.inst().getYamlManager().getLimit().inspection_frequency * 20L);
+					CubitBukkitPlugin.inst().getYamlManager().getLimit().inspection_frequency * 20L);
 
 			chunkTasks.put(event.getChunk(), task);
-		} else if (Landplugin.inst().getYamlManager().getLimit().check_chunk_load) {
+		} else if (CubitBukkitPlugin.inst().getYamlManager().getLimit().check_chunk_load) {
 
 			mrg.checkChunk(event.getChunk(), null);
 		}
@@ -67,7 +67,7 @@ public class WorldListener implements Listener {
 			chunkTasks.remove(event.getChunk()).cancel();
 		}
 
-		if (Landplugin.inst().getYamlManager().getLimit().check_chunk_unload) {
+		if (CubitBukkitPlugin.inst().getYamlManager().getLimit().check_chunk_unload) {
 			mrg.checkChunk(event.getChunk(), null);
 		}
 	}
