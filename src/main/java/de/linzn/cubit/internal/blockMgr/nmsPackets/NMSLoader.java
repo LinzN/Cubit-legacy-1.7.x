@@ -32,7 +32,7 @@ public class NMSLoader {
 
 		Object obj = null;
 		try {
-			obj = Class.forName("de.kekshaus.cubit.api.blockAPI.nmsPackets.NMS_" + versionNumber).newInstance();
+			obj = Class.forName("de.linzn.cubit.internal.blockMgr.nmsPackets.NMS_" + versionNumber).newInstance();
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
