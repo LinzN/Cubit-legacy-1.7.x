@@ -12,8 +12,8 @@ import org.bukkit.World;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.kekshaus.cubit.api.utils.NameCache;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.internal.cache.NameCache;
 import de.linzn.cubit.internal.regionMgr.flags.FirePacket;
 import de.linzn.cubit.internal.regionMgr.flags.LockPacket;
 import de.linzn.cubit.internal.regionMgr.flags.MonsterPacket;
@@ -25,7 +25,7 @@ import de.linzn.cubit.internal.regionMgr.region.ManageRegions;
 import de.linzn.cubit.internal.regionMgr.region.RegionData;
 import de.linzn.cubit.internal.regionMgr.region.SaveRegions;
 
-public class RegionAPIManager {
+public class CubitregionManager {
 
 	private CubitBukkitPlugin plugin;
 	private ManageRegions mReg;
@@ -39,8 +39,8 @@ public class RegionAPIManager {
 	public TNTPacket tntPacket;
 	public PotionPacket potionPacket;
 
-	public RegionAPIManager(CubitBukkitPlugin plugin) {
-		plugin.getLogger().info("Loading RegionAPIManager");
+	public CubitregionManager(CubitBukkitPlugin plugin) {
+		plugin.getLogger().info("Loading CubitregionManager");
 		this.plugin = plugin;
 		this.nameCache = new NameCache();
 		this.mReg = new ManageRegions();

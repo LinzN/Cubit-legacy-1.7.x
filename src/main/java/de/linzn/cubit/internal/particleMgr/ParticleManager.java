@@ -15,7 +15,7 @@ public class ParticleManager {
 	private CubitBukkitPlugin plugin;
 
 	public ParticleManager(CubitBukkitPlugin plugin) {
-		plugin.getLogger().info("Loading ParticleAPIManager");
+		plugin.getLogger().info("Loading ParticleManager");
 		if (Bukkit.getPluginManager().getPlugin("ParticleLIB") != null) {
 			plugin.getLogger().info("Using ParticleLIB as provider");
 		} else if (isSpigot()) {

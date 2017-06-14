@@ -17,7 +17,7 @@ import de.linzn.cubit.internal.blockMgr.BlockManager;
 import de.linzn.cubit.internal.databaseMgr.DatabaseManager;
 import de.linzn.cubit.internal.entityMgr.EntityManager;
 import de.linzn.cubit.internal.particleMgr.ParticleManager;
-import de.linzn.cubit.internal.regionMgr.RegionAPIManager;
+import de.linzn.cubit.internal.regionMgr.CubitregionManager;
 import de.linzn.cubit.internal.vaultMgr.VaultManager;
 
 public class CubitBukkitPlugin extends JavaPlugin {
@@ -25,7 +25,7 @@ public class CubitBukkitPlugin extends JavaPlugin {
 	private static CubitBukkitPlugin inst;
 	private WorldGuardPlugin wgPl;
 	private WorldEdit wePl;
-	private RegionAPIManager regionMrg;
+	private CubitregionManager regionMrg;
 	private BlockManager blockMrg;
 	private ParticleManager particleMrg;
 	private VaultManager vaultMrg;
@@ -99,7 +99,7 @@ public class CubitBukkitPlugin extends JavaPlugin {
 
 	private boolean setupManagers() {
 		this.yamlConfiguration = new YamlConfigurationManager(this);
-		this.regionMrg = new RegionAPIManager(this);
+		this.regionMrg = new CubitregionManager(this);
 		this.blockMrg = new BlockManager(this);
 		this.particleMrg = new ParticleManager(this);
 		this.vaultMrg = new VaultManager(this);
@@ -114,7 +114,7 @@ public class CubitBukkitPlugin extends JavaPlugin {
 		return inst;
 	}
 
-	public RegionAPIManager getRegionManager() {
+	public CubitregionManager getRegionManager() {
 		return this.regionMrg;
 	}
 

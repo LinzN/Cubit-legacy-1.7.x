@@ -1,4 +1,4 @@
-package de.kekshaus.cubit.api.utils;
+package de.linzn.cubit.internal.cache;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
