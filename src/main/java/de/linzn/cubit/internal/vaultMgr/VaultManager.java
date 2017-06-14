@@ -19,7 +19,7 @@ public class VaultManager {
 	private EconomyHook ecoMrg = null;
 
 	public VaultManager(CubitBukkitPlugin plugin) {
-		plugin.getLogger().info("Loading VaultAPIManager");
+		plugin.getLogger().info("Loading VaultManager");
 		this.plugin = plugin;
 		if (setupEconomy()) {
 			this.ecoMrg = new EconomyHook(plugin, econ);

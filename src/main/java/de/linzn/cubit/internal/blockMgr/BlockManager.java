@@ -15,7 +15,7 @@ public class BlockManager {
 	private BlockHandler blockHandler;
 
 	public BlockManager(CubitBukkitPlugin plugin) {
-		plugin.getLogger().info("Loading BlockAPIManager");
+		plugin.getLogger().info("Loading BlockManager");
 		this.plugin = plugin;
 		this.nmsloader = new NMSLoader(this.plugin);
 		this.snapshotHandler = new SnapshotHandler(this.plugin);
