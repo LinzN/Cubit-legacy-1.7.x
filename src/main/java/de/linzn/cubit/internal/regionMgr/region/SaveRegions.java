@@ -4,7 +4,7 @@ import org.bukkit.World;
 
 import com.sk89q.worldguard.protection.managers.RegionManager;
 
-import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 
 public class SaveRegions {
 	public void save(final RegionData regionData) {

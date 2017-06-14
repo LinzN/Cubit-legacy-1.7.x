@@ -5,7 +5,7 @@ import org.bukkit.ChatColor;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 
-import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import de.linzn.cubit.internal.regionMgr.IProtectionFlag;
 import de.linzn.cubit.internal.regionMgr.region.RegionData;
 

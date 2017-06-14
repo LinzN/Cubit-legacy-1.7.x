@@ -6,7 +6,7 @@ import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.plugin.Plugin;
 
-import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 
 public class ChangeBiome {
 

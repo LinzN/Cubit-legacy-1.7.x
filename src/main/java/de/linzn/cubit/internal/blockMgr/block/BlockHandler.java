@@ -2,7 +2,8 @@ package de.linzn.cubit.internal.blockMgr.block;
 
 import org.bukkit.Chunk;
 import org.bukkit.Material;
-import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+
+import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 
 public class BlockHandler {
 

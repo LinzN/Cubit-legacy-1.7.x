@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Chunk;
-import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+
+import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 
 public class SnapshotHandler {
 

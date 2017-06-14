@@ -14,7 +14,7 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 
 public class ManageRegions {
 

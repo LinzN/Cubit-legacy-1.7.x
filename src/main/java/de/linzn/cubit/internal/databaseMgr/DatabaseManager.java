@@ -6,7 +6,7 @@ import java.util.UUID;
 
 import org.bukkit.World;
 
-import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import de.linzn.cubit.internal.databaseMgr.engine.SQLIEngine;
 
 public class DatabaseManager {

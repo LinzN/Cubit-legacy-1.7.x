@@ -13,7 +13,7 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.kekshaus.cubit.api.utils.NameCache;
-import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import de.linzn.cubit.internal.regionMgr.flags.FirePacket;
 import de.linzn.cubit.internal.regionMgr.flags.LockPacket;
 import de.linzn.cubit.internal.regionMgr.flags.MonsterPacket;

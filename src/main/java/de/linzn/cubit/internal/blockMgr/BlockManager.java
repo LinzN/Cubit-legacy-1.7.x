@@ -1,6 +1,6 @@
 package de.linzn.cubit.internal.blockMgr;
 
-import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import de.linzn.cubit.internal.blockMgr.biome.BiomeHandler;
 import de.linzn.cubit.internal.blockMgr.block.BlockHandler;
 import de.linzn.cubit.internal.blockMgr.nmsPackets.NMSLoader;

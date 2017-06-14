@@ -1,5 +1,5 @@
 name: Cubit
-main : de.kekshaus.cubit.plugin.CubitBukkitPlugin
+main : de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin
 version: ${project.version}.${build.number}
 description: A worldguard region manager for bukkit servers
 author: Niklas Linz

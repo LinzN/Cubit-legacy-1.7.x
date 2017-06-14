@@ -8,7 +8,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 
 import com.sk89q.worldguard.LocalPlayer;
 
-import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import de.linzn.cubit.internal.vaultMgr.eConomy.EconomyHook;
 import net.milkbowl.vault.economy.Economy;
 

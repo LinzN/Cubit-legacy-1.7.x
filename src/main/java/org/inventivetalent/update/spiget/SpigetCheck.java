@@ -2,7 +2,7 @@ package org.inventivetalent.update.spiget;
 
 import org.inventivetalent.update.spiget.comparator.VersionComparator;
 
-import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 
 public class SpigetCheck {
 	private CubitBukkitPlugin plugin;

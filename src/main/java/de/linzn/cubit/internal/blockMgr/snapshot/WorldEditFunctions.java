@@ -23,7 +23,8 @@ import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.bukkit.adapter.BukkitImplAdapter;
 import com.sk89q.worldedit.data.DataException;
 import com.sk89q.worldedit.schematic.SchematicFormat;
-import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+
+import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 
 @SuppressWarnings("deprecation")
 public class WorldEditFunctions {

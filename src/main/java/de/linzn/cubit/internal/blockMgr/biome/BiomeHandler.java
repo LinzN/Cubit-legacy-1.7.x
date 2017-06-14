@@ -3,7 +3,7 @@ package de.linzn.cubit.internal.blockMgr.biome;
 import org.bukkit.Chunk;
 import org.bukkit.block.Biome;
 
-import de.kekshaus.cubit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 
 public class BiomeHandler {
 
