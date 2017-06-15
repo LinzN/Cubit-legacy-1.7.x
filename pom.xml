@@ -5,6 +5,10 @@
 	<name>cubit</name>
 	<repositories>
 		<repository>
+			<id>enigmar-repo</id>
+			<url>https://repository.enigmar.de/</url>
+		</repository>
+		<repository>
 			<id>sk89q-snapshots</id>
 			<url>http://maven.sk89q.com/artifactory/repo</url>
 			<releases>
@@ -27,10 +31,6 @@
 		<repository>
 			<id>inventive-repo</id>
 			<url>https://repo.inventivetalent.org/content/groups/public/</url>
-		</repository>
-		<repository>
-			<id>enigmar-repo</id>
-			<url>https://repository.enigmar.de/</url>
 		</repository>
 	</repositories>
 	<dependencies>
