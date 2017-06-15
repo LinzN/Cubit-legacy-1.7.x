@@ -28,6 +28,10 @@
 			<id>inventive-repo</id>
 			<url>https://repo.inventivetalent.org/content/groups/public/</url>
 		</repository>
+		<repository>
+			<id>enigmar-repo</id>
+			<url>https://repository.enigmar.de/</url>
+		</repository>
 	</repositories>
 	<dependencies>
 		<dependency>
@@ -186,7 +190,7 @@
 			</plugin>
 		</plugins>
 	</build>
-	<version>4.0.0</version>
+	<version>4.0.0-${build.number}</version>
 	<groupId>de.linzn</groupId>
 	<dependencyManagement>
 		<dependencies>
