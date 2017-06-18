@@ -29,7 +29,7 @@ public class DatabaseManager {
 		this.useSql = this.plugin.getYamlManager().getSettings().sqlUse;
 
 		if (this.useSql) {
-			this.engine = new SQLIEngine("jdbc:mysql://" + host + ":" + port + "/" + database + "?useSSL=false",
+			this.engine = new SQLIEngine("jdbc:mysql://" + host + ":" + port + "/" + database + "?autoReconnect=true&useSSL=false",
 					username, password, this.useSql);
 		} else {
 			this.engine = new SQLIEngine("jdbc:sqlite:" + plugin.getDataFolder().getAbsolutePath() + "/database.db",
