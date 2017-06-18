@@ -31,7 +31,6 @@ import de.linzn.cubit.bukkit.command.universal.RemoveMemberUniversal;
 import de.linzn.cubit.bukkit.command.universal.ResetUniversal;
 import de.linzn.cubit.bukkit.command.universal.RestoreUniversal;
 import de.linzn.cubit.bukkit.command.universal.SaveUniversal;
-import de.linzn.cubit.bukkit.command.universal.VersionUniversal;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import de.linzn.cubit.bukkit.plugin.PermissionNodes;
 import de.linzn.cubit.internal.regionMgr.LandTypes;
@@ -92,7 +91,6 @@ public class CommandLand implements CommandExecutor {
 		try {
 			PermissionNodes perm = CubitBukkitPlugin.inst().getPermNodes();
 			/* GS Buy/Sell Commands */
-			this.cmdMap.put("version", new VersionUniversal(this.plugin, null, null));
 			this.cmdMap.put("help", new HelpLand(this.plugin, perm.helpLand));
 			this.cmdMap.put("buy", new BuyLand(this.plugin, perm.buyLand));
 			this.cmdMap.put("sell", new SellLand(this.plugin, perm.sellLand, false));

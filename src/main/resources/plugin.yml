@@ -8,6 +8,8 @@ depend: [WorldEdit, WorldGuard, Vault]
 softdepend: [ParticleLIB]
 
 commands:
+  cubit:
+    description: Plugin command
   land:
     description: Land Command
   shop:

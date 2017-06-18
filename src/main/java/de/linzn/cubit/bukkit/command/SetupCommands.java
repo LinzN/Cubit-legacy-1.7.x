@@ -1,6 +1,7 @@
 package de.linzn.cubit.bukkit.command;
 
 import de.linzn.cubit.bukkit.command.admin.CommandAdmin;
+import de.linzn.cubit.bukkit.command.cubit.CommandCubit;
 import de.linzn.cubit.bukkit.command.land.CommandLand;
 import de.linzn.cubit.bukkit.command.shop.CommandShop;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
@@ -8,6 +9,7 @@ import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 public class SetupCommands {
 
 	private CubitBukkitPlugin plugin;
+	private String commandCubit = "cubit";
 	private String commandLand = "land";
 	private String commandShop = "shop";
 	private String commandAdmin = "cadmin";
@@ -19,6 +21,13 @@ public class SetupCommands {
 	}
 
 	private void registerCommands() {
+		/* Command setup for /cubit */
+		CommandCubit cubitClass = new CommandCubit(this.plugin);
+		if (!cubitClass.isLoaded())
+			cubitClass.loadCmd();
+		plugin.getLogger().info("Register command /cubit");
+		plugin.getCommand(commandCubit).setExecutor(cubitClass);
+		
 		/* Command setup for /land */
 		CommandLand landClass = new CommandLand(this.plugin);
 		if (!landClass.isLoaded())

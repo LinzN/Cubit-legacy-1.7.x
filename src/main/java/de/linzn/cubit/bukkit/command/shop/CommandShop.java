@@ -23,7 +23,6 @@ import de.linzn.cubit.bukkit.command.universal.KickUniversal;
 import de.linzn.cubit.bukkit.command.universal.ListBiomesUniversal;
 import de.linzn.cubit.bukkit.command.universal.ListUniversal;
 import de.linzn.cubit.bukkit.command.universal.RemoveMemberUniversal;
-import de.linzn.cubit.bukkit.command.universal.VersionUniversal;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import de.linzn.cubit.bukkit.plugin.PermissionNodes;
 import de.linzn.cubit.internal.regionMgr.LandTypes;
@@ -83,7 +82,6 @@ public class CommandShop implements CommandExecutor {
 	public void loadCmd() {
 		try {
 			PermissionNodes perm = CubitBukkitPlugin.inst().getPermNodes();
-			this.cmdMap.put("version", new VersionUniversal(this.plugin, null, null));
 			this.cmdMap.put("help", new HelpShop(this.plugin, perm.helpShop));
 			this.cmdMap.put("buy", new BuyShop(this.plugin, perm.buyShop));
 			this.cmdMap.put("sell", new SellShop(this.plugin, perm.sellShop));

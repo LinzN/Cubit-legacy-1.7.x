@@ -17,7 +17,6 @@ import de.linzn.cubit.bukkit.command.admin.main.CreateShopAdmin;
 import de.linzn.cubit.bukkit.command.admin.main.DeleteServerAdmin;
 import de.linzn.cubit.bukkit.command.admin.main.DeleteShopAdmin;
 import de.linzn.cubit.bukkit.command.admin.main.HelpAdmin;
-import de.linzn.cubit.bukkit.command.admin.main.ReloadAdmin;
 import de.linzn.cubit.bukkit.command.land.main.OfferLand;
 import de.linzn.cubit.bukkit.command.land.main.SellLand;
 import de.linzn.cubit.bukkit.command.universal.AddMemberUniversal;
@@ -27,7 +26,6 @@ import de.linzn.cubit.bukkit.command.universal.ListBiomesUniversal;
 import de.linzn.cubit.bukkit.command.universal.ListSnapshotsUniversal;
 import de.linzn.cubit.bukkit.command.universal.ListUniversal;
 import de.linzn.cubit.bukkit.command.universal.RemoveMemberUniversal;
-import de.linzn.cubit.bukkit.command.universal.VersionUniversal;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import de.linzn.cubit.bukkit.plugin.PermissionNodes;
 import de.linzn.cubit.internal.regionMgr.LandTypes;
@@ -76,7 +74,6 @@ public class CommandAdmin implements CommandExecutor {
 		try {
 			PermissionNodes perm = CubitBukkitPlugin.inst().getPermNodes();
 			/* Protection AdminCommands */
-			this.cmdMap.put("version", new VersionUniversal(this.plugin, null, null));
 			this.cmdMap.put("help", new HelpAdmin(this.plugin, perm.helpAdminLand));
 			this.cmdMap.put("setpvp",
 					new ChangeFlagUniversal(this.plugin, CubitBukkitPlugin.inst().getRegionManager().pvpPacket,
@@ -110,7 +107,6 @@ public class CommandAdmin implements CommandExecutor {
 			this.cmdMap.put("listbiomes",
 					new ListBiomesUniversal(this.plugin, perm.listBiomesAdminLand, LandTypes.NOTYPE));
 			this.cmdMap.put("list", new ListUniversal(this.plugin, perm.listAdminLand, LandTypes.NOTYPE, true));
-			this.cmdMap.put("reload", new ReloadAdmin(this.plugin, perm.reloadCubit));
 
 			this.cmdMap.put("listsaves",
 					new ListSnapshotsUniversal(this.plugin, perm.listSavesAdmin, LandTypes.NOTYPE, true));

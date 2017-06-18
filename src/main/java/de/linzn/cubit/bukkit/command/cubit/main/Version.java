@@ -1,4 +1,4 @@
-package de.linzn.cubit.bukkit.command.universal;
+package de.linzn.cubit.bukkit.command.cubit.main;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -6,13 +6,12 @@ import org.bukkit.command.CommandSender;
 
 import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
-import de.linzn.cubit.internal.regionMgr.LandTypes;
 
-public class VersionUniversal implements ICommand {
+public class Version implements ICommand {
 
 	private CubitBukkitPlugin plugin;
 
-	public VersionUniversal(CubitBukkitPlugin plugin, String permNode, LandTypes type) {
+	public Version(CubitBukkitPlugin plugin) {
 		this.plugin = plugin;
 	}
 
