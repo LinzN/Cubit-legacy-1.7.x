@@ -49,19 +49,17 @@ public abstract class VersionComparator {
 	public static final VersionComparator SEM_VER = new VersionComparator() {
 		@Override
 		public boolean isNewer(String currentVersion, String checkVersion) {
-			currentVersion = currentVersion.replace(".", "").replaceAll("[^0-9.]", "");
-			;
-			checkVersion = checkVersion.replace(".", "").replaceAll("[^0-9.]", "");
-			;
+			String currentVersionCut = getOnlyNumerics(currentVersion);
+			String checkVersionCut = getOnlyNumerics(checkVersion);
 
 			try {
-				int current = Integer.parseInt(currentVersion);
-				int check = Integer.parseInt(checkVersion);
+				int current = Integer.parseInt(currentVersionCut);
+				int check = Integer.parseInt(checkVersionCut);
 
 				return check > current;
 			} catch (NumberFormatException e) {
-				System.err.println("[SpigetUpdate] Invalid SemVer versions specified [" + currentVersion + "] ["
-						+ checkVersion + "]");
+				System.err.println("[SpigetUpdate] Invalid SemVer versions specified [" + currentVersionCut + "] ["
+						+ checkVersionCut + "]");
 			}
 			return false;
 		}
@@ -77,5 +75,20 @@ public abstract class VersionComparator {
 	 * @return <code>true</code> if the checked version is newer
 	 */
 	public abstract boolean isNewer(String currentVersion, String checkVersion);
+	
+	public String getOnlyNumerics(String str) {
+	    if (str == null) {
+	        return null;
+	    }
+	    StringBuffer strBuff = new StringBuffer();
+	    char c;
+	    for (int i = 0; i < str.length() ; i++) {
+	        c = str.charAt(i);
+	        if (Character.isDigit(c)) {
+	            strBuff.append(c);
+	        }
+	    }
+	    return strBuff.toString();
+	}
 
 }
