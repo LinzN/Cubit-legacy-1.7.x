@@ -445,7 +445,7 @@ public class LanguageYaml {
 		cubitHelpHeaderP1 = this.getLanguageString("theme.cubitHelpPage1.header",
 				"&6<<<<<<<<<<<<<<<<<<<<&2&l|Cubit|&6>>>>>>>>>>>>>>>>>>>>");
 		cubitHelpE1P1 = this.getLanguageString("theme.cubitHelpPage1.help1","&2 Cubit version: &e/cubit version");
-		cubitHelpE1P1 = this.getLanguageString("theme.cubitHelpPage1.help2","&2 Reload cubit: &e/cubit reload");
+		cubitHelpE2P1 = this.getLanguageString("theme.cubitHelpPage1.help2","&2 Reload cubit: &e/cubit reload");
 
 	}
 
