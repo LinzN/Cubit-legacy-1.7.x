@@ -12,6 +12,7 @@ import org.bukkit.command.CommandSender;
 import com.google.common.collect.Maps;
 
 import de.linzn.cubit.bukkit.command.ICommand;
+import de.linzn.cubit.bukkit.command.cubit.main.HelpCubit;
 import de.linzn.cubit.bukkit.command.cubit.main.Reload;
 import de.linzn.cubit.bukkit.command.cubit.main.Version;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
@@ -61,6 +62,7 @@ public class CommandCubit implements CommandExecutor {
 		try {
 			PermissionNodes perm = CubitBukkitPlugin.inst().getPermNodes();
 			/* Protection CubitCommand */
+			this.cmdMap.put("help", new HelpCubit(this.plugin));
 			this.cmdMap.put("version", new Version(this.plugin));
 			this.cmdMap.put("reload", new Reload(this.plugin, perm.reloadCubit));
 
