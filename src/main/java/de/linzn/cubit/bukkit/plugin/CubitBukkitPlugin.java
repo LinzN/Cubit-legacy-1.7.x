@@ -1,6 +1,5 @@
 package de.linzn.cubit.bukkit.plugin;
 
-import org.bstats.Metrics;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
