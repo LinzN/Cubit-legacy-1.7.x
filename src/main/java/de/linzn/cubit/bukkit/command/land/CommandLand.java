@@ -98,6 +98,8 @@ public class CommandLand implements CommandExecutor {
 			this.cmdMap.put("verkaufen", new SellLand(this.plugin, perm.sellLand, false));
 			this.cmdMap.put("offer", new OfferLand(this.plugin, perm.offerLand, false));
 
+			this.cmdMap.put("map", new ShowMap(plugin));
+
 			this.cmdMap.put("takeoffer", new TakeOfferLand(this.plugin, perm.takeOfferLand));
 			this.cmdMap.put("buyup", new BuyupLand(this.plugin, perm.buyupLand));
 
@@ -139,6 +141,7 @@ public class CommandLand implements CommandExecutor {
 			this.cmdMap.put("save", new SaveUniversal(this.plugin, perm.saveLand, LandTypes.WORLD));
 			this.cmdMap.put("restore", new RestoreUniversal(this.plugin, perm.restoreLand, LandTypes.WORLD));
 			this.cmdMap.put("reset", new ResetUniversal(this.plugin, perm.resetLand, LandTypes.WORLD));
+
 
 			this.isLoaded = true;
 		} catch (Exception e) {

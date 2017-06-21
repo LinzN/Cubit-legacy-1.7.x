@@ -1,5 +1,6 @@
 package de.linzn.cubit.bukkit.plugin;
 
+import de.linzn.cubit.internal.landMap.MapManager;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -35,6 +36,8 @@ public class CubitBukkitPlugin extends JavaPlugin {
 	private Metrics metrics;
 	private SpigetCheck spigetCheck;
 
+	private MapManager mapManager;
+
 	@Override
 	public void onEnable() {
 		inst = this;
@@ -46,6 +49,9 @@ public class CubitBukkitPlugin extends JavaPlugin {
 			this.setEnabled(false);
 			return;
 		}
+
+		this.mapManager = new MapManager(this);
+
 		this.getServer().getPluginManager().registerEvents(new LoginListener(), this);
 
 		new SetupCommands(this);
@@ -62,6 +68,7 @@ public class CubitBukkitPlugin extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		HandlerList.unregisterAll(CubitBukkitPlugin.inst());
+		mapManager.removeAllMaps();
 	}
 
 	private boolean getPluginDepends() {
@@ -161,4 +168,7 @@ public class CubitBukkitPlugin extends JavaPlugin {
 		return this.yamlConfiguration;
 	}
 
+	public MapManager getMapManager() {
+		return mapManager;
+	}
 }
