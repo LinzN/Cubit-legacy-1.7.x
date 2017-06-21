@@ -31,6 +31,7 @@ import de.linzn.cubit.bukkit.command.universal.RemoveMemberUniversal;
 import de.linzn.cubit.bukkit.command.universal.ResetUniversal;
 import de.linzn.cubit.bukkit.command.universal.RestoreUniversal;
 import de.linzn.cubit.bukkit.command.universal.SaveUniversal;
+import de.linzn.cubit.bukkit.command.universal.ShowMapUniversal;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import de.linzn.cubit.bukkit.plugin.PermissionNodes;
 import de.linzn.cubit.internal.regionMgr.LandTypes;
@@ -98,7 +99,7 @@ public class CommandLand implements CommandExecutor {
 			this.cmdMap.put("verkaufen", new SellLand(this.plugin, perm.sellLand, false));
 			this.cmdMap.put("offer", new OfferLand(this.plugin, perm.offerLand, false));
 
-			this.cmdMap.put("map", new ShowMap(plugin));
+			this.cmdMap.put("map", new ShowMapUniversal(plugin, perm.showMapLand, LandTypes.WORLD));
 
 			this.cmdMap.put("takeoffer", new TakeOfferLand(this.plugin, perm.takeOfferLand));
 			this.cmdMap.put("buyup", new BuyupLand(this.plugin, perm.buyupLand));

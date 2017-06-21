@@ -56,6 +56,7 @@ permissions:
             cubit.command.land.savesnapshot: true
             cubit.command.land.resetsnapshot: true
             cubit.command.land.listsnapshots: true
+            cubit.command.land.showmap: true
     cubit.command.user.shop:
         description:  User command permissions
         children:
@@ -143,6 +144,9 @@ permissions:
         description: Haupt-Hilfeseite
         default: op
     cubit.command.land.buyup:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.land.showmap:
         description: Haupt-Hilfeseite
         default: op
     cubit.command.land.flag.pvp:

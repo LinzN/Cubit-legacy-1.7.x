@@ -28,6 +28,7 @@ public class PermissionNodes {
 	public String restoreLand = "cubit.command.land.restoresnapshot";
 	public String resetLand = "cubit.command.land.resetsnapshot";
 	public String listSavesLand = "cubit.command.land.listsnapshots";
+	public String showMapLand = "cubit.command.land.showmap";
 	/* Shop Perms */
 	public String buyShop = "cubit.command.shop.buy";
 	public String sellShop = "cubit.command.shop.sell";

@@ -31,12 +31,12 @@ public class CubitBukkitPlugin extends JavaPlugin {
 	private VaultManager vaultMrg;
 	private DatabaseManager databaseMrg;
 	private EntityManager entityMrg;
+	private MapManager mapMrg;
 	private PermissionNodes permNodes;
 	private YamlConfigurationManager yamlConfiguration;
 	private Metrics metrics;
 	private SpigetCheck spigetCheck;
 
-	private MapManager mapManager;
 
 	@Override
 	public void onEnable() {
@@ -50,7 +50,7 @@ public class CubitBukkitPlugin extends JavaPlugin {
 			return;
 		}
 
-		this.mapManager = new MapManager(this);
+		
 
 		this.getServer().getPluginManager().registerEvents(new LoginListener(), this);
 
@@ -68,7 +68,7 @@ public class CubitBukkitPlugin extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		HandlerList.unregisterAll(CubitBukkitPlugin.inst());
-		mapManager.removeAllMaps();
+		mapMrg.removeAllMaps();
 	}
 
 	private boolean getPluginDepends() {
@@ -112,6 +112,7 @@ public class CubitBukkitPlugin extends JavaPlugin {
 		this.permNodes = new PermissionNodes(this);
 		this.databaseMrg = new DatabaseManager(this);
 		this.entityMrg = new EntityManager(this);
+		this.mapMrg = new MapManager(this);
 		return true;
 
 	}
@@ -143,6 +144,10 @@ public class CubitBukkitPlugin extends JavaPlugin {
 	public EntityManager getEntityManager(){
 		return this.entityMrg;
 	}
+	
+	public MapManager getMapManager() {
+		return mapMrg;
+	}
 
 	public PermissionNodes getPermNodes() {
 		return this.permNodes;
@@ -156,7 +161,7 @@ public class CubitBukkitPlugin extends JavaPlugin {
 		return this.wePl;
 	}
 
-	public Metrics getEMetrics() {
+	public Metrics getMetrics() {
 		return this.metrics;
 	}
 
@@ -168,7 +173,4 @@ public class CubitBukkitPlugin extends JavaPlugin {
 		return this.yamlConfiguration;
 	}
 
-	public MapManager getMapManager() {
-		return mapManager;
-	}
 }

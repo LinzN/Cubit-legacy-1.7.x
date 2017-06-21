@@ -32,6 +32,7 @@ public class SettingsYaml {
 	public boolean landUseMaterialBorder;
 	public Material landBuyMaterialBorder;
 	public Material landSellMaterialBorder;
+	public boolean landUseScoreboardMap;
 
 	/* Shop module */
 
@@ -87,7 +88,8 @@ public class SettingsYaml {
 				.valueOf((String) this.getObjectValue("module.land.buyMaterialBorder", Material.TORCH.toString()));
 		this.landSellMaterialBorder = Material.valueOf(
 				(String) this.getObjectValue("module.land.sellMaterialBorder", Material.REDSTONE_TORCH_ON.toString()));
-
+		this.landUseScoreboardMap = (boolean) this.getObjectValue("module.land.useScoreboardMap", false);
+		
 		List<String> shopsEnabledWorlds = new ArrayList<>();
 		shopsEnabledWorlds.add("shops");
 		this.shopEnabledWorlds = (List<String>) this.getStringList("module.shop.enabledWorlds", shopsEnabledWorlds);
