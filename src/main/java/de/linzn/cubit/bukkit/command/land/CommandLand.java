@@ -20,7 +20,6 @@ import de.linzn.cubit.bukkit.command.land.main.OfferLand;
 import de.linzn.cubit.bukkit.command.land.main.SellLand;
 import de.linzn.cubit.bukkit.command.land.main.TakeOfferLand;
 import de.linzn.cubit.bukkit.command.universal.AddMemberUniversal;
-import de.linzn.cubit.bukkit.command.universal.ChangeBiomeUniversal;
 import de.linzn.cubit.bukkit.command.universal.ChangeFlagUniversal;
 import de.linzn.cubit.bukkit.command.universal.InfoUniversal;
 import de.linzn.cubit.bukkit.command.universal.KickUniversal;
@@ -29,9 +28,10 @@ import de.linzn.cubit.bukkit.command.universal.ListSnapshotsUniversal;
 import de.linzn.cubit.bukkit.command.universal.ListUniversal;
 import de.linzn.cubit.bukkit.command.universal.RemoveMemberUniversal;
 import de.linzn.cubit.bukkit.command.universal.ResetUniversal;
-import de.linzn.cubit.bukkit.command.universal.RestoreUniversal;
-import de.linzn.cubit.bukkit.command.universal.SaveUniversal;
 import de.linzn.cubit.bukkit.command.universal.ShowMapUniversal;
+import de.linzn.cubit.bukkit.command.universal.blockedit.EditBiomeUniversal;
+import de.linzn.cubit.bukkit.command.universal.blockedit.EditRestoreUniversal;
+import de.linzn.cubit.bukkit.command.universal.blockedit.EditSaveUniversal;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import de.linzn.cubit.bukkit.plugin.PermissionNodes;
 import de.linzn.cubit.internal.regionMgr.LandTypes;
@@ -133,14 +133,14 @@ public class CommandLand implements CommandExecutor {
 							perm.flagLand + "potion", LandTypes.WORLD, false));
 
 			this.cmdMap.put("changebiome",
-					new ChangeBiomeUniversal(this.plugin, perm.changeBiomeLand, LandTypes.WORLD, false));
+					new EditBiomeUniversal(this.plugin, perm.changeBiomeLand, LandTypes.WORLD, false));
 
 			this.cmdMap.put("listbiomes", new ListBiomesUniversal(this.plugin, perm.listBiomesLand, LandTypes.WORLD));
 			this.cmdMap.put("listsaves",
 					new ListSnapshotsUniversal(this.plugin, perm.listSavesLand, LandTypes.WORLD, false));
 
-			this.cmdMap.put("save", new SaveUniversal(this.plugin, perm.saveLand, LandTypes.WORLD));
-			this.cmdMap.put("restore", new RestoreUniversal(this.plugin, perm.restoreLand, LandTypes.WORLD));
+			this.cmdMap.put("save", new EditSaveUniversal(this.plugin, perm.saveLand, LandTypes.WORLD));
+			this.cmdMap.put("restore", new EditRestoreUniversal(this.plugin, perm.restoreLand, LandTypes.WORLD));
 			this.cmdMap.put("reset", new ResetUniversal(this.plugin, perm.resetLand, LandTypes.WORLD));
 
 

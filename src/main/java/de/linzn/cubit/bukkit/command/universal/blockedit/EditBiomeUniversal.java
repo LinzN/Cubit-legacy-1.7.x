@@ -1,4 +1,4 @@
-package de.linzn.cubit.bukkit.command.universal;
+package de.linzn.cubit.bukkit.command.universal.blockedit;
 
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -12,14 +12,14 @@ import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import de.linzn.cubit.internal.regionMgr.LandTypes;
 import de.linzn.cubit.internal.regionMgr.region.RegionData;
 
-public class ChangeBiomeUniversal implements ICommand {
+public class EditBiomeUniversal implements ICommand {
 
 	private CubitBukkitPlugin plugin;
 	private String permNode;
 	private LandTypes type;
 	private boolean isAdmin;
 
-	public ChangeBiomeUniversal(CubitBukkitPlugin plugin, String permNode, LandTypes type, boolean isAdmin) {
+	public EditBiomeUniversal(CubitBukkitPlugin plugin, String permNode, LandTypes type, boolean isAdmin) {
 		this.plugin = plugin;
 		this.isAdmin = isAdmin;
 

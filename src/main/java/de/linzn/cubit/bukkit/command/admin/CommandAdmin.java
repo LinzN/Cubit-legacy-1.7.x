@@ -20,12 +20,12 @@ import de.linzn.cubit.bukkit.command.admin.main.HelpAdmin;
 import de.linzn.cubit.bukkit.command.land.main.OfferLand;
 import de.linzn.cubit.bukkit.command.land.main.SellLand;
 import de.linzn.cubit.bukkit.command.universal.AddMemberUniversal;
-import de.linzn.cubit.bukkit.command.universal.ChangeBiomeUniversal;
 import de.linzn.cubit.bukkit.command.universal.ChangeFlagUniversal;
 import de.linzn.cubit.bukkit.command.universal.ListBiomesUniversal;
 import de.linzn.cubit.bukkit.command.universal.ListSnapshotsUniversal;
 import de.linzn.cubit.bukkit.command.universal.ListUniversal;
 import de.linzn.cubit.bukkit.command.universal.RemoveMemberUniversal;
+import de.linzn.cubit.bukkit.command.universal.blockedit.EditBiomeUniversal;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import de.linzn.cubit.bukkit.plugin.PermissionNodes;
 import de.linzn.cubit.internal.regionMgr.LandTypes;
@@ -103,7 +103,7 @@ public class CommandAdmin implements CommandExecutor {
 			this.cmdMap.put("deleteshop", new DeleteShopAdmin(this.plugin, perm.deleteShopAdminLand));
 
 			this.cmdMap.put("changebiome",
-					new ChangeBiomeUniversal(this.plugin, perm.changeBiomeAdminLand, LandTypes.NOTYPE, true));
+					new EditBiomeUniversal(this.plugin, perm.changeBiomeAdminLand, LandTypes.NOTYPE, true));
 			this.cmdMap.put("listbiomes",
 					new ListBiomesUniversal(this.plugin, perm.listBiomesAdminLand, LandTypes.NOTYPE));
 			this.cmdMap.put("list", new ListUniversal(this.plugin, perm.listAdminLand, LandTypes.NOTYPE, true));

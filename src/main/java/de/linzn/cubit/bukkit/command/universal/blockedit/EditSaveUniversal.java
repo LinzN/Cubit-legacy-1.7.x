@@ -1,4 +1,4 @@
-package de.linzn.cubit.bukkit.command.universal;
+package de.linzn.cubit.bukkit.command.universal.blockedit;
 
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -11,13 +11,13 @@ import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import de.linzn.cubit.internal.regionMgr.LandTypes;
 import de.linzn.cubit.internal.regionMgr.region.RegionData;
 
-public class RestoreUniversal implements ICommand {
+public class EditSaveUniversal implements ICommand {
 
 	private CubitBukkitPlugin plugin;
 	private String permNode;
 	private LandTypes type;
 
-	public RestoreUniversal(CubitBukkitPlugin plugin, String permNode, LandTypes type) {
+	public EditSaveUniversal(CubitBukkitPlugin plugin, String permNode, LandTypes type) {
 		this.plugin = plugin;
 		this.permNode = permNode;
 		this.type = type;
@@ -59,13 +59,6 @@ public class RestoreUniversal implements ICommand {
 		 * Check if the player has permissions for this land or hat landadmin
 		 * permissions
 		 */
-
-		if (args.length < 2) {
-			sender.sendMessage(plugin.getYamlManager().getLanguage().wrongArguments.replace("{usage}",
-					"/" + cmd.getLabel() + " " + args[0].toLowerCase() + " [SnapshotName]"));
-			return true;
-		}
-
 		if (!plugin.getRegionManager().isValidRegion(loc.getWorld(), chunk.getX(), chunk.getZ())) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandFound);
 			return true;
@@ -83,14 +76,14 @@ public class RestoreUniversal implements ICommand {
 			return true;
 		}
 
-		String snapshotName = args[1].toLowerCase();
+		String snapshotName = regionData.getRegionName().toLowerCase();
 
-		if (!plugin.getBlockManager().getSnapshotHandler().isSnapshot(player.getUniqueId(), snapshotName)) {
-			sender.sendMessage(plugin.getYamlManager().getLanguage().noSnapshot);
+		if (plugin.getBlockManager().getSnapshotHandler().isSnapshot(player.getUniqueId(), snapshotName)) {
+			sender.sendMessage(plugin.getYamlManager().getLanguage().alreadySnapshot);
 			return true;
 		}
 
-		double economyValue = plugin.getYamlManager().getSettings().landRestoreSnapshotPrice;
+		double economyValue = plugin.getYamlManager().getSettings().landSaveSnapshotPrice;
 
 		if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), economyValue)) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
@@ -100,27 +93,25 @@ public class RestoreUniversal implements ICommand {
 
 		if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), null, economyValue)) {
 			/* If this task failed! This should never happen */
-			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "RESTORE-ECONOMY"));
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SAVE-ECONOMY"));
 			plugin.getLogger()
-					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "RESTORE-ECONOMY"));
+					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SAVE-ECONOMY"));
 			return true;
 		}
 
-		if (!this.plugin.getBlockManager().getSnapshotHandler().restoreSnapshot(player.getUniqueId(), chunk,
+		if (!this.plugin.getBlockManager().getSnapshotHandler().createSnapshot(player.getUniqueId(), chunk,
 				snapshotName, true)) {
 			/* If this task failed! This should never happen */
-			sender.sendMessage(
-					plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "RESTORE-SNAPSHOT"));
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SAVE-SNAPSHOT"));
 			plugin.getLogger()
-					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "RESTORE-SNAPSHOT"));
+					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SAVE-SNAPSHOT"));
 			return true;
 		}
 
 		sender.sendMessage(
-				plugin.getYamlManager().getLanguage().restoredSnapshot.replace("{snapshotName}", snapshotName));
+				plugin.getYamlManager().getLanguage().savedSnapshot.replace("{regionID}", regionData.getRegionName()));
 
 		return true;
-
 	}
 
 }
