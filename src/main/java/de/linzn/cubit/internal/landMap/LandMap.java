@@ -29,9 +29,6 @@ import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.*;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -41,10 +38,8 @@ import java.util.UUID;
 public class LandMap {
 
 	Player mapViewer;
-	// Scoreboard playerMap;
 	int schedulerId;
 	Chunk currChunk;
-	List<RegionData> nearbyLand = new ArrayList<>();
 	String currDir;
 	private CubitBukkitPlugin plugin;
 
@@ -52,42 +47,7 @@ public class LandMap {
 		this.plugin = plugin;
 		this.mapViewer = p;
 		this.currChunk = p.getLocation().getChunk();
-		// System.out.println("CURR: "+currChunk);
-
-		for (int x = -3; x <= 3; x++) {
-			for (int z = -3; z <= 3; z++) {
-				if (plugin.getRegionManager().isValidRegion(currChunk.getWorld(), currChunk.getX() + x,
-						currChunk.getZ() + z)) {
-					RegionData data = plugin.getRegionManager().praseRegionData(currChunk.getWorld(),
-							currChunk.getX() + x, currChunk.getZ() + z);
-					nearbyLand.add(data);
-				}
-			}
-		}
-
-		// displayMap(mapViewer);
 		this.currDir = getPlayerDirection(mapViewer);
-
-		new BukkitRunnable() {
-
-			@Override
-			public void run() {
-				displayMap(mapViewer);
-			}
-		}.runTask(plugin);
-
-		/*
-		 * this.schedulerId =
-		 * Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Landlord.
-		 * getInstance(), new BukkitRunnable() {
-		 * 
-		 * @Override public void run() {
-		 * if(!currDir.equals(getPlayerDirection(mapViewer)) ||
-		 * !currChunk.equals(mapViewer.getLocation().getChunk())){
-		 * displayMap(mapViewer); currDir = getPlayerDirection(mapViewer); }
-		 * 
-		 * } }, 0L, 7L);
-		 */
 
 		this.schedulerId = new BukkitRunnable() {
 			public void run() {
@@ -157,91 +117,159 @@ public class LandMap {
 
 	public static String[][] getMapDir(String dir) {
 
-		String[][] mapDir = new String[][] { { "▓", "▒", "▒", "∞", "▒", "▒", "▓" },
-				{ "▒", "▓", "▒", "∞", "▒", "▓", "▒" }, { "▒", "▒", "▓", "∞", "▓", "▒", "▒" },
-				{ "▓", "▒", "▓", "█", "▒", "▓", "▒" }, { "▓", "▓", "▒", "▒", "▒", "▓", "▓" },
-				{ "▓", "▒", "▓", "▓", "▓", "▒", "▓" }, { "▒", "▓", "▓", "▓", "▓", "▓", "▒" } };
+		String[][] mapDir = new String[][] { 
+			{ "▓", "█", "█", "∞", "█", "█", "▓" },
+			{ "█", "▓", "█", "∞", "█", "▓", "█" }, 
+			{ "█", "█", "▓", "∞", "▓", "█", "█" },
+			{ "▓", "█", "▓", "█", "█", "▓", "█" }, 
+			{ "▓", "▓", "█", "█", "█", "▓", "▓" },
+			{ "▓", "█", "▓", "▓", "▓", "█", "▓" }, 
+			{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 
 		if (dir.equals("west")) {
-			mapDir = new String[][] { { "▓", "▒", "▒", "▒", "▒", "▒", "▓" }, { "▒", "▓", "▒", "▓", "▒", "▓", "▒" },
-					{ "▒", "▒", "▓", "▒", "▓", "▒", "▒" }, { "∞", "∞", "∞", "\u2062", "▒", "▓", "▒" },
-					{ "▓", "▓", "▒", "▒", "▒", "▓", "▓" }, { "▓", "▒", "▓", "▓", "▓", "▒", "▓" },
-					{ "▒", "▓", "▓", "▓", "▓", "▓", "▒" } };
+			mapDir = new String[][] { 
+			{ "▓", "█", "█", "█", "█", "█", "▓" }, 
+			{ "█", "▓", "█", "▓", "█", "▓", "█" },
+			{ "█", "█", "▓", "█", "▓", "█", "█" }, 
+			{ "∞", "∞", "∞", "\u2062", "█", "▓", "█" },
+			{ "▓", "▓", "█", "█", "█", "▓", "▓" }, 
+			{ "▓", "█", "▓", "▓", "▓", "█", "▓" },
+			{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("west northwest")) {
-			mapDir = new String[][] { { "▓", "▒", "▒", "▒", "▒", "▒", "▓" }, { "∞", "▓", "▒", "▓", "▒", "▓", "▒" },
-					{ "▒", "∞", "∞", "▒", "▓", "▒", "▒" }, { "▓", "▒", "▓", "\u2062", "▒", "▓", "▒" },
-					{ "▓", "▓", "▒", "▒", "▒", "▓", "▓" }, { "▓", "▒", "▓", "▓", "▓", "▒", "▓" },
-					{ "▒", "▓", "▓", "▓", "▓", "▓", "▒" } };
+			mapDir = new String[][] { 
+			{ "▓", "█", "█", "█", "█", "█", "▓" }, 
+			{ "∞", "▓", "█", "▓", "█", "▓", "█" },
+			{ "█", "∞", "∞", "█", "▓", "█", "█" }, 
+			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+			{ "▓", "▓", "█", "█", "█", "▓", "▓" }, 
+			{ "▓", "█", "▓", "▓", "▓", "█", "▓" },
+			{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("northwest")) {
-			mapDir = new String[][] { { "∞", "▒", "▒", "▒", "▒", "▒", "▓" }, { "▒", "∞", "▒", "▓", "▒", "▓", "▒" },
-					{ "▒", "▒", "∞", "▒", "▓", "▒", "▒" }, { "▓", "▒", "▓", "\u2062", "▒", "▓", "▒" },
-					{ "▓", "▓", "▒", "▒", "▒", "▓", "▓" }, { "▓", "▒", "▓", "▓", "▓", "▒", "▓" },
-					{ "▒", "▓", "▓", "▓", "▓", "▓", "▒" } };
+			mapDir = new String[][] { 
+			{ "∞", "█", "█", "█", "█", "█", "▓" }, 
+			{ "█", "∞", "█", "▓", "█", "▓", "█" },
+			{ "█", "█", "∞", "█", "▓", "█", "█" }, 
+			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+			{ "▓", "▓", "█", "█", "█", "▓", "▓" }, 
+			{ "▓", "█", "▓", "▓", "▓", "█", "▓" },
+			{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("north northwest")) {
-			mapDir = new String[][] { { "▓", "∞", "▒", "▒", "▒", "▒", "▓" }, { "▒", "▓", "∞", "▓", "▒", "▓", "▒" },
-					{ "▒", "▒", "∞", "▒", "▓", "▒", "▒" }, { "▓", "▒", "▓", "\u2062", "▒", "▓", "▒" },
-					{ "▓", "▓", "▒", "▒", "▒", "▓", "▓" }, { "▓", "▒", "▓", "▓", "▓", "▒", "▓" },
-					{ "▒", "▓", "▓", "▓", "▓", "▓", "▒" } };
+			mapDir = new String[][] { 
+			{ "▓", "∞", "█", "█", "█", "█", "▓" },
+			{ "█", "▓", "∞", "▓", "█", "▓", "█" },
+			{ "█", "█", "∞", "█", "▓", "█", "█" }, 
+			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+			{ "▓", "▓", "█", "█", "█", "▓", "▓" }, 
+			{ "▓", "█", "▓", "▓", "▓", "█", "▓" },
+			{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("north")) {
-			mapDir = new String[][] { { "▓", "▒", "▒", "∞", "▒", "▒", "▓" }, { "▒", "▓", "▒", "∞", "▒", "▓", "▒" },
-					{ "▒", "▒", "▓", "∞", "▓", "▒", "▒" }, { "▓", "▒", "▓", "\u2062", "▒", "▓", "▒" },
-					{ "▓", "▓", "▒", "▒", "▒", "▓", "▓" }, { "▓", "▒", "▓", "▓", "▓", "▒", "▓" },
-					{ "▒", "▓", "▓", "▓", "▓", "▓", "▒" } };
+			mapDir = new String[][] { 
+			{ "▓", "█", "█", "∞", "█", "█", "▓" }, 
+			{ "█", "▓", "█", "∞", "█", "▓", "█" },
+			{ "█", "█", "▓", "∞", "▓", "█", "█" }, 
+			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+			{ "▓", "▓", "█", "█", "█", "▓", "▓" }, 
+			{ "▓", "█", "▓", "▓", "▓", "█", "▓" },
+			{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("north northeast")) {
-			mapDir = new String[][] { { "▓", "▒", "▒", "▒", "▒", "∞", "▓" }, { "▒", "▓", "▒", "▓", "∞", "▓", "▒" },
-					{ "▒", "▒", "▓", "▒", "∞", "▒", "▒" }, { "▓", "▒", "▓", "\u2062", "▒", "▓", "▒" },
-					{ "▓", "▓", "▒", "▒", "▒", "▓", "▓" }, { "▓", "▒", "▓", "▓", "▓", "▒", "▓" },
-					{ "▒", "▓", "▓", "▓", "▓", "▓", "▒" } };
+			mapDir = new String[][] { 
+			{ "▓", "█", "█", "█", "█", "∞", "▓" }, 
+			{ "█", "▓", "█", "▓", "∞", "▓", "█" },
+			{ "█", "█", "▓", "█", "∞", "█", "█" }, 
+			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+			{ "▓", "▓", "█", "█", "█", "▓", "▓" }, 
+			{ "▓", "█", "▓", "▓", "▓", "█", "▓" },
+			{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("northeast")) {
-			mapDir = new String[][] { { "▓", "▒", "▒", "▒", "▒", "▒", "∞" }, { "▒", "▓", "▒", "▓", "▒", "∞", "▒" },
-					{ "▒", "▒", "▓", "▒", "∞", "▒", "▒" }, { "▓", "▒", "▓", "\u2062", "▒", "▓", "▒" },
-					{ "▓", "▓", "▒", "▒", "▒", "▓", "▓" }, { "▓", "▒", "▓", "▓", "▓", "▒", "▓" },
-					{ "▒", "▓", "▓", "▓", "▓", "▓", "▒" } };
+			mapDir = new String[][] { 
+			{ "▓", "█", "█", "█", "█", "█", "∞" },
+			{ "█", "▓", "█", "▓", "█", "∞", "█" },
+			{ "█", "█", "▓", "█", "∞", "█", "█" },
+			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+			{ "▓", "▓", "█", "█", "█", "▓", "▓" }, 
+			{ "▓", "█", "▓", "▓", "▓", "█", "▓" },
+			{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("east northeast")) {
-			mapDir = new String[][] { { "▓", "▒", "▒", "▒", "▒", "▒", "▓" }, { "▒", "▓", "▒", "▓", "▒", "▓", "∞" },
-					{ "▒", "▒", "▓", "▒", "∞", "∞", "▒" }, { "▓", "▒", "▓", "\u2062", "▒", "▓", "▒" },
-					{ "▓", "▓", "▒", "▒", "▒", "▓", "▓" }, { "▓", "▒", "▓", "▓", "▓", "▒", "▓" },
-					{ "▒", "▓", "▓", "▓", "▓", "▓", "▒" } };
+			mapDir = new String[][] { 
+			{ "▓", "█", "█", "█", "█", "█", "▓" }, 
+			{ "█", "▓", "█", "▓", "█", "▓", "∞" },
+			{ "█", "█", "▓", "█", "∞", "∞", "█" }, 
+			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+			{ "▓", "▓", "█", "█", "█", "▓", "▓" }, 
+			{ "▓", "█", "▓", "▓", "▓", "█", "▓" },
+			{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("east")) {
-			mapDir = new String[][] { { "▓", "▒", "▒", "▒", "▒", "▒", "▓" }, { "▒", "▓", "▒", "▓", "▒", "▓", "▒" },
-					/**/{ "▒", "▒", "▓", "▒", "▓", "▒", "▒" }, { "▓", "▒", "▓", "\u2062", "∞", "∞", "∞" },
-					{ "▓", "▓", "▒", "▒", "▒", "▓", "▓" }, { "▓", "▒", "▓", "▓", "▓", "▒", "▓" },
-					{ "▒", "▓", "▓", "▓", "▓", "▓", "▒" } };
+			mapDir = new String[][] {
+			{ "▓", "█", "█", "█", "█", "█", "▓" }, 
+			{ "█", "▓", "█", "▓", "█", "▓", "█" },
+			{ "█", "█", "▓", "█", "▓", "█", "█" }, 
+			{ "▓", "█", "▓", "\u2062", "∞", "∞", "∞" },
+			{ "▓", "▓", "█", "█", "█", "▓", "▓" }, 
+			{ "▓", "█", "▓", "▓", "▓", "█", "▓" },
+					{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("east southeast")) {
-			mapDir = new String[][] { { "▓", "▒", "▒", "▒", "▒", "▒", "▓" }, { "▒", "▓", "▒", "▓", "▒", "▓", "▒" },
-					{ "▒", "▒", "▓", "▒", "▓", "▒", "▒" }, { "▓", "▒", "▓", "\u2062", "▒", "▓", "▒" },
-					{ "▓", "▓", "▒", "▒", "∞", "∞", "▓" }, { "▓", "▒", "▓", "▓", "▓", "▒", "∞" },
-					{ "▒", "▓", "▓", "▓", "▓", "▓", "▒" } };
+			mapDir = new String[][] { 
+			{ "▓", "█", "█", "█", "█", "█", "▓" },
+			{ "█", "▓", "█", "▓", "█", "▓", "█" },
+			{ "█", "█", "▓", "█", "▓", "█", "█" }, 
+			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+			{ "▓", "▓", "█", "█", "∞", "∞", "▓" }, 
+			{ "▓", "█", "▓", "▓", "▓", "█", "∞" },
+			{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("southeast")) {
-			mapDir = new String[][] { { "▓", "▒", "▒", "▒", "▒", "▒", "▓" }, { "▒", "▓", "▒", "▓", "▒", "▓", "▒" },
-					{ "▒", "▒", "▓", "▒", "▓", "▒", "▒" }, { "▓", "▒", "▓", "\u2062", "▒", "▓", "▒" },
-					{ "▓", "▓", "▒", "▒", "∞", "▓", "▓" }, { "▓", "▒", "▓", "▓", "▓", "∞", "▓" },
-					{ "▒", "▓", "▓", "▓", "▓", "▓", "∞" } };
+			mapDir = new String[][] { 
+			{ "▓", "█", "█", "█", "█", "█", "▓" },
+			{ "█", "▓", "█", "▓", "█", "▓", "█" },
+			{ "█", "█", "▓", "█", "▓", "█", "█" },
+			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+			{ "▓", "▓", "█", "█", "∞", "▓", "▓" }, 
+			{ "▓", "█", "▓", "▓", "▓", "∞", "▓" },
+			{ "█", "▓", "▓", "▓", "▓", "▓", "∞" } };
 		} else if (dir.equals("south southeast")) {
-			mapDir = new String[][] { { "▓", "▒", "▒", "▒", "▒", "▒", "▓" }, { "▒", "▓", "▒", "▓", "▒", "▓", "▒" },
-					{ "▒", "▒", "▓", "▒", "▓", "▒", "▒" }, { "▓", "▒", "▓", "\u2062", "▒", "▓", "▒" },
-					{ "▓", "▓", "▒", "▒", "∞", "▓", "▓" }, { "▓", "▒", "▓", "▓", "∞", "▒", "▓" },
-					{ "▒", "▓", "▓", "▓", "▓", "∞", "▒" } };
+			mapDir = new String[][] { 
+			{ "▓", "█", "█", "█", "█", "█", "▓" }, 
+			{ "█", "▓", "█", "▓", "█", "▓", "█" },
+			{ "█", "█", "▓", "█", "▓", "█", "█" }, 
+			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+			{ "▓", "▓", "█", "█", "∞", "▓", "▓" }, 
+			{ "▓", "█", "▓", "▓", "∞", "█", "▓" },
+			{ "█", "▓", "▓", "▓", "▓", "∞", "█" } };
 		} else if (dir.equals("south")) {
-			mapDir = new String[][] { { "▓", "▒", "▒", "▒", "▒", "▒", "▓" }, { "▒", "▓", "▒", "▓", "▒", "▓", "▒" },
-					{ "▒", "▒", "▓", "▒", "▓", "▒", "▒" }, { "▓", "▒", "▓", "\u2062", "▒", "▓", "▒" },
-					{ "▓", "▓", "▒", "∞", "▒", "▓", "▓" }, { "▓", "▒", "▓", "∞", "▓", "▒", "▓" },
-					{ "▒", "▓", "▓", "∞", "▓", "▓", "▒" } };
+			mapDir = new String[][] { 
+			{ "▓", "█", "█", "█", "█", "█", "▓" }, 
+			{ "█", "▓", "█", "▓", "█", "▓", "█" },
+			{ "█", "█", "▓", "█", "▓", "█", "█" },
+			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+			{ "▓", "▓", "█", "∞", "█", "▓", "▓" }, 
+			{ "▓", "█", "▓", "∞", "▓", "█", "▓" },
+			{ "█", "▓", "▓", "∞", "▓", "▓", "█" } };
 		} else if (dir.equals("south southwest")) {
-			mapDir = new String[][] { { "▓", "▒", "▒", "▒", "▒", "▒", "▓" }, { "▒", "▓", "▒", "▓", "▒", "▓", "▒" },
-					{ "▒", "▒", "▓", "▒", "▓", "▒", "▒" }, { "▓", "▒", "▓", "\u2062", "▒", "▓", "▒" },
-					{ "▓", "▓", "∞", "▒", "▒", "▓", "▓" }, { "▓", "▒", "∞", "▓", "▓", "▒", "▓" },
-					{ "▒", "∞", "▓", "▓", "▓", "▓", "▒" } };
+			mapDir = new String[][] { 
+			{ "▓", "█", "█", "█", "█", "█", "▓" }, 
+			{ "█", "▓", "█", "▓", "█", "▓", "█" },
+			{ "█", "█", "▓", "█", "▓", "█", "█" }, 
+			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+			{ "▓", "▓", "∞", "█", "█", "▓", "▓" }, 
+			{ "▓", "█", "∞", "▓", "▓", "█", "▓" },
+			{ "█", "∞", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("southwest")) {
-			mapDir = new String[][] { { "▓", "▒", "▒", "▒", "▒", "▒", "▓" }, { "▒", "▓", "▒", "▓", "▒", "▓", "▒" },
-					{ "▒", "▒", "▓", "▒", "▓", "▒", "▒" }, { "▓", "▒", "▓", "\u2062", "▒", "▓", "▒" },
-					{ "▓", "▓", "∞", "▒", "▒", "▓", "▓" }, { "▓", "∞", "▓", "▓", "▓", "▒", "▓" },
-					{ "∞", "▓", "▓", "▓", "▓", "▓", "▒" } };
+			mapDir = new String[][] { 
+			{ "▓", "█", "█", "█", "█", "█", "▓" }, 
+			{ "█", "▓", "█", "▓", "█", "▓", "█" },
+			{ "█", "█", "▓", "█", "▓", "█", "█" }, 
+			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+			{ "▓", "▓", "∞", "█", "█", "▓", "▓" }, 
+			{ "▓", "∞", "▓", "▓", "▓", "█", "▓" },
+			{ "∞", "▓", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("west southwest")) {
-			mapDir = new String[][] { { "▓", "▒", "▒", "▒", "▒", "▒", "▓" }, { "▒", "▓", "▒", "▓", "▒", "▓", "▒" },
-					{ "▒", "▒", "▓", "▒", "▓", "▒", "▒" }, { "▓", "▒", "▓", "\u2062", "▒", "▓", "▒" },
-					{ "▓", "∞", "∞", "▒", "▒", "▓", "▓" }, { "∞", "▒", "▓", "▓", "▓", "▒", "▓" },
-					{ "▒", "▓", "▓", "▓", "▓", "▓", "▒" } };
+			mapDir = new String[][] { 
+			{ "▓", "█", "█", "█", "█", "█", "▓" },
+			{ "█", "▓", "█", "▓", "█", "▓", "█" },
+			{ "█", "█", "▓", "█", "▓", "█", "█" },
+			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+			{ "▓", "∞", "∞", "█", "█", "▓", "▓" },
+			{ "∞", "█", "▓", "▓", "▓", "█", "▓" },
+			{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 		}
 
 		return mapDir;
@@ -252,30 +280,20 @@ public class LandMap {
 	}
 
 	public void removeMap() {
-		new BukkitRunnable() {
-			public void run() {
-				mapViewer.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
-				Bukkit.getServer().getScheduler().cancelTask(schedulerId);
-			}
-		}.runTask(plugin);
+		mapViewer.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
+		Bukkit.getServer().getScheduler().cancelTask(schedulerId);
 
 	}
 
 	private Scoreboard displayMap(Player p) {
 		ScoreboardManager manager = Bukkit.getScoreboardManager();
 		Scoreboard board = manager.getNewScoreboard();
-		// Scoreboard board = manager.getMainScoreboard();
 		Team team = board.registerNewTeam("teamname");
 		team.addPlayer(p);
 
-		final String header = "LandMap";
+		final String header = "Cubit Lands";
 
 		Objective objective = board.registerNewObjective("Land Map", "dummy");
-		/*
-		 * ChatColor.STRIKETHROUGH+""+ChatColor.DARK_GREEN+
-		 * "=== "+ChatColor.RESET+""+ChatColor.DARK_GREEN +"Land Map"
-		 * +ChatColor.STRIKETHROUGH+""+ChatColor.DARK_GREEN+" ==="
-		 */
 		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
 		/**
@@ -301,7 +319,6 @@ public class LandMap {
 				}
 			}
 
-			// todo THIS BETTER NOT STAY!!!!!!
 			class myOfflinePlayer implements OfflinePlayer {
 				String name;
 
@@ -372,7 +389,6 @@ public class LandMap {
 
 			}
 
-			// todo
 			OfflinePlayer ofp = new myOfflinePlayer(mapData[i].substring(5, 17));
 
 			Score score = objective.getScore(ofp.getName());
@@ -384,38 +400,18 @@ public class LandMap {
 			t.setSuffix(mapData[i].substring(17));
 			t.addPlayer(ofp);
 			t.setDisplayName(mapData[i]);
-
-			// Score score = objective.getScore(Bukkit.getOfflinePlayer(i +
-			// ""));
-			// score.setScore((mapData.length)-i);
 		}
-		// Score score = objective.getScore(Bukkit.getOfflinePlayer()); //Get a
-		// fake offline player
-		// board.
 		p.setScoreboard(board);
 
 		return board;
 	}
 
 	public void updateMap() {
-		for (int x = -3; x <= 3; x++) {
-			for (int z = -3; z <= 3; z++) {
-				if (plugin.getRegionManager().isValidRegion(currChunk.getWorld(), currChunk.getX() + x,
-						currChunk.getZ() + z)) {
-					RegionData data = plugin.getRegionManager().praseRegionData(currChunk.getWorld(),
-							currChunk.getX() + x, currChunk.getZ() + z);
-					nearbyLand.add(data);
-				} else
-					nearbyLand.add(null);
-			}
-		}
 		currChunk = mapViewer.getLocation().getChunk();
 		currDir = "";
 	}
 
 	private String[] buildMap(Player p) {
-		// String st
-		// ="▒▒▒▓▒▒▒\n▒▒▓▓▓▒▒\n▒▓▓▓▓▓▒\n▓▓▓█▓▓▓\n▓▓▒▒▒▓▓\n▓▒▒▒▒▒▓\n▒▒▒▒▒▒▒";
 
 		final int radius = 3;
 
@@ -437,8 +433,6 @@ public class LandMap {
 
 				if (plugin.getRegionManager().isValidRegion(currChunk.getWorld(), currChunk.getX() + xx,
 						currChunk.getZ() + zz)) {
-					// System.out.println("Valid Region at " + currChunk.getX()
-					// + xx + ":" + currChunk.getZ() + zz);
 					RegionData data = plugin.getRegionManager().praseRegionData(currChunk.getWorld(),
 							currChunk.getX() + xx, currChunk.getZ() + zz);
 					if (data.praseWGRegion() != null) {
@@ -464,14 +458,11 @@ public class LandMap {
 						currSpot = ChatColor.GRAY + currSpot;
 					}
 				}
-				// System.out.println(currSpot);
 				row += currSpot;
 			}
-			// if currchunk changed
 			mapRows[z] = row;
 
 		}
-		// mapRows[0] = "";
 
 		/**
 		 * Locale strings are retrieved from file for use in map legend.

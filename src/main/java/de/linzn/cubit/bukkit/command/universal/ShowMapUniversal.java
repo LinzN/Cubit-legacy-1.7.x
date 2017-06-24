@@ -8,6 +8,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 /**
  * Created by spatium on 20.06.17.
@@ -34,7 +35,7 @@ public class ShowMapUniversal implements ICommand {
 		if (this.plugin.getYamlManager().getSettings().landUseScoreboardMap) {
 
 			/* Build and get all variables */
-			Player player = (Player) sender;
+			final Player player = (Player) sender;
 
 			/* Permission Check */
 			if (!player.hasPermission(this.permNode)) {
@@ -43,7 +44,11 @@ public class ShowMapUniversal implements ICommand {
 			}
 
 			try {
+				new BukkitRunnable() {
+					public void run() {
 				plugin.getMapManager().toggleMap(player);
+					}
+				}.runTask(plugin);
 			} catch (Exception e) {
 				e.printStackTrace();
 				sender.sendMessage(ChatColor.RED + "No map available");
