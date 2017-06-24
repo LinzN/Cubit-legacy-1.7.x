@@ -471,7 +471,7 @@ public class LandMap {
 		 */
 
 		final String yours = "Yours";
-		final String friends = "Friends";
+		final String member = "Member";
 		final String others = "Others";
 
 		if (yours.length() <= 25) {
@@ -480,10 +480,10 @@ public class LandMap {
 			mapRows[mapRows.length - 3] = ChatColor.GREEN + "█- " + yours.substring(0, 25);
 		}
 
-		if (friends.length() <= 25) {
-			mapRows[mapRows.length - 2] = ChatColor.YELLOW + "█- " + friends;
+		if (member.length() <= 25) {
+			mapRows[mapRows.length - 2] = ChatColor.YELLOW + "█- " + member;
 		} else {
-			mapRows[mapRows.length - 2] = ChatColor.YELLOW + "█- " + friends.substring(0, 25);
+			mapRows[mapRows.length - 2] = ChatColor.YELLOW + "█- " + member.substring(0, 25);
 		}
 
 		if (others.length() <= 25) {
