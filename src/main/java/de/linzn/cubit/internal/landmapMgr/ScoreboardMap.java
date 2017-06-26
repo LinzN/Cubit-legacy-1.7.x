@@ -57,7 +57,7 @@ public class ScoreboardMap {
 					currDir = getPlayerDirection(mapViewer);
 				}
 			}
-		}.runTaskTimer(plugin, 0L, 7L).getTaskId();
+		}.runTaskTimerAsynchronously(this.plugin, 0L, 7L).getTaskId();
 
 		new BukkitRunnable() {
 
@@ -65,7 +65,7 @@ public class ScoreboardMap {
 			public void run() {
 				displayMap(mapViewer);
 			}
-		}.runTask(plugin);
+		}.runTaskAsynchronously(plugin);
 
 	}
 
@@ -117,159 +117,91 @@ public class ScoreboardMap {
 
 	public static String[][] getMapDir(String dir) {
 
-		String[][] mapDir = new String[][] { 
-			{ "▓", "█", "█", "∞", "█", "█", "▓" },
-			{ "█", "▓", "█", "∞", "█", "▓", "█" }, 
-			{ "█", "█", "▓", "∞", "▓", "█", "█" },
-			{ "▓", "█", "▓", "█", "█", "▓", "█" }, 
-			{ "▓", "▓", "█", "█", "█", "▓", "▓" },
-			{ "▓", "█", "▓", "▓", "▓", "█", "▓" }, 
-			{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
+		String[][] mapDir = new String[][] { { "▓", "█", "█", "∞", "█", "█", "▓" },
+				{ "█", "▓", "█", "∞", "█", "▓", "█" }, { "█", "█", "▓", "∞", "▓", "█", "█" },
+				{ "▓", "█", "▓", "█", "█", "▓", "█" }, { "▓", "▓", "█", "█", "█", "▓", "▓" },
+				{ "▓", "█", "▓", "▓", "▓", "█", "▓" }, { "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 
 		if (dir.equals("west")) {
-			mapDir = new String[][] { 
-			{ "▓", "█", "█", "█", "█", "█", "▓" }, 
-			{ "█", "▓", "█", "▓", "█", "▓", "█" },
-			{ "█", "█", "▓", "█", "▓", "█", "█" }, 
-			{ "∞", "∞", "∞", "\u2062", "█", "▓", "█" },
-			{ "▓", "▓", "█", "█", "█", "▓", "▓" }, 
-			{ "▓", "█", "▓", "▓", "▓", "█", "▓" },
-			{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
+			mapDir = new String[][] { { "▓", "█", "█", "█", "█", "█", "▓" }, { "█", "▓", "█", "▓", "█", "▓", "█" },
+					{ "█", "█", "▓", "█", "▓", "█", "█" }, { "∞", "∞", "∞", "\u2062", "█", "▓", "█" },
+					{ "▓", "▓", "█", "█", "█", "▓", "▓" }, { "▓", "█", "▓", "▓", "▓", "█", "▓" },
+					{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("west northwest")) {
-			mapDir = new String[][] { 
-			{ "▓", "█", "█", "█", "█", "█", "▓" }, 
-			{ "∞", "▓", "█", "▓", "█", "▓", "█" },
-			{ "█", "∞", "∞", "█", "▓", "█", "█" }, 
-			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
-			{ "▓", "▓", "█", "█", "█", "▓", "▓" }, 
-			{ "▓", "█", "▓", "▓", "▓", "█", "▓" },
-			{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
+			mapDir = new String[][] { { "▓", "█", "█", "█", "█", "█", "▓" }, { "∞", "▓", "█", "▓", "█", "▓", "█" },
+					{ "█", "∞", "∞", "█", "▓", "█", "█" }, { "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+					{ "▓", "▓", "█", "█", "█", "▓", "▓" }, { "▓", "█", "▓", "▓", "▓", "█", "▓" },
+					{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("northwest")) {
-			mapDir = new String[][] { 
-			{ "∞", "█", "█", "█", "█", "█", "▓" }, 
-			{ "█", "∞", "█", "▓", "█", "▓", "█" },
-			{ "█", "█", "∞", "█", "▓", "█", "█" }, 
-			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
-			{ "▓", "▓", "█", "█", "█", "▓", "▓" }, 
-			{ "▓", "█", "▓", "▓", "▓", "█", "▓" },
-			{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
+			mapDir = new String[][] { { "∞", "█", "█", "█", "█", "█", "▓" }, { "█", "∞", "█", "▓", "█", "▓", "█" },
+					{ "█", "█", "∞", "█", "▓", "█", "█" }, { "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+					{ "▓", "▓", "█", "█", "█", "▓", "▓" }, { "▓", "█", "▓", "▓", "▓", "█", "▓" },
+					{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("north northwest")) {
-			mapDir = new String[][] { 
-			{ "▓", "∞", "█", "█", "█", "█", "▓" },
-			{ "█", "▓", "∞", "▓", "█", "▓", "█" },
-			{ "█", "█", "∞", "█", "▓", "█", "█" }, 
-			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
-			{ "▓", "▓", "█", "█", "█", "▓", "▓" }, 
-			{ "▓", "█", "▓", "▓", "▓", "█", "▓" },
-			{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
+			mapDir = new String[][] { { "▓", "∞", "█", "█", "█", "█", "▓" }, { "█", "▓", "∞", "▓", "█", "▓", "█" },
+					{ "█", "█", "∞", "█", "▓", "█", "█" }, { "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+					{ "▓", "▓", "█", "█", "█", "▓", "▓" }, { "▓", "█", "▓", "▓", "▓", "█", "▓" },
+					{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("north")) {
-			mapDir = new String[][] { 
-			{ "▓", "█", "█", "∞", "█", "█", "▓" }, 
-			{ "█", "▓", "█", "∞", "█", "▓", "█" },
-			{ "█", "█", "▓", "∞", "▓", "█", "█" }, 
-			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
-			{ "▓", "▓", "█", "█", "█", "▓", "▓" }, 
-			{ "▓", "█", "▓", "▓", "▓", "█", "▓" },
-			{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
+			mapDir = new String[][] { { "▓", "█", "█", "∞", "█", "█", "▓" }, { "█", "▓", "█", "∞", "█", "▓", "█" },
+					{ "█", "█", "▓", "∞", "▓", "█", "█" }, { "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+					{ "▓", "▓", "█", "█", "█", "▓", "▓" }, { "▓", "█", "▓", "▓", "▓", "█", "▓" },
+					{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("north northeast")) {
-			mapDir = new String[][] { 
-			{ "▓", "█", "█", "█", "█", "∞", "▓" }, 
-			{ "█", "▓", "█", "▓", "∞", "▓", "█" },
-			{ "█", "█", "▓", "█", "∞", "█", "█" }, 
-			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
-			{ "▓", "▓", "█", "█", "█", "▓", "▓" }, 
-			{ "▓", "█", "▓", "▓", "▓", "█", "▓" },
-			{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
+			mapDir = new String[][] { { "▓", "█", "█", "█", "█", "∞", "▓" }, { "█", "▓", "█", "▓", "∞", "▓", "█" },
+					{ "█", "█", "▓", "█", "∞", "█", "█" }, { "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+					{ "▓", "▓", "█", "█", "█", "▓", "▓" }, { "▓", "█", "▓", "▓", "▓", "█", "▓" },
+					{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("northeast")) {
-			mapDir = new String[][] { 
-			{ "▓", "█", "█", "█", "█", "█", "∞" },
-			{ "█", "▓", "█", "▓", "█", "∞", "█" },
-			{ "█", "█", "▓", "█", "∞", "█", "█" },
-			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
-			{ "▓", "▓", "█", "█", "█", "▓", "▓" }, 
-			{ "▓", "█", "▓", "▓", "▓", "█", "▓" },
-			{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
+			mapDir = new String[][] { { "▓", "█", "█", "█", "█", "█", "∞" }, { "█", "▓", "█", "▓", "█", "∞", "█" },
+					{ "█", "█", "▓", "█", "∞", "█", "█" }, { "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+					{ "▓", "▓", "█", "█", "█", "▓", "▓" }, { "▓", "█", "▓", "▓", "▓", "█", "▓" },
+					{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("east northeast")) {
-			mapDir = new String[][] { 
-			{ "▓", "█", "█", "█", "█", "█", "▓" }, 
-			{ "█", "▓", "█", "▓", "█", "▓", "∞" },
-			{ "█", "█", "▓", "█", "∞", "∞", "█" }, 
-			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
-			{ "▓", "▓", "█", "█", "█", "▓", "▓" }, 
-			{ "▓", "█", "▓", "▓", "▓", "█", "▓" },
-			{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
+			mapDir = new String[][] { { "▓", "█", "█", "█", "█", "█", "▓" }, { "█", "▓", "█", "▓", "█", "▓", "∞" },
+					{ "█", "█", "▓", "█", "∞", "∞", "█" }, { "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+					{ "▓", "▓", "█", "█", "█", "▓", "▓" }, { "▓", "█", "▓", "▓", "▓", "█", "▓" },
+					{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("east")) {
-			mapDir = new String[][] {
-			{ "▓", "█", "█", "█", "█", "█", "▓" }, 
-			{ "█", "▓", "█", "▓", "█", "▓", "█" },
-			{ "█", "█", "▓", "█", "▓", "█", "█" }, 
-			{ "▓", "█", "▓", "\u2062", "∞", "∞", "∞" },
-			{ "▓", "▓", "█", "█", "█", "▓", "▓" }, 
-			{ "▓", "█", "▓", "▓", "▓", "█", "▓" },
+			mapDir = new String[][] { { "▓", "█", "█", "█", "█", "█", "▓" }, { "█", "▓", "█", "▓", "█", "▓", "█" },
+					{ "█", "█", "▓", "█", "▓", "█", "█" }, { "▓", "█", "▓", "\u2062", "∞", "∞", "∞" },
+					{ "▓", "▓", "█", "█", "█", "▓", "▓" }, { "▓", "█", "▓", "▓", "▓", "█", "▓" },
 					{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("east southeast")) {
-			mapDir = new String[][] { 
-			{ "▓", "█", "█", "█", "█", "█", "▓" },
-			{ "█", "▓", "█", "▓", "█", "▓", "█" },
-			{ "█", "█", "▓", "█", "▓", "█", "█" }, 
-			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
-			{ "▓", "▓", "█", "█", "∞", "∞", "▓" }, 
-			{ "▓", "█", "▓", "▓", "▓", "█", "∞" },
-			{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
+			mapDir = new String[][] { { "▓", "█", "█", "█", "█", "█", "▓" }, { "█", "▓", "█", "▓", "█", "▓", "█" },
+					{ "█", "█", "▓", "█", "▓", "█", "█" }, { "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+					{ "▓", "▓", "█", "█", "∞", "∞", "▓" }, { "▓", "█", "▓", "▓", "▓", "█", "∞" },
+					{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("southeast")) {
-			mapDir = new String[][] { 
-			{ "▓", "█", "█", "█", "█", "█", "▓" },
-			{ "█", "▓", "█", "▓", "█", "▓", "█" },
-			{ "█", "█", "▓", "█", "▓", "█", "█" },
-			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
-			{ "▓", "▓", "█", "█", "∞", "▓", "▓" }, 
-			{ "▓", "█", "▓", "▓", "▓", "∞", "▓" },
-			{ "█", "▓", "▓", "▓", "▓", "▓", "∞" } };
+			mapDir = new String[][] { { "▓", "█", "█", "█", "█", "█", "▓" }, { "█", "▓", "█", "▓", "█", "▓", "█" },
+					{ "█", "█", "▓", "█", "▓", "█", "█" }, { "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+					{ "▓", "▓", "█", "█", "∞", "▓", "▓" }, { "▓", "█", "▓", "▓", "▓", "∞", "▓" },
+					{ "█", "▓", "▓", "▓", "▓", "▓", "∞" } };
 		} else if (dir.equals("south southeast")) {
-			mapDir = new String[][] { 
-			{ "▓", "█", "█", "█", "█", "█", "▓" }, 
-			{ "█", "▓", "█", "▓", "█", "▓", "█" },
-			{ "█", "█", "▓", "█", "▓", "█", "█" }, 
-			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
-			{ "▓", "▓", "█", "█", "∞", "▓", "▓" }, 
-			{ "▓", "█", "▓", "▓", "∞", "█", "▓" },
-			{ "█", "▓", "▓", "▓", "▓", "∞", "█" } };
+			mapDir = new String[][] { { "▓", "█", "█", "█", "█", "█", "▓" }, { "█", "▓", "█", "▓", "█", "▓", "█" },
+					{ "█", "█", "▓", "█", "▓", "█", "█" }, { "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+					{ "▓", "▓", "█", "█", "∞", "▓", "▓" }, { "▓", "█", "▓", "▓", "∞", "█", "▓" },
+					{ "█", "▓", "▓", "▓", "▓", "∞", "█" } };
 		} else if (dir.equals("south")) {
-			mapDir = new String[][] { 
-			{ "▓", "█", "█", "█", "█", "█", "▓" }, 
-			{ "█", "▓", "█", "▓", "█", "▓", "█" },
-			{ "█", "█", "▓", "█", "▓", "█", "█" },
-			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
-			{ "▓", "▓", "█", "∞", "█", "▓", "▓" }, 
-			{ "▓", "█", "▓", "∞", "▓", "█", "▓" },
-			{ "█", "▓", "▓", "∞", "▓", "▓", "█" } };
+			mapDir = new String[][] { { "▓", "█", "█", "█", "█", "█", "▓" }, { "█", "▓", "█", "▓", "█", "▓", "█" },
+					{ "█", "█", "▓", "█", "▓", "█", "█" }, { "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+					{ "▓", "▓", "█", "∞", "█", "▓", "▓" }, { "▓", "█", "▓", "∞", "▓", "█", "▓" },
+					{ "█", "▓", "▓", "∞", "▓", "▓", "█" } };
 		} else if (dir.equals("south southwest")) {
-			mapDir = new String[][] { 
-			{ "▓", "█", "█", "█", "█", "█", "▓" }, 
-			{ "█", "▓", "█", "▓", "█", "▓", "█" },
-			{ "█", "█", "▓", "█", "▓", "█", "█" }, 
-			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
-			{ "▓", "▓", "∞", "█", "█", "▓", "▓" }, 
-			{ "▓", "█", "∞", "▓", "▓", "█", "▓" },
-			{ "█", "∞", "▓", "▓", "▓", "▓", "█" } };
+			mapDir = new String[][] { { "▓", "█", "█", "█", "█", "█", "▓" }, { "█", "▓", "█", "▓", "█", "▓", "█" },
+					{ "█", "█", "▓", "█", "▓", "█", "█" }, { "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+					{ "▓", "▓", "∞", "█", "█", "▓", "▓" }, { "▓", "█", "∞", "▓", "▓", "█", "▓" },
+					{ "█", "∞", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("southwest")) {
-			mapDir = new String[][] { 
-			{ "▓", "█", "█", "█", "█", "█", "▓" }, 
-			{ "█", "▓", "█", "▓", "█", "▓", "█" },
-			{ "█", "█", "▓", "█", "▓", "█", "█" }, 
-			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
-			{ "▓", "▓", "∞", "█", "█", "▓", "▓" }, 
-			{ "▓", "∞", "▓", "▓", "▓", "█", "▓" },
-			{ "∞", "▓", "▓", "▓", "▓", "▓", "█" } };
+			mapDir = new String[][] { { "▓", "█", "█", "█", "█", "█", "▓" }, { "█", "▓", "█", "▓", "█", "▓", "█" },
+					{ "█", "█", "▓", "█", "▓", "█", "█" }, { "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+					{ "▓", "▓", "∞", "█", "█", "▓", "▓" }, { "▓", "∞", "▓", "▓", "▓", "█", "▓" },
+					{ "∞", "▓", "▓", "▓", "▓", "▓", "█" } };
 		} else if (dir.equals("west southwest")) {
-			mapDir = new String[][] { 
-			{ "▓", "█", "█", "█", "█", "█", "▓" },
-			{ "█", "▓", "█", "▓", "█", "▓", "█" },
-			{ "█", "█", "▓", "█", "▓", "█", "█" },
-			{ "▓", "█", "▓", "\u2062", "█", "▓", "█" },
-			{ "▓", "∞", "∞", "█", "█", "▓", "▓" },
-			{ "∞", "█", "▓", "▓", "▓", "█", "▓" },
-			{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
+			mapDir = new String[][] { { "▓", "█", "█", "█", "█", "█", "▓" }, { "█", "▓", "█", "▓", "█", "▓", "█" },
+					{ "█", "█", "▓", "█", "▓", "█", "█" }, { "▓", "█", "▓", "\u2062", "█", "▓", "█" },
+					{ "▓", "∞", "∞", "█", "█", "▓", "▓" }, { "∞", "█", "▓", "▓", "▓", "█", "▓" },
+					{ "█", "▓", "▓", "▓", "▓", "▓", "█" } };
 		}
 
 		return mapDir;
@@ -285,125 +217,64 @@ public class ScoreboardMap {
 
 	}
 
-	private Scoreboard displayMap(Player p) {
-		ScoreboardManager manager = Bukkit.getScoreboardManager();
-		Scoreboard board = manager.getNewScoreboard();
-		Team team = board.registerNewTeam("teamname");
-		team.addPlayer(p);
+	private Scoreboard displayMap(final Player p) {
+		final String[] mapData = buildMap(p);
 
-		final String header = "Cubit Lands";
+		this.plugin.getServer().getScheduler().runTask(this.plugin, new Runnable() {
 
-		Objective objective = board.registerNewObjective("Land Map", "dummy");
-		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+			@Override
+			public void run() {
+				ScoreboardManager manager = Bukkit.getScoreboardManager();
+				final Scoreboard board = manager.getNewScoreboard();
+				Team team = board.registerNewTeam("teamname");
+				team.addPlayer(p);
 
-		/**
-		 * Locale string is retrieved from file for use in map header.
-		 * Scoreboards do not cooperate with headers longer than 14 characters,
-		 * therefore it will be truncated if too long.
-		 */
+				final String header = "Cubit Lands";
 
-		if (header.length() <= 14) {
-			objective.setDisplayName(ChatColor.YELLOW + "" + ChatColor.STRIKETHROUGH + "==" + ChatColor.RESET + ""
-					+ ChatColor.GOLD + " " + header + " " + ChatColor.YELLOW + "" + ChatColor.STRIKETHROUGH + "==");
-		} else {
-			objective.setDisplayName(
-					ChatColor.YELLOW + "" + ChatColor.STRIKETHROUGH + "==" + ChatColor.RESET + "" + ChatColor.GOLD + " "
-							+ header.substring(0, 14) + " " + ChatColor.YELLOW + "" + ChatColor.STRIKETHROUGH + "==");
-		}
+				final Objective objective = board.registerNewObjective("Land Map", "dummy");
+				objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
-		String[] mapData = buildMap(p);
-		for (int i = 0; i < mapData.length; i++) {
-			if (mapData[i].length() < 21) {
-				for (int f = 0; f < (21 - mapData[i].length()); f++) {
-					mapData[i] += ChatColor.RESET;
+				/**
+				 * Locale string is retrieved from file for use in map header.
+				 * Scoreboards do not cooperate with headers longer than 14
+				 * characters, therefore it will be truncated if too long.
+				 */
+
+				if (header.length() <= 14) {
+					objective.setDisplayName(ChatColor.YELLOW + "" + ChatColor.STRIKETHROUGH + "==" + ChatColor.RESET
+							+ "" + ChatColor.GOLD + " " + header + " " + ChatColor.YELLOW + "" + ChatColor.STRIKETHROUGH
+							+ "==");
+				} else {
+					objective.setDisplayName(ChatColor.YELLOW + "" + ChatColor.STRIKETHROUGH + "==" + ChatColor.RESET
+							+ "" + ChatColor.GOLD + " " + header.substring(0, 14) + " " + ChatColor.YELLOW + ""
+							+ ChatColor.STRIKETHROUGH + "==");
 				}
+
+				for (int i = 0; i < mapData.length; i++) {
+					if (mapData[i].length() < 21) {
+						for (int f = 0; f < (21 - mapData[i].length()); f++) {
+							mapData[i] += ChatColor.RESET;
+						}
+					}
+
+					OfflinePlayer ofp = new FakeOfflinePlayer(mapData[i].substring(5, 17));
+
+					Score score = objective.getScore(ofp.getName());
+
+					score.setScore(mapData.length - i);
+
+					Team t = board.registerNewTeam(i + "");
+					t.setPrefix(mapData[i].substring(0, 5));
+					t.setSuffix(mapData[i].substring(17));
+					t.addPlayer(ofp);
+					t.setDisplayName(mapData[i]);
+				}
+
+				p.setScoreboard(board);
 			}
+		});
 
-			class myOfflinePlayer implements OfflinePlayer {
-				String name;
-
-				public myOfflinePlayer(String name) {
-					this.name = name;
-				}
-
-				public Player getPlayer() {
-					return null;
-				}
-
-				public boolean hasPlayedBefore() {
-					return false;
-				}
-
-				public String getName() {
-					return name;
-				}
-
-				public UUID getUniqueId() {
-					return null;
-				}
-
-				public long getFirstPlayed() {
-					return 0;
-				}
-
-				public boolean isBanned() {
-					return false;
-				}
-
-				@Deprecated
-				public void setBanned(boolean b) {
-					return;
-				}
-
-				public Map<String, Object> serialize() {
-					return null;
-				}
-
-				public boolean isWhitelisted() {
-					return true;
-				}
-
-				public void setWhitelisted(boolean b) {
-					return;
-				}
-
-				public Location getBedSpawnLocation() {
-					return null;
-				}
-
-				public boolean isOnline() {
-					return false;
-				}
-
-				public long getLastPlayed() {
-					return 0;
-				}
-
-				public boolean isOp() {
-					return false;
-				}
-
-				public void setOp(boolean b) {
-					return;
-				}
-
-			}
-
-			OfflinePlayer ofp = new myOfflinePlayer(mapData[i].substring(5, 17));
-
-			Score score = objective.getScore(ofp.getName());
-
-			score.setScore(mapData.length - i);
-
-			Team t = board.registerNewTeam(i + "");
-			t.setPrefix(mapData[i].substring(0, 5));
-			t.setSuffix(mapData[i].substring(17));
-			t.addPlayer(ofp);
-			t.setDisplayName(mapData[i]);
-		}
-		p.setScoreboard(board);
-
-		return board;
+		return null;
 	}
 
 	public void updateMap() {
