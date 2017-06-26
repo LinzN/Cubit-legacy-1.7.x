@@ -21,7 +21,7 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.linzn.cubit.internal.landMap;
+package de.linzn.cubit.internal.landmapMgr;
 
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import de.linzn.cubit.internal.regionMgr.region.RegionData;
@@ -35,7 +35,7 @@ import java.util.UUID;
 /**
  * File created by jcdesimp on 3/1/14. Updated by SpatiumPrinceps on 20/06/17
  */
-public class LandMap {
+public class ScoreboardMap {
 
 	Player mapViewer;
 	int schedulerId;
@@ -43,7 +43,7 @@ public class LandMap {
 	String currDir;
 	private CubitBukkitPlugin plugin;
 
-	public LandMap(Player p, CubitBukkitPlugin plugin) {
+	public ScoreboardMap(Player p, CubitBukkitPlugin plugin) {
 		this.plugin = plugin;
 		this.mapViewer = p;
 		this.currChunk = p.getLocation().getChunk();

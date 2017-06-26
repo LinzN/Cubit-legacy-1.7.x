@@ -21,7 +21,7 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.linzn.cubit.internal.landMap;
+package de.linzn.cubit.internal.landmapMgr;
 
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import org.bukkit.entity.Player;
@@ -31,19 +31,19 @@ import java.util.HashMap;
 /**
  * File created by jcdesimp on 3/10/14. Updated by SpatiumPrinceps on 20/06/17
  */
-public class MapManager implements Listener {
-	private HashMap<String, LandMap> mapList;
+public class LandmapManager implements Listener {
+	private HashMap<String, ScoreboardMap> mapList;
 
 	private CubitBukkitPlugin plugin;
 
-	public MapManager(CubitBukkitPlugin plugin) {
-		plugin.getLogger().info("Loading MapManager");
+	public LandmapManager(CubitBukkitPlugin plugin) {
+		plugin.getLogger().info("Loading LandmapManager");
 		this.plugin = plugin;
-		this.mapList = new HashMap<String, LandMap>();
+		this.mapList = new HashMap<String, ScoreboardMap>();
 		this.plugin = plugin;
 	}
 
-	private void addMap(LandMap m) {
+	private void addMap(ScoreboardMap m) {
 		mapList.put(m.getMapViewer().getName(), m);
 	}
 
@@ -52,7 +52,7 @@ public class MapManager implements Listener {
 			if (mapList.containsKey(p.getName())) {
 				remMap(p.getName());
 			} else {
-				addMap(new LandMap(p, this.plugin));
+				addMap(new ScoreboardMap(p, this.plugin));
 			}
 		}
 	}
@@ -60,7 +60,7 @@ public class MapManager implements Listener {
 	public void remMap(String pName) {
 
 		if (mapList.containsKey(pName)) {
-			LandMap curr = mapList.get(pName);
+			ScoreboardMap curr = mapList.get(pName);
 			curr.removeMap();
 			mapList.remove(pName);
 		}

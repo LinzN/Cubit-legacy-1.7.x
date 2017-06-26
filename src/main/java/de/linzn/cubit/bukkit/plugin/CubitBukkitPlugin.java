@@ -1,6 +1,6 @@
 package de.linzn.cubit.bukkit.plugin;
 
-import de.linzn.cubit.internal.landMap.MapManager;
+import de.linzn.cubit.internal.landmapMgr.LandmapManager;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -31,7 +31,7 @@ public class CubitBukkitPlugin extends JavaPlugin {
 	private VaultManager vaultMrg;
 	private DatabaseManager databaseMrg;
 	private EntityManager entityMrg;
-	private MapManager mapMrg;
+	private LandmapManager mapMrg;
 	private PermissionNodes permNodes;
 	private YamlConfigurationManager yamlConfiguration;
 	private Metrics metrics;
@@ -112,7 +112,7 @@ public class CubitBukkitPlugin extends JavaPlugin {
 		this.permNodes = new PermissionNodes(this);
 		this.databaseMrg = new DatabaseManager(this);
 		this.entityMrg = new EntityManager(this);
-		this.mapMrg = new MapManager(this);
+		this.mapMrg = new LandmapManager(this);
 		return true;
 
 	}
@@ -145,7 +145,7 @@ public class CubitBukkitPlugin extends JavaPlugin {
 		return this.entityMrg;
 	}
 	
-	public MapManager getMapManager() {
+	public LandmapManager getMapManager() {
 		return mapMrg;
 	}
 
