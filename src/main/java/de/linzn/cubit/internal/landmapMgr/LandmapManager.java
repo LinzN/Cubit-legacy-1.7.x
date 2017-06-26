@@ -24,54 +24,59 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package de.linzn.cubit.internal.landmapMgr;
 
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.internal.landmapMgr.listeners.CubitMapListener;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * File created by jcdesimp on 3/10/14. Updated by SpatiumPrinceps on 20/06/17
  */
 public class LandmapManager implements Listener {
-	private HashMap<String, ScoreboardMap> mapList;
+	private HashMap<UUID, ScoreboardMap> mapList;
 
 	private CubitBukkitPlugin plugin;
 
 	public LandmapManager(CubitBukkitPlugin plugin) {
 		plugin.getLogger().info("Loading LandmapManager");
 		this.plugin = plugin;
-		this.mapList = new HashMap<String, ScoreboardMap>();
-		this.plugin = plugin;
+		this.mapList = new HashMap<UUID, ScoreboardMap>();
+		if (CubitBukkitPlugin.inst().getYamlManager().getSettings().landUseScoreboardMap) {
+			this.plugin.getServer().getPluginManager().registerEvents(new CubitMapListener(this), this.plugin);
+		}
 	}
 
-	private void addMap(ScoreboardMap m) {
-		mapList.put(m.getMapViewer().getName(), m);
+	private void registerScoreboardMap(ScoreboardMap m) {
+		mapList.put(m.getMapViewer().getUniqueId(), m);
+		return;
 	}
 
 	public void toggleMap(Player p) {
 		if (this.plugin.getYamlManager().getSettings().landUseScoreboardMap) {
-			if (mapList.containsKey(p.getName())) {
-				remMap(p.getName());
+			if (mapList.containsKey(p.getUniqueId())) {
+				unregisterScoreboardMap(p.getUniqueId());
 			} else {
-				addMap(new ScoreboardMap(p, this.plugin));
+				registerScoreboardMap(new ScoreboardMap(p, this.plugin));
 			}
 		}
 	}
 
-	public void remMap(String pName) {
-
-		if (mapList.containsKey(pName)) {
-			ScoreboardMap curr = mapList.get(pName);
-			curr.removeMap();
-			mapList.remove(pName);
+	public void unregisterScoreboardMap(UUID pUUID) {
+		if (mapList.containsKey(pUUID)) {
+			mapList.get(pUUID).removeMap();
+			mapList.remove(pUUID);
 		}
+		return;
 	}
 
-	public void removeAllMaps() {
-		for (String k : mapList.keySet()) {
+	public void unregisterScoreboardMaps() {
+		for (UUID k : mapList.keySet()) {
 			mapList.get(k).removeMap();
 		}
 		mapList.clear();
+		return;
 	}
-
 
 }

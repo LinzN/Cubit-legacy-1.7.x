@@ -68,7 +68,7 @@ public class CubitBukkitPlugin extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		HandlerList.unregisterAll(CubitBukkitPlugin.inst());
-		mapMrg.removeAllMaps();
+		mapMrg.unregisterScoreboardMaps();
 	}
 
 	private boolean getPluginDepends() {
