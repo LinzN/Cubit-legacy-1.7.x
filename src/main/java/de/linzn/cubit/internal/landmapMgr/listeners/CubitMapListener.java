@@ -1,22 +1,21 @@
 package de.linzn.cubit.internal.landmapMgr.listeners;
 
+import de.linzn.cubit.internal.landmapMgr.ScoreboardMapManager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import de.linzn.cubit.internal.landmapMgr.LandmapManager;
-
 public class CubitMapListener implements Listener {
 
-	private final LandmapManager landmapMgr;
+	private final ScoreboardMapManager scoreboardmapMgr;
 
-	public CubitMapListener(LandmapManager landmapMgr) {
-		this.landmapMgr = landmapMgr;
+	public CubitMapListener(ScoreboardMapManager scoreboardmapMgr) {
+		this.scoreboardmapMgr = scoreboardmapMgr;
 	}
 
 	@EventHandler(ignoreCancelled = true)
 	public void onPlayerQuitEvent(PlayerQuitEvent event) {
-		landmapMgr.unregisterScoreboardMap(event.getPlayer().getUniqueId());
+		scoreboardmapMgr.unregisterExistScoreboardMap(event.getPlayer().getUniqueId());
 	}
 
 

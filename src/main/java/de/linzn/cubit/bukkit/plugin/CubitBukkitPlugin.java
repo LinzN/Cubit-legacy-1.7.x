@@ -1,6 +1,6 @@
 package de.linzn.cubit.bukkit.plugin;
 
-import de.linzn.cubit.internal.landmapMgr.LandmapManager;
+import de.linzn.cubit.internal.landmapMgr.ScoreboardMapManager;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -31,7 +31,7 @@ public class CubitBukkitPlugin extends JavaPlugin {
 	private VaultManager vaultMrg;
 	private DatabaseManager databaseMrg;
 	private EntityManager entityMrg;
-	private LandmapManager mapMrg;
+	private ScoreboardMapManager scoreboardMapMgr;
 	private PermissionNodes permNodes;
 	private YamlConfigurationManager yamlConfiguration;
 	private Metrics metrics;
@@ -67,8 +67,8 @@ public class CubitBukkitPlugin extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
+		scoreboardMapMgr.cleanupAllScoreboardMaps();
 		HandlerList.unregisterAll(CubitBukkitPlugin.inst());
-		mapMrg.unregisterScoreboardMaps();
 	}
 
 	private boolean getPluginDepends() {
@@ -112,7 +112,7 @@ public class CubitBukkitPlugin extends JavaPlugin {
 		this.permNodes = new PermissionNodes(this);
 		this.databaseMrg = new DatabaseManager(this);
 		this.entityMrg = new EntityManager(this);
-		this.mapMrg = new LandmapManager(this);
+		this.scoreboardMapMgr = new ScoreboardMapManager(this);
 		return true;
 
 	}
@@ -145,8 +145,8 @@ public class CubitBukkitPlugin extends JavaPlugin {
 		return this.entityMrg;
 	}
 	
-	public LandmapManager getMapManager() {
-		return mapMrg;
+	public ScoreboardMapManager getScoreboardMapManager() {
+		return scoreboardMapMgr;
 	}
 
 	public PermissionNodes getPermNodes() {
