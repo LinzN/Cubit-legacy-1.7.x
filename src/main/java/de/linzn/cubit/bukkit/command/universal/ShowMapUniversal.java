@@ -46,7 +46,7 @@ public class ShowMapUniversal implements ICommand {
 			try {
 				new BukkitRunnable() {
 					public void run() {
-				plugin.getScoreboardMapManager().toggleMap(player);
+				plugin.getScoreboardMapManager().toggleScoreboardMap(player.getUniqueId());
 					}
 				}.runTask(plugin);
 			} catch (Exception e) {
