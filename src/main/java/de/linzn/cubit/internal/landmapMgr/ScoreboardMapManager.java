@@ -21,9 +21,9 @@ public class ScoreboardMapManager {
 
     public void toggleScoreboardMap(UUID playerUUID, boolean value) {
         if (value) {
-            this.unregisterExistScoreboardMap(playerUUID);
-        } else {
             this.registerNewScoreboardMap(playerUUID);
+        } else {
+            this.unregisterExistScoreboardMap(playerUUID);
         }
         return;
     }
