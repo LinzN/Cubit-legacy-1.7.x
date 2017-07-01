@@ -1,4 +1,4 @@
-package de.linzn.cubit.internal.databaseMgr.types;
+package de.linzn.cubit.internal.dataAccessMgr.types;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

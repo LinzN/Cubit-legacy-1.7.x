@@ -1,18 +1,18 @@
-package de.linzn.cubit.internal.databaseMgr;
+package de.linzn.cubit.internal.dataAccessMgr;
 
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
-import de.linzn.cubit.internal.databaseMgr.types.DatabaseType;
-import de.linzn.cubit.internal.databaseMgr.types.MySqlType;
-import de.linzn.cubit.internal.databaseMgr.types.SqliteType;
+import de.linzn.cubit.internal.dataAccessMgr.types.DatabaseType;
+import de.linzn.cubit.internal.dataAccessMgr.types.MySqlType;
+import de.linzn.cubit.internal.dataAccessMgr.types.SqliteType;
 
-public class DataManager {
+public class DataAccessManager {
 	
 	private CubitBukkitPlugin plugin;
 	public DatabaseType databaseType;
 	private boolean useMysql;
 	
-	public DataManager(CubitBukkitPlugin plugin){
-		plugin.getLogger().info("Loading DataManager");
+	public DataAccessManager(CubitBukkitPlugin plugin){
+		plugin.getLogger().info("Loading DataAccessManager");
 		this.plugin = plugin;
 		this.useMysql = this.plugin.getYamlManager().getSettings().sqlUse;
 		
