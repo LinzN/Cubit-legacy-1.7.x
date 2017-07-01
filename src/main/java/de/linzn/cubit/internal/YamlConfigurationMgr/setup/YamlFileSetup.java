@@ -19,19 +19,6 @@ public class YamlFileSetup {
 
 	public YamlFileSetup(Plugin plugin) {
 		this.plugin = plugin;
-		File flatfileDirectory = new File(this.plugin.getDataFolder(), "flatfiles");
-		if (!flatfileDirectory.exists()) {
-			try {
-				boolean setting = flatfileDirectory.mkdirs();
-				if (setting) {
-					this.plugin.getLogger().info("Created flatfile directory");
-				} else {
-					this.plugin.getLogger().severe("Error while creating flatfile directory");
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
 
 		File configDirectory = new File(this.plugin.getDataFolder(), "configs");
 		if (!configDirectory.exists()) {
