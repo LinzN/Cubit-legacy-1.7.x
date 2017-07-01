@@ -4,12 +4,12 @@ import org.inventivetalent.update.spiget.comparator.VersionComparator;
 
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 
-public class SpigetCheck {
+public class SpigetUpdateCheck {
 	private CubitBukkitPlugin plugin;
 	public boolean isAvailable;
 	public String version;
 
-	public SpigetCheck(CubitBukkitPlugin plugin) {
+	public SpigetUpdateCheck(CubitBukkitPlugin plugin) {
 		this.plugin = plugin;
 
 		this.plugin.getServer().getScheduler().runTaskTimerAsynchronously(this.plugin, new Runnable() {

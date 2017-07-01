@@ -16,18 +16,20 @@ public class SaveRegions {
 	}
 
 	public void saveData(final RegionData regionData, final World world) {
-		CubitBukkitPlugin.inst().getServer().getScheduler().runTaskAsynchronously(CubitBukkitPlugin.inst(), new Runnable() {
-			public void run() {
-				try {
-					RegionManager manager = CubitBukkitPlugin.inst().getWorldGuardPlugin().getRegionManager(world);
-					if (regionData != null && regionData.praseWGRegion() != null) {
-						manager.addRegion(regionData.praseWGRegion());
+		CubitBukkitPlugin.inst().getServer().getScheduler().runTaskAsynchronously(CubitBukkitPlugin.inst(),
+				new Runnable() {
+					public void run() {
+						try {
+							RegionManager manager = CubitBukkitPlugin.inst().getWorldGuardPlugin()
+									.getRegionManager(world);
+							if (regionData != null && regionData.praseWGRegion() != null) {
+								manager.addRegion(regionData.praseWGRegion());
+							}
+							manager.saveChanges();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
 					}
-					manager.saveChanges();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+				});
 	}
 }

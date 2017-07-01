@@ -181,7 +181,7 @@ public class LanguageYaml {
 	public String adminHelpE2P5;
 	public String adminHelpE3P5;
 	public String adminHelpE4P5;
-	
+
 	/* Page 1 Help for Cubit Command */
 	public String cubitHelpHeaderP1;
 	public String cubitHelpE1P1;
@@ -440,12 +440,11 @@ public class LanguageYaml {
 				"&2 Delete Serverregion: &e/cadmin deleteserver");
 		adminHelpE3P5 = this.getLanguageString("theme.adminHelpPage5.help3", "&2 Create Shop: &e/cadmin createshop");
 		adminHelpE4P5 = this.getLanguageString("theme.adminHelpPage5.help4", "&2 Delete Shop: &e/cadmin deleteshop");
-		
-		
+
 		cubitHelpHeaderP1 = this.getLanguageString("theme.cubitHelpPage1.header",
 				"&6<<<<<<<<<<<<<<<<<<<<&2&l|Cubit|&6>>>>>>>>>>>>>>>>>>>>");
-		cubitHelpE1P1 = this.getLanguageString("theme.cubitHelpPage1.help1","&2 Cubit version: &e/cubit version");
-		cubitHelpE2P1 = this.getLanguageString("theme.cubitHelpPage1.help2","&2 Reload cubit: &e/cubit reload");
+		cubitHelpE1P1 = this.getLanguageString("theme.cubitHelpPage1.help1", "&2 Cubit version: &e/cubit version");
+		cubitHelpE2P1 = this.getLanguageString("theme.cubitHelpPage1.help2", "&2 Reload cubit: &e/cubit reload");
 
 	}
 

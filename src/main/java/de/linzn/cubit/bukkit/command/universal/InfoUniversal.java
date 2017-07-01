@@ -77,7 +77,9 @@ public class InfoUniversal implements ICommand {
 
 	private void landInfo(Player player, RegionData regionData) {
 		/* Get RegionData Info */
-		String formatedTime = plugin.getDatabaseManager().getLastLoginFormated(regionData.getOwnersUUID()[0]);
+		long lastLogin = plugin.getDataAccessManager().databaseType
+				.get_last_login_profile(regionData.getOwnersUUID()[0]);
+		String formatedTime = plugin.getDataAccessManager().databaseType.get_formate_date(lastLogin);
 		String minBorder = regionData.getMinPoint();
 		String maxBorder = regionData.getMaxPoint();
 		String statusLock = plugin.getRegionManager().lockPacket.getStateColor(regionData)
@@ -110,9 +112,11 @@ public class InfoUniversal implements ICommand {
 				.replace("{monster}", statusMonster).replace("{fire}", statusFire).replace("{pvp}", statusPvP)
 				.replace("{tnt}", statusTNT).replace("{potion}", statusPotion));
 
-		if (plugin.getDatabaseManager().isOffered(regionData.getRegionName(), regionData.getWorld())) {
-			player.sendMessage(plugin.getYamlManager().getLanguage().landInfoA2.replace("{value}", "" + plugin
-					.getDatabaseManager().getOfferData(regionData.getRegionName(), regionData.getWorld()).getValue()));
+		if (plugin.getDataAccessManager().databaseType.get_is_offer(regionData.getRegionName(),
+				regionData.getWorld())) {
+			player.sendMessage(plugin.getYamlManager().getLanguage().landInfoA2.replace("{value}",
+					"" + plugin.getDataAccessManager().databaseType
+							.get_offer(regionData.getRegionName(), regionData.getWorld()).getValue()));
 		}
 
 		boolean isMember = false;
@@ -131,7 +135,9 @@ public class InfoUniversal implements ICommand {
 	private void shopInfo(Player player, RegionData regionData) {
 		/* Get RegionData Info */
 		if (regionData.getOwnersUUID().length != 0) {
-			String formatedTime = plugin.getDatabaseManager().getLastLoginFormated(regionData.getOwnersUUID()[0]);
+			long lastLogin = plugin.getDataAccessManager().databaseType
+					.get_last_login_profile(regionData.getOwnersUUID()[0]);
+			String formatedTime = plugin.getDataAccessManager().databaseType.get_formate_date(lastLogin);
 			String minBorder = regionData.getMinPoint();
 			String maxBorder = regionData.getMaxPoint();
 			String statusLock = plugin.getRegionManager().lockPacket.getStateColor(regionData)
@@ -163,15 +169,16 @@ public class InfoUniversal implements ICommand {
 			player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE6.replace("{lock}", statusLock)
 					.replace("{monster}", statusMonster).replace("{fire}", statusFire).replace("{pvp}", statusPvP)
 					.replace("{tnt}", statusTNT).replace("{potion}", statusPotion));
-			if (plugin.getDatabaseManager().isOffered(regionData.getRegionName(), regionData.getWorld())) {
+			if (plugin.getDataAccessManager().databaseType.get_is_offer(regionData.getRegionName(),
+					regionData.getWorld())) {
 				player.sendMessage(plugin.getYamlManager().getLanguage().landInfoA2.replace("{value}",
-						"" + plugin.getVaultManager().formateToEconomy(plugin.getDatabaseManager()
-								.getOfferData(regionData.getRegionName(), regionData.getWorld()).getValue())));
+						"" + plugin.getVaultManager().formateToEconomy(plugin.getDataAccessManager().databaseType
+								.get_offer(regionData.getRegionName(), regionData.getWorld()).getValue())));
 			}
 
 		} else {
-			String value = plugin.getVaultManager().formateToEconomy(plugin.getDatabaseManager()
-					.getOfferData(regionData.getRegionName(), regionData.getWorld()).getValue());
+			String value = plugin.getVaultManager().formateToEconomy(plugin.getDataAccessManager().databaseType
+					.get_offer(regionData.getRegionName(), regionData.getWorld()).getValue());
 
 			player.sendMessage(
 					plugin.getYamlManager().getLanguage().landInfoE1.replace("{regionID}", regionData.getRegionName()));

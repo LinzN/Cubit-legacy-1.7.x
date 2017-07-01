@@ -364,7 +364,7 @@ public class CubitregionManager {
 	public boolean isToLongOffline(final UUID uuid, final boolean isMember) {
 		long currentTimeStamp = new Date().getTime();
 
-		long lastLogin = plugin.getDatabaseManager().getTimeStamp(uuid);
+		long lastLogin = plugin.getDataAccessManager().databaseType.get_last_login_profile(uuid);
 		long landDeprecated = (long) (this.plugin.getYamlManager().getSettings().landDeprecatedOther * 24 * 60 * 60
 				* 1000);
 

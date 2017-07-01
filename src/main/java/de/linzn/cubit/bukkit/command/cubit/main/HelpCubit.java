@@ -17,10 +17,10 @@ public class HelpCubit implements ICommand {
 	@Override
 	public boolean runCmd(final Command cmd, final CommandSender sender, String[] args) {
 
-		//if (args.length < 2) {
-		//} else if (args[1].toString().equalsIgnoreCase("2")) {
-		//	return page2(sender);
-		//} 
+		// if (args.length < 2) {
+		// } else if (args[1].toString().equalsIgnoreCase("2")) {
+		// return page2(sender);
+		// }
 
 		return page1(sender);
 	}
@@ -33,8 +33,5 @@ public class HelpCubit implements ICommand {
 		return true;
 
 	}
-
-
-
 
 }

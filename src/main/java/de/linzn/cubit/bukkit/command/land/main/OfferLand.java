@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
-import de.linzn.cubit.internal.databaseMgr.OfferData;
+import de.linzn.cubit.internal.dataAccessMgr.OfferData;
 import de.linzn.cubit.internal.regionMgr.LandTypes;
 import de.linzn.cubit.internal.regionMgr.region.RegionData;
 
@@ -77,8 +77,10 @@ public class OfferLand implements ICommand {
 			}
 			double value = Double.parseDouble(args[1]);
 			if (value <= 0) {
-				if (plugin.getDatabaseManager().isOffered(regionData.getRegionName(), loc.getWorld())) {
-					if (!plugin.getDatabaseManager().removeOfferData(regionData.getRegionName(), loc.getWorld())) {
+				if (plugin.getDataAccessManager().databaseType.get_is_offer(regionData.getRegionName(),
+						loc.getWorld())) {
+					if (!plugin.getDataAccessManager().databaseType.set_remove_offer(regionData.getRegionName(),
+							loc.getWorld())) {
 						/* If this task failed! This should never happen */
 						sender.sendMessage(
 								plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "OFFER-REMOVE"));
@@ -93,7 +95,7 @@ public class OfferLand implements ICommand {
 				OfferData offerData = new OfferData(regionData.getRegionName(), loc.getWorld());
 				offerData.setPlayerUUID(regionData.getOwnersUUID()[0]);
 				offerData.setValue(value);
-				if (!plugin.getDatabaseManager().setOfferData(offerData)) {
+				if (!plugin.getDataAccessManager().databaseType.set_create_offer(offerData)) {
 					/* If this task failed! This should never happen */
 					sender.sendMessage(
 							plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "OFFER-ADD"));

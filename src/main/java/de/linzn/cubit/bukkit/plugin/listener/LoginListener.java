@@ -19,14 +19,14 @@ public class LoginListener implements Listener {
 			@Override
 			public void run() {
 
-				CubitBukkitPlugin.inst().getDatabaseManager().updateProfile(event.getPlayer().getUniqueId(),
-						event.getPlayer().getName(), new Date().getTime());
+				CubitBukkitPlugin.inst().getDataAccessManager().databaseType.set_update_profile(
+						event.getPlayer().getUniqueId(), event.getPlayer().getName(), new Date().getTime());
 				if (event.getPlayer().hasPermission(CubitBukkitPlugin.inst().getPermNodes().checkUpdateAdmin)) {
-					if (CubitBukkitPlugin.inst().getSpigetCheck().isAvailable) {
+					if (CubitBukkitPlugin.inst().getSpigetUpdateCheck().isAvailable) {
 						event.getPlayer()
 								.sendMessage(ChatColor.GREEN
 										+ "A new update for Cubit is avaiable. Check out the new version "
-										+ CubitBukkitPlugin.inst().getSpigetCheck().version + "!");
+										+ CubitBukkitPlugin.inst().getSpigetUpdateCheck().version + "!");
 					}
 				}
 

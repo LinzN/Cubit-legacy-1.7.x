@@ -18,8 +18,8 @@ public class AdditionalPhysicsListener implements Listener {
 		RegionData fromLand = CubitBukkitPlugin.inst().getRegionManager().praseRegionData(fromChunk.getWorld(),
 				fromChunk.getX(), fromChunk.getZ());
 
-		RegionData toLand = CubitBukkitPlugin.inst().getRegionManager().praseRegionData(toChunk.getWorld(), toChunk.getX(),
-				toChunk.getZ());
+		RegionData toLand = CubitBukkitPlugin.inst().getRegionManager().praseRegionData(toChunk.getWorld(),
+				toChunk.getX(), toChunk.getZ());
 
 		if (toLand.getLandType() == LandTypes.NOTYPE) {
 			return;

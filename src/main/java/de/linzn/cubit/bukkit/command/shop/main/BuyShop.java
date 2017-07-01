@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
-import de.linzn.cubit.internal.databaseMgr.OfferData;
+import de.linzn.cubit.internal.dataAccessMgr.OfferData;
 import de.linzn.cubit.internal.regionMgr.LandTypes;
 import de.linzn.cubit.internal.regionMgr.region.RegionData;
 
@@ -64,7 +64,7 @@ public class BuyShop implements ICommand {
 			player.sendMessage(plugin.getYamlManager().getLanguage().takeOwnLand);
 			return true;
 		}
-		if (!plugin.getDatabaseManager().isOffered(regionData.getRegionName(), loc.getWorld())) {
+		if (!plugin.getDataAccessManager().databaseType.get_is_offer(regionData.getRegionName(), loc.getWorld())) {
 			sender.sendMessage(
 					plugin.getYamlManager().getLanguage().notOffered.replace("regionID", regionData.getRegionName()));
 			return true;
@@ -75,7 +75,8 @@ public class BuyShop implements ICommand {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().reachLimit);
 			return true;
 		}
-		OfferData offerData = plugin.getDatabaseManager().getOfferData(regionData.getRegionName(), loc.getWorld());
+		OfferData offerData = plugin.getDataAccessManager().databaseType.get_offer(regionData.getRegionName(),
+				loc.getWorld());
 
 		if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), offerData.getValue())) {
 			sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
@@ -100,7 +101,7 @@ public class BuyShop implements ICommand {
 			return true;
 		}
 		/* Remove offer from Database */
-		if (!plugin.getDatabaseManager().removeOfferData(regionData.getRegionName(), loc.getWorld())) {
+		if (!plugin.getDataAccessManager().databaseType.set_remove_offer(regionData.getRegionName(), loc.getWorld())) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(
 					plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SHOP-REMOVEOFFER"));

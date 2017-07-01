@@ -5,12 +5,14 @@ import java.util.UUID;
 
 import org.bukkit.World;
 
-import de.linzn.cubit.internal.databaseMgr.OfferData;
+import de.linzn.cubit.internal.dataAccessMgr.OfferData;
 
 public interface DatabaseType {
-	
+
 	public boolean setupDatabase();
+
 	public Connection createConnection();
+
 	public boolean releaseConnection(Connection con);
 
 	// Input
@@ -28,10 +30,12 @@ public interface DatabaseType {
 	public String get_profile_name(UUID uuid);
 
 	public long get_last_login_profile(String p);
-	
+
 	public OfferData get_offer(String regionID, World world);
 
 	public boolean get_is_offer(String regionID, World world);
 
+	// Other
+	public String get_formate_date(long date);
 
 }

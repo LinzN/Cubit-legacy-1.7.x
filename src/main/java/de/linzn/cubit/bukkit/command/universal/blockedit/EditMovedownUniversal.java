@@ -76,7 +76,6 @@ public class EditMovedownUniversal implements ICommand {
 			return true;
 		}
 
-
 		double economyValue = plugin.getYamlManager().getSettings().landSaveSnapshotPrice;
 
 		if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), economyValue)) {
@@ -93,8 +92,7 @@ public class EditMovedownUniversal implements ICommand {
 			return true;
 		}
 
-	
-		//Code
+		// Code
 		return true;
 	}
 

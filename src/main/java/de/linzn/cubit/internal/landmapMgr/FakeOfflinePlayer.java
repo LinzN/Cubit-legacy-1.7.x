@@ -7,7 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-public class FakeOfflinePlayer  implements OfflinePlayer {
+public class FakeOfflinePlayer implements OfflinePlayer {
 	String name;
 
 	public FakeOfflinePlayer(String name) {

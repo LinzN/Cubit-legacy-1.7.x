@@ -89,7 +89,7 @@ public class SettingsYaml {
 		this.landSellMaterialBorder = Material.valueOf(
 				(String) this.getObjectValue("module.land.sellMaterialBorder", Material.REDSTONE_TORCH_ON.toString()));
 		this.landUseScoreboardMap = (boolean) this.getObjectValue("module.land.useScoreboardMap", false);
-		
+
 		List<String> shopsEnabledWorlds = new ArrayList<>();
 		shopsEnabledWorlds.add("shops");
 		this.shopEnabledWorlds = (List<String>) this.getStringList("module.shop.enabledWorlds", shopsEnabledWorlds);

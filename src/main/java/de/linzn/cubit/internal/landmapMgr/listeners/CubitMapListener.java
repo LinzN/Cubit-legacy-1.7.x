@@ -18,5 +18,4 @@ public class CubitMapListener implements Listener {
 		scoreboardmapMgr.unregisterExistScoreboardMap(event.getPlayer().getUniqueId());
 	}
 
-
 }

@@ -75,20 +75,20 @@ public abstract class VersionComparator {
 	 * @return <code>true</code> if the checked version is newer
 	 */
 	public abstract boolean isNewer(String currentVersion, String checkVersion);
-	
+
 	public String getOnlyNumerics(String str) {
-	    if (str == null) {
-	        return null;
-	    }
-	    StringBuffer strBuff = new StringBuffer();
-	    char c;
-	    for (int i = 0; i < str.length() ; i++) {
-	        c = str.charAt(i);
-	        if (Character.isDigit(c)) {
-	            strBuff.append(c);
-	        }
-	    }
-	    return strBuff.toString();
+		if (str == null) {
+			return null;
+		}
+		StringBuffer strBuff = new StringBuffer();
+		char c;
+		for (int i = 0; i < str.length(); i++) {
+			c = str.charAt(i);
+			if (Character.isDigit(c)) {
+				strBuff.append(c);
+			}
+		}
+		return strBuff.toString();
 	}
 
 }

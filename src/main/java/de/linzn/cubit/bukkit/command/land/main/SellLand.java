@@ -92,7 +92,7 @@ public class SellLand implements ICommand {
 					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-BLOCK"));
 			return true;
 		}
-		if (!plugin.getDatabaseManager().removeOfferData(regionData.getRegionName(), loc.getWorld())) {
+		if (!plugin.getDataAccessManager().databaseType.set_remove_offer(regionData.getRegionName(), loc.getWorld())) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(
 					plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SELL-REMOVEOFFER"));

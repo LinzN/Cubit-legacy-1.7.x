@@ -17,12 +17,10 @@ public class ShowMapUniversal implements ICommand {
 
 	private CubitBukkitPlugin plugin;
 	private String permNode;
-	private LandTypes type;
 
 	public ShowMapUniversal(CubitBukkitPlugin plugin, String permNode, LandTypes type) {
 		this.plugin = plugin;
 		this.permNode = permNode;
-		this.type = type;
 	}
 
 	@Override
@@ -46,7 +44,7 @@ public class ShowMapUniversal implements ICommand {
 			try {
 				new BukkitRunnable() {
 					public void run() {
-				plugin.getScoreboardMapManager().toggleScoreboardMap(player.getUniqueId());
+						plugin.getScoreboardMapManager().toggleScoreboardMap(player.getUniqueId());
 					}
 				}.runTask(plugin);
 			} catch (Exception e) {

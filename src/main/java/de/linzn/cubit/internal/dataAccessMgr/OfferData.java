@@ -1,4 +1,4 @@
-package de.linzn.cubit.internal.databaseMgr;
+package de.linzn.cubit.internal.dataAccessMgr;
 
 import java.util.UUID;
 

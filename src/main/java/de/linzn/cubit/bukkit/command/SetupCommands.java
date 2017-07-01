@@ -27,7 +27,7 @@ public class SetupCommands {
 			cubitClass.loadCmd();
 		plugin.getLogger().info("Register command /cubit");
 		plugin.getCommand(commandCubit).setExecutor(cubitClass);
-		
+
 		/* Command setup for /land */
 		CommandLand landClass = new CommandLand(this.plugin);
 		if (!landClass.isLoaded())

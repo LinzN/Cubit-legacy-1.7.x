@@ -5,7 +5,7 @@ import java.util.UUID;
 import org.bukkit.World;
 
 import de.linzn.cubit.internal.YamlConfigurationMgr.setup.CustomConfig;
-import de.linzn.cubit.internal.databaseMgr.OfferData;
+import de.linzn.cubit.internal.dataAccessMgr.OfferData;
 
 public class FlatfileYaml {
 

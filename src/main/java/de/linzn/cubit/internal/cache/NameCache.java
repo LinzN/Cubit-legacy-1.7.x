@@ -57,7 +57,7 @@ public class NameCache {
 	}
 
 	private String fetchDatabaseName(UUID uuid) {
-		return CubitBukkitPlugin.inst().getDatabaseManager().getProfileName(uuid);
+		return CubitBukkitPlugin.inst().getDataAccessManager().databaseType.get_profile_name(uuid);
 
 	}
 
