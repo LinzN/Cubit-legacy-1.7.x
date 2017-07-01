@@ -5,7 +5,6 @@ description: A worldguard region manager for bukkit servers
 author: Niklas Linz
 load: POSTWORLD
 depend: [WorldEdit, WorldGuard, Vault]
-softdepend: [ParticleLIB]
 
 commands:
   cubit:
