@@ -4,7 +4,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import de.linzn.cubit.internal.YamlConfigurationMgr.files.FlagProtectionsYaml;
-import de.linzn.cubit.internal.YamlConfigurationMgr.files.FlatfileYaml;
 import de.linzn.cubit.internal.YamlConfigurationMgr.files.LanguageYaml;
 import de.linzn.cubit.internal.YamlConfigurationMgr.files.LimitYaml;
 import de.linzn.cubit.internal.YamlConfigurationMgr.files.SettingsYaml;
@@ -32,10 +31,6 @@ public class YamlConfigurationManager {
 
 	public LanguageYaml getLanguage() {
 		return this.fileOperator.language;
-	}
-
-	public FlatfileYaml getFlatfile() {
-		return this.fileOperator.flatFileDatabase;
 	}
 
 	public LimitYaml getLimit() {

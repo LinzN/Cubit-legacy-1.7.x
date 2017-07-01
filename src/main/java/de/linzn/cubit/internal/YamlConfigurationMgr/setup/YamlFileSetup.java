@@ -5,7 +5,6 @@ import java.io.File;
 import org.bukkit.plugin.Plugin;
 
 import de.linzn.cubit.internal.YamlConfigurationMgr.files.FlagProtectionsYaml;
-import de.linzn.cubit.internal.YamlConfigurationMgr.files.FlatfileYaml;
 import de.linzn.cubit.internal.YamlConfigurationMgr.files.LanguageYaml;
 import de.linzn.cubit.internal.YamlConfigurationMgr.files.LimitYaml;
 import de.linzn.cubit.internal.YamlConfigurationMgr.files.SettingsYaml;
@@ -16,7 +15,6 @@ public class YamlFileSetup {
 	public LanguageYaml language;
 	public LimitYaml limit;
 	public FlagProtectionsYaml flag;
-	public FlatfileYaml flatFileDatabase;
 	private Plugin plugin;
 
 	public YamlFileSetup(Plugin plugin) {
@@ -65,9 +63,6 @@ public class YamlFileSetup {
 
 		CustomConfig languageConfig = new CustomConfig(this.plugin, languageDirectory, "language.yml");
 		this.language = new LanguageYaml(languageConfig);
-
-		CustomConfig flatfileConfig = new CustomConfig(this.plugin, flatfileDirectory, "database.yml");
-		this.flatFileDatabase = new FlatfileYaml(flatfileConfig);
 
 		CustomConfig limitConfig = new CustomConfig(this.plugin, configDirectory, "entityLimiter.yml");
 		this.limit = new LimitYaml(limitConfig);
