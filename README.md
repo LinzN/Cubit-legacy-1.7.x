@@ -55,5 +55,5 @@ Here you find the sourcecode of cubit.
 
 
 
-#### [Buildserver thanks to md_5](https://ci.md-5.net/job/Cubit/)
+#### [Buildserver](https://ci.md-5.net/job/Cubit/) Thanks to md_5
 If you want to test development builds.
