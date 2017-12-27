@@ -27,12 +27,12 @@ MySQL Server
 
 
 
-#### [Permissions](https://github.com/LinzN/cubit/wiki/Permissions)
+#### [Permissions](https://github.com/minegaming/cubit/wiki/Permissions)
 All permissions for cubit.
 
 
 
-#### [Commands](https://github.com/LinzN/cubit/wiki/Commands)
+#### [Commands](https://github.com/minegaming/cubit/wiki/Commands)
 Show all commands for cubit.
 
 
@@ -50,10 +50,10 @@ Show all commands for cubit.
 
 
 
-#### [SourceCode](https://github.com/LinzN/cubit)
+#### [SourceCode](https://github.com/minegaming/cubit)
 Here you find the sourcecode of cubit.
 
 
 
-#### [Buildserver](https://jenkins.enigmar.de/job/cubit/)
+#### [Buildserver thanks to md_5](https://ci.md-5.net/job/Cubit/)
 If you want to test development builds.
