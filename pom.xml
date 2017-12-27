@@ -77,7 +77,7 @@
 
 		</dependency>
 
-		<!--Spigot API -->
+        <!--Spigot Server -->
 		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot</artifactId>
