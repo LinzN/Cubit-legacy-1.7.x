@@ -1,16 +1,15 @@
 package de.linzn.cubit.bukkit.command.shop.main;
 
-import org.bukkit.Chunk;
-import org.bukkit.Location;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-
 import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import de.linzn.cubit.internal.dataAccessMgr.OfferData;
 import de.linzn.cubit.internal.regionMgr.LandTypes;
 import de.linzn.cubit.internal.regionMgr.region.RegionData;
+import org.bukkit.Chunk;
+import org.bukkit.Location;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class BuyShop implements ICommand {
 
@@ -112,6 +111,15 @@ public class BuyShop implements ICommand {
 
 		if (!plugin.getBlockManager().getBlockHandler().placeLandBorder(chunk,
 				CubitBukkitPlugin.inst().getYamlManager().getSettings().landBuyMaterialBorder)) {
+			/* If this task failed! This should never happen */
+			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-BLOCK"));
+			plugin.getLogger()
+					.warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-BLOCK"));
+			return true;
+		}
+
+
+		if (!plugin.getBlockManager().getBlockHandler().removeBlockOnShopBuy(chunk, CubitBukkitPlugin.inst().getYamlManager().getSettings().shopMaterialCleanup)) {
 			/* If this task failed! This should never happen */
 			sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-BLOCK"));
 			plugin.getLogger()

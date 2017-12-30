@@ -1,12 +1,11 @@
 package de.linzn.cubit.internal.YamlConfigurationMgr.files;
 
+import de.linzn.cubit.internal.YamlConfigurationMgr.setup.CustomConfig;
+import org.bukkit.Material;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import org.bukkit.Material;
-
-import de.linzn.cubit.internal.YamlConfigurationMgr.setup.CustomConfig;
 
 public class SettingsYaml {
 
@@ -39,6 +38,8 @@ public class SettingsYaml {
 	public List<String> shopEnabledWorlds;
 	public double shopBasePrice;
 	public int shopLimit;
+    public boolean useShopMaterialCleanup;
+    public List<Material> shopMaterialCleanup;
 
 	/* Particle module */
 	public boolean particleUse;
@@ -95,6 +96,13 @@ public class SettingsYaml {
 		this.shopBasePrice = (double) this.getObjectValue("module.shop.basePrice", 300D);
 		this.shopLimit = (int) this.getObjectValue("module.shop.shopLimit", 4);
 
+        List<Material> shopCleanupMaterial = new ArrayList<>();
+        shopCleanupMaterial.add(Material.SIGN_POST);
+        shopCleanupMaterial.add(Material.SIGN);
+        shopCleanupMaterial.add(Material.WALL_SIGN);
+        this.useShopMaterialCleanup = (boolean) this.getObjectValue("module.shop.useShopMaterialCleanup", false);
+        this.shopMaterialCleanup = (List<Material>) this.getMaterialList("module.shop.shopMaterialCleanup", shopCleanupMaterial);
+
 		this.particleUse = (boolean) this.getObjectValue("module.particle.use", true);
 
 		this.sqlUse = (boolean) this.getObjectValue("module.database.useSql", false);
@@ -127,8 +135,14 @@ public class SettingsYaml {
 			this.configFile.set(path, list);
 		}
 		return this.configFile.getStringList(path);
+    }
 
-	}
+    public Object getMaterialList(String path, List<Material> list) {
+        if (!this.configFile.contains(path)) {
+            this.configFile.set(path, list);
+        }
+        return this.configFile.getStringList(path);
+    }
 
 	public CustomConfig getFile() {
 		return this.configFile;

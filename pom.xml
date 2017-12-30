@@ -131,14 +131,13 @@
 			</plugin>
 		</plugins>
 	</build>
-	<version>4.0.0-${build.number}</version>
+    <version>4.0.0</version>
 	<groupId>de.linzn</groupId>
 	<dependencyManagement>
 		<dependencies>
 		</dependencies>
 	</dependencyManagement>
 	<properties>
-		<build.number>SNAPSHOT</build.number>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<artifactId>cubit</artifactId>

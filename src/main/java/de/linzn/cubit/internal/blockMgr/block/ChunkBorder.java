@@ -78,16 +78,11 @@ public class ChunkBorder implements Runnable {
 
 	private void setBlockSync(final Material material, final Location corner_1, final Location corner_2,
 			final Location corner_3, final Location corner_4) {
-		plugin.getServer().getScheduler().runTask(plugin, new Runnable() {
-
-			@Override
-			public void run() {
-				chunk.getWorld().getBlockAt(corner_1).setType(material);
-				chunk.getWorld().getBlockAt(corner_2).setType(material);
-				chunk.getWorld().getBlockAt(corner_3).setType(material);
-				chunk.getWorld().getBlockAt(corner_4).setType(material);
-			}
-
+		plugin.getServer().getScheduler().runTask(plugin, () -> {
+			chunk.getWorld().getBlockAt(corner_1).setType(material);
+			chunk.getWorld().getBlockAt(corner_2).setType(material);
+			chunk.getWorld().getBlockAt(corner_3).setType(material);
+			chunk.getWorld().getBlockAt(corner_4).setType(material);
 		});
 	}
 }
