@@ -96,12 +96,17 @@ public class SettingsYaml {
 		this.shopBasePrice = (double) this.getObjectValue("module.shop.basePrice", 300D);
 		this.shopLimit = (int) this.getObjectValue("module.shop.shopLimit", 4);
 
-        List<Material> shopCleanupMaterial = new ArrayList<>();
-        shopCleanupMaterial.add(Material.SIGN_POST);
-        shopCleanupMaterial.add(Material.SIGN);
-        shopCleanupMaterial.add(Material.WALL_SIGN);
         this.useShopMaterialCleanup = (boolean) this.getObjectValue("module.shop.useShopMaterialCleanup", false);
-        this.shopMaterialCleanup = (List<Material>) this.getMaterialList("module.shop.shopMaterialCleanup", shopCleanupMaterial);
+        this.shopMaterialCleanup = new ArrayList<>();
+
+        List<String> shopCleanupMaterial = new ArrayList<>();
+        shopCleanupMaterial.add(Material.SIGN_POST.toString());
+        shopCleanupMaterial.add(Material.SIGN.toString());
+        shopCleanupMaterial.add(Material.WALL_SIGN.toString());
+
+        for (String materialEntry : (List<String>) this.getStringList("module.shop.shopMaterialCleanup", shopCleanupMaterial)) {
+            this.shopMaterialCleanup.add(Material.valueOf(materialEntry));
+        }
 
 		this.particleUse = (boolean) this.getObjectValue("module.particle.use", true);
 
