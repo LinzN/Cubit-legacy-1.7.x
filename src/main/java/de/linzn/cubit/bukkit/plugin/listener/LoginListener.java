@@ -1,3 +1,13 @@
+/*
+ * Copyright (C) 2017. MineGaming - All Rights Reserved
+ * You may use, distribute and modify this code under the
+ * terms of the LGPLv3 license, which unfortunately won't be
+ * written for another century.
+ *
+ * You should have received a copy of the LGPLv3 license with
+ * this file. If not, please write to: niklas.linz@enigmar.de
+ */
+
 package de.linzn.cubit.bukkit.plugin.listener;
 
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
@@ -11,8 +21,8 @@ import java.util.Date;
 
 public class LoginListener implements Listener {
 
-	@EventHandler
-	public void onPlayerJoin(final PlayerLoginEvent event) {
+    @EventHandler
+    public void onPlayerJoin(final PlayerLoginEvent event) {
         Bukkit.getScheduler().runTaskAsynchronously(CubitBukkitPlugin.inst(), () -> {
             CubitBukkitPlugin.inst().getDataAccessManager().databaseType.set_update_profile(
                     event.getPlayer().getUniqueId(), event.getPlayer().getName(), new Date().getTime());

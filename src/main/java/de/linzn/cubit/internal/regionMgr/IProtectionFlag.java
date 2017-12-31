@@ -1,21 +1,30 @@
+/*
+ * Copyright (C) 2017. MineGaming - All Rights Reserved
+ * You may use, distribute and modify this code under the
+ * terms of the LGPLv3 license, which unfortunately won't be
+ * written for another century.
+ *
+ * You should have received a copy of the LGPLv3 license with
+ * this file. If not, please write to: niklas.linz@enigmar.de
+ */
+
 package de.linzn.cubit.internal.regionMgr;
 
+import de.linzn.cubit.internal.regionMgr.region.RegionData;
 import org.bukkit.ChatColor;
 
-import de.linzn.cubit.internal.regionMgr.region.RegionData;
-
 public interface IProtectionFlag {
-	public abstract RegionData enablePacket(RegionData regionData);
+    RegionData enablePacket(RegionData regionData);
 
-	public abstract RegionData disablePacket(RegionData regionData);
+    RegionData disablePacket(RegionData regionData);
 
-	public abstract boolean getState(RegionData regionData);
+    boolean getState(RegionData regionData);
 
-	public abstract ChatColor getStateColor(RegionData regionData);
+    ChatColor getStateColor(RegionData regionData);
 
-	public abstract RegionData switchState(RegionData regionData, boolean value, boolean save);
+    RegionData switchState(RegionData regionData, boolean value, boolean save);
 
-	public abstract RegionData switchState(RegionData regionData, boolean save);
+    RegionData switchState(RegionData regionData, boolean save);
 
-	public abstract String getPacketName();
+    String getPacketName();
 }

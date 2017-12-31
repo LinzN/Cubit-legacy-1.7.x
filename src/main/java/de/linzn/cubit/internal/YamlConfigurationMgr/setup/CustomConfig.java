@@ -1,106 +1,101 @@
-package de.linzn.cubit.internal.YamlConfigurationMgr.setup;
+/*
+ * Copyright (C) 2017. MineGaming - All Rights Reserved
+ * You may use, distribute and modify this code under the
+ * terms of the LGPLv3 license, which unfortunately won't be
+ * written for another century.
+ *
+ * You should have received a copy of the LGPLv3 license with
+ * this file. If not, please write to: niklas.linz@enigmar.de
+ */
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+package de.linzn.cubit.internal.YamlConfigurationMgr.setup;
 
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class CustomConfig extends YamlConfiguration {
 
-	private File file;
-	private String defaults;
-	private Plugin plugin;
+    private File file;
+    private String defaults;
+    private Plugin plugin;
 
-	/**
-	 * Creates new PluginFile, with defaults
-	 * 
-	 * @param plugin
-	 *            - Your plugin
-	 * @param file
-	 *            - Your directory
-	 * @param fileName
-	 *            - Name of the file
-	 * @param defaultsName
-	 *            - Name of the defaults
-	 */
-	public CustomConfig(Plugin plugin, File directory, String fileName) {
-		this(plugin, directory, fileName, null);
-	}
 
-	public CustomConfig(Plugin plugin, File directory, String fileName, String defaultsName) {
-		this.plugin = plugin;
-		this.defaults = defaultsName;
-		this.file = new File(directory, fileName);
-		reload();
-	}
+    public CustomConfig(Plugin plugin, File directory, String fileName) {
+        this(plugin, directory, fileName, null);
+    }
 
-	/**
-	 * Reload configuration
-	 */
-	public void reload() {
+    public CustomConfig(Plugin plugin, File directory, String fileName, String defaultsName) {
+        this.plugin = plugin;
+        this.defaults = defaultsName;
+        this.file = new File(directory, fileName);
+        reload();
+    }
 
-		if (!file.exists()) {
+    /**
+     * Reload configuration
+     */
+    public void reload() {
 
-			try {
-				file.getParentFile().mkdirs();
-				file.createNewFile();
+        if (!file.exists()) {
 
-			} catch (IOException exception) {
-				exception.printStackTrace();
-				this.plugin.getLogger().severe("Error while creating file " + file.getName());
-			}
+            try {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
 
-		}
+            } catch (IOException exception) {
+                exception.printStackTrace();
+                this.plugin.getLogger().severe("Error while creating file " + file.getName());
+            }
 
-		try {
-			load(file);
+        }
 
-			if (defaults != null) {
-				InputStreamReader reader = new InputStreamReader(this.plugin.getResource(defaults));
-				FileConfiguration defaultsConfig = YamlConfiguration.loadConfiguration(reader);
+        try {
+            load(file);
 
-				setDefaults(defaultsConfig);
-				options().copyDefaults(true);
+            if (defaults != null) {
+                InputStreamReader reader = new InputStreamReader(this.plugin.getResource(defaults));
+                FileConfiguration defaultsConfig = YamlConfiguration.loadConfiguration(reader);
 
-				reader.close();
-				save();
-			}
+                setDefaults(defaultsConfig);
+                options().copyDefaults(true);
 
-		} catch (IOException exception) {
-			exception.printStackTrace();
-			plugin.getLogger().severe("Error while loading file " + file.getName());
+                reader.close();
+                save();
+            }
 
-		} catch (InvalidConfigurationException exception) {
-			exception.printStackTrace();
-			plugin.getLogger().severe("Error while loading file " + file.getName());
+        } catch (IOException | InvalidConfigurationException exception) {
+            exception.printStackTrace();
+            plugin.getLogger().severe("Error while loading file " + file.getName());
 
-		}
+        }
 
-	}
+    }
 
-	/**
-	 * Save configuration
-	 */
-	public void save() {
+    /**
+     * Save configuration
+     */
+    public void save() {
 
-		try {
-			options().indent(2);
-			save(file);
+        try {
+            options().indent(2);
+            save(file);
 
-		} catch (IOException exception) {
-			exception.printStackTrace();
-			plugin.getLogger().severe("Error while saving file " + file.getName());
-		}
+        } catch (IOException exception) {
+            exception.printStackTrace();
+            plugin.getLogger().severe("Error while saving file " + file.getName());
+        }
 
-	}
+    }
 
-	public void saveAndReload() {
-		save();
-		reload();
-	}
+    public void saveAndReload() {
+        save();
+        reload();
+    }
 
 }

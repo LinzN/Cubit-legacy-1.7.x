@@ -1,3 +1,13 @@
+/*
+ * Copyright (C) 2017. MineGaming - All Rights Reserved
+ * You may use, distribute and modify this code under the
+ * terms of the LGPLv3 license, which unfortunately won't be
+ * written for another century.
+ *
+ * You should have received a copy of the LGPLv3 license with
+ * this file. If not, please write to: niklas.linz@enigmar.de
+ */
+
 package de.linzn.cubit.internal.blockMgr.block;
 
 import org.bukkit.Chunk;
@@ -35,8 +45,6 @@ public class ChunkBlockCleaner implements Runnable {
     }
 
     private void removeBlock(final Block block) {
-        plugin.getServer().getScheduler().runTask(plugin, () -> {
-            block.setType(Material.AIR);
-        });
+        plugin.getServer().getScheduler().runTask(plugin, () -> block.setType(Material.AIR));
     }
 }

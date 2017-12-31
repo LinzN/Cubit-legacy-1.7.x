@@ -1,218 +1,221 @@
+/*
+ * Copyright (C) 2017. MineGaming - All Rights Reserved
+ * You may use, distribute and modify this code under the
+ * terms of the LGPLv3 license, which unfortunately won't be
+ * written for another century.
+ *
+ * You should have received a copy of the LGPLv3 license with
+ * this file. If not, please write to: niklas.linz@enigmar.de
+ */
+
 package de.linzn.cubit.internal.entityMgr;
+
+import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.internal.entityMgr.listeners.EntityListener;
+import de.linzn.cubit.internal.entityMgr.listeners.WorldListener;
+import org.bukkit.Chunk;
+import org.bukkit.entity.*;
+import org.bukkit.event.HandlerList;
+import org.bukkit.plugin.Plugin;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.bukkit.Chunk;
-import org.bukkit.entity.Ambient;
-import org.bukkit.entity.Animals;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Monster;
-import org.bukkit.entity.NPC;
-import org.bukkit.entity.WaterMob;
-import org.bukkit.event.HandlerList;
-import org.bukkit.plugin.Plugin;
-
-import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
-import de.linzn.cubit.internal.entityMgr.listeners.EntityListener;
-import de.linzn.cubit.internal.entityMgr.listeners.WorldListener;
-
 public class EntityManager {
 
-	private List<String> ignoreMetadata, excludedWorlds;
-	private EntityListener entityListener;
-	private WorldListener worldListener;
-	private Plugin plugin;
+    private List<String> ignoreMetadata, excludedWorlds;
+    private EntityListener entityListener;
+    private WorldListener worldListener;
+    private Plugin plugin;
 
-	public EntityManager(Plugin plugin) {
-		plugin.getLogger().info("Loading EntityManager");
-		this.plugin = plugin;
-		if (CubitBukkitPlugin.inst().getYamlManager().getSettings().entityLimiterUse) {
-			loadLimiter();
-		}
-	}
+    public EntityManager(Plugin plugin) {
+        plugin.getLogger().info("Loading EntityManager");
+        this.plugin = plugin;
+        if (CubitBukkitPlugin.inst().getYamlManager().getSettings().entityLimiterUse) {
+            loadLimiter();
+        }
+    }
 
-	public void loadLimiter() {
-		if (CubitBukkitPlugin.inst().getYamlManager().getLimit().watch_creature_spawns) {
-			if (entityListener == null) {
-				entityListener = new EntityListener(this);
-				this.plugin.getServer().getPluginManager().registerEvents(entityListener, this.plugin);
-			}
-		} else if (entityListener != null) {
-			HandlerList.unregisterAll(entityListener);
-			entityListener = null;
-		}
-		if (CubitBukkitPlugin.inst().getYamlManager().getLimit().active_inspections
-				|| CubitBukkitPlugin.inst().getYamlManager().getLimit().check_chunk_load
-				|| CubitBukkitPlugin.inst().getYamlManager().getLimit().check_chunk_unload) {
-			if (worldListener == null) {
-				worldListener = new WorldListener(this, this.plugin);
-				this.plugin.getServer().getPluginManager().registerEvents(worldListener, this.plugin);
-			}
-		} else if (worldListener != null) {
-			HandlerList.unregisterAll(worldListener);
-			worldListener.cancelAllTasks();
-			worldListener = null;
-		}
+    public static String getMobGroup(Entity entity) {
+        if (entity instanceof Animals) {
+            return "ANIMAL";
+        }
 
-		if (entityListener == null && worldListener == null) {
-			this.plugin.getLogger().severe("No spawnreasons are enabled, the entityLimiter will do nothing!");
-		}
+        if (entity instanceof Monster) {
+            return "MONSTER";
+        }
 
-		ignoreMetadata = CubitBukkitPlugin.inst().getYamlManager().getLimit().ignore_metadata;
-		excludedWorlds = CubitBukkitPlugin.inst().getYamlManager().getLimit().excluded_worlds;
+        if (entity instanceof Ambient) {
+            return "AMBIENT";
+        }
 
-	}
+        if (entity instanceof WaterMob) {
+            return "WATER_MOB";
+        }
 
-	public boolean checkChunk(Chunk chunk, Entity entity) {
+        if (entity instanceof NPC) {
+            return "NPC";
+        }
+        return "OTHER";
+    }
 
-		if (excludedWorlds.contains(chunk.getWorld().getName())) {
-			return false;
-		}
+    public void loadLimiter() {
+        if (CubitBukkitPlugin.inst().getYamlManager().getLimit().watch_creature_spawns) {
+            if (entityListener == null) {
+                entityListener = new EntityListener(this);
+                this.plugin.getServer().getPluginManager().registerEvents(entityListener, this.plugin);
+            }
+        } else if (entityListener != null) {
+            HandlerList.unregisterAll(entityListener);
+            entityListener = null;
+        }
+        if (CubitBukkitPlugin.inst().getYamlManager().getLimit().active_inspections
+                || CubitBukkitPlugin.inst().getYamlManager().getLimit().check_chunk_load
+                || CubitBukkitPlugin.inst().getYamlManager().getLimit().check_chunk_unload) {
+            if (worldListener == null) {
+                worldListener = new WorldListener(this, this.plugin);
+                this.plugin.getServer().getPluginManager().registerEvents(worldListener, this.plugin);
+            }
+        } else if (worldListener != null) {
+            HandlerList.unregisterAll(worldListener);
+            worldListener.cancelAllTasks();
+            worldListener = null;
+        }
 
-		if (entity != null) {
+        if (entityListener == null && worldListener == null) {
+            this.plugin.getLogger().severe("No spawnreasons are enabled, the entityLimiter will do nothing!");
+        }
 
-			if (entity instanceof HumanEntity) {
-				return false;
-			}
+        ignoreMetadata = CubitBukkitPlugin.inst().getYamlManager().getLimit().ignore_metadata;
+        excludedWorlds = CubitBukkitPlugin.inst().getYamlManager().getLimit().excluded_worlds;
 
-			for (String metadata : ignoreMetadata) {
-				if (entity.hasMetadata(metadata)) {
-					return false;
-				}
-			}
-		}
+    }
 
-		Entity[] entities = chunk.getEntities();
-		HashMap<String, ArrayList<Entity>> types = new HashMap<String, ArrayList<Entity>>();
+    public boolean checkChunk(Chunk chunk, Entity entity) {
 
-		nextChunkEntity: for (int i = entities.length - 1; i >= 0; i--) {
-			Entity chunkEntity = entities[i];
-			if (chunkEntity instanceof HumanEntity) {
-				continue;
-			}
+        if (excludedWorlds.contains(chunk.getWorld().getName())) {
+            return false;
+        }
 
-			for (String metadata : ignoreMetadata) {
-				if (chunkEntity.hasMetadata(metadata)) {
-					continue nextChunkEntity;
-				}
-			}
+        if (entity != null) {
 
-			String eType = chunkEntity.getType().name();
-			String eGroup = getMobGroup(chunkEntity);
+            if (entity instanceof HumanEntity) {
+                return false;
+            }
 
-			if (CubitBukkitPlugin.inst().getYamlManager().getLimit().containsEntityGroup(eType)) {
-				if (!types.containsKey(eType)) {
-					types.put(eType, new ArrayList<Entity>());
-				}
-				types.get(eType).add(chunkEntity);
-			}
+            for (String metadata : ignoreMetadata) {
+                if (entity.hasMetadata(metadata)) {
+                    return false;
+                }
+            }
+        }
 
-			if (CubitBukkitPlugin.inst().getYamlManager().getLimit().containsEntityGroup(eGroup)) {
-				if (!types.containsKey(eGroup)) {
-					types.put(eGroup, new ArrayList<Entity>());
-				}
-				types.get(eGroup).add(chunkEntity);
-			}
-		}
+        Entity[] entities = chunk.getEntities();
+        HashMap<String, ArrayList<Entity>> types = new HashMap<>();
 
-		if (entity != null) {
+        nextChunkEntity:
+        for (int i = entities.length - 1; i >= 0; i--) {
+            Entity chunkEntity = entities[i];
+            if (chunkEntity instanceof HumanEntity) {
+                continue;
+            }
 
-			String eType = entity.getType().name();
+            for (String metadata : ignoreMetadata) {
+                if (chunkEntity.hasMetadata(metadata)) {
+                    continue nextChunkEntity;
+                }
+            }
 
-			if (CubitBukkitPlugin.inst().getYamlManager().getLimit().containsEntityGroup(eType)) {
-				int typeCount;
-				if (types.containsKey(eType)) {
-					typeCount = types.get(eType).size() + 1;
-				} else {
-					typeCount = 1;
-				}
-				if (typeCount > CubitBukkitPlugin.inst().getYamlManager().getLimit().getEntityGroupValue(eType)) {
-					return true;
-				}
-			}
+            String eType = chunkEntity.getType().name();
+            String eGroup = getMobGroup(chunkEntity);
 
-			String eGroup = getMobGroup(entity);
+            if (CubitBukkitPlugin.inst().getYamlManager().getLimit().containsEntityGroup(eType)) {
+                if (!types.containsKey(eType)) {
+                    types.put(eType, new ArrayList<>());
+                }
+                types.get(eType).add(chunkEntity);
+            }
 
-			if (CubitBukkitPlugin.inst().getYamlManager().getLimit().containsEntityGroup(eGroup)) {
-				int typeCount;
-				if (types.containsKey(eGroup)) {
-					typeCount = types.get(eGroup).size() + 1;
-				} else {
-					typeCount = 1;
-				}
-				return typeCount > CubitBukkitPlugin.inst().getYamlManager().getLimit().getEntityGroupValue(eGroup);
-			}
+            if (CubitBukkitPlugin.inst().getYamlManager().getLimit().containsEntityGroup(eGroup)) {
+                if (!types.containsKey(eGroup)) {
+                    types.put(eGroup, new ArrayList<>());
+                }
+                types.get(eGroup).add(chunkEntity);
+            }
+        }
 
-		}
+        if (entity != null) {
 
-		for (Entry<String, ArrayList<Entity>> entry : types.entrySet()) {
+            String eType = entity.getType().name();
 
-			String eType = entry.getKey();
-			int limit = CubitBukkitPlugin.inst().getYamlManager().getLimit().getEntityGroupValue(eType);
+            if (CubitBukkitPlugin.inst().getYamlManager().getLimit().containsEntityGroup(eType)) {
+                int typeCount;
+                if (types.containsKey(eType)) {
+                    typeCount = types.get(eType).size() + 1;
+                } else {
+                    typeCount = 1;
+                }
+                if (typeCount > CubitBukkitPlugin.inst().getYamlManager().getLimit().getEntityGroupValue(eType)) {
+                    return true;
+                }
+            }
 
-			if (entry.getValue().size() < limit) {
-				continue;
-			}
+            String eGroup = getMobGroup(entity);
 
-			debug("Removing " + (entry.getValue().size() - limit) + " " + eType + " @ " + chunk.getX() + " "
-					+ chunk.getZ());
+            if (CubitBukkitPlugin.inst().getYamlManager().getLimit().containsEntityGroup(eGroup)) {
+                int typeCount;
+                if (types.containsKey(eGroup)) {
+                    typeCount = types.get(eGroup).size() + 1;
+                } else {
+                    typeCount = 1;
+                }
+                return typeCount > CubitBukkitPlugin.inst().getYamlManager().getLimit().getEntityGroupValue(eGroup);
+            }
 
-			boolean skipNamed = CubitBukkitPlugin.inst().getYamlManager().getLimit().preserve_named_entities;
-			int toRemove = entry.getValue().size() - limit;
-			int index = entry.getValue().size() - 1;
-			while (toRemove > 0 && index >= 0) {
-				Entity toCheck = entry.getValue().get(index);
-				if (!skipNamed || toCheck.getCustomName() == null
-						|| toCheck instanceof LivingEntity && ((LivingEntity) toCheck).getRemoveWhenFarAway()) {
-					toCheck.remove();
-					--toRemove;
-				}
-				--index;
-			}
-			if (toRemove == 0) {
-				continue;
-			}
-			index = entry.getValue().size() - toRemove - 1;
-			for (; index < entry.getValue().size(); index++) {
-				entry.getValue().get(index).remove();
-			}
-		}
+        }
 
-		return false;
-	}
+        for (Entry<String, ArrayList<Entity>> entry : types.entrySet()) {
 
-	public void debug(String mess) {
-		if (CubitBukkitPlugin.inst().getYamlManager().getLimit().plugin_debug) {
-			this.plugin.getLogger().info("Debug: " + mess);
-		}
-	}
+            String eType = entry.getKey();
+            int limit = CubitBukkitPlugin.inst().getYamlManager().getLimit().getEntityGroupValue(eType);
 
-	public static String getMobGroup(Entity entity) {
-		if (entity instanceof Animals) {
-			return "ANIMAL";
-		}
+            if (entry.getValue().size() < limit) {
+                continue;
+            }
 
-		if (entity instanceof Monster) {
-			return "MONSTER";
-		}
+            debug("Removing " + (entry.getValue().size() - limit) + " " + eType + " @ " + chunk.getX() + " "
+                    + chunk.getZ());
 
-		if (entity instanceof Ambient) {
-			return "AMBIENT";
-		}
+            boolean skipNamed = CubitBukkitPlugin.inst().getYamlManager().getLimit().preserve_named_entities;
+            int toRemove = entry.getValue().size() - limit;
+            int index = entry.getValue().size() - 1;
+            while (toRemove > 0 && index >= 0) {
+                Entity toCheck = entry.getValue().get(index);
+                if (!skipNamed || toCheck.getCustomName() == null
+                        || toCheck instanceof LivingEntity && ((LivingEntity) toCheck).getRemoveWhenFarAway()) {
+                    toCheck.remove();
+                    --toRemove;
+                }
+                --index;
+            }
+            if (toRemove == 0) {
+                continue;
+            }
+            index = entry.getValue().size() - toRemove - 1;
+            for (; index < entry.getValue().size(); index++) {
+                entry.getValue().get(index).remove();
+            }
+        }
 
-		if (entity instanceof WaterMob) {
-			return "WATER_MOB";
-		}
+        return false;
+    }
 
-		if (entity instanceof NPC) {
-			return "NPC";
-		}
-		return "OTHER";
-	}
+    public void debug(String mess) {
+        if (CubitBukkitPlugin.inst().getYamlManager().getLimit().plugin_debug) {
+            this.plugin.getLogger().info("Debug: " + mess);
+        }
+    }
 
 }

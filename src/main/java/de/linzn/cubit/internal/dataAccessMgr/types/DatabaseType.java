@@ -1,41 +1,50 @@
+/*
+ * Copyright (C) 2017. MineGaming - All Rights Reserved
+ * You may use, distribute and modify this code under the
+ * terms of the LGPLv3 license, which unfortunately won't be
+ * written for another century.
+ *
+ * You should have received a copy of the LGPLv3 license with
+ * this file. If not, please write to: niklas.linz@enigmar.de
+ */
+
 package de.linzn.cubit.internal.dataAccessMgr.types;
+
+import de.linzn.cubit.internal.dataAccessMgr.OfferData;
+import org.bukkit.World;
 
 import java.sql.Connection;
 import java.util.UUID;
 
-import org.bukkit.World;
-
-import de.linzn.cubit.internal.dataAccessMgr.OfferData;
-
 public interface DatabaseType {
 
-	public boolean setupDatabase();
+    boolean setupDatabase();
 
-	public Connection createConnection();
+    Connection createConnection();
 
-	public boolean releaseConnection(Connection con);
+    boolean releaseConnection(Connection con);
 
-	// Input
+    // Input
 
-	public boolean set_create_offer(OfferData data);
+    boolean set_create_offer(OfferData data);
 
-	public boolean set_remove_offer(String regionID, World world);
+    boolean set_remove_offer(String regionID, World world);
 
-	public boolean set_update_profile(UUID uuid, String player, long time);
+    boolean set_update_profile(UUID uuid, String player, long time);
 
-	// Output
+    // Output
 
-	public long get_last_login_profile(UUID uuid);
+    long get_last_login_profile(UUID uuid);
 
-	public String get_profile_name(UUID uuid);
+    String get_profile_name(UUID uuid);
 
-	public long get_last_login_profile(String p);
+    long get_last_login_profile(String p);
 
-	public OfferData get_offer(String regionID, World world);
+    OfferData get_offer(String regionID, World world);
 
-	public boolean get_is_offer(String regionID, World world);
+    boolean get_is_offer(String regionID, World world);
 
-	// Other
-	public String get_formate_date(long date);
+    // Other
+    String get_formate_date(long date);
 
 }
