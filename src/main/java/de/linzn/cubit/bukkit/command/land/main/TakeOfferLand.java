@@ -76,7 +76,7 @@ public class TakeOfferLand implements ICommand {
         }
         if (!plugin.getDataAccessManager().databaseType.get_is_offer(regionData.getRegionName(), loc.getWorld())) {
             sender.sendMessage(
-                    plugin.getYamlManager().getLanguage().notOffered.replace("regionID", regionData.getRegionName()));
+                    plugin.getYamlManager().getLanguage().notOffered.replace("{regionID}", regionData.getRegionName()));
             return true;
         }
 
