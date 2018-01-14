@@ -12,6 +12,7 @@ package de.linzn.cubit.bukkit.command.land.main;
 
 import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.internal.cubitEvents.CubitLandBuyEvent;
 import de.linzn.cubit.internal.regionMgr.LandTypes;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -89,6 +90,10 @@ public class BuyLand implements ICommand {
                     .warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-BLOCK"));
             return true;
         }
+
+        /* Call cubit buy land event */
+        CubitLandBuyEvent cubitLandBuyEvent = new CubitLandBuyEvent(loc.getWorld(), regionID);
+        this.plugin.getServer().getPluginManager().callEvent(cubitLandBuyEvent);
 
         if (!plugin.getParticleManager().sendBuy(player, loc)) {
             /* If this task failed! This should never happen */

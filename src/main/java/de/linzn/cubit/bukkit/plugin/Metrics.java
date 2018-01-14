@@ -108,7 +108,7 @@ public class Metrics {
         logFailedRequests = config.getBoolean("logFailedRequests", false);
         if (config.getBoolean("enabled", true)) {
             boolean found = false;
-            // Search for all other bStats Metrics classes to see if we are the
+            // Search for all other bStats Metrics makers to see if we are the
             // first one
             for (Class<?> service : Bukkit.getServicesManager().getKnownServices()) {
                 try {
@@ -302,7 +302,7 @@ public class Metrics {
         final JSONObject data = getServerData();
 
         JSONArray pluginData = new JSONArray();
-        // Search for all other bStats Metrics classes to get their plugin data
+        // Search for all other bStats Metrics makers to get their plugin data
         for (Class<?> service : Bukkit.getServicesManager().getKnownServices()) {
             try {
                 service.getField("B_STATS_VERSION"); // Our identifier :)

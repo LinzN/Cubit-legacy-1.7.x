@@ -12,6 +12,7 @@ package de.linzn.cubit.bukkit.command.land.main;
 
 import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.internal.cubitEvents.CubitLandUpdateEvent;
 import de.linzn.cubit.internal.dataAccessMgr.OfferData;
 import de.linzn.cubit.internal.regionMgr.LandTypes;
 import de.linzn.cubit.internal.regionMgr.region.RegionData;
@@ -115,6 +116,10 @@ public class TakeOfferLand implements ICommand {
                     plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "TAKEOFFER-REMOVEOFFER"));
             return true;
         }
+
+        /* Cubit land update event*/
+        CubitLandUpdateEvent cubitLandUpdateEvent = new CubitLandUpdateEvent(loc.getWorld(), regionData.getRegionName());
+        this.plugin.getServer().getPluginManager().callEvent(cubitLandUpdateEvent);
 
         if (!plugin.getParticleManager().sendBuy(player, loc)) {
             /* If this task failed! This should never happen */

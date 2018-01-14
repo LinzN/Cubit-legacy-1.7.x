@@ -12,6 +12,7 @@ package de.linzn.cubit.bukkit.command.admin.main;
 
 import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.internal.cubitEvents.CubitLandSellEvent;
 import de.linzn.cubit.internal.regionMgr.LandTypes;
 import de.linzn.cubit.internal.regionMgr.region.RegionData;
 import org.bukkit.Chunk;
@@ -83,6 +84,10 @@ public class DeleteShopAdmin implements ICommand {
                     .warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "DELETE-REGION"));
             return true;
         }
+
+        /* Call cubit sell land event */
+        CubitLandSellEvent cubitLandSellEvent = new CubitLandSellEvent(loc.getWorld(), regionName);
+        this.plugin.getServer().getPluginManager().callEvent(cubitLandSellEvent);
 
         sender.sendMessage(plugin.getYamlManager().getLanguage().deleteShopLand.replace("{regionID}", regionName));
 

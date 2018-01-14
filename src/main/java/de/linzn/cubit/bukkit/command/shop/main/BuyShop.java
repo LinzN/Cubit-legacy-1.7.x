@@ -12,6 +12,7 @@ package de.linzn.cubit.bukkit.command.shop.main;
 
 import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.internal.cubitEvents.CubitLandUpdateEvent;
 import de.linzn.cubit.internal.dataAccessMgr.OfferData;
 import de.linzn.cubit.internal.regionMgr.LandTypes;
 import de.linzn.cubit.internal.regionMgr.region.RegionData;
@@ -136,6 +137,11 @@ public class BuyShop implements ICommand {
                     .warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-BLOCK"));
             return true;
         }
+
+        /* Cubit land update event*/
+        CubitLandUpdateEvent cubitLandUpdateEvent = new CubitLandUpdateEvent(loc.getWorld(), regionData.getRegionName());
+        this.plugin.getServer().getPluginManager().callEvent(cubitLandUpdateEvent);
+
         /* Task was successfully. Send BuyMessage */
         sender.sendMessage(
                 plugin.getYamlManager().getLanguage().buySuccess.replace("{regionID}", regionData.getRegionName()));

@@ -12,6 +12,7 @@ package de.linzn.cubit.bukkit.command.land.main;
 
 import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.internal.cubitEvents.CubitLandSellEvent;
 import de.linzn.cubit.internal.regionMgr.LandTypes;
 import de.linzn.cubit.internal.regionMgr.region.RegionData;
 import org.bukkit.Chunk;
@@ -109,6 +110,10 @@ public class SellLand implements ICommand {
                     .warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SELL-REMOVEOFFER"));
             return true;
         }
+
+        /* Call cubit sell land event */
+        CubitLandSellEvent cubitLandSellEvent = new CubitLandSellEvent(loc.getWorld(), regionID);
+        this.plugin.getServer().getPluginManager().callEvent(cubitLandSellEvent);
 
         if (!plugin.getParticleManager().sendSell(player, loc)) {
             /* If this task failed! This should never happen */

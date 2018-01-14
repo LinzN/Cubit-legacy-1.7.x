@@ -12,6 +12,7 @@ package de.linzn.cubit.bukkit.command.admin.main;
 
 import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.internal.cubitEvents.CubitLandBuyEvent;
 import de.linzn.cubit.internal.dataAccessMgr.OfferData;
 import de.linzn.cubit.internal.regionMgr.LandTypes;
 import org.apache.commons.lang.math.NumberUtils;
@@ -117,6 +118,10 @@ public class CreateShopAdmin implements ICommand {
                     .warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "OFFER-ADD"));
             return true;
         }
+
+        /* Call cubit buy land event */
+        CubitLandBuyEvent cubitLandBuyEvent = new CubitLandBuyEvent(loc.getWorld(), regionName);
+        this.plugin.getServer().getPluginManager().callEvent(cubitLandBuyEvent);
 
         sender.sendMessage(plugin.getYamlManager().getLanguage().createShopLand.replace("{regionID}", regionName));
 
