@@ -2,7 +2,6 @@ package de.linzn.cubit.internal.dynmapMgr.makers;
 
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 
@@ -25,12 +24,11 @@ public class CheckRegionUpdates implements Runnable {
 
     @Override
     public void run() {
-        Bukkit.getScheduler().runTaskAsynchronously(this.cubitDynmap.plugin, () -> {
             if (!this.isSetup) {
                 this.OnSetup();
                 return;
             }
-
+        Bukkit.getScheduler().runTaskAsynchronously(this.cubitDynmap.plugin, () -> {
             for (World world : this.cubitDynmap.regionPending.keySet()) {
                 RegionManager regionManager = this.cubitDynmap.plugin.getWorldGuardPlugin().getRegionManager(world);
                 Map<String, Boolean> worldRegions = this.cubitDynmap.regionPending.get(world);
@@ -64,10 +62,10 @@ public class CheckRegionUpdates implements Runnable {
             this.showedRegions.put(world, worldRegions);
 
             for (ProtectedRegion protectedRegion : regionManager.getRegions().values()) {
-                Bukkit.getScheduler().runTask(CubitBukkitPlugin.inst(), () -> {
+                //Bukkit.getScheduler().runTask(CubitBukkitPlugin.inst(), () -> {
                     cubitDynmap.updateRegionMarker(world, protectedRegion);
                     worldRegions.add(protectedRegion.getId());
-                });
+                //});
             }
         }
         this.isSetup = true;

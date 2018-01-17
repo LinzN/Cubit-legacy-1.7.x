@@ -8,6 +8,7 @@ import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import de.linzn.cubit.internal.dynmapMgr.checkRegionListener.CubitRegionListener;
 import de.linzn.cubit.internal.dynmapMgr.checkRegionListener.PluginLoadListener;
 import de.linzn.cubit.internal.regionMgr.LandTypes;
+import de.linzn.cubit.internal.regionMgr.region.RegionData;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.plugin.Plugin;
@@ -50,7 +51,7 @@ public class CubitDynmap {
         }
     }
 
-    private String formatInfoBox(ProtectedRegion region, AreaMarker m, LandTypes cubitType) {
+    private String formatInfoBox(RegionData regionData, AreaMarker m, LandTypes cubitType, boolean hasOwner) {
         String typeString;
 
         switch (cubitType) {
@@ -58,10 +59,10 @@ public class CubitDynmap {
                 typeString = "<div class=\"infowindow\"><span style=\"font-size:120%;\">Type: SERVER<br> %cubitLand%</span></div>";
                 break;
             case SHOP:
-                typeString = "<div class=\"infowindow\"><span style=\"font-size:120%;\">Type: SHOP<br> %cubitLand%</span></div>";
+                typeString = "<div class=\"infowindow\"><span style=\"font-size:120%;\">Type: SHOP<br> %cubitLand% %ownerstyle%</span></div>";
                 break;
             case WORLD:
-                typeString = "<div class=\"infowindow\"><span style=\"font-size:120%;\">Type: LAND<br> %cubitLand%</span></div>";
+                typeString = "<div class=\"infowindow\"><span style=\"font-size:120%;\">Type: LAND<br> %cubitLand% %ownerstyle%</span></div>";
                 break;
             default:
                 typeString = "<div class=\"infowindow\"><span style=\"font-size:120%;\">Type: LAND<br> %cubitLand%</span></div>";
@@ -70,11 +71,16 @@ public class CubitDynmap {
 
         String v = "<div class=\"cubitInfo\">" + typeString + "</div>";
         v = v.replace("%cubitLand%", m.getLabel());
+        if (hasOwner) {
+            v = v.replace("%ownerstyle%", "<br>Besitzer: " + this.plugin.getRegionManager().getPlayerNames(regionData.getOwnersUUID()).toString());
+        } else {
+            v = v.replace("%ownerstyle%", "<br>Frei");
+        }
         return v;
     }
 
 
-    private void addStyle(AreaMarker m, ProtectedRegion region, LandTypes cubitType, boolean hasOwner) {
+    private void addStyle(AreaMarker m, RegionData regionData, LandTypes cubitType, boolean hasOwner) {
         AreaStyle as;
         switch (cubitType) {
             case SERVER:
@@ -107,22 +113,19 @@ public class CubitDynmap {
 
 
     void updateRegionMarker(World world, ProtectedRegion region) {
-        String name = region.getId();
         double[] x;
         double[] z;
 
         String regionId = region.getId();
-        LandTypes cubitType = LandTypes.WORLD;
-        boolean hasOwner = true;
-        if (region.getOwners().getUniqueIds().isEmpty()) {
-            hasOwner = false;
+        LandTypes cubitType = LandTypes.getLandType(regionId);
+        RegionData regionData = new RegionData(world);
+        regionData.setWGRegion(region);
+
+        boolean hasOwner = false;
+        if (regionData.getOwnersUUID().length >= 1) {
+            hasOwner = true;
         }
 
-        if (regionId.startsWith(LandTypes.SHOP.toString().toLowerCase())) {
-            cubitType = LandTypes.SHOP;
-        } else if (regionId.startsWith(LandTypes.SERVER.toString().toLowerCase())) {
-            cubitType = LandTypes.SERVER;
-        }
 
         RegionType tn = region.getType();
         BlockVector l0 = region.getMinimumPoint();
@@ -145,15 +148,15 @@ public class CubitDynmap {
         String markerId = world.getName() + "_" + regionId;
         AreaMarker m = this.markerSet.findAreaMarker(markerId);
         if (m == null) {
-            m = this.markerSet.createAreaMarker(markerId, name, false, world.getName(), x, z, false);
+            m = this.markerSet.createAreaMarker(markerId, regionId, false, world.getName(), x, z, false);
             if (m == null)
                 return;
         } else {
             m.setCornerLocations(x, z);
-            m.setLabel(name);
+            m.setLabel(regionId);
         }
-        addStyle(m, region, cubitType, hasOwner);
-        m.setDescription(formatInfoBox(region, m, cubitType));
+        addStyle(m, regionData, cubitType, hasOwner);
+        m.setDescription(formatInfoBox(regionData, m, cubitType, hasOwner));
     }
 
     public void initialize() {
