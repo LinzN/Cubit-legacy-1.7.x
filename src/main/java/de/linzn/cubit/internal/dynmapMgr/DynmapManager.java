@@ -24,7 +24,9 @@ public class DynmapManager {
     public DynmapManager(CubitBukkitPlugin plugin) {
         plugin.getLogger().info("Loading DynmapManager");
         this.plugin = plugin;
-        this.cubitDynmap = new CubitDynmap(this.plugin);
+        if (this.plugin.getYamlManager().getSettings().useDynmap) {
+            this.cubitDynmap = new CubitDynmap(this.plugin);
+        }
 
     }
 

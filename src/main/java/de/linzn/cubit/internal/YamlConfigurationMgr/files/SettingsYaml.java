@@ -60,6 +60,7 @@ public class SettingsYaml {
     public String sqlUser;
     public String sqlPassword;
     public boolean updateCheck;
+    public boolean useDynmap;
     public long cubitSetupDate;
     private CustomConfig configFile;
 
@@ -125,6 +126,8 @@ public class SettingsYaml {
         this.physicWaterLavaFlowLand = (boolean) getObjectValue("module.physicWaterLavaFlowLand.use", false);
 
         this.updateCheck = (boolean) getObjectValue("module.updateCheck", true);
+
+        this.useDynmap = (boolean) getObjectValue("module.dynmap.use", false);
 
         this.cubitSetupDate = (long) getObjectValue("doNotTouch.cubitSetupDate", new Date().getTime());
 
