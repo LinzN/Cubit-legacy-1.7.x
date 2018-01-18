@@ -1,3 +1,14 @@
+/*
+ * Copyright (C) 2018. MineGaming - All Rights Reserved
+ * You may use, distribute and modify this code under the
+ * terms of the LGPLv3 license, which unfortunately won't be
+ * written for another century.
+ *
+ *  You should have received a copy of the LGPLv3 license with
+ *  this file. If not, please write to: niklas.linz@enigmar.de
+ *
+ */
+
 package de.linzn.cubit.internal.dynmapMgr.makers;
 
 import com.sk89q.worldguard.protection.managers.RegionManager;
@@ -24,10 +35,10 @@ public class CheckRegionUpdates implements Runnable {
 
     @Override
     public void run() {
-            if (!this.isSetup) {
-                this.OnSetup();
-                return;
-            }
+        if (!this.isSetup) {
+            this.OnSetup();
+            return;
+        }
         Bukkit.getScheduler().runTaskAsynchronously(this.cubitDynmap.plugin, () -> {
             for (World world : this.cubitDynmap.regionPending.keySet()) {
                 RegionManager regionManager = this.cubitDynmap.plugin.getWorldGuardPlugin().getRegionManager(world);
@@ -63,8 +74,8 @@ public class CheckRegionUpdates implements Runnable {
 
             for (ProtectedRegion protectedRegion : regionManager.getRegions().values()) {
                 //Bukkit.getScheduler().runTask(CubitBukkitPlugin.inst(), () -> {
-                    cubitDynmap.updateRegionMarker(world, protectedRegion);
-                    worldRegions.add(protectedRegion.getId());
+                cubitDynmap.updateRegionMarker(world, protectedRegion);
+                worldRegions.add(protectedRegion.getId());
                 //});
             }
         }
