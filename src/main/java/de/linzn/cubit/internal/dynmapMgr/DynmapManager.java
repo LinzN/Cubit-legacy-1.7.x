@@ -27,7 +27,6 @@ public class DynmapManager {
         if (this.plugin.getYamlManager().getSettings().useDynmap) {
             this.cubitDynmap = new CubitDynmap(this.plugin);
         }
-
     }
 
 
