@@ -11,10 +11,7 @@
 
 package de.linzn.cubit.internal.YamlConfigurationMgr;
 
-import de.linzn.cubit.internal.YamlConfigurationMgr.files.FlagProtectionsYaml;
-import de.linzn.cubit.internal.YamlConfigurationMgr.files.LanguageYaml;
-import de.linzn.cubit.internal.YamlConfigurationMgr.files.LimitYaml;
-import de.linzn.cubit.internal.YamlConfigurationMgr.files.SettingsYaml;
+import de.linzn.cubit.internal.YamlConfigurationMgr.files.*;
 import de.linzn.cubit.internal.YamlConfigurationMgr.setup.YamlFileSetup;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -49,6 +46,10 @@ public class YamlConfigurationManager {
 
     public FlagProtectionsYaml getFlag() {
         return this.fileOperator.flag;
+    }
+
+    public CommandsYaml getCommandsConfig() {
+        return this.fileOperator.commands;
     }
 
 }

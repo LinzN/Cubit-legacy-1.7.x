@@ -20,6 +20,7 @@ public class LanguageYaml {
     public String startBiomeChange;
     /* Error MSG */
     public String noConsoleMode;
+    public String disabledCommand;
     public String errorInTask;
     public String errorCommand;
     public String errorNoCommand;
@@ -192,6 +193,7 @@ public class LanguageYaml {
         startBiomeChange = this.getLanguageString("startBiomeChange", "&2Starting biome change for region {regionID}!");
         /* Error MSG */
         noConsoleMode = this.getLanguageString("noConsoleMode", "&4Sorry this is not available in console mode!");
+        disabledCommand = this.getLanguageString("disabledCommand", "&4Sorry this command is disabled!");
         noEnabledWorld = this.getLanguageString("noEnabledWorld",
                 "&4Sorry but this command is not available in this world!");
         errorInTask = this.getLanguageString("errorInTask", "&4An internal error occurred during: [&e{error}&4]");

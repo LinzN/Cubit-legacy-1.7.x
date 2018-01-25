@@ -11,10 +11,7 @@
 
 package de.linzn.cubit.internal.YamlConfigurationMgr.setup;
 
-import de.linzn.cubit.internal.YamlConfigurationMgr.files.FlagProtectionsYaml;
-import de.linzn.cubit.internal.YamlConfigurationMgr.files.LanguageYaml;
-import de.linzn.cubit.internal.YamlConfigurationMgr.files.LimitYaml;
-import de.linzn.cubit.internal.YamlConfigurationMgr.files.SettingsYaml;
+import de.linzn.cubit.internal.YamlConfigurationMgr.files.*;
 import org.bukkit.plugin.Plugin;
 
 import java.io.File;
@@ -25,6 +22,7 @@ public class YamlFileSetup {
     public LanguageYaml language;
     public LimitYaml limit;
     public FlagProtectionsYaml flag;
+    public CommandsYaml commands;
     private Plugin plugin;
 
     public YamlFileSetup(Plugin plugin) {
@@ -67,8 +65,12 @@ public class YamlFileSetup {
         CustomConfig flagConfig = new CustomConfig(this.plugin, configDirectory, "defaultProtections.yml");
         this.flag = new FlagProtectionsYaml(flagConfig);
 
+        CustomConfig commandsConfig = new CustomConfig(this.plugin, configDirectory, "commands.yml");
+        this.commands = new CommandsYaml(commandsConfig);
+
         CustomConfig settingsConfig = new CustomConfig(this.plugin, this.plugin.getDataFolder(), "settings.yml");
         this.settings = new SettingsYaml(settingsConfig);
+
 
     }
 }

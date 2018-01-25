@@ -39,6 +39,12 @@ public class OfferLand implements ICommand {
 
     @Override
     public boolean runCmd(final Command cmd, final CommandSender sender, String[] args) {
+        if (!CubitBukkitPlugin.inst().getYamlManager().getCommandsConfig().land_offer) {
+            /* Command is disabled */
+            sender.sendMessage(plugin.getYamlManager().getLanguage().disabledCommand);
+            return true;
+        }
+
         if (!(sender instanceof Player)) {
             /* This is not possible from the server console */
             sender.sendMessage(plugin.getYamlManager().getLanguage().noConsoleMode);
