@@ -124,9 +124,11 @@ public class InfoUniversal implements ICommand {
 
         if (plugin.getDataAccessManager().databaseType.get_is_offer(regionData.getRegionName(),
                 regionData.getWorld())) {
+
+            double offerValues = plugin.getDataAccessManager().databaseType.get_offer(regionData.getRegionName(), regionData.getWorld()).getValue();
+            double basePrice = CubitBukkitPlugin.inst().getVaultManager().calculateLandCost(player.getUniqueId(), player.getLocation().getWorld(), true);
             player.sendMessage(plugin.getYamlManager().getLanguage().landInfoA2.replace("{value}",
-                    "" + plugin.getDataAccessManager().databaseType
-                            .get_offer(regionData.getRegionName(), regionData.getWorld()).getValue()));
+                    "" + offerValues + " + Base: " + basePrice));
         }
 
         boolean isMember = false;
