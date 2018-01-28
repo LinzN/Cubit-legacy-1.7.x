@@ -28,6 +28,9 @@ public class MySqlType implements DatabaseType {
     private String username;
     private String password;
 
+    private String offerDatabase = "offerManager";
+    private String uuidCacheDatabase = "uuidcache";
+
     @Override
     public boolean setupDatabase() {
         this.database = CubitBukkitPlugin.inst().getYamlManager().getSettings().sqlDataBase;
@@ -40,10 +43,17 @@ public class MySqlType implements DatabaseType {
         Connection con = this.createConnection();
         try {
             Statement state = con.createStatement();
+            if (CubitBukkitPlugin.inst().getYamlManager().getSettings().useMineSuite && CubitBukkitPlugin.inst().getYamlManager().getSettings().useMineSuiteDatabase) {
+                CubitBukkitPlugin.inst().getLogger().info("Use MineSuite integration");
+                offerDatabase = "module_cubit_offerdata";
+                uuidCacheDatabase = "core_uuidcache";
+            }
             state.executeUpdate(
-                    "CREATE TABLE IF NOT EXISTS offerManager (Id int NOT NULL AUTO_INCREMENT, regionID text, world text, uuid text, value double, PRIMARY KEY (Id));");
+                    "CREATE TABLE IF NOT EXISTS " + offerDatabase + " (Id int NOT NULL AUTO_INCREMENT, regionID text, world text, uuid text, value double, PRIMARY KEY (Id));");
             state.executeUpdate(
-                    "CREATE TABLE IF NOT EXISTS uuidcache (Id int NOT NULL AUTO_INCREMENT, UUID text, NAME text, TIMESTAMP bigint, PRIMARY KEY (id));");
+                    "CREATE TABLE IF NOT EXISTS " + uuidCacheDatabase + " (Id int NOT NULL AUTO_INCREMENT, UUID text, NAME text, TIMESTAMP bigint, PRIMARY KEY (id));");
+
+
             state.close();
             return this.releaseConnection(con);
         } catch (SQLException e) {
@@ -89,18 +99,18 @@ public class MySqlType implements DatabaseType {
         Connection con = this.createConnection();
         try {
             Statement state = con.createStatement();
-            ResultSet result = state.executeQuery("SELECT value FROM offerManager WHERE regionID = '"
+            ResultSet result = state.executeQuery("SELECT value FROM " + offerDatabase + " WHERE regionID = '"
                     + data.getRegionID() + "' AND world = '" + data.getWorld().getName().toLowerCase() + "';");
             String uuidData = "NULL";
             if (data.getPlayerUUID() != null) {
                 uuidData = data.getPlayerUUID().toString();
             }
             if (result.next()) {
-                state.executeUpdate("UPDATE offerManager SET value = '" + data.getValue() + "', uuid = '" + uuidData
+                state.executeUpdate("UPDATE " + offerDatabase + " SET value = '" + data.getValue() + "', uuid = '" + uuidData
                         + "' WHERE regionID = '" + data.getRegionID() + "' AND world = '"
                         + data.getWorld().getName().toLowerCase() + "';");
             } else {
-                state.executeUpdate("INSERT INTO offerManager (regionID, value, world, uuid) VALUES ('"
+                state.executeUpdate("INSERT INTO " + offerDatabase + " (regionID, value, world, uuid) VALUES ('"
                         + data.getRegionID() + "', '" + data.getValue() + "', '"
                         + data.getWorld().getName().toLowerCase() + "', '" + uuidData + "');");
             }
@@ -119,11 +129,11 @@ public class MySqlType implements DatabaseType {
         Connection con = this.createConnection();
         try {
             Statement state = con.createStatement();
-            ResultSet result = state.executeQuery("SELECT value FROM offerManager WHERE regionID = '" + regionID
+            ResultSet result = state.executeQuery("SELECT value FROM " + offerDatabase + " WHERE regionID = '" + regionID
                     + "' AND world = '" + world.getName() + "';");
 
             if (result.next()) {
-                state.executeUpdate("DELETE FROM offerManager WHERE regionID = '" + regionID + "' AND world = '"
+                state.executeUpdate("DELETE FROM " + offerDatabase + " WHERE regionID = '" + regionID + "' AND world = '"
                         + world.getName() + "';");
             }
             result.close();
@@ -142,14 +152,14 @@ public class MySqlType implements DatabaseType {
         Connection con = this.createConnection();
         try {
             Statement state = con.createStatement();
-            ResultSet result = state.executeQuery("SELECT NAME FROM uuidcache WHERE UUID = '" + uuid + "';");
+            ResultSet result = state.executeQuery("SELECT NAME FROM " + uuidCacheDatabase + " WHERE UUID = '" + uuid + "';");
 
             if (result.next()) {
 
-                state.executeUpdate("UPDATE uuidcache SET NAME = '" + player + "', TIMESTAMP = '" + time
+                state.executeUpdate("UPDATE " + uuidCacheDatabase + " SET NAME = '" + player + "', TIMESTAMP = '" + time
                         + "' WHERE UUID = '" + uuid.toString() + "';");
             } else {
-                state.executeUpdate("INSERT INTO uuidcache (UUID, NAME, TIMESTAMP) VALUES ('" + uuid.toString() + "', '"
+                state.executeUpdate("INSERT INTO " + uuidCacheDatabase + " (UUID, NAME, TIMESTAMP) VALUES ('" + uuid.toString() + "', '"
                         + player + "', '" + time + "');");
 
             }
@@ -170,7 +180,7 @@ public class MySqlType implements DatabaseType {
         Connection con = this.createConnection();
         try {
             Statement state = con.createStatement();
-            ResultSet result = state.executeQuery("SELECT TIMESTAMP FROM uuidcache WHERE UUID = '" + uuid + "';");
+            ResultSet result = state.executeQuery("SELECT TIMESTAMP FROM " + uuidCacheDatabase + " WHERE UUID = '" + uuid + "';");
             if (result.next()) {
                 lastlogin = result.getLong(1);
             }
@@ -189,7 +199,7 @@ public class MySqlType implements DatabaseType {
         Connection con = this.createConnection();
         try {
             Statement state = con.createStatement();
-            ResultSet result = state.executeQuery("SELECT NAME FROM uuidcache WHERE UUID = '" + uuid + "';");
+            ResultSet result = state.executeQuery("SELECT NAME FROM " + uuidCacheDatabase + " WHERE UUID = '" + uuid + "';");
             if (result.next()) {
                 name = result.getString(1);
             }
@@ -216,7 +226,7 @@ public class MySqlType implements DatabaseType {
         Connection con = this.createConnection();
         try {
             Statement state = con.createStatement();
-            ResultSet result = state.executeQuery("SELECT value, uuid FROM offerManager WHERE regionID = '" + regionID
+            ResultSet result = state.executeQuery("SELECT value, uuid FROM " + offerDatabase + " WHERE regionID = '" + regionID
                     + "' AND world = '" + world.getName().toLowerCase() + "';");
 
             if (result.next()) {
@@ -245,7 +255,7 @@ public class MySqlType implements DatabaseType {
         Connection con = this.createConnection();
         try {
             Statement state = con.createStatement();
-            ResultSet result = state.executeQuery("SELECT uuid FROM offerManager WHERE regionID = '" + regionID
+            ResultSet result = state.executeQuery("SELECT uuid FROM " + offerDatabase + " WHERE regionID = '" + regionID
                     + "' AND world = '" + world.getName() + "';");
 
             if (result.next()) {

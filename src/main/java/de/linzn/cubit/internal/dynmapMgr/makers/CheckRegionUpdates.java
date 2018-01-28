@@ -73,10 +73,8 @@ public class CheckRegionUpdates implements Runnable {
             this.showedRegions.put(world, worldRegions);
 
             for (ProtectedRegion protectedRegion : regionManager.getRegions().values()) {
-                //Bukkit.getScheduler().runTask(CubitBukkitPlugin.inst(), () -> {
                 cubitDynmap.updateRegionMarker(world, protectedRegion);
                 worldRegions.add(protectedRegion.getId());
-                //});
             }
         }
         this.isSetup = true;

@@ -61,6 +61,8 @@ public class SettingsYaml {
     public String sqlPassword;
     public boolean updateCheck;
     public boolean useDynmap;
+    public boolean useMineSuite;
+    public boolean useMineSuiteDatabase;
     public long cubitSetupDate;
     private CustomConfig configFile;
 
@@ -128,6 +130,9 @@ public class SettingsYaml {
         this.updateCheck = (boolean) getObjectValue("module.updateCheck", true);
 
         this.useDynmap = (boolean) getObjectValue("module.dynmap.use", false);
+
+        this.useMineSuite = (boolean) getObjectValue("module.mineSuite.use", false);
+        this.useMineSuiteDatabase = (boolean) getObjectValue("module.mineSuite.sameDatabase", false);
 
         this.cubitSetupDate = (long) getObjectValue("doNotTouch.cubitSetupDate", new Date().getTime());
 
