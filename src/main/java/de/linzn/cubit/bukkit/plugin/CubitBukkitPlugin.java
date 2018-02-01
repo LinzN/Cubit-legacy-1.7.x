@@ -19,7 +19,6 @@ import de.linzn.cubit.bukkit.plugin.listener.LoginListener;
 import de.linzn.cubit.internal.YamlConfigurationMgr.YamlConfigurationManager;
 import de.linzn.cubit.internal.blockMgr.BlockManager;
 import de.linzn.cubit.internal.dataAccessMgr.DataAccessManager;
-import de.linzn.cubit.internal.dynmapMgr.DynmapManager;
 import de.linzn.cubit.internal.entityMgr.EntityManager;
 import de.linzn.cubit.internal.landmapMgr.ScoreboardMapManager;
 import de.linzn.cubit.internal.particleMgr.ParticleManager;
@@ -41,7 +40,6 @@ public class CubitBukkitPlugin extends JavaPlugin {
     private DataAccessManager dataAccessMgr;
     private EntityManager entityMrg;
     private ScoreboardMapManager scoreboardMapMgr;
-    private DynmapManager dynmapManager;
     private PermissionNodes permNodes;
     private YamlConfigurationManager yamlConfiguration;
     private Metrics metrics;
@@ -124,7 +122,6 @@ public class CubitBukkitPlugin extends JavaPlugin {
         this.dataAccessMgr = new DataAccessManager(this);
         this.entityMrg = new EntityManager(this);
         this.scoreboardMapMgr = new ScoreboardMapManager(this);
-        this.dynmapManager = new DynmapManager(this);
         return true;
 
     }
@@ -155,10 +152,6 @@ public class CubitBukkitPlugin extends JavaPlugin {
 
     public ScoreboardMapManager getScoreboardMapManager() {
         return scoreboardMapMgr;
-    }
-
-    public DynmapManager getDynmapManager() {
-        return this.dynmapManager;
     }
 
     public PermissionNodes getPermNodes() {

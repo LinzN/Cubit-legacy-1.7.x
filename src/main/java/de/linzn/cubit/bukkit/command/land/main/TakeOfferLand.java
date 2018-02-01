@@ -137,7 +137,7 @@ public class TakeOfferLand implements ICommand {
         }
 
         /* Cubit land update event*/
-        CubitLandUpdateEvent cubitLandUpdateEvent = new CubitLandUpdateEvent(loc.getWorld(), regionData.getRegionName());
+        CubitLandUpdateEvent cubitLandUpdateEvent = new CubitLandUpdateEvent(loc.getWorld(), regionData.getRegionName(), regionData);
         this.plugin.getServer().getPluginManager().callEvent(cubitLandUpdateEvent);
 
         if (!plugin.getParticleManager().sendBuy(player, loc)) {

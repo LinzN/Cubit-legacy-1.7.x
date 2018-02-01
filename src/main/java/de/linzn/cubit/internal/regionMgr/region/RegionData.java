@@ -12,6 +12,7 @@
 package de.linzn.cubit.internal.regionMgr.region;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import de.linzn.cubit.internal.regionMgr.LandTypes;
 import org.bukkit.World;
 
@@ -22,6 +23,7 @@ public class RegionData {
     private ProtectedRegion region;
     private LandTypes type;
     private World world;
+    private String ownerName;
 
     public RegionData(World world) {
         this.type = LandTypes.NOTYPE;
@@ -32,6 +34,9 @@ public class RegionData {
     public void setWGRegion(ProtectedRegion region) {
         this.type = LandTypes.getLandType(region.getId());
         this.region = region;
+        if (this.getOwnersUUID().length > 0) {
+            this.ownerName = CubitBukkitPlugin.inst().getRegionManager().getPlayerName(this.getOwnersUUID()[0]);
+        }
     }
 
     public ProtectedRegion praseWGRegion() {

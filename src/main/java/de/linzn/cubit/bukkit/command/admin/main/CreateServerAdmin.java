@@ -15,6 +15,7 @@ import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import de.linzn.cubit.internal.cubitEvents.CubitLandBuyEvent;
 import de.linzn.cubit.internal.regionMgr.LandTypes;
+import de.linzn.cubit.internal.regionMgr.region.RegionData;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -69,7 +70,9 @@ public class CreateServerAdmin implements ICommand {
         }
 
         /* Call cubit buy land event */
-        CubitLandBuyEvent cubitLandBuyEvent = new CubitLandBuyEvent(loc.getWorld(), regionID);
+        RegionData regionData = new RegionData(loc.getWorld());
+        regionData.setWGRegion(this.plugin.getWorldGuardPlugin().getRegionManager(loc.getWorld()).getRegion(regionID));
+        CubitLandBuyEvent cubitLandBuyEvent = new CubitLandBuyEvent(loc.getWorld(), regionID, regionData);
         this.plugin.getServer().getPluginManager().callEvent(cubitLandBuyEvent);
 
         if (!plugin.getParticleManager().sendBuy(player, loc)) {

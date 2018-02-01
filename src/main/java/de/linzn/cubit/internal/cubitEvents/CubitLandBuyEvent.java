@@ -11,6 +11,7 @@
 
 package de.linzn.cubit.internal.cubitEvents;
 
+import de.linzn.cubit.internal.regionMgr.region.RegionData;
 import org.bukkit.World;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -19,10 +20,12 @@ public final class CubitLandBuyEvent extends Event {
     private static final HandlerList handlers = new HandlerList();
     private World world;
     private String regionId;
+    private RegionData regionData;
 
-    public CubitLandBuyEvent(World world, String regionId) {
+    public CubitLandBuyEvent(World world, String regionId, RegionData regionData) {
         this.world = world;
         this.regionId = regionId;
+        this.regionData = regionData;
     }
 
     public static HandlerList getHandlerList() {
@@ -31,6 +34,10 @@ public final class CubitLandBuyEvent extends Event {
 
     public String getRegionID() {
         return this.regionId;
+    }
+
+    public RegionData getRegionData() {
+        return this.regionData;
     }
 
     public World getWorld() {

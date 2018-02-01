@@ -60,7 +60,6 @@ public class SettingsYaml {
     public String sqlUser;
     public String sqlPassword;
     public boolean updateCheck;
-    public boolean useDynmap;
     public boolean useMineSuite;
     public boolean useMineSuiteDatabase;
     public long cubitSetupDate;
@@ -128,9 +127,6 @@ public class SettingsYaml {
         this.physicWaterLavaFlowLand = (boolean) getObjectValue("module.physicWaterLavaFlowLand.use", false);
 
         this.updateCheck = (boolean) getObjectValue("module.updateCheck", true);
-
-        this.useDynmap = (boolean) getObjectValue("module.dynmap.use", false);
-
         this.useMineSuite = (boolean) getObjectValue("module.mineSuite.use", false);
         this.useMineSuiteDatabase = (boolean) getObjectValue("module.mineSuite.sameDatabase", false);
 
