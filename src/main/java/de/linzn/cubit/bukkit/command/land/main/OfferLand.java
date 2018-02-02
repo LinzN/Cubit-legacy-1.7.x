@@ -74,7 +74,7 @@ public class OfferLand implements ICommand {
             return true;
         }
 
-        if (cubitLand.getLandType() != CubitType.WORLD) {
+        if (cubitLand.getCubitType() != CubitType.WORLD) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}",
                     CubitType.WORLD.toString()));
             return true;
@@ -82,7 +82,7 @@ public class OfferLand implements ICommand {
 
         if (!plugin.getRegionManager().hasLandPermission(cubitLand, player.getUniqueId()) && !this.isAdmin) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
-                    cubitLand.getRegionName()));
+                    cubitLand.getLandName()));
             return true;
         }
 
@@ -93,9 +93,9 @@ public class OfferLand implements ICommand {
             }
             double value = Double.parseDouble(args[1]);
             if (value <= 0) {
-                if (plugin.getDataAccessManager().databaseType.get_is_offer(cubitLand.getRegionName(),
+                if (plugin.getDataAccessManager().databaseType.get_is_offer(cubitLand.getLandName(),
                         loc.getWorld())) {
-                    if (!plugin.getDataAccessManager().databaseType.set_remove_offer(cubitLand.getRegionName(),
+                    if (!plugin.getDataAccessManager().databaseType.set_remove_offer(cubitLand.getLandName(),
                             loc.getWorld())) {
                         /* If this task failed! This should never happen */
                         sender.sendMessage(
@@ -105,10 +105,10 @@ public class OfferLand implements ICommand {
                         return true;
                     }
                     sender.sendMessage(plugin.getYamlManager().getLanguage().offerRemoveSuccess.replace("{regionID}",
-                            cubitLand.getRegionName()));
+                            cubitLand.getLandName()));
                 }
             } else {
-                OfferData offerData = new OfferData(cubitLand.getRegionName(), loc.getWorld());
+                OfferData offerData = new OfferData(cubitLand.getLandName(), loc.getWorld());
                 offerData.setPlayerUUID(cubitLand.getOwnersUUID()[0]);
                 offerData.setValue(value);
                 if (!plugin.getDataAccessManager().databaseType.set_create_offer(offerData)) {
@@ -120,7 +120,7 @@ public class OfferLand implements ICommand {
                     return true;
                 }
                 sender.sendMessage(plugin.getYamlManager().getLanguage().offerAddSuccess
-                        .replace("{regionID}", cubitLand.getRegionName())
+                        .replace("{regionID}", cubitLand.getLandName())
                         .replace("{value}", plugin.getVaultManager().formateToEconomy(value)));
             }
         }

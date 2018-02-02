@@ -74,7 +74,7 @@ public class EditSaveUniversal implements ICommand {
             return true;
         }
 
-        if (cubitLand.getLandType() != type && type != CubitType.NOTYPE) {
+        if (cubitLand.getCubitType() != type && type != CubitType.NOTYPE) {
             sender.sendMessage(
                     plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}", type.toString()));
             return true;
@@ -82,11 +82,11 @@ public class EditSaveUniversal implements ICommand {
 
         if (!plugin.getRegionManager().hasLandPermission(cubitLand, player.getUniqueId())) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
-                    cubitLand.getRegionName()));
+                    cubitLand.getLandName()));
             return true;
         }
 
-        String snapshotName = cubitLand.getRegionName().toLowerCase();
+        String snapshotName = cubitLand.getLandName().toLowerCase();
 
         if (plugin.getBlockManager().getSnapshotHandler().isSnapshot(player.getUniqueId(), snapshotName)) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().alreadySnapshot);
@@ -119,7 +119,7 @@ public class EditSaveUniversal implements ICommand {
         }
 
         sender.sendMessage(
-                plugin.getYamlManager().getLanguage().savedSnapshot.replace("{regionID}", cubitLand.getRegionName()));
+                plugin.getYamlManager().getLanguage().savedSnapshot.replace("{regionID}", cubitLand.getLandName()));
 
         return true;
     }

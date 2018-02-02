@@ -21,6 +21,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
+
 public class InfoUniversal implements ICommand {
 
     private CubitBukkitPlugin plugin;
@@ -58,7 +60,7 @@ public class InfoUniversal implements ICommand {
         sender.sendMessage(plugin.getYamlManager().getLanguage().landHeader);
 
         /* Check Type of this Region */
-        switch (cubitLand.getLandType()) {
+        switch (cubitLand.getCubitType()) {
             case SERVER:
                 serverInfo(player, cubitLand);
                 break;
@@ -107,13 +109,11 @@ public class InfoUniversal implements ICommand {
                 + plugin.getRegionManager().potionPacket.getPacketName();
 
         player.sendMessage(
-                plugin.getYamlManager().getLanguage().landInfoE1.replace("{regionID}", cubitLand.getRegionName()));
+                plugin.getYamlManager().getLanguage().landInfoE1.replace("{regionID}", cubitLand.getLandName()));
 
-        player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}",
-                plugin.getRegionManager().getPlayerNames(cubitLand.getOwnersUUID()).toString()));
+        player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}", Arrays.toString(cubitLand.getOwnerNames())));
         if (cubitLand.getMembersUUID().length != 0) {
-            player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE3.replace("{members}",
-                    plugin.getRegionManager().getPlayerNames(cubitLand.getMembersUUID()).toString()));
+            player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE3.replace("{members}", Arrays.toString(cubitLand.getMemberNames())));
         }
         player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE4.replace("{min}", minBorder).replace("{max}",
                 maxBorder));
@@ -122,10 +122,10 @@ public class InfoUniversal implements ICommand {
                 .replace("{monster}", statusMonster).replace("{fire}", statusFire).replace("{pvp}", statusPvP)
                 .replace("{tnt}", statusTNT).replace("{potion}", statusPotion));
 
-        if (plugin.getDataAccessManager().databaseType.get_is_offer(cubitLand.getRegionName(),
+        if (plugin.getDataAccessManager().databaseType.get_is_offer(cubitLand.getLandName(),
                 cubitLand.getWorld())) {
 
-            double offerValues = plugin.getDataAccessManager().databaseType.get_offer(cubitLand.getRegionName(), cubitLand.getWorld()).getValue();
+            double offerValues = plugin.getDataAccessManager().databaseType.get_offer(cubitLand.getLandName(), cubitLand.getWorld()).getValue();
             double basePrice = CubitBukkitPlugin.inst().getVaultManager().calculateLandCost(player.getUniqueId(), player.getLocation().getWorld(), true);
             player.sendMessage(plugin.getYamlManager().getLanguage().landInfoA2.replace("{value}",
                     "" + offerValues + " + Base: " + basePrice));
@@ -167,13 +167,13 @@ public class InfoUniversal implements ICommand {
                     + plugin.getRegionManager().potionPacket.getPacketName();
 
             player.sendMessage(
-                    plugin.getYamlManager().getLanguage().landInfoE1.replace("{regionID}", cubitLand.getRegionName()));
+                    plugin.getYamlManager().getLanguage().landInfoE1.replace("{regionID}", cubitLand.getLandName()));
 
             player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE2.replace("{owner}",
-                    plugin.getRegionManager().getPlayerNames(cubitLand.getOwnersUUID()).toString()));
+                    Arrays.toString(cubitLand.getOwnerNames())));
             if (cubitLand.getMembersUUID().length != 0) {
                 player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE3.replace("{members}",
-                        plugin.getRegionManager().getPlayerNames(cubitLand.getMembersUUID()).toString()));
+                        Arrays.toString(cubitLand.getMemberNames())));
             }
             player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE4.replace("{min}", minBorder)
                     .replace("{max}", maxBorder));
@@ -181,21 +181,21 @@ public class InfoUniversal implements ICommand {
             player.sendMessage(plugin.getYamlManager().getLanguage().landInfoE6.replace("{lock}", statusLock)
                     .replace("{monster}", statusMonster).replace("{fire}", statusFire).replace("{pvp}", statusPvP)
                     .replace("{tnt}", statusTNT).replace("{potion}", statusPotion));
-            if (plugin.getDataAccessManager().databaseType.get_is_offer(cubitLand.getRegionName(),
+            if (plugin.getDataAccessManager().databaseType.get_is_offer(cubitLand.getLandName(),
                     cubitLand.getWorld())) {
                 player.sendMessage(plugin.getYamlManager().getLanguage().landInfoA2.replace("{value}",
                         "" + plugin.getVaultManager().formateToEconomy(plugin.getDataAccessManager().databaseType
-                                .get_offer(cubitLand.getRegionName(), cubitLand.getWorld()).getValue())));
+                                .get_offer(cubitLand.getLandName(), cubitLand.getWorld()).getValue())));
             }
 
         } else {
             String value = plugin.getVaultManager().formateToEconomy(plugin.getDataAccessManager().databaseType
-                    .get_offer(cubitLand.getRegionName(), cubitLand.getWorld()).getValue());
+                    .get_offer(cubitLand.getLandName(), cubitLand.getWorld()).getValue());
 
             player.sendMessage(
-                    plugin.getYamlManager().getLanguage().landInfoE1.replace("{regionID}", cubitLand.getRegionName()));
+                    plugin.getYamlManager().getLanguage().landInfoE1.replace("{regionID}", cubitLand.getLandName()));
             player.sendMessage(plugin.getYamlManager().getLanguage().isFreeAndBuyable
-                    .replace("{regionID}", cubitLand.getRegionName()).replace("{price}", value));
+                    .replace("{regionID}", cubitLand.getLandName()).replace("{price}", value));
 
         }
     }

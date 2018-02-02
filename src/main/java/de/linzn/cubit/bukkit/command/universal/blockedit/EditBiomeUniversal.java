@@ -81,7 +81,7 @@ public class EditBiomeUniversal implements ICommand {
             return true;
         }
 
-        if (cubitLand.getLandType() != type && type != CubitType.NOTYPE) {
+        if (cubitLand.getCubitType() != type && type != CubitType.NOTYPE) {
             sender.sendMessage(
                     plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}", type.toString()));
             return true;
@@ -89,7 +89,7 @@ public class EditBiomeUniversal implements ICommand {
 
         if (!plugin.getRegionManager().hasLandPermission(cubitLand, player.getUniqueId()) && !this.isAdmin) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
-                    cubitLand.getRegionName()));
+                    cubitLand.getLandName()));
             return true;
         }
 
@@ -112,7 +112,7 @@ public class EditBiomeUniversal implements ICommand {
         }
 
         sender.sendMessage(plugin.getYamlManager().getLanguage().startBiomeChange.replace("{regionID}",
-                cubitLand.getRegionName()));
+                cubitLand.getLandName()));
         if (!plugin.getBlockManager().getBiomeHandler().changeBiomeChunk(chunk, biome)) {
             /* If this task failed! This should never happen */
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SET-BIOME"));
@@ -130,7 +130,7 @@ public class EditBiomeUniversal implements ICommand {
         }
 
         sender.sendMessage(plugin.getYamlManager().getLanguage().changedBiome
-                .replace("{regionID}", cubitLand.getRegionName()).replace("{biome}", biome.name().toUpperCase()));
+                .replace("{regionID}", cubitLand.getLandName()).replace("{biome}", biome.name().toUpperCase()));
 
         return true;
     }

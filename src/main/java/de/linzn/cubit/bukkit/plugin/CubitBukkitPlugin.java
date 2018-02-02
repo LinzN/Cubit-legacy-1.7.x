@@ -17,6 +17,7 @@ import de.linzn.cubit.bukkit.command.SetupCommands;
 import de.linzn.cubit.bukkit.plugin.listener.AdditionalPhysicsListener;
 import de.linzn.cubit.bukkit.plugin.listener.LoginListener;
 import de.linzn.cubit.internal.blockEdit.BlockEditManager;
+import de.linzn.cubit.internal.cacheSystem.CacheManager;
 import de.linzn.cubit.internal.configurations.YamlConfigurationManager;
 import de.linzn.cubit.internal.cubitRegion.CubitRegionManager;
 import de.linzn.cubit.internal.dataBase.DatabaseManager;
@@ -42,6 +43,7 @@ public class CubitBukkitPlugin extends JavaPlugin {
     private ScoreboardMapManager scoreboardMapMgr;
     private PermissionNodes permNodes;
     private YamlConfigurationManager yamlConfiguration;
+    private CacheManager cacheManager;
     private Metrics metrics;
     private SpigetUpdateCheck spigetUpdateCheck;
 
@@ -104,7 +106,7 @@ public class CubitBukkitPlugin extends JavaPlugin {
     }
 
     private void runOutgoingStreams() {
-        getLogger().info("Run outgoing streams.");
+        getLogger().info("Run updater and metrics");
         this.metrics = new Metrics(this);
         if (this.yamlConfiguration.getSettings().updateCheck) {
             this.spigetUpdateCheck = new SpigetUpdateCheck(this);
@@ -116,6 +118,7 @@ public class CubitBukkitPlugin extends JavaPlugin {
         this.yamlConfiguration = new YamlConfigurationManager(this);
         this.regionMrg = new CubitRegionManager(this);
         this.blockMrg = new BlockEditManager(this);
+        this.cacheManager = new CacheManager(this);
         this.particleMrg = new ParticleManager(this);
         this.vaultMrg = new VaultManager(this);
         this.permNodes = new PermissionNodes(this);
@@ -128,6 +131,10 @@ public class CubitBukkitPlugin extends JavaPlugin {
 
     public CubitRegionManager getRegionManager() {
         return this.regionMrg;
+    }
+
+    public CacheManager getCacheManager() {
+        return this.cacheManager;
     }
 
     public BlockEditManager getBlockManager() {

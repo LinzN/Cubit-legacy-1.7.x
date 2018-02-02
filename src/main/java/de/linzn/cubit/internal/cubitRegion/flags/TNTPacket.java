@@ -22,25 +22,25 @@ public class TNTPacket implements ICubitPacket {
 
     @Override
     public CubitLand enablePacket(CubitLand cubitLand) {
-        cubitLand.praseWGRegion().setFlag(DefaultFlag.CREEPER_EXPLOSION, StateFlag.State.DENY);
-        cubitLand.praseWGRegion().setFlag(DefaultFlag.TNT, StateFlag.State.DENY);
-        cubitLand.praseWGRegion().setFlag(DefaultFlag.OTHER_EXPLOSION, StateFlag.State.DENY);
+        cubitLand.getWGRegion().setFlag(DefaultFlag.CREEPER_EXPLOSION, StateFlag.State.DENY);
+        cubitLand.getWGRegion().setFlag(DefaultFlag.TNT, StateFlag.State.DENY);
+        cubitLand.getWGRegion().setFlag(DefaultFlag.OTHER_EXPLOSION, StateFlag.State.DENY);
         return cubitLand;
 
     }
 
     @Override
     public CubitLand disablePacket(CubitLand cubitLand) {
-        cubitLand.praseWGRegion().setFlag(DefaultFlag.CREEPER_EXPLOSION, StateFlag.State.ALLOW);
-        cubitLand.praseWGRegion().setFlag(DefaultFlag.TNT, StateFlag.State.ALLOW);
-        cubitLand.praseWGRegion().setFlag(DefaultFlag.OTHER_EXPLOSION, StateFlag.State.ALLOW);
+        cubitLand.getWGRegion().setFlag(DefaultFlag.CREEPER_EXPLOSION, StateFlag.State.ALLOW);
+        cubitLand.getWGRegion().setFlag(DefaultFlag.TNT, StateFlag.State.ALLOW);
+        cubitLand.getWGRegion().setFlag(DefaultFlag.OTHER_EXPLOSION, StateFlag.State.ALLOW);
         return cubitLand;
 
     }
 
     @Override
     public boolean getState(CubitLand cubitLand) {
-        return cubitLand.praseWGRegion().getFlag(DefaultFlag.OTHER_EXPLOSION) == StateFlag.State.DENY;
+        return cubitLand.getWGRegion().getFlag(DefaultFlag.OTHER_EXPLOSION) == StateFlag.State.DENY;
     }
 
     @Override

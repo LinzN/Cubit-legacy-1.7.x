@@ -62,14 +62,14 @@ public class DeleteShopAdmin implements ICommand {
          */
         CubitLand cubitLand = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 
-        if (cubitLand.getLandType() != CubitType.SHOP) {
+        if (cubitLand.getCubitType() != CubitType.SHOP) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}",
                     CubitType.SHOP.toString()));
             return true;
         }
 
         /* Remove offer from Database */
-        if (!plugin.getDataAccessManager().databaseType.set_remove_offer(cubitLand.getRegionName(), loc.getWorld())) {
+        if (!plugin.getDataAccessManager().databaseType.set_remove_offer(cubitLand.getLandName(), loc.getWorld())) {
             /* If this task failed! This should never happen */
             sender.sendMessage(
                     plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SHOP-REMOVEOFFER"));

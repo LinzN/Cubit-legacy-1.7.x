@@ -69,7 +69,7 @@ public class KickUniversal implements ICommand {
             return true;
         }
 
-        if (cubitLand.getLandType() != type && type != CubitType.NOTYPE) {
+        if (cubitLand.getCubitType() != type && type != CubitType.NOTYPE) {
             sender.sendMessage(
                     plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}", type.toString()));
             return true;
@@ -77,7 +77,7 @@ public class KickUniversal implements ICommand {
 
         if (!plugin.getRegionManager().hasLandPermission(cubitLand, player.getUniqueId())) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
-                    cubitLand.getRegionName()));
+                    cubitLand.getLandName()));
             return true;
         }
         HashSet<UUID> playerMap = new HashSet<>();
@@ -104,13 +104,13 @@ public class KickUniversal implements ICommand {
                 plugin.getServer().getScheduler().runTask(plugin, () -> {
                     kickedPlayer.teleport(loc.getWorld().getSpawnLocation());
                     kickedPlayer.sendMessage(plugin.getYamlManager().getLanguage().kickedInfo.replace("{regionID}",
-                            cubitLand.getRegionName()));
+                            cubitLand.getLandName()));
                 });
 
             }
         }
         sender.sendMessage(
-                plugin.getYamlManager().getLanguage().kickInfo.replace("{regionID}", cubitLand.getRegionName()));
+                plugin.getYamlManager().getLanguage().kickInfo.replace("{regionID}", cubitLand.getLandName()));
 
         return true;
     }

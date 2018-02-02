@@ -26,8 +26,8 @@ public class MonsterPacket implements ICubitPacket {
     @Override
     @SuppressWarnings("serial")
     public CubitLand enablePacket(CubitLand cubitLand) {
-        cubitLand.praseWGRegion().setFlag(DefaultFlag.MOB_DAMAGE, StateFlag.State.DENY);
-        cubitLand.praseWGRegion().getFlags().put(DefaultFlag.DENY_SPAWN, new HashSet<EntityType>() {
+        cubitLand.getWGRegion().setFlag(DefaultFlag.MOB_DAMAGE, StateFlag.State.DENY);
+        cubitLand.getWGRegion().getFlags().put(DefaultFlag.DENY_SPAWN, new HashSet<EntityType>() {
             {
                 add(EntityType.CREEPER);
                 add(EntityType.ZOMBIE);
@@ -53,8 +53,8 @@ public class MonsterPacket implements ICubitPacket {
     @Override
     @SuppressWarnings("serial")
     public CubitLand disablePacket(CubitLand cubitLand) {
-        cubitLand.praseWGRegion().setFlag(DefaultFlag.MOB_DAMAGE, StateFlag.State.ALLOW);
-        cubitLand.praseWGRegion().getFlags().put(DefaultFlag.DENY_SPAWN, new HashSet<EntityType>() {
+        cubitLand.getWGRegion().setFlag(DefaultFlag.MOB_DAMAGE, StateFlag.State.ALLOW);
+        cubitLand.getWGRegion().getFlags().put(DefaultFlag.DENY_SPAWN, new HashSet<EntityType>() {
             {
 
             }
@@ -65,7 +65,7 @@ public class MonsterPacket implements ICubitPacket {
 
     @Override
     public boolean getState(CubitLand cubitLand) {
-        return cubitLand.praseWGRegion().getFlag(DefaultFlag.MOB_DAMAGE) == StateFlag.State.DENY;
+        return cubitLand.getWGRegion().getFlag(DefaultFlag.MOB_DAMAGE) == StateFlag.State.DENY;
     }
 
     @Override

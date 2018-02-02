@@ -70,7 +70,7 @@ public class BuyupLand implements ICommand {
             return true;
         }
 
-        if (cubitLand.getLandType() != CubitType.WORLD) {
+        if (cubitLand.getCubitType() != CubitType.WORLD) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}",
                     CubitType.WORLD.toString()));
             return true;
@@ -115,7 +115,7 @@ public class BuyupLand implements ICommand {
             return true;
         }
         /* Remove offer from Database */
-        if (!plugin.getDataAccessManager().databaseType.set_remove_offer(cubitLand.getRegionName(), loc.getWorld())) {
+        if (!plugin.getDataAccessManager().databaseType.set_remove_offer(cubitLand.getLandName(), loc.getWorld())) {
             /* If this task failed! This should never happen */
             sender.sendMessage(
                     plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "BUYUP-REMOVEOFFER"));
@@ -125,7 +125,7 @@ public class BuyupLand implements ICommand {
         }
 
         /* Cubit land update event*/
-        CubitLandUpdateEvent cubitLandUpdateEvent = new CubitLandUpdateEvent(loc.getWorld(), cubitLand.getRegionName(), cubitLand);
+        CubitLandUpdateEvent cubitLandUpdateEvent = new CubitLandUpdateEvent(loc.getWorld(), cubitLand.getLandName(), cubitLand);
         this.plugin.getServer().getPluginManager().callEvent(cubitLandUpdateEvent);
 
         if (!plugin.getParticleManager().sendBuy(player, loc)) {
@@ -137,7 +137,7 @@ public class BuyupLand implements ICommand {
         }
         /* Task was successfully. Send BuyMessage */
         sender.sendMessage(
-                plugin.getYamlManager().getLanguage().buySuccess.replace("{regionID}", cubitLand.getRegionName()));
+                plugin.getYamlManager().getLanguage().buySuccess.replace("{regionID}", cubitLand.getLandName()));
 
         return true;
     }

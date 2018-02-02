@@ -12,4 +12,5 @@
 package de.linzn.cubit.api;
 
 public class CubitAPI {
+
 }

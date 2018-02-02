@@ -43,15 +43,15 @@ public class EconomyHook {
             if (sender.getName() != null) {
                 econ.withdrawPlayer(sender, value);
             } else {
-                econ.withdrawPlayer(this.plugin.getRegionManager().getPlayerName(senderUUID), value);
+                econ.withdrawPlayer(this.plugin.getCacheManager().getPlayername(senderUUID), value);
             }
         }
         if (recieverUUID != null) {
-            OfflinePlayer reciever = Bukkit.getOfflinePlayer(recieverUUID);
-            if (reciever.getName() != null) {
-                econ.depositPlayer(reciever, value);
+            OfflinePlayer receiver = Bukkit.getOfflinePlayer(recieverUUID);
+            if (receiver.getName() != null) {
+                econ.depositPlayer(receiver, value);
             } else {
-                econ.depositPlayer(this.plugin.getRegionManager().getPlayerName(recieverUUID), value);
+                econ.depositPlayer(this.plugin.getCacheManager().getPlayername(recieverUUID), value);
             }
 
         }

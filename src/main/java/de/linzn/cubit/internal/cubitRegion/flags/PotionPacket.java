@@ -22,21 +22,21 @@ public class PotionPacket implements ICubitPacket {
 
     @Override
     public CubitLand enablePacket(CubitLand cubitLand) {
-        cubitLand.praseWGRegion().setFlag(DefaultFlag.POTION_SPLASH, StateFlag.State.DENY);
+        cubitLand.getWGRegion().setFlag(DefaultFlag.POTION_SPLASH, StateFlag.State.DENY);
         return cubitLand;
 
     }
 
     @Override
     public CubitLand disablePacket(CubitLand cubitLand) {
-        cubitLand.praseWGRegion().setFlag(DefaultFlag.POTION_SPLASH, StateFlag.State.ALLOW);
+        cubitLand.getWGRegion().setFlag(DefaultFlag.POTION_SPLASH, StateFlag.State.ALLOW);
         return cubitLand;
 
     }
 
     @Override
     public boolean getState(CubitLand cubitLand) {
-        return cubitLand.praseWGRegion().getFlag(DefaultFlag.POTION_SPLASH) == StateFlag.State.DENY;
+        return cubitLand.getWGRegion().getFlag(DefaultFlag.POTION_SPLASH) == StateFlag.State.DENY;
     }
 
     @Override

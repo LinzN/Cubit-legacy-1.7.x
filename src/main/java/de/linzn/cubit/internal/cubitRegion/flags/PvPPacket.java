@@ -22,21 +22,21 @@ public class PvPPacket implements ICubitPacket {
 
     @Override
     public CubitLand enablePacket(CubitLand cubitLand) {
-        cubitLand.praseWGRegion().setFlag(DefaultFlag.PVP, StateFlag.State.DENY);
+        cubitLand.getWGRegion().setFlag(DefaultFlag.PVP, StateFlag.State.DENY);
         return cubitLand;
 
     }
 
     @Override
     public CubitLand disablePacket(CubitLand cubitLand) {
-        cubitLand.praseWGRegion().setFlag(DefaultFlag.PVP, StateFlag.State.ALLOW);
+        cubitLand.getWGRegion().setFlag(DefaultFlag.PVP, StateFlag.State.ALLOW);
         return cubitLand;
 
     }
 
     @Override
     public boolean getState(CubitLand cubitLand) {
-        return cubitLand.praseWGRegion().getFlag(DefaultFlag.PVP) == StateFlag.State.DENY;
+        return cubitLand.getWGRegion().getFlag(DefaultFlag.PVP) == StateFlag.State.DENY;
     }
 
     @Override

@@ -71,26 +71,26 @@ public class NameCache {
     }
 
     public String getCacheName(UUID uuid) {
-        String prasedName = null;
+        String playerName = null;
 
         if (playerCache.containsKey(uuid)) {
-            prasedName = playerCache.get(uuid);
+            playerName = playerCache.get(uuid);
         }
-        if (prasedName == null) {
-            prasedName = fetchDatabaseName(uuid);
-        }
-
-        if (prasedName == null) {
-            prasedName = fetchBukkitName(uuid);
+        if (playerName == null) {
+            playerName = fetchDatabaseName(uuid);
         }
 
-        if (prasedName == null) {
-            prasedName = fetchMojangName(uuid);
+        if (playerName == null) {
+            playerName = fetchBukkitName(uuid);
         }
 
-        if (prasedName == null) {
-            prasedName = "Unknown";
+        if (playerName == null) {
+            playerName = fetchMojangName(uuid);
         }
-        return prasedName;
+
+        if (playerName == null) {
+            playerName = "Unknown";
+        }
+        return playerName;
     }
 }

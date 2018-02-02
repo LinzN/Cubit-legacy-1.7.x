@@ -19,12 +19,10 @@ import org.bukkit.event.HandlerList;
 public final class CubitLandBuyEvent extends Event {
     private static final HandlerList handlers = new HandlerList();
     private World world;
-    private String regionId;
     private CubitLand cubitLand;
 
-    public CubitLandBuyEvent(World world, String regionId, CubitLand cubitLand) {
+    public CubitLandBuyEvent(World world, CubitLand cubitLand) {
         this.world = world;
-        this.regionId = regionId;
         this.cubitLand = cubitLand;
     }
 
@@ -32,11 +30,7 @@ public final class CubitLandBuyEvent extends Event {
         return handlers;
     }
 
-    public String getRegionID() {
-        return this.regionId;
-    }
-
-    public CubitLand getRegionData() {
+    public CubitLand getCubitLand() {
         return this.cubitLand;
     }
 

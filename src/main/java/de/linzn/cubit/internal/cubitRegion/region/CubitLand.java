@@ -23,24 +23,27 @@ public class CubitLand {
     private ProtectedRegion region;
     private CubitType type;
     private World world;
-    private String ownerName;
+    private String[] ownerNames;
+    private String[] memberNames;
 
     public CubitLand(World world) {
         this.type = CubitType.NOTYPE;
         this.world = world;
+    }
 
+    public ProtectedRegion getWGRegion() {
+        return this.region;
     }
 
     public void setWGRegion(ProtectedRegion region) {
         this.type = CubitType.getLandType(region.getId());
         this.region = region;
         if (this.getOwnersUUID().length > 0) {
-            this.ownerName = CubitBukkitPlugin.inst().getRegionManager().getPlayerName(this.getOwnersUUID()[0]);
+            this.ownerNames = CubitBukkitPlugin.inst().getCacheManager().getPlayernames(this.getOwnersUUID());
         }
-    }
-
-    public ProtectedRegion praseWGRegion() {
-        return this.region;
+        if (this.getMembersUUID().length > 0) {
+            this.memberNames = CubitBukkitPlugin.inst().getCacheManager().getPlayernames(this.getMembersUUID());
+        }
     }
 
     public String getMinPoint() {
@@ -52,24 +55,32 @@ public class CubitLand {
     }
 
     public UUID[] getOwnersUUID() {
-        Set<UUID> uuidSet = praseWGRegion().getOwners().getUniqueIds();
+        Set<UUID> uuidSet = region.getOwners().getUniqueIds();
         return uuidSet.toArray(new UUID[uuidSet.size()]);
     }
 
     public UUID[] getMembersUUID() {
-        Set<UUID> uuidSet = praseWGRegion().getMembers().getUniqueIds();
+        Set<UUID> uuidSet = region.getMembers().getUniqueIds();
         return uuidSet.toArray(new UUID[uuidSet.size()]);
+    }
+
+    public String[] getOwnerNames() {
+        return this.ownerNames;
+    }
+
+    public String[] getMemberNames() {
+        return this.memberNames;
     }
 
     public World getWorld() {
         return this.world;
     }
 
-    public CubitType getLandType() {
+    public CubitType getCubitType() {
         return this.type;
     }
 
-    public String getRegionName() {
+    public String getLandName() {
         return this.region.getId();
     }
 

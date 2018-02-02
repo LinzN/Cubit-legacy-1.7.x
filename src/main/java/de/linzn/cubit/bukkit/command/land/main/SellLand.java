@@ -69,9 +69,9 @@ public class SellLand implements ICommand {
         }
 
         CubitLand cubitLand = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
-        final String regionID = cubitLand.getRegionName();
+        final String regionID = cubitLand.getLandName();
 
-        if (cubitLand.getLandType() != CubitType.WORLD) {
+        if (cubitLand.getCubitType() != CubitType.WORLD) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}",
                     CubitType.WORLD.toString()));
             return true;
@@ -79,7 +79,7 @@ public class SellLand implements ICommand {
 
         if (!plugin.getRegionManager().hasLandPermission(cubitLand, player.getUniqueId()) && !this.isAdmin) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
-                    cubitLand.getRegionName()));
+                    cubitLand.getLandName()));
             return true;
         }
 
@@ -109,7 +109,7 @@ public class SellLand implements ICommand {
                     .warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-BLOCK"));
             return true;
         }
-        if (!plugin.getDataAccessManager().databaseType.set_remove_offer(cubitLand.getRegionName(), loc.getWorld())) {
+        if (!plugin.getDataAccessManager().databaseType.set_remove_offer(cubitLand.getLandName(), loc.getWorld())) {
             /* If this task failed! This should never happen */
             sender.sendMessage(
                     plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SELL-REMOVEOFFER"));

@@ -14,7 +14,6 @@ package de.linzn.cubit.internal.cubitRegion;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
-import de.linzn.cubit.internal.cacheSystem.NameCache;
 import de.linzn.cubit.internal.cubitRegion.flags.*;
 import de.linzn.cubit.internal.cubitRegion.region.CubitLand;
 import de.linzn.cubit.internal.cubitRegion.region.ManageRegionEntities;
@@ -42,12 +41,10 @@ public class CubitRegionManager {
     private ManageRegions mReg;
     private ManageRegionEntities mRegE;
     private SaveRegions saveMrg;
-    private NameCache nameCache;
 
     public CubitRegionManager(CubitBukkitPlugin plugin) {
         plugin.getLogger().info("Loading CubitRegionManager");
         this.plugin = plugin;
-        this.nameCache = new NameCache();
         this.mReg = new ManageRegions();
         this.mRegE = new ManageRegionEntities();
         this.saveMrg = new SaveRegions();
@@ -355,7 +352,7 @@ public class CubitRegionManager {
     }
 
     public boolean hasLandPermission(final CubitLand cubitLand, final UUID uuid) {
-        return cubitLand.praseWGRegion().getOwners().getUniqueIds().contains(uuid);
+        return cubitLand.getWGRegion().getOwners().getUniqueIds().contains(uuid);
 
     }
 
@@ -372,19 +369,6 @@ public class CubitRegionManager {
         }
 
         return currentTimeStamp - lastLogin >= landDeprecated;
-    }
-
-    public List<String> getPlayerNames(UUID[] playerUUIDs) {
-        List<String> playerNames = new ArrayList<>();
-        for (UUID playerUUID : playerUUIDs) {
-            playerNames.add(nameCache.getCacheName(playerUUID));
-        }
-
-        return playerNames;
-    }
-
-    public String getPlayerName(UUID playerUUID) {
-        return nameCache.getCacheName(playerUUID);
     }
 
 }

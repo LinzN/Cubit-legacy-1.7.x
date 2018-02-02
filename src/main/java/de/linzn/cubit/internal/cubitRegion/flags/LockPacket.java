@@ -25,8 +25,8 @@ public class LockPacket implements ICubitPacket {
     @Override
     public CubitLand enablePacket(CubitLand cubitLand) {
         RegionGroupFlag groupFlag = DefaultFlag.USE.getRegionGroupFlag();
-        cubitLand.praseWGRegion().setFlag(groupFlag, RegionGroup.NON_MEMBERS);
-        cubitLand.praseWGRegion().setFlag(DefaultFlag.USE, StateFlag.State.DENY);
+        cubitLand.getWGRegion().setFlag(groupFlag, RegionGroup.NON_MEMBERS);
+        cubitLand.getWGRegion().setFlag(DefaultFlag.USE, StateFlag.State.DENY);
         return cubitLand;
 
     }
@@ -34,15 +34,15 @@ public class LockPacket implements ICubitPacket {
     @Override
     public CubitLand disablePacket(CubitLand cubitLand) {
         RegionGroupFlag groupFlag = DefaultFlag.USE.getRegionGroupFlag();
-        cubitLand.praseWGRegion().setFlag(groupFlag, RegionGroup.ALL);
-        cubitLand.praseWGRegion().setFlag(DefaultFlag.USE, StateFlag.State.ALLOW);
+        cubitLand.getWGRegion().setFlag(groupFlag, RegionGroup.ALL);
+        cubitLand.getWGRegion().setFlag(DefaultFlag.USE, StateFlag.State.ALLOW);
         return cubitLand;
 
     }
 
     @Override
     public boolean getState(CubitLand cubitLand) {
-        return cubitLand.praseWGRegion().getFlag(DefaultFlag.USE) == StateFlag.State.DENY;
+        return cubitLand.getWGRegion().getFlag(DefaultFlag.USE) == StateFlag.State.DENY;
     }
 
     @Override

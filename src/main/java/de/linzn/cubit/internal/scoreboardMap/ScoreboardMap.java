@@ -378,7 +378,7 @@ public class ScoreboardMap {
                         currChunk.getZ() + zz)) {
                     CubitLand data = plugin.getRegionManager().praseRegionData(currChunk.getWorld(),
                             currChunk.getX() + xx, currChunk.getZ() + zz);
-                    if (data.praseWGRegion() != null) {
+                    if (data.getWGRegion() != null) {
                         boolean unchanged = true;
                         for (UUID id : data.getOwnersUUID())
                             if (id.equals(p.getUniqueId())) {

@@ -81,7 +81,7 @@ public class SellShop implements ICommand {
 
         UUID economyOwner = cubitLand.getOwnersUUID()[0];
 
-        if (cubitLand.getLandType() != CubitType.SHOP) {
+        if (cubitLand.getCubitType() != CubitType.SHOP) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}",
                     CubitType.SHOP.toString()));
             return true;
@@ -89,7 +89,7 @@ public class SellShop implements ICommand {
 
         if (!plugin.getRegionManager().hasLandPermission(cubitLand, player.getUniqueId())) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
-                    cubitLand.getRegionName()));
+                    cubitLand.getLandName()));
             return true;
         }
 
@@ -149,7 +149,7 @@ public class SellShop implements ICommand {
         }
 
         /* Cubit land update event*/
-        CubitLandUpdateEvent cubitLandUpdateEvent = new CubitLandUpdateEvent(loc.getWorld(), cubitLand.getRegionName(), cubitLand);
+        CubitLandUpdateEvent cubitLandUpdateEvent = new CubitLandUpdateEvent(loc.getWorld(), cubitLand.getLandName(), cubitLand);
         this.plugin.getServer().getPluginManager().callEvent(cubitLandUpdateEvent);
 
         sender.sendMessage(plugin.getYamlManager().getLanguage().sellSuccess.replace("{regionID}", regionName));

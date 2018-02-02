@@ -30,8 +30,8 @@ public class SaveRegions {
                     try {
                         RegionManager manager = CubitBukkitPlugin.inst().getWorldGuardPlugin()
                                 .getRegionManager(world);
-                        if (cubitLand != null && cubitLand.praseWGRegion() != null) {
-                            manager.addRegion(cubitLand.praseWGRegion());
+                        if (cubitLand != null && cubitLand.getWGRegion() != null) {
+                            manager.addRegion(cubitLand.getWGRegion());
                         }
                         manager.saveChanges();
                     } catch (Exception e) {

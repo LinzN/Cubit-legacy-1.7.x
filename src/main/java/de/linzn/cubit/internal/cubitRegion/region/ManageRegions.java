@@ -56,7 +56,7 @@ public class ManageRegions {
 
     public CubitLand removeRegion(CubitLand cubitLand, World world) {
         RegionManager manager = CubitBukkitPlugin.inst().getWorldGuardPlugin().getRegionManager(world);
-        manager.removeRegion(cubitLand.getRegionName());
+        manager.removeRegion(cubitLand.getLandName());
         return cubitLand;
 
     }

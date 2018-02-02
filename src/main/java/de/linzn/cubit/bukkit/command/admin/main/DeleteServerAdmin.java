@@ -60,9 +60,9 @@ public class DeleteServerAdmin implements ICommand {
         }
 
         CubitLand cubitLand = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
-        final String regionID = cubitLand.getRegionName();
+        final String regionID = cubitLand.getLandName();
 
-        if (cubitLand.getLandType() != CubitType.SERVER) {
+        if (cubitLand.getCubitType() != CubitType.SERVER) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}",
                     CubitType.SERVER.toString()));
             return true;

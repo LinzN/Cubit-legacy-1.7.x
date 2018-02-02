@@ -71,7 +71,7 @@ public class BuyShop implements ICommand {
             return true;
         }
 
-        if (cubitLand.getLandType() != CubitType.SHOP) {
+        if (cubitLand.getCubitType() != CubitType.SHOP) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}",
                     CubitType.SHOP.toString()));
             return true;
@@ -81,9 +81,9 @@ public class BuyShop implements ICommand {
             player.sendMessage(plugin.getYamlManager().getLanguage().takeOwnLand);
             return true;
         }
-        if (!plugin.getDataAccessManager().databaseType.get_is_offer(cubitLand.getRegionName(), loc.getWorld())) {
+        if (!plugin.getDataAccessManager().databaseType.get_is_offer(cubitLand.getLandName(), loc.getWorld())) {
             sender.sendMessage(
-                    plugin.getYamlManager().getLanguage().notOffered.replace("regionID", cubitLand.getRegionName()));
+                    plugin.getYamlManager().getLanguage().notOffered.replace("regionID", cubitLand.getLandName()));
             return true;
         }
 
@@ -92,7 +92,7 @@ public class BuyShop implements ICommand {
             sender.sendMessage(plugin.getYamlManager().getLanguage().reachLimit);
             return true;
         }
-        OfferData offerData = plugin.getDataAccessManager().databaseType.get_offer(cubitLand.getRegionName(),
+        OfferData offerData = plugin.getDataAccessManager().databaseType.get_offer(cubitLand.getLandName(),
                 loc.getWorld());
 
         if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), offerData.getValue())) {
@@ -118,7 +118,7 @@ public class BuyShop implements ICommand {
             return true;
         }
         /* Remove offer from Database */
-        if (!plugin.getDataAccessManager().databaseType.set_remove_offer(cubitLand.getRegionName(), loc.getWorld())) {
+        if (!plugin.getDataAccessManager().databaseType.set_remove_offer(cubitLand.getLandName(), loc.getWorld())) {
             /* If this task failed! This should never happen */
             sender.sendMessage(
                     plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SHOP-REMOVEOFFER"));
@@ -146,12 +146,12 @@ public class BuyShop implements ICommand {
         }
 
         /* Cubit land update event*/
-        CubitLandUpdateEvent cubitLandUpdateEvent = new CubitLandUpdateEvent(loc.getWorld(), cubitLand.getRegionName(), cubitLand);
+        CubitLandUpdateEvent cubitLandUpdateEvent = new CubitLandUpdateEvent(loc.getWorld(), cubitLand.getLandName(), cubitLand);
         this.plugin.getServer().getPluginManager().callEvent(cubitLandUpdateEvent);
 
         /* Task was successfully. Send BuyMessage */
         sender.sendMessage(
-                plugin.getYamlManager().getLanguage().buySuccess.replace("{regionID}", cubitLand.getRegionName()));
+                plugin.getYamlManager().getLanguage().buySuccess.replace("{regionID}", cubitLand.getLandName()));
 
         return true;
     }

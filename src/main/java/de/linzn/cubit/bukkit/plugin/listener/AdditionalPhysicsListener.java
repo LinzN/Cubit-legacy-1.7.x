@@ -31,11 +31,11 @@ public class AdditionalPhysicsListener implements Listener {
         CubitLand toLand = CubitBukkitPlugin.inst().getRegionManager().praseRegionData(toChunk.getWorld(),
                 toChunk.getX(), toChunk.getZ());
 
-        if (toLand.getLandType() == CubitType.NOTYPE) {
+        if (toLand.getCubitType() == CubitType.NOTYPE) {
             return;
         }
 
-        if (fromLand.getLandType() == CubitType.SERVER && toLand.getLandType() == CubitType.SERVER) {
+        if (fromLand.getCubitType() == CubitType.SERVER && toLand.getCubitType() == CubitType.SERVER) {
             return;
         }
 

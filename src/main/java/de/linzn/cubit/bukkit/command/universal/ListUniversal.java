@@ -130,7 +130,7 @@ public class ListUniversal implements ICommand {
 
         for (CubitLand rgData : subRegionList) {
             player.sendMessage(plugin.getYamlManager().getLanguage().landListEntry.replace("{counter}", "" + counter)
-                    .replace("{regionID}", rgData.getRegionName()).replace("{minPoints}", rgData.getMinPoint())
+                    .replace("{regionID}", rgData.getLandName()).replace("{minPoints}", rgData.getMinPoint())
                     .replace("{maxPoints}", rgData.getMaxPoint()));
             counter++;
         }

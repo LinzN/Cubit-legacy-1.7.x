@@ -100,9 +100,8 @@ public class BuyLand implements ICommand {
         }
 
         /* Call cubit buy land event */
-        CubitLand cubitLand = new CubitLand(loc.getWorld());
-        cubitLand.setWGRegion(this.plugin.getWorldGuardPlugin().getRegionManager(loc.getWorld()).getRegion(regionID));
-        CubitLandBuyEvent cubitLandBuyEvent = new CubitLandBuyEvent(loc.getWorld(), regionID, cubitLand);
+        CubitLand cubitLand = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
+        CubitLandBuyEvent cubitLandBuyEvent = new CubitLandBuyEvent(loc.getWorld(), cubitLand);
         this.plugin.getServer().getPluginManager().callEvent(cubitLandBuyEvent);
 
         if (!plugin.getParticleManager().sendBuy(player, loc)) {

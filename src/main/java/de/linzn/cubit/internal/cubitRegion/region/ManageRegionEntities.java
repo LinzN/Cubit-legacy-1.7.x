@@ -33,7 +33,7 @@ public class ManageRegionEntities {
         if (regionListe.size() <= 30) {
 
             for (CubitLand region : regionListe) {
-                region.praseWGRegion().setOwners(domain);
+                region.getWGRegion().setOwners(domain);
             }
         } else {
 
@@ -43,7 +43,7 @@ public class ManageRegionEntities {
                         30 * i + 29 >= regionListe.size() ? regionListe.size() : 30 * i + 29);
 
                 for (CubitLand region : list) {
-                    region.praseWGRegion().setOwners(domain);
+                    region.getWGRegion().setOwners(domain);
                 }
             }
 
@@ -57,7 +57,7 @@ public class ManageRegionEntities {
         if (regionListe.size() <= 30) {
 
             for (CubitLand region : regionListe) {
-                region.praseWGRegion().getMembers().addPlayer(lPlayer);
+                region.getWGRegion().getMembers().addPlayer(lPlayer);
             }
         } else {
 
@@ -67,7 +67,7 @@ public class ManageRegionEntities {
                         30 * i + 29 >= regionListe.size() ? regionListe.size() : 30 * i + 29);
 
                 for (CubitLand region : list) {
-                    region.praseWGRegion().getMembers().addPlayer(lPlayer);
+                    region.getWGRegion().getMembers().addPlayer(lPlayer);
                 }
             }
 
@@ -81,7 +81,7 @@ public class ManageRegionEntities {
         if (regionListe.size() <= 30) {
 
             for (CubitLand region : regionListe) {
-                region.praseWGRegion().getMembers().removePlayer(lPlayer);
+                region.getWGRegion().getMembers().removePlayer(lPlayer);
             }
         } else {
 
@@ -91,7 +91,7 @@ public class ManageRegionEntities {
                         30 * i + 29 >= regionListe.size() ? regionListe.size() : 30 * i + 29);
 
                 for (CubitLand region : list) {
-                    region.praseWGRegion().getMembers().removePlayer(lPlayer);
+                    region.getWGRegion().getMembers().removePlayer(lPlayer);
                 }
             }
 
@@ -104,7 +104,7 @@ public class ManageRegionEntities {
         if (regionListe.size() <= 30) {
 
             for (CubitLand region : regionListe) {
-                region.praseWGRegion().getMembers().clear();
+                region.getWGRegion().getMembers().clear();
             }
         } else {
 
@@ -114,7 +114,7 @@ public class ManageRegionEntities {
                         30 * i + 29 >= regionListe.size() ? regionListe.size() : 30 * i + 29);
 
                 for (CubitLand region : list) {
-                    region.praseWGRegion().getMembers().clear();
+                    region.getWGRegion().getMembers().clear();
                 }
             }
 
@@ -127,7 +127,7 @@ public class ManageRegionEntities {
         if (regionListe.size() <= 30) {
 
             for (CubitLand region : regionListe) {
-                region.praseWGRegion().getOwners().clear();
+                region.getWGRegion().getOwners().clear();
             }
         } else {
 
@@ -137,7 +137,7 @@ public class ManageRegionEntities {
                         30 * i + 29 >= regionListe.size() ? regionListe.size() : 30 * i + 29);
 
                 for (CubitLand region : list) {
-                    region.praseWGRegion().getOwners().clear();
+                    region.getWGRegion().getOwners().clear();
                 }
             }
 
@@ -155,7 +155,7 @@ public class ManageRegionEntities {
             if (entry.getValue().getOwners().contains(lPlayer)) {
                 CubitLand cubitLand = new CubitLand(world);
                 cubitLand.setWGRegion(entry.getValue());
-                if (cubitLand.getLandType() == type || type == CubitType.NOTYPE) {
+                if (cubitLand.getCubitType() == type || type == CubitType.NOTYPE) {
                     toReturn.add(entry.getValue());
                 }
             }
