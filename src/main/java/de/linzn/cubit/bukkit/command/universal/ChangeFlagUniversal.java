@@ -13,9 +13,9 @@ package de.linzn.cubit.bukkit.command.universal;
 
 import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
-import de.linzn.cubit.internal.regionMgr.IProtectionFlag;
-import de.linzn.cubit.internal.regionMgr.LandTypes;
-import de.linzn.cubit.internal.regionMgr.region.RegionData;
+import de.linzn.cubit.internal.cubitRegion.CubitType;
+import de.linzn.cubit.internal.cubitRegion.ICubitPacket;
+import de.linzn.cubit.internal.cubitRegion.region.CubitLand;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -25,12 +25,12 @@ import org.bukkit.entity.Player;
 public class ChangeFlagUniversal implements ICommand {
 
     private CubitBukkitPlugin plugin;
-    private IProtectionFlag packet;
+    private ICubitPacket packet;
     private boolean isAdmin;
     private String permNode;
-    private LandTypes type;
+    private CubitType type;
 
-    public ChangeFlagUniversal(CubitBukkitPlugin plugin, IProtectionFlag packet, String permNode, LandTypes type,
+    public ChangeFlagUniversal(CubitBukkitPlugin plugin, ICubitPacket packet, String permNode, CubitType type,
                                boolean isAdmin) {
         this.plugin = plugin;
         this.packet = packet;
@@ -48,10 +48,10 @@ public class ChangeFlagUniversal implements ICommand {
             return true;
         }
 
-		/* Build and get all variables */
+        /* Build and get all variables */
         Player player = (Player) sender;
 
-		/* Permission Check */
+        /* Permission Check */
         if (!player.hasPermission(this.permNode)) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoPermission);
             return true;
@@ -59,51 +59,51 @@ public class ChangeFlagUniversal implements ICommand {
 
         final Location loc = player.getLocation();
         final Chunk chunk = loc.getChunk();
-        RegionData regionData = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
+        CubitLand cubitLand = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 
-		/*
-		 * Check if the player has permissions for this land or hat landadmin
-		 * permissions
-		 */
+        /*
+         * Check if the player has permissions for this land or hat landadmin
+         * permissions
+         */
         if (!plugin.getRegionManager().isValidRegion(loc.getWorld(), chunk.getX(), chunk.getZ())) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandFound);
             return true;
         }
 
-        if (regionData.getLandType() != type && type != LandTypes.NOTYPE) {
+        if (cubitLand.getLandType() != type && type != CubitType.NOTYPE) {
             sender.sendMessage(
                     plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}", type.toString()));
             return true;
         }
 
-        if (!plugin.getRegionManager().hasLandPermission(regionData, player.getUniqueId()) && !this.isAdmin) {
+        if (!plugin.getRegionManager().hasLandPermission(cubitLand, player.getUniqueId()) && !this.isAdmin) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
-                    regionData.getRegionName()));
+                    cubitLand.getRegionName()));
             return true;
         }
 
-		/* Command based switch */
+        /* Command based switch */
         if (args.length < 2) {
         } else if (args[1].equalsIgnoreCase("on")) {
 
-            packet.switchState(regionData, true, true);
-            String stateString = plugin.getRegionManager().getStringState(packet.getState(regionData));
+            packet.switchState(cubitLand, true, true);
+            String stateString = plugin.getRegionManager().getStringState(packet.getState(cubitLand));
             sender.sendMessage(plugin.getYamlManager().getLanguage().flagSwitchSuccess
                     .replace("{flag}", packet.getPacketName()).replace("{value}", stateString));
 
             return true;
         } else if (args[1].equalsIgnoreCase("off")) {
 
-            packet.switchState(regionData, false, true);
-            String stateString = plugin.getRegionManager().getStringState(packet.getState(regionData));
+            packet.switchState(cubitLand, false, true);
+            String stateString = plugin.getRegionManager().getStringState(packet.getState(cubitLand));
             sender.sendMessage(plugin.getYamlManager().getLanguage().flagSwitchSuccess
                     .replace("{flag}", packet.getPacketName()).replace("{value}", stateString));
 
             return true;
         }
         /* Switch flag-state to the opposite value */
-        packet.switchState(regionData, true);
-        String stateString = plugin.getRegionManager().getStringState(packet.getState(regionData));
+        packet.switchState(cubitLand, true);
+        String stateString = plugin.getRegionManager().getStringState(packet.getState(cubitLand));
 
         if (!plugin.getParticleManager().changeFlag(player, loc)) {
             /* If this task failed! This should never happen */

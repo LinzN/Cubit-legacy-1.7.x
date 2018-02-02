@@ -11,12 +11,12 @@
 
 package de.linzn.cubit.bukkit.command.shop.main;
 
+import de.linzn.cubit.api.events.CubitLandUpdateEvent;
 import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
-import de.linzn.cubit.internal.cubitEvents.CubitLandUpdateEvent;
-import de.linzn.cubit.internal.dataAccessMgr.OfferData;
-import de.linzn.cubit.internal.regionMgr.LandTypes;
-import de.linzn.cubit.internal.regionMgr.region.RegionData;
+import de.linzn.cubit.internal.cubitRegion.CubitType;
+import de.linzn.cubit.internal.cubitRegion.region.CubitLand;
+import de.linzn.cubit.internal.dataBase.OfferData;
 import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -52,10 +52,10 @@ public class SellShop implements ICommand {
             return true;
         }
 
-		/* Build and get all variables */
+        /* Build and get all variables */
         Player player = (Player) sender;
 
-		/* Permission Check */
+        /* Permission Check */
         if (!player.hasPermission(this.permNode)) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoPermission);
             return true;
@@ -63,33 +63,33 @@ public class SellShop implements ICommand {
 
         final Location loc = player.getLocation();
         final Chunk chunk = loc.getChunk();
-        final String regionName = CubitBukkitPlugin.inst().getRegionManager().buildLandName(LandTypes.SHOP.toString(),
+        final String regionName = CubitBukkitPlugin.inst().getRegionManager().buildLandName(CubitType.SHOP.toString(),
                 chunk.getX(), chunk.getZ());
 
-		/*
-		 * Check if the player has permissions for this land or hat landadmin
-		 * permissions
-		 */
+        /*
+         * Check if the player has permissions for this land or hat landadmin
+         * permissions
+         */
 
-		/* Check if this is a valid sellTask */
+        /* Check if this is a valid sellTask */
         if (!plugin.getRegionManager().isValidRegion(loc.getWorld(), chunk.getX(), chunk.getZ())) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandFound);
             return true;
         }
 
-        RegionData regionData = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
+        CubitLand cubitLand = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 
-        UUID economyOwner = regionData.getOwnersUUID()[0];
+        UUID economyOwner = cubitLand.getOwnersUUID()[0];
 
-        if (regionData.getLandType() != LandTypes.SHOP) {
+        if (cubitLand.getLandType() != CubitType.SHOP) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}",
-                    LandTypes.SHOP.toString()));
+                    CubitType.SHOP.toString()));
             return true;
         }
 
-        if (!plugin.getRegionManager().hasLandPermission(regionData, player.getUniqueId())) {
+        if (!plugin.getRegionManager().hasLandPermission(cubitLand, player.getUniqueId())) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
-                    regionData.getRegionName()));
+                    cubitLand.getRegionName()));
             return true;
         }
 
@@ -149,7 +149,7 @@ public class SellShop implements ICommand {
         }
 
         /* Cubit land update event*/
-        CubitLandUpdateEvent cubitLandUpdateEvent = new CubitLandUpdateEvent(loc.getWorld(), regionData.getRegionName(), regionData);
+        CubitLandUpdateEvent cubitLandUpdateEvent = new CubitLandUpdateEvent(loc.getWorld(), cubitLand.getRegionName(), cubitLand);
         this.plugin.getServer().getPluginManager().callEvent(cubitLandUpdateEvent);
 
         sender.sendMessage(plugin.getYamlManager().getLanguage().sellSuccess.replace("{regionID}", regionName));

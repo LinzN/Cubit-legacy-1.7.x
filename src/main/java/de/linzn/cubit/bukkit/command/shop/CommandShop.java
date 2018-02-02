@@ -20,7 +20,7 @@ import de.linzn.cubit.bukkit.command.universal.*;
 import de.linzn.cubit.bukkit.command.universal.blockedit.EditBiomeUniversal;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import de.linzn.cubit.bukkit.plugin.PermissionNodes;
-import de.linzn.cubit.internal.regionMgr.LandTypes;
+import de.linzn.cubit.internal.cubitRegion.CubitType;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -91,17 +91,17 @@ public class CommandShop implements CommandExecutor {
             this.cmdMap.put("sell", new SellShop(this.plugin, perm.sellShop));
             this.cmdMap.put("verkaufen", new SellShop(this.plugin, perm.sellShop));
 
-            this.cmdMap.put("list", new ListUniversal(this.plugin, perm.listShop, LandTypes.SHOP, false));
-            this.cmdMap.put("info", new InfoUniversal(this.plugin, perm.infoShop, LandTypes.SHOP));
+            this.cmdMap.put("list", new ListUniversal(this.plugin, perm.listShop, CubitType.SHOP, false));
+            this.cmdMap.put("info", new InfoUniversal(this.plugin, perm.infoShop, CubitType.SHOP));
 
-			/* Universal Commands */
-            this.cmdMap.put("add", new AddMemberUniversal(this.plugin, perm.addMemberShop, LandTypes.SHOP, false));
+            /* Universal Commands */
+            this.cmdMap.put("add", new AddMemberUniversal(this.plugin, perm.addMemberShop, CubitType.SHOP, false));
             this.cmdMap.put("remove",
-                    new RemoveMemberUniversal(this.plugin, perm.removeMemberShop, LandTypes.SHOP, false));
-            this.cmdMap.put("kick", new KickUniversal(this.plugin, perm.kickShop, LandTypes.SHOP));
+                    new RemoveMemberUniversal(this.plugin, perm.removeMemberShop, CubitType.SHOP, false));
+            this.cmdMap.put("kick", new KickUniversal(this.plugin, perm.kickShop, CubitType.SHOP));
             this.cmdMap.put("changebiome",
-                    new EditBiomeUniversal(this.plugin, perm.changeBiomeShop, LandTypes.SHOP, false));
-            this.cmdMap.put("listbiomes", new ListBiomesUniversal(this.plugin, perm.listBiomesShop, LandTypes.SHOP));
+                    new EditBiomeUniversal(this.plugin, perm.changeBiomeShop, CubitType.SHOP, false));
+            this.cmdMap.put("listbiomes", new ListBiomesUniversal(this.plugin, perm.listBiomesShop, CubitType.SHOP));
 
             this.isLoaded = true;
         } catch (Exception e) {

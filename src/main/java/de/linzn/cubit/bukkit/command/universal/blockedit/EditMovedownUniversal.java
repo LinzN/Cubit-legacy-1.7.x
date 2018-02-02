@@ -13,8 +13,8 @@ package de.linzn.cubit.bukkit.command.universal.blockedit;
 
 import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
-import de.linzn.cubit.internal.regionMgr.LandTypes;
-import de.linzn.cubit.internal.regionMgr.region.RegionData;
+import de.linzn.cubit.internal.cubitRegion.CubitType;
+import de.linzn.cubit.internal.cubitRegion.region.CubitLand;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -25,9 +25,9 @@ public class EditMovedownUniversal implements ICommand {
 
     private CubitBukkitPlugin plugin;
     private String permNode;
-    private LandTypes type;
+    private CubitType type;
 
-    public EditMovedownUniversal(CubitBukkitPlugin plugin, String permNode, LandTypes type) {
+    public EditMovedownUniversal(CubitBukkitPlugin plugin, String permNode, CubitType type) {
         this.plugin = plugin;
         this.permNode = permNode;
         this.type = type;
@@ -41,7 +41,7 @@ public class EditMovedownUniversal implements ICommand {
             return true;
         }
 
-		/* Build and get all variables */
+        /* Build and get all variables */
         Player player = (Player) sender;
 
         if (!this.plugin.getYamlManager().getSettings().landUseSnapshots) {
@@ -54,7 +54,7 @@ public class EditMovedownUniversal implements ICommand {
             return true;
         }
 
-		/* Permission Check */
+        /* Permission Check */
         if (!player.hasPermission(this.permNode)) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoPermission);
             return true;
@@ -62,27 +62,27 @@ public class EditMovedownUniversal implements ICommand {
 
         final Location loc = player.getLocation();
         final Chunk chunk = loc.getChunk();
-        final RegionData regionData = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(),
+        final CubitLand cubitLand = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(),
                 chunk.getZ());
 
-		/*
-		 * Check if the player has permissions for this land or hat landadmin
-		 * permissions
-		 */
+        /*
+         * Check if the player has permissions for this land or hat landadmin
+         * permissions
+         */
         if (!plugin.getRegionManager().isValidRegion(loc.getWorld(), chunk.getX(), chunk.getZ())) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandFound);
             return true;
         }
 
-        if (regionData.getLandType() != type && type != LandTypes.NOTYPE) {
+        if (cubitLand.getLandType() != type && type != CubitType.NOTYPE) {
             sender.sendMessage(
                     plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}", type.toString()));
             return true;
         }
 
-        if (!plugin.getRegionManager().hasLandPermission(regionData, player.getUniqueId())) {
+        if (!plugin.getRegionManager().hasLandPermission(cubitLand, player.getUniqueId())) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
-                    regionData.getRegionName()));
+                    cubitLand.getRegionName()));
             return true;
         }
 

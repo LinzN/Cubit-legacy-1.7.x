@@ -13,7 +13,7 @@ package de.linzn.cubit.bukkit.command.universal;
 
 import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
-import de.linzn.cubit.internal.regionMgr.LandTypes;
+import de.linzn.cubit.internal.cubitRegion.CubitType;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -28,7 +28,7 @@ public class ShowMapUniversal implements ICommand {
     private CubitBukkitPlugin plugin;
     private String permNode;
 
-    public ShowMapUniversal(CubitBukkitPlugin plugin, String permNode, LandTypes type) {
+    public ShowMapUniversal(CubitBukkitPlugin plugin, String permNode, CubitType type) {
         this.plugin = plugin;
         this.permNode = permNode;
     }
@@ -42,10 +42,10 @@ public class ShowMapUniversal implements ICommand {
         }
         if (this.plugin.getYamlManager().getSettings().landUseScoreboardMap) {
 
-			/* Build and get all variables */
+            /* Build and get all variables */
             final Player player = (Player) sender;
 
-			/* Permission Check */
+            /* Permission Check */
             if (!player.hasPermission(this.permNode)) {
                 sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoPermission);
                 return true;

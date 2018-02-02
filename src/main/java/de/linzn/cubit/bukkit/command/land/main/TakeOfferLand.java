@@ -11,12 +11,12 @@
 
 package de.linzn.cubit.bukkit.command.land.main;
 
+import de.linzn.cubit.api.events.CubitLandUpdateEvent;
 import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
-import de.linzn.cubit.internal.cubitEvents.CubitLandUpdateEvent;
-import de.linzn.cubit.internal.dataAccessMgr.OfferData;
-import de.linzn.cubit.internal.regionMgr.LandTypes;
-import de.linzn.cubit.internal.regionMgr.region.RegionData;
+import de.linzn.cubit.internal.cubitRegion.CubitType;
+import de.linzn.cubit.internal.cubitRegion.region.CubitLand;
+import de.linzn.cubit.internal.dataBase.OfferData;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -49,10 +49,10 @@ public class TakeOfferLand implements ICommand {
             return true;
         }
 
-		/* Build and get all variables */
+        /* Build and get all variables */
         Player player = (Player) sender;
 
-		/* Permission Check */
+        /* Permission Check */
         if (!player.hasPermission(this.permNode)) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoPermission);
             return true;
@@ -60,35 +60,35 @@ public class TakeOfferLand implements ICommand {
 
         final Location loc = player.getLocation();
         final Chunk chunk = loc.getChunk();
-        RegionData regionData = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
+        CubitLand cubitLand = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 
-		/*
-		 * Check if the player has permissions for this land or hat landadmin
-		 * permissions
-		 */
+        /*
+         * Check if the player has permissions for this land or hat landadmin
+         * permissions
+         */
 
         if (!plugin.getRegionManager().isValidRegion(loc.getWorld(), chunk.getX(), chunk.getZ())) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandFound);
             return true;
         }
 
-        if (regionData.getLandType() != LandTypes.WORLD) {
+        if (cubitLand.getLandType() != CubitType.WORLD) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}",
-                    LandTypes.WORLD.toString()));
+                    CubitType.WORLD.toString()));
             return true;
         }
 
-        if (plugin.getRegionManager().hasLandPermission(regionData, player.getUniqueId())) {
+        if (plugin.getRegionManager().hasLandPermission(cubitLand, player.getUniqueId())) {
             player.sendMessage(plugin.getYamlManager().getLanguage().takeOwnLand);
             return true;
         }
-        if (!plugin.getDataAccessManager().databaseType.get_is_offer(regionData.getRegionName(), loc.getWorld())) {
+        if (!plugin.getDataAccessManager().databaseType.get_is_offer(cubitLand.getRegionName(), loc.getWorld())) {
             sender.sendMessage(
-                    plugin.getYamlManager().getLanguage().notOffered.replace("{regionID}", regionData.getRegionName()));
+                    plugin.getYamlManager().getLanguage().notOffered.replace("{regionID}", cubitLand.getRegionName()));
             return true;
         }
 
-        OfferData offerData = plugin.getDataAccessManager().databaseType.get_offer(regionData.getRegionName(),
+        OfferData offerData = plugin.getDataAccessManager().databaseType.get_offer(cubitLand.getRegionName(),
                 loc.getWorld());
 
         double basePrice = plugin.getVaultManager().calculateLandCost(player.getUniqueId(), loc.getWorld(), true);
@@ -100,7 +100,7 @@ public class TakeOfferLand implements ICommand {
             return true;
         }
 
-        if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), regionData.getOwnersUUID()[0],
+        if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), cubitLand.getOwnersUUID()[0],
                 offerData.getValue())) {
             /* If this task failed! This should never happen */
             sender.sendMessage(
@@ -118,7 +118,7 @@ public class TakeOfferLand implements ICommand {
             return true;
         }
         /* Change owner and clear Memberlist */
-        if (!plugin.getRegionManager().restoreDefaultSettings(regionData, loc.getWorld(), player.getUniqueId())) {
+        if (!plugin.getRegionManager().restoreDefaultSettings(cubitLand, loc.getWorld(), player.getUniqueId())) {
             /* If this task failed! This should never happen */
             sender.sendMessage(
                     plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "TAKEOFFER-UPDATEOWNER"));
@@ -127,7 +127,7 @@ public class TakeOfferLand implements ICommand {
             return true;
         }
         /* Remove offer from Database */
-        if (!plugin.getDataAccessManager().databaseType.set_remove_offer(regionData.getRegionName(), loc.getWorld())) {
+        if (!plugin.getDataAccessManager().databaseType.set_remove_offer(cubitLand.getRegionName(), loc.getWorld())) {
             /* If this task failed! This should never happen */
             sender.sendMessage(
                     plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "TAKEOFFER-REMOVEOFFER"));
@@ -137,7 +137,7 @@ public class TakeOfferLand implements ICommand {
         }
 
         /* Cubit land update event*/
-        CubitLandUpdateEvent cubitLandUpdateEvent = new CubitLandUpdateEvent(loc.getWorld(), regionData.getRegionName(), regionData);
+        CubitLandUpdateEvent cubitLandUpdateEvent = new CubitLandUpdateEvent(loc.getWorld(), cubitLand.getRegionName(), cubitLand);
         this.plugin.getServer().getPluginManager().callEvent(cubitLandUpdateEvent);
 
         if (!plugin.getParticleManager().sendBuy(player, loc)) {
@@ -149,7 +149,7 @@ public class TakeOfferLand implements ICommand {
         }
         /* Task was successfully. Send BuyMessage */
         sender.sendMessage(
-                plugin.getYamlManager().getLanguage().buySuccess.replace("{regionID}", regionData.getRegionName()));
+                plugin.getYamlManager().getLanguage().buySuccess.replace("{regionID}", cubitLand.getRegionName()));
 
         return true;
     }

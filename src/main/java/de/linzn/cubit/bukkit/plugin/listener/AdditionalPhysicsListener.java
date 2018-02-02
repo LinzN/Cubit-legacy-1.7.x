@@ -12,8 +12,8 @@
 package de.linzn.cubit.bukkit.plugin.listener;
 
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
-import de.linzn.cubit.internal.regionMgr.LandTypes;
-import de.linzn.cubit.internal.regionMgr.region.RegionData;
+import de.linzn.cubit.internal.cubitRegion.CubitType;
+import de.linzn.cubit.internal.cubitRegion.region.CubitLand;
 import org.bukkit.Chunk;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -25,17 +25,17 @@ public class AdditionalPhysicsListener implements Listener {
     public void onLiquidFlowOtherLand(final BlockFromToEvent event) {
         Chunk fromChunk = event.getBlock().getLocation().getChunk();
         Chunk toChunk = event.getToBlock().getLocation().getChunk();
-        RegionData fromLand = CubitBukkitPlugin.inst().getRegionManager().praseRegionData(fromChunk.getWorld(),
+        CubitLand fromLand = CubitBukkitPlugin.inst().getRegionManager().praseRegionData(fromChunk.getWorld(),
                 fromChunk.getX(), fromChunk.getZ());
 
-        RegionData toLand = CubitBukkitPlugin.inst().getRegionManager().praseRegionData(toChunk.getWorld(),
+        CubitLand toLand = CubitBukkitPlugin.inst().getRegionManager().praseRegionData(toChunk.getWorld(),
                 toChunk.getX(), toChunk.getZ());
 
-        if (toLand.getLandType() == LandTypes.NOTYPE) {
+        if (toLand.getLandType() == CubitType.NOTYPE) {
             return;
         }
 
-        if (fromLand.getLandType() == LandTypes.SERVER && toLand.getLandType() == LandTypes.SERVER) {
+        if (fromLand.getLandType() == CubitType.SERVER && toLand.getLandType() == CubitType.SERVER) {
             return;
         }
 

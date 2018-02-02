@@ -11,11 +11,11 @@
 
 package de.linzn.cubit.bukkit.command.admin.main;
 
+import de.linzn.cubit.api.events.CubitLandSellEvent;
 import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
-import de.linzn.cubit.internal.cubitEvents.CubitLandSellEvent;
-import de.linzn.cubit.internal.regionMgr.LandTypes;
-import de.linzn.cubit.internal.regionMgr.region.RegionData;
+import de.linzn.cubit.internal.cubitRegion.CubitType;
+import de.linzn.cubit.internal.cubitRegion.region.CubitLand;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -42,10 +42,10 @@ public class DeleteShopAdmin implements ICommand {
             return true;
         }
 
-		/* Build and get all variables */
+        /* Build and get all variables */
         Player player = (Player) sender;
 
-		/* Permission Check */
+        /* Permission Check */
         if (!player.hasPermission(this.permNode)) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoPermission);
             return true;
@@ -53,23 +53,23 @@ public class DeleteShopAdmin implements ICommand {
 
         final Location loc = player.getLocation();
         final Chunk chunk = loc.getChunk();
-        final String regionName = CubitBukkitPlugin.inst().getRegionManager().buildLandName(LandTypes.SHOP.toString(),
+        final String regionName = CubitBukkitPlugin.inst().getRegionManager().buildLandName(CubitType.SHOP.toString(),
                 chunk.getX(), chunk.getZ());
 
-		/*
-		 * Check if the player has permissions for this land or hat landadmin
-		 * permissions
-		 */
-        RegionData regionData = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
+        /*
+         * Check if the player has permissions for this land or hat landadmin
+         * permissions
+         */
+        CubitLand cubitLand = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 
-        if (regionData.getLandType() != LandTypes.SHOP) {
+        if (cubitLand.getLandType() != CubitType.SHOP) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}",
-                    LandTypes.SHOP.toString()));
+                    CubitType.SHOP.toString()));
             return true;
         }
 
-		/* Remove offer from Database */
-        if (!plugin.getDataAccessManager().databaseType.set_remove_offer(regionData.getRegionName(), loc.getWorld())) {
+        /* Remove offer from Database */
+        if (!plugin.getDataAccessManager().databaseType.set_remove_offer(cubitLand.getRegionName(), loc.getWorld())) {
             /* If this task failed! This should never happen */
             sender.sendMessage(
                     plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SHOP-REMOVEOFFER"));
@@ -78,7 +78,7 @@ public class DeleteShopAdmin implements ICommand {
             return true;
         }
 
-        if (!plugin.getRegionManager().removeLand(regionData, loc.getWorld())) {
+        if (!plugin.getRegionManager().removeLand(cubitLand, loc.getWorld())) {
             /* If this task failed! This should never happen */
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "DELETE-REGION"));
             plugin.getLogger()

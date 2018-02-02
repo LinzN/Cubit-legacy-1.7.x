@@ -13,8 +13,8 @@ package de.linzn.cubit.bukkit.command.universal;
 
 import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
-import de.linzn.cubit.internal.regionMgr.LandTypes;
-import de.linzn.cubit.internal.regionMgr.region.RegionData;
+import de.linzn.cubit.internal.cubitRegion.CubitType;
+import de.linzn.cubit.internal.cubitRegion.region.CubitLand;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -27,10 +27,10 @@ public class ListUniversal implements ICommand {
 
     private CubitBukkitPlugin plugin;
     private String permNode;
-    private LandTypes type;
+    private CubitType type;
     private boolean isAdmin;
 
-    public ListUniversal(CubitBukkitPlugin plugin, String permNode, LandTypes type, boolean isAdmin) {
+    public ListUniversal(CubitBukkitPlugin plugin, String permNode, CubitType type, boolean isAdmin) {
         this.plugin = plugin;
         this.permNode = permNode;
         this.type = type;
@@ -45,10 +45,10 @@ public class ListUniversal implements ICommand {
             return true;
         }
 
-		/* Build and get all variables */
+        /* Build and get all variables */
         Player player = (Player) sender;
 
-		/* Permission Check */
+        /* Permission Check */
         if (!player.hasPermission(this.permNode)) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoPermission);
             return true;
@@ -76,7 +76,7 @@ public class ListUniversal implements ICommand {
                 searchUUID = Bukkit.getOfflinePlayer(args[1]).getUniqueId();
             }
 
-            List<RegionData> regionList = this.plugin.getRegionManager().getAllRegionsFromPlayer(searchUUID,
+            List<CubitLand> regionList = this.plugin.getRegionManager().getAllRegionsFromPlayer(searchUUID,
                     player.getLocation().getWorld(), type);
 
             int pageNumber = 0;
@@ -107,7 +107,7 @@ public class ListUniversal implements ICommand {
         }
     }
 
-    private void show(Player player, int pageNumber, List<RegionData> regionList) {
+    private void show(Player player, int pageNumber, List<CubitLand> regionList) {
         int regionCount = regionList.size();
 
         if (regionCount == 0) {
@@ -120,7 +120,7 @@ public class ListUniversal implements ICommand {
             return;
         }
 
-        List<RegionData> subRegionList = regionList.subList(pageNumber * 10,
+        List<CubitLand> subRegionList = regionList.subList(pageNumber * 10,
                 pageNumber * 10 + 10 > regionCount ? regionCount : pageNumber * 10 + 10);
 
         player.sendMessage(plugin.getYamlManager().getLanguage().landListHeader.replace("{count}", "" + regionCount)
@@ -128,7 +128,7 @@ public class ListUniversal implements ICommand {
 
         int counter = pageNumber * 10 + 1;
 
-        for (RegionData rgData : subRegionList) {
+        for (CubitLand rgData : subRegionList) {
             player.sendMessage(plugin.getYamlManager().getLanguage().landListEntry.replace("{counter}", "" + counter)
                     .replace("{regionID}", rgData.getRegionName()).replace("{minPoints}", rgData.getMinPoint())
                     .replace("{maxPoints}", rgData.getMaxPoint()));

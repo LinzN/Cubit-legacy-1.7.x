@@ -20,7 +20,7 @@ import de.linzn.cubit.bukkit.command.universal.blockedit.EditRestoreUniversal;
 import de.linzn.cubit.bukkit.command.universal.blockedit.EditSaveUniversal;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import de.linzn.cubit.bukkit.plugin.PermissionNodes;
-import de.linzn.cubit.internal.regionMgr.LandTypes;
+import de.linzn.cubit.internal.cubitRegion.CubitType;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -95,8 +95,8 @@ public class CommandLand implements CommandExecutor {
             this.cmdMap.put("offer", new OfferLand(this.plugin, perm.offerLand, false));
             this.cmdMap.put("anbieten", new OfferLand(this.plugin, perm.offerLand, false));
 
-            this.cmdMap.put("map", new ShowMapUniversal(plugin, perm.showMapLand, LandTypes.WORLD));
-            this.cmdMap.put("karte", new ShowMapUniversal(plugin, perm.showMapLand, LandTypes.WORLD));
+            this.cmdMap.put("map", new ShowMapUniversal(plugin, perm.showMapLand, CubitType.WORLD));
+            this.cmdMap.put("karte", new ShowMapUniversal(plugin, perm.showMapLand, CubitType.WORLD));
 
             this.cmdMap.put("takeoffer", new TakeOfferLand(this.plugin, perm.takeOfferLand));
             this.cmdMap.put("abkaufen", new TakeOfferLand(this.plugin, perm.takeOfferLand));
@@ -104,45 +104,45 @@ public class CommandLand implements CommandExecutor {
             this.cmdMap.put("buyup", new BuyupLand(this.plugin, perm.buyupLand));
             this.cmdMap.put("aufkaufen", new BuyupLand(this.plugin, perm.buyupLand));
 
-			/* Universal Commands */
-            this.cmdMap.put("info", new InfoUniversal(this.plugin, perm.infoLand, LandTypes.WORLD));
-            this.cmdMap.put("list", new ListUniversal(this.plugin, perm.listLand, LandTypes.WORLD, false));
-            this.cmdMap.put("kick", new KickUniversal(this.plugin, perm.kickLand, LandTypes.WORLD));
+            /* Universal Commands */
+            this.cmdMap.put("info", new InfoUniversal(this.plugin, perm.infoLand, CubitType.WORLD));
+            this.cmdMap.put("list", new ListUniversal(this.plugin, perm.listLand, CubitType.WORLD, false));
+            this.cmdMap.put("kick", new KickUniversal(this.plugin, perm.kickLand, CubitType.WORLD));
 
-            this.cmdMap.put("add", new AddMemberUniversal(this.plugin, perm.addMemberLand, LandTypes.WORLD, false));
+            this.cmdMap.put("add", new AddMemberUniversal(this.plugin, perm.addMemberLand, CubitType.WORLD, false));
             this.cmdMap.put("remove",
-                    new RemoveMemberUniversal(this.plugin, perm.removeMemberLand, LandTypes.WORLD, false));
+                    new RemoveMemberUniversal(this.plugin, perm.removeMemberLand, CubitType.WORLD, false));
 
-			/* Protection Commands */
+            /* Protection Commands */
             this.cmdMap.put("pvp",
                     new ChangeFlagUniversal(this.plugin, CubitBukkitPlugin.inst().getRegionManager().pvpPacket,
-                            perm.flagLand + "pvp", LandTypes.WORLD, false));
+                            perm.flagLand + "pvp", CubitType.WORLD, false));
             this.cmdMap.put("fire",
                     new ChangeFlagUniversal(this.plugin, CubitBukkitPlugin.inst().getRegionManager().firePacket,
-                            perm.flagLand + "fire", LandTypes.WORLD, false));
+                            perm.flagLand + "fire", CubitType.WORLD, false));
             this.cmdMap.put("lock",
                     new ChangeFlagUniversal(this.plugin, CubitBukkitPlugin.inst().getRegionManager().lockPacket,
-                            perm.flagLand + "lock", LandTypes.WORLD, false));
+                            perm.flagLand + "lock", CubitType.WORLD, false));
             this.cmdMap.put("tnt",
                     new ChangeFlagUniversal(this.plugin, CubitBukkitPlugin.inst().getRegionManager().tntPacket,
-                            perm.flagLand + "tnt", LandTypes.WORLD, false));
+                            perm.flagLand + "tnt", CubitType.WORLD, false));
             this.cmdMap.put("monster",
                     new ChangeFlagUniversal(this.plugin, CubitBukkitPlugin.inst().getRegionManager().monsterPacket,
-                            perm.flagLand + "monster", LandTypes.WORLD, false));
+                            perm.flagLand + "monster", CubitType.WORLD, false));
             this.cmdMap.put("potion",
                     new ChangeFlagUniversal(this.plugin, CubitBukkitPlugin.inst().getRegionManager().potionPacket,
-                            perm.flagLand + "potion", LandTypes.WORLD, false));
+                            perm.flagLand + "potion", CubitType.WORLD, false));
 
             this.cmdMap.put("changebiome",
-                    new EditBiomeUniversal(this.plugin, perm.changeBiomeLand, LandTypes.WORLD, false));
+                    new EditBiomeUniversal(this.plugin, perm.changeBiomeLand, CubitType.WORLD, false));
 
-            this.cmdMap.put("listbiomes", new ListBiomesUniversal(this.plugin, perm.listBiomesLand, LandTypes.WORLD));
+            this.cmdMap.put("listbiomes", new ListBiomesUniversal(this.plugin, perm.listBiomesLand, CubitType.WORLD));
             this.cmdMap.put("listsaves",
-                    new ListSnapshotsUniversal(this.plugin, perm.listSavesLand, LandTypes.WORLD, false));
+                    new ListSnapshotsUniversal(this.plugin, perm.listSavesLand, CubitType.WORLD, false));
 
-            this.cmdMap.put("save", new EditSaveUniversal(this.plugin, perm.saveLand, LandTypes.WORLD));
-            this.cmdMap.put("restore", new EditRestoreUniversal(this.plugin, perm.restoreLand, LandTypes.WORLD));
-            this.cmdMap.put("reset", new ResetUniversal(this.plugin, perm.resetLand, LandTypes.WORLD));
+            this.cmdMap.put("save", new EditSaveUniversal(this.plugin, perm.saveLand, CubitType.WORLD));
+            this.cmdMap.put("restore", new EditRestoreUniversal(this.plugin, perm.restoreLand, CubitType.WORLD));
+            this.cmdMap.put("reset", new ResetUniversal(this.plugin, perm.resetLand, CubitType.WORLD));
 
             this.isLoaded = true;
         } catch (Exception e) {

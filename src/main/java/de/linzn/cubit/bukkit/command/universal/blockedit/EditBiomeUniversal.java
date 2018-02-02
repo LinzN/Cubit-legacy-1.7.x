@@ -13,8 +13,8 @@ package de.linzn.cubit.bukkit.command.universal.blockedit;
 
 import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
-import de.linzn.cubit.internal.regionMgr.LandTypes;
-import de.linzn.cubit.internal.regionMgr.region.RegionData;
+import de.linzn.cubit.internal.cubitRegion.CubitType;
+import de.linzn.cubit.internal.cubitRegion.region.CubitLand;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.block.Biome;
@@ -26,10 +26,10 @@ public class EditBiomeUniversal implements ICommand {
 
     private CubitBukkitPlugin plugin;
     private String permNode;
-    private LandTypes type;
+    private CubitType type;
     private boolean isAdmin;
 
-    public EditBiomeUniversal(CubitBukkitPlugin plugin, String permNode, LandTypes type, boolean isAdmin) {
+    public EditBiomeUniversal(CubitBukkitPlugin plugin, String permNode, CubitType type, boolean isAdmin) {
         this.plugin = plugin;
         this.isAdmin = isAdmin;
 
@@ -45,10 +45,10 @@ public class EditBiomeUniversal implements ICommand {
             return true;
         }
 
-		/* Build and get all variables */
+        /* Build and get all variables */
         Player player = (Player) sender;
 
-		/* Permission Check */
+        /* Permission Check */
         if (!player.hasPermission(this.permNode)) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoPermission);
             return true;
@@ -70,26 +70,26 @@ public class EditBiomeUniversal implements ICommand {
 
         Biome biome = Biome.valueOf(args[1].toUpperCase());
         final Chunk chunk = loc.getChunk();
-        RegionData regionData = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
+        CubitLand cubitLand = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(), chunk.getZ());
 
-		/*
-		 * Check if the player has permissions for this land or hat landadmin
-		 * permissions
-		 */
+        /*
+         * Check if the player has permissions for this land or hat landadmin
+         * permissions
+         */
         if (!plugin.getRegionManager().isValidRegion(loc.getWorld(), chunk.getX(), chunk.getZ())) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandFound);
             return true;
         }
 
-        if (regionData.getLandType() != type && type != LandTypes.NOTYPE) {
+        if (cubitLand.getLandType() != type && type != CubitType.NOTYPE) {
             sender.sendMessage(
                     plugin.getYamlManager().getLanguage().errorNoValidLandFound.replace("{type}", type.toString()));
             return true;
         }
 
-        if (!plugin.getRegionManager().hasLandPermission(regionData, player.getUniqueId()) && !this.isAdmin) {
+        if (!plugin.getRegionManager().hasLandPermission(cubitLand, player.getUniqueId()) && !this.isAdmin) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
-                    regionData.getRegionName()));
+                    cubitLand.getRegionName()));
             return true;
         }
 
@@ -112,7 +112,7 @@ public class EditBiomeUniversal implements ICommand {
         }
 
         sender.sendMessage(plugin.getYamlManager().getLanguage().startBiomeChange.replace("{regionID}",
-                regionData.getRegionName()));
+                cubitLand.getRegionName()));
         if (!plugin.getBlockManager().getBiomeHandler().changeBiomeChunk(chunk, biome)) {
             /* If this task failed! This should never happen */
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SET-BIOME"));
@@ -130,7 +130,7 @@ public class EditBiomeUniversal implements ICommand {
         }
 
         sender.sendMessage(plugin.getYamlManager().getLanguage().changedBiome
-                .replace("{regionID}", regionData.getRegionName()).replace("{biome}", biome.name().toUpperCase()));
+                .replace("{regionID}", cubitLand.getRegionName()).replace("{biome}", biome.name().toUpperCase()));
 
         return true;
     }

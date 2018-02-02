@@ -13,8 +13,8 @@ package de.linzn.cubit.bukkit.command.universal;
 
 import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
-import de.linzn.cubit.internal.blockMgr.snapshot.Snapshot;
-import de.linzn.cubit.internal.regionMgr.LandTypes;
+import de.linzn.cubit.internal.blockEdit.snapshot.Snapshot;
+import de.linzn.cubit.internal.cubitRegion.CubitType;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -28,10 +28,10 @@ public class ListSnapshotsUniversal implements ICommand {
 
     private CubitBukkitPlugin plugin;
     private String permNode;
-    private LandTypes type;
+    private CubitType type;
     private boolean isAdmin;
 
-    public ListSnapshotsUniversal(CubitBukkitPlugin plugin, String permNode, LandTypes type, boolean isAdmin) {
+    public ListSnapshotsUniversal(CubitBukkitPlugin plugin, String permNode, CubitType type, boolean isAdmin) {
         this.plugin = plugin;
         this.permNode = permNode;
         this.type = type;
@@ -46,10 +46,10 @@ public class ListSnapshotsUniversal implements ICommand {
             return true;
         }
 
-		/* Build and get all variables */
+        /* Build and get all variables */
         Player player = (Player) sender;
 
-		/* Permission Check */
+        /* Permission Check */
         if (!player.hasPermission(this.permNode)) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoPermission);
             return true;

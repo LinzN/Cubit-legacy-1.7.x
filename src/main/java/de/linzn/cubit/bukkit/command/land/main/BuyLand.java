@@ -11,11 +11,11 @@
 
 package de.linzn.cubit.bukkit.command.land.main;
 
+import de.linzn.cubit.api.events.CubitLandBuyEvent;
 import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
-import de.linzn.cubit.internal.cubitEvents.CubitLandBuyEvent;
-import de.linzn.cubit.internal.regionMgr.LandTypes;
-import de.linzn.cubit.internal.regionMgr.region.RegionData;
+import de.linzn.cubit.internal.cubitRegion.CubitType;
+import de.linzn.cubit.internal.cubitRegion.region.CubitLand;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -47,10 +47,10 @@ public class BuyLand implements ICommand {
             return true;
         }
 
-		/* Build and get all variables */
+        /* Build and get all variables */
         Player player = (Player) sender;
 
-		/* Permission Check */
+        /* Permission Check */
         if (!player.hasPermission(this.permNode)) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoPermission);
             return true;
@@ -61,7 +61,7 @@ public class BuyLand implements ICommand {
         final String regionID = plugin.getRegionManager().buildLandName(loc.getWorld().getName(), chunk.getX(),
                 chunk.getZ());
 
-		/* Check if this is a valid buyTask */
+        /* Check if this is a valid buyTask */
         if (plugin.getRegionManager().isValidRegion(loc.getWorld(), chunk.getX(), chunk.getZ())) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().buyIsAlreadyLand.replace("{regionID}", regionID));
             return true;
@@ -82,7 +82,7 @@ public class BuyLand implements ICommand {
             return true;
         }
 
-        if (!plugin.getRegionManager().createRegion(loc, player.getUniqueId(), LandTypes.WORLD)) {
+        if (!plugin.getRegionManager().createRegion(loc, player.getUniqueId(), CubitType.WORLD)) {
             /* If this task failed! This should never happen */
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-REGION"));
             plugin.getLogger()
@@ -100,9 +100,9 @@ public class BuyLand implements ICommand {
         }
 
         /* Call cubit buy land event */
-        RegionData regionData = new RegionData(loc.getWorld());
-        regionData.setWGRegion(this.plugin.getWorldGuardPlugin().getRegionManager(loc.getWorld()).getRegion(regionID));
-        CubitLandBuyEvent cubitLandBuyEvent = new CubitLandBuyEvent(loc.getWorld(), regionID, regionData);
+        CubitLand cubitLand = new CubitLand(loc.getWorld());
+        cubitLand.setWGRegion(this.plugin.getWorldGuardPlugin().getRegionManager(loc.getWorld()).getRegion(regionID));
+        CubitLandBuyEvent cubitLandBuyEvent = new CubitLandBuyEvent(loc.getWorld(), regionID, cubitLand);
         this.plugin.getServer().getPluginManager().callEvent(cubitLandBuyEvent);
 
         if (!plugin.getParticleManager().sendBuy(player, loc)) {
@@ -113,7 +113,7 @@ public class BuyLand implements ICommand {
             return true;
         }
 
-		/* Task was successfully. Send BuyMessage */
+        /* Task was successfully. Send BuyMessage */
         sender.sendMessage(plugin.getYamlManager().getLanguage().buySuccess.replace("{regionID}", regionID));
         return true;
     }

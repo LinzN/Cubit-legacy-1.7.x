@@ -11,12 +11,12 @@
 
 package de.linzn.cubit.bukkit.command.admin.main;
 
+import de.linzn.cubit.api.events.CubitLandBuyEvent;
 import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
-import de.linzn.cubit.internal.cubitEvents.CubitLandBuyEvent;
-import de.linzn.cubit.internal.dataAccessMgr.OfferData;
-import de.linzn.cubit.internal.regionMgr.LandTypes;
-import de.linzn.cubit.internal.regionMgr.region.RegionData;
+import de.linzn.cubit.internal.cubitRegion.CubitType;
+import de.linzn.cubit.internal.cubitRegion.region.CubitLand;
+import de.linzn.cubit.internal.dataBase.OfferData;
 import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -44,10 +44,10 @@ public class CreateShopAdmin implements ICommand {
             return true;
         }
 
-		/* Build and get all variables */
+        /* Build and get all variables */
         Player player = (Player) sender;
 
-		/* Permission Check */
+        /* Permission Check */
         if (!player.hasPermission(this.permNode)) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoPermission);
             return true;
@@ -55,16 +55,16 @@ public class CreateShopAdmin implements ICommand {
 
         final Location loc = player.getLocation();
         final Chunk chunk = loc.getChunk();
-        final String regionName = CubitBukkitPlugin.inst().getRegionManager().buildLandName(LandTypes.SHOP.toString(),
+        final String regionName = CubitBukkitPlugin.inst().getRegionManager().buildLandName(CubitType.SHOP.toString(),
                 chunk.getX(), chunk.getZ());
 
-		/*
-		 * Check if the player has permissions for this land or hat landadmin
-		 * permissions
-		 */
+        /*
+         * Check if the player has permissions for this land or hat landadmin
+         * permissions
+         */
 
         if (!plugin.getRegionManager().isValidRegion(loc.getWorld(), chunk.getX(), chunk.getZ())) {
-            if (!plugin.getRegionManager().createRegion(loc, player.getUniqueId(), LandTypes.SHOP)) {
+            if (!plugin.getRegionManager().createRegion(loc, player.getUniqueId(), CubitType.SHOP)) {
                 /* If this task failed! This should never happen */
                 sender.sendMessage(
                         plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-REGION"));
@@ -122,9 +122,9 @@ public class CreateShopAdmin implements ICommand {
         }
 
         /* Call cubit buy land event */
-        RegionData regionData = new RegionData(loc.getWorld());
-        regionData.setWGRegion(this.plugin.getWorldGuardPlugin().getRegionManager(loc.getWorld()).getRegion(regionName));
-        CubitLandBuyEvent cubitLandBuyEvent = new CubitLandBuyEvent(loc.getWorld(), regionName, regionData);
+        CubitLand cubitLand = new CubitLand(loc.getWorld());
+        cubitLand.setWGRegion(this.plugin.getWorldGuardPlugin().getRegionManager(loc.getWorld()).getRegion(regionName));
+        CubitLandBuyEvent cubitLandBuyEvent = new CubitLandBuyEvent(loc.getWorld(), regionName, cubitLand);
         this.plugin.getServer().getPluginManager().callEvent(cubitLandBuyEvent);
 
         sender.sendMessage(plugin.getYamlManager().getLanguage().createShopLand.replace("{regionID}", regionName));

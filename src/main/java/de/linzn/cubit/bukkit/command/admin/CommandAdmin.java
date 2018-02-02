@@ -20,7 +20,7 @@ import de.linzn.cubit.bukkit.command.universal.*;
 import de.linzn.cubit.bukkit.command.universal.blockedit.EditBiomeUniversal;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import de.linzn.cubit.bukkit.plugin.PermissionNodes;
-import de.linzn.cubit.internal.regionMgr.LandTypes;
+import de.linzn.cubit.internal.cubitRegion.CubitType;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -73,24 +73,24 @@ public class CommandAdmin implements CommandExecutor {
             this.cmdMap.put("help", new HelpAdmin(this.plugin, perm.helpAdminLand));
             this.cmdMap.put("setpvp",
                     new ChangeFlagUniversal(this.plugin, CubitBukkitPlugin.inst().getRegionManager().pvpPacket,
-                            perm.flagAdminLand + "pvp", LandTypes.NOTYPE, true));
+                            perm.flagAdminLand + "pvp", CubitType.NOTYPE, true));
             this.cmdMap.put("setfire",
                     new ChangeFlagUniversal(this.plugin, CubitBukkitPlugin.inst().getRegionManager().firePacket,
-                            perm.flagAdminLand + "fire", LandTypes.NOTYPE, true));
+                            perm.flagAdminLand + "fire", CubitType.NOTYPE, true));
             this.cmdMap.put("setlock",
                     new ChangeFlagUniversal(this.plugin, CubitBukkitPlugin.inst().getRegionManager().lockPacket,
-                            perm.flagAdminLand + "lock", LandTypes.NOTYPE, true));
+                            perm.flagAdminLand + "lock", CubitType.NOTYPE, true));
             this.cmdMap.put("settnt",
                     new ChangeFlagUniversal(this.plugin, CubitBukkitPlugin.inst().getRegionManager().tntPacket,
-                            perm.flagAdminLand + "tnt", LandTypes.NOTYPE, true));
+                            perm.flagAdminLand + "tnt", CubitType.NOTYPE, true));
             this.cmdMap.put("setmonster",
                     new ChangeFlagUniversal(this.plugin, CubitBukkitPlugin.inst().getRegionManager().monsterPacket,
-                            perm.flagAdminLand + "monster", LandTypes.NOTYPE, true));
+                            perm.flagAdminLand + "monster", CubitType.NOTYPE, true));
             this.cmdMap.put("remove", new SellLand(this.plugin, perm.sellAdminLand, true));
             this.cmdMap.put("addplayer",
-                    new AddMemberUniversal(this.plugin, perm.addMemberAdminLand, LandTypes.NOTYPE, true));
+                    new AddMemberUniversal(this.plugin, perm.addMemberAdminLand, CubitType.NOTYPE, true));
             this.cmdMap.put("removeplayer",
-                    new RemoveMemberUniversal(this.plugin, perm.removeMemberAdminLand, LandTypes.NOTYPE, true));
+                    new RemoveMemberUniversal(this.plugin, perm.removeMemberAdminLand, CubitType.NOTYPE, true));
             this.cmdMap.put("setoffer", new OfferLand(this.plugin, perm.offerAdminLand, true));
 
             this.cmdMap.put("createserver", new CreateServerAdmin(this.plugin, perm.createServerAdminLand));
@@ -99,13 +99,13 @@ public class CommandAdmin implements CommandExecutor {
             this.cmdMap.put("deleteshop", new DeleteShopAdmin(this.plugin, perm.deleteShopAdminLand));
 
             this.cmdMap.put("changebiome",
-                    new EditBiomeUniversal(this.plugin, perm.changeBiomeAdminLand, LandTypes.NOTYPE, true));
+                    new EditBiomeUniversal(this.plugin, perm.changeBiomeAdminLand, CubitType.NOTYPE, true));
             this.cmdMap.put("listbiomes",
-                    new ListBiomesUniversal(this.plugin, perm.listBiomesAdminLand, LandTypes.NOTYPE));
-            this.cmdMap.put("list", new ListUniversal(this.plugin, perm.listAdminLand, LandTypes.NOTYPE, true));
+                    new ListBiomesUniversal(this.plugin, perm.listBiomesAdminLand, CubitType.NOTYPE));
+            this.cmdMap.put("list", new ListUniversal(this.plugin, perm.listAdminLand, CubitType.NOTYPE, true));
 
             this.cmdMap.put("listsaves",
-                    new ListSnapshotsUniversal(this.plugin, perm.listSavesAdmin, LandTypes.NOTYPE, true));
+                    new ListSnapshotsUniversal(this.plugin, perm.listSavesAdmin, CubitType.NOTYPE, true));
 
             this.isLoaded = true;
         } catch (Exception e) {

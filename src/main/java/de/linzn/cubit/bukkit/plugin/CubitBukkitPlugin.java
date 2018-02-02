@@ -16,14 +16,14 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import de.linzn.cubit.bukkit.command.SetupCommands;
 import de.linzn.cubit.bukkit.plugin.listener.AdditionalPhysicsListener;
 import de.linzn.cubit.bukkit.plugin.listener.LoginListener;
-import de.linzn.cubit.internal.YamlConfigurationMgr.YamlConfigurationManager;
-import de.linzn.cubit.internal.blockMgr.BlockManager;
-import de.linzn.cubit.internal.dataAccessMgr.DataAccessManager;
-import de.linzn.cubit.internal.entityMgr.EntityManager;
-import de.linzn.cubit.internal.landmapMgr.ScoreboardMapManager;
-import de.linzn.cubit.internal.particleMgr.ParticleManager;
-import de.linzn.cubit.internal.regionMgr.CubitregionManager;
-import de.linzn.cubit.internal.vaultMgr.VaultManager;
+import de.linzn.cubit.internal.blockEdit.BlockEditManager;
+import de.linzn.cubit.internal.configurations.YamlConfigurationManager;
+import de.linzn.cubit.internal.cubitRegion.CubitRegionManager;
+import de.linzn.cubit.internal.dataBase.DatabaseManager;
+import de.linzn.cubit.internal.entityManage.EntityManager;
+import de.linzn.cubit.internal.particle.ParticleManager;
+import de.linzn.cubit.internal.scoreboardMap.ScoreboardMapManager;
+import de.linzn.cubit.internal.vault.VaultManager;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.inventivetalent.update.spiget.SpigetUpdateCheck;
@@ -33,11 +33,11 @@ public class CubitBukkitPlugin extends JavaPlugin {
     private static CubitBukkitPlugin inst;
     private WorldGuardPlugin wgPl;
     private WorldEdit wePl;
-    private CubitregionManager regionMrg;
-    private BlockManager blockMrg;
+    private CubitRegionManager regionMrg;
+    private BlockEditManager blockMrg;
     private ParticleManager particleMrg;
     private VaultManager vaultMrg;
-    private DataAccessManager dataAccessMgr;
+    private DatabaseManager dataAccessMgr;
     private EntityManager entityMrg;
     private ScoreboardMapManager scoreboardMapMgr;
     private PermissionNodes permNodes;
@@ -114,23 +114,23 @@ public class CubitBukkitPlugin extends JavaPlugin {
 
     private boolean setupManagers() {
         this.yamlConfiguration = new YamlConfigurationManager(this);
-        this.regionMrg = new CubitregionManager(this);
-        this.blockMrg = new BlockManager(this);
+        this.regionMrg = new CubitRegionManager(this);
+        this.blockMrg = new BlockEditManager(this);
         this.particleMrg = new ParticleManager(this);
         this.vaultMrg = new VaultManager(this);
         this.permNodes = new PermissionNodes(this);
-        this.dataAccessMgr = new DataAccessManager(this);
+        this.dataAccessMgr = new DatabaseManager(this);
         this.entityMrg = new EntityManager(this);
         this.scoreboardMapMgr = new ScoreboardMapManager(this);
         return true;
 
     }
 
-    public CubitregionManager getRegionManager() {
+    public CubitRegionManager getRegionManager() {
         return this.regionMrg;
     }
 
-    public BlockManager getBlockManager() {
+    public BlockEditManager getBlockManager() {
         return this.blockMrg;
     }
 
@@ -138,7 +138,7 @@ public class CubitBukkitPlugin extends JavaPlugin {
         return this.particleMrg;
     }
 
-    public DataAccessManager getDataAccessManager() {
+    public DatabaseManager getDataAccessManager() {
         return this.dataAccessMgr;
     }
 
