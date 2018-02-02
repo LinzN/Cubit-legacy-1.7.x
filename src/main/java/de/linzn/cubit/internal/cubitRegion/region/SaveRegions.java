@@ -16,27 +16,26 @@ import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import org.bukkit.World;
 
 public class SaveRegions {
-    public void save(final CubitLand cubitLand) {
-        saveData(cubitLand, cubitLand.getWorld());
+    public boolean save(final CubitLand cubitLand) {
+        return saveData(cubitLand, cubitLand.getWorld());
     }
 
-    public void save(final World world) {
-        saveData(null, world);
+    public boolean save(final World world) {
+        return saveData(null, world);
     }
 
-    public void saveData(final CubitLand cubitLand, final World world) {
-        CubitBukkitPlugin.inst().getServer().getScheduler().runTaskAsynchronously(CubitBukkitPlugin.inst(),
-                () -> {
-                    try {
-                        RegionManager manager = CubitBukkitPlugin.inst().getWorldGuardPlugin()
-                                .getRegionManager(world);
-                        if (cubitLand != null && cubitLand.getWGRegion() != null) {
-                            manager.addRegion(cubitLand.getWGRegion());
-                        }
-                        manager.saveChanges();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                });
+    public boolean saveData(final CubitLand cubitLand, final World world) {
+        try {
+            RegionManager manager = CubitBukkitPlugin.inst().getWorldGuardPlugin()
+                    .getRegionManager(world);
+            if (cubitLand != null && cubitLand.getWGRegion() != null) {
+                manager.addRegion(cubitLand.getWGRegion());
+            }
+            manager.saveChanges();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

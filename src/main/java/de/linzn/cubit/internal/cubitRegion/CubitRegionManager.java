@@ -107,13 +107,11 @@ public class CubitRegionManager {
                     this.plugin.getYamlManager().getFlag().worldRegionPacketFire, false);
             cubitLand = this.potionPacket.switchState(cubitLand,
                     this.plugin.getYamlManager().getFlag().worldRegionPacketPotion, false);
-            saveMrg.save(cubitLand);
+            return saveMrg.save(cubitLand);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-        return true;
-
     }
 
     private boolean serverRegion(final Location loc) {
@@ -136,12 +134,11 @@ public class CubitRegionManager {
                     this.plugin.getYamlManager().getFlag().serverRegionPacketFire, false);
             cubitLand = this.potionPacket.switchState(cubitLand,
                     this.plugin.getYamlManager().getFlag().serverRegionPacketPotion, false);
-            saveMrg.save(cubitLand);
+            return saveMrg.save(cubitLand);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-        return true;
 
     }
 
@@ -165,12 +162,11 @@ public class CubitRegionManager {
                     this.plugin.getYamlManager().getFlag().shopRegionPacketFire, false);
             cubitLand = this.potionPacket.switchState(cubitLand,
                     this.plugin.getYamlManager().getFlag().shopRegionPacketPotion, false);
-            saveMrg.save(cubitLand);
+            return saveMrg.save(cubitLand);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-        return true;
 
     }
 
@@ -197,23 +193,21 @@ public class CubitRegionManager {
             this.potionPacket.switchState(cubitLand, this.plugin.getYamlManager().getFlag().worldRegionPacketPotion,
                     false);
 
-            saveMrg.save(world);
+            return saveMrg.save(world);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-        return true;
     }
 
     public boolean removeLand(final CubitLand cubitLand, final World world) {
         try {
             mReg.removeRegion(cubitLand, world);
-            saveMrg.save(world);
+            return saveMrg.save(world);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-        return true;
     }
 
     public boolean addMember(final CubitLand cubitLand, final World world, final UUID playerUUID) {
@@ -222,12 +216,11 @@ public class CubitRegionManager {
             List<CubitLand> list = new ArrayList<>();
             list.add(cubitLand);
             mRegE.addMember(list, world, player);
-            saveMrg.save(world);
+            return saveMrg.save(world);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-        return true;
     }
 
     public boolean addMemberAll(final UUID ownerUUID, final World world, final UUID playerUUID, final CubitType type) {
@@ -242,12 +235,11 @@ public class CubitRegionManager {
                 list.add(data);
             }
             mRegE.addMember(list, world, member);
-            saveMrg.save(world);
+            return saveMrg.save(world);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-        return true;
     }
 
     public boolean removeMemberAll(final UUID ownerUUID, final World world, final UUID playerUUID,
@@ -263,12 +255,11 @@ public class CubitRegionManager {
                 list.add(data);
             }
             mRegE.removeMember(list, world, member);
-            saveMrg.save(world);
+            return saveMrg.save(world);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-        return true;
     }
 
     public boolean removeMember(final CubitLand cubitLand, final World world, final UUID playerUUID) {
@@ -277,12 +268,11 @@ public class CubitRegionManager {
             List<CubitLand> list = new ArrayList<>();
             list.add(cubitLand);
             mRegE.removeMember(list, world, player);
-            saveMrg.save(world);
+            return saveMrg.save(world);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-        return true;
     }
 
     public String getStringState(boolean value) {
