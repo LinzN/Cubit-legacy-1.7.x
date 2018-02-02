@@ -60,9 +60,9 @@ public class ResetUniversal implements ICommand {
             return true;
         }
 
-        final Location loc = player.getLocation();
-        final Chunk chunk = loc.getChunk();
-        final CubitLand cubitLand = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(),
+        Location loc = player.getLocation();
+        Chunk chunk = loc.getChunk();
+        CubitLand cubitLand = plugin.getRegionManager().praseRegionData(loc.getWorld(), chunk.getX(),
                 chunk.getZ());
 
         /*
