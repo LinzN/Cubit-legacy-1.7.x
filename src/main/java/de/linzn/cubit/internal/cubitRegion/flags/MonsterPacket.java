@@ -24,7 +24,7 @@ import java.util.HashSet;
 public class MonsterPacket implements ICubitPacket {
 
     @Override
-    @SuppressWarnings("serial")
+
     public CubitLand enablePacket(CubitLand cubitLand) {
         cubitLand.getWGRegion().setFlag(DefaultFlag.MOB_DAMAGE, StateFlag.State.DENY);
         cubitLand.getWGRegion().getFlags().put(DefaultFlag.DENY_SPAWN, new HashSet<EntityType>() {
@@ -43,7 +43,15 @@ public class MonsterPacket implements ICubitPacket {
                 add(EntityType.WITCH);
                 add(EntityType.ENDERMITE);
                 add(EntityType.GUARDIAN);
-
+                add(EntityType.ZOMBIE_VILLAGER);
+                add(EntityType.HUSK);
+                add(EntityType.POLAR_BEAR);
+                add(EntityType.EVOKER);
+                add(EntityType.SHULKER);
+                add(EntityType.MAGMA_CUBE);
+                add(EntityType.STRAY);
+                add(EntityType.VEX);
+                add(EntityType.VINDICATOR);
             }
         });
         return cubitLand;
@@ -78,7 +86,7 @@ public class MonsterPacket implements ICubitPacket {
 
     @Override
     public CubitLand switchState(CubitLand cubitLand, boolean value, boolean save) {
-        CubitLand newCubitLand = cubitLand;
+        CubitLand newCubitLand;
         if (value) {
             newCubitLand = enablePacket(cubitLand);
         } else {

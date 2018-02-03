@@ -53,7 +53,7 @@ public class TNTPacket implements ICubitPacket {
 
     @Override
     public CubitLand switchState(CubitLand cubitLand, boolean value, boolean save) {
-        CubitLand newCubitLand = cubitLand;
+        CubitLand newCubitLand;
         if (value) {
             newCubitLand = enablePacket(cubitLand);
         } else {
