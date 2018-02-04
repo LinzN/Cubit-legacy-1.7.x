@@ -55,7 +55,6 @@ public class NameCache {
             if (playerName != null) {
                 playerCache.put(uuid, playerName);
             }
-
             return playerName;
         } catch (Exception e) {
             e.printStackTrace();
@@ -70,9 +69,7 @@ public class NameCache {
         if (playerName != null) {
             playerCache.put(uuid, playerName);
         }
-
         return playerName;
-
     }
 
     public String getCacheName(UUID uuid) {
