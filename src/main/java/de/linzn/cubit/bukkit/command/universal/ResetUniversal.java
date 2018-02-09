@@ -70,7 +70,7 @@ public class ResetUniversal implements ICommand {
          * permissions
          */
 
-        if (args.length < 1) {
+        if (args.length <= 1) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().wrongArguments.replace("{usage}",
                     "/" + cmd.getLabel() + " " + args[0].toLowerCase()));
             return true;

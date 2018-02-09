@@ -130,8 +130,7 @@ public class WorldEditFunctions {
     }
 
     public Location convertChunkLocation(Chunk chunk) {
-        Location loc = new Location(chunk.getWorld(), chunk.getX() * 16, 0, chunk.getZ() * 16);
-        return loc;
+        return new Location(chunk.getWorld(), chunk.getX() * 16, 0, chunk.getZ() * 16);
     }
 
     public void removeFile(final UUID uuid, final String snapshotName) {

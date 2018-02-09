@@ -57,19 +57,11 @@ public class CubitRegionManager {
     }
 
     public boolean isValidRegion(final World world, final int valueX, final int valueZ) {
-
         RegionManager manager = plugin.getWorldGuardPlugin().getRegionManager(world);
         String serverName = buildLandName(CubitType.SERVER.toString().toLowerCase(), valueX, valueZ);
         String shopName = buildLandName(CubitType.SHOP.toString().toLowerCase(), valueX, valueZ);
         String worldName = buildLandName(world.getName().toLowerCase(), valueX, valueZ);
-        if (manager.hasRegion(serverName)) {
-            return true;
-        } else if (manager.hasRegion(shopName)) {
-            return true;
-        } else if (manager.hasRegion(worldName)) {
-            return true;
-        }
-        return false;
+        return manager.hasRegion(serverName) || manager.hasRegion(shopName) || manager.hasRegion(worldName);
     }
 
     public boolean createRegion(final Location loc, final UUID playerUUID, final CubitType type) {
