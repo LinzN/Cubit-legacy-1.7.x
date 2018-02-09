@@ -23,6 +23,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.UUID;
 
@@ -92,7 +93,7 @@ public class KickUniversal implements ICommand {
             if (plugin.getRegionManager().hasLandPermission(cubitLand, entity.getUniqueId())) {
                 continue;
             }
-            if (cubitLand.getMembersUUID().equals(entity.getUniqueId())) {
+            if (Arrays.asList(cubitLand.getMembersUUID()).contains(entity.getUniqueId())) {
                 continue;
             }
             playerMap.add(entity.getUniqueId());
