@@ -179,6 +179,14 @@ public class LanguageYaml {
     /* Snapshots List */
     public String landListsnapshotsHeader;
     public String landListsnapshotsEntry;
+
+    /* Land confirm Task like biome */
+    public String landEditConfirmTask;
+    public String landEditConfirmTaskCancel;
+    public String landEditConfirmInfoBiome;
+    public String landEditConfirmInfoReset;
+
+
     private CustomConfig configFile;
 
     public LanguageYaml(CustomConfig configFile) {
@@ -437,6 +445,10 @@ public class LanguageYaml {
         cubitHelpE1P1 = this.getLanguageString("theme.cubitHelpPage1.help1", "&2 Cubit version: &e/cubit version");
         cubitHelpE2P1 = this.getLanguageString("theme.cubitHelpPage1.help2", "&2 Reload cubit: &e/cubit reload");
 
+        landEditConfirmTask = this.getLanguageString("landEditConfirmTask.info", "&eBestätige mit &b/{command} {subcommand} OK \n&eDu hast 20 Sekunden Zeit.");
+        landEditConfirmTaskCancel = this.getLanguageString("landEditConfirmTask.cancel", "&cAktion wurde abgebrochen!");
+        landEditConfirmInfoBiome = this.getLanguageString("landEditConfirmTask.biome", "&eBist du dir sicher dass du das Biome ändern möchtest?");
+        landEditConfirmInfoReset = this.getLanguageString("landEditConfirmTask.reset", "&eBist du dir sicher dass du alle Blöcke auf dem Land löschen willst?");
     }
 
     public String getLanguageString(String path, String defaultValue) {

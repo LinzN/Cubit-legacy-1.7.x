@@ -16,6 +16,7 @@ import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.command.land.main.*;
 import de.linzn.cubit.bukkit.command.universal.*;
 import de.linzn.cubit.bukkit.command.universal.blockedit.EditBiomeUniversal;
+import de.linzn.cubit.bukkit.command.universal.blockedit.EditResetUniversal;
 import de.linzn.cubit.bukkit.command.universal.blockedit.EditRestoreUniversal;
 import de.linzn.cubit.bukkit.command.universal.blockedit.EditSaveUniversal;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
@@ -142,7 +143,7 @@ public class CommandLand implements CommandExecutor {
 
             this.cmdMap.put("save", new EditSaveUniversal(this.plugin, perm.saveLand, CubitType.WORLD));
             this.cmdMap.put("restore", new EditRestoreUniversal(this.plugin, perm.restoreLand, CubitType.WORLD));
-            this.cmdMap.put("reset", new ResetUniversal(this.plugin, perm.resetLand, CubitType.WORLD));
+            this.cmdMap.put("reset", new EditResetUniversal(this.plugin, perm.resetLand, CubitType.WORLD));
 
             this.isLoaded = true;
         } catch (Exception e) {

@@ -22,19 +22,25 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
+import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
+
 public class EditBiomeUniversal implements ICommand {
 
     private CubitBukkitPlugin plugin;
     private String permNode;
     private CubitType type;
     private boolean isAdmin;
+    private HashMap<UUID, Object[]> confirmTask;
+
 
     public EditBiomeUniversal(CubitBukkitPlugin plugin, String permNode, CubitType type, boolean isAdmin) {
         this.plugin = plugin;
         this.isAdmin = isAdmin;
-
         this.permNode = permNode;
         this.type = type;
+        this.confirmTask = new HashMap<>();
     }
 
     @Override
@@ -60,13 +66,29 @@ public class EditBiomeUniversal implements ICommand {
             return true;
         }
 
-        final Location loc = player.getLocation();
+        Location loc = player.getLocation();
 
         if (!checkBiome(args[1].toUpperCase())) {
             sender.sendMessage(
                     plugin.getYamlManager().getLanguage().notABiome.replace("{biome}", args[1].toUpperCase()));
             return true;
         }
+
+        /* Confirm task */
+        /* Check if confirm task exist and confirm with "ok" and set old location */
+        if (args.length > 2) {
+            if (args[2].equalsIgnoreCase("ok") && confirmTask.containsKey(player.getUniqueId())) {
+                loc = (Location) confirmTask.get(player.getUniqueId())[1];
+            }
+        }
+
+        /* Check if a confirm task is already exist and not "ok" */
+        if (args.length < 3 && confirmTask.containsKey(player.getUniqueId())) {
+            sender.sendMessage(this.plugin.getYamlManager().getLanguage().landEditConfirmTaskCancel);
+            confirmTask.remove(player.getUniqueId());
+            return true;
+        }
+        /* End confirm task */
 
         Biome biome = Biome.valueOf(args[1].toUpperCase());
         final Chunk chunk = loc.getChunk();
@@ -76,6 +98,7 @@ public class EditBiomeUniversal implements ICommand {
          * Check if the player has permissions for this land or hat landadmin
          * permissions
          */
+
         if (!plugin.getRegionManager().isValidRegion(loc.getWorld(), chunk.getX(), chunk.getZ())) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandFound);
             return true;
@@ -87,11 +110,35 @@ public class EditBiomeUniversal implements ICommand {
             return true;
         }
 
+
         if (!plugin.getRegionManager().hasLandPermission(cubitLand, player.getUniqueId()) && !this.isAdmin) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
                     cubitLand.getLandName()));
             return true;
         }
+
+        /* Add a confirm task */
+        if (!this.confirmTask.containsKey(player.getUniqueId())) {
+            sender.sendMessage(this.plugin.getYamlManager().getLanguage().landEditConfirmInfoBiome);
+            sender.sendMessage(this.plugin.getYamlManager().getLanguage().landEditConfirmTask.replace("{command}", cmd.getLabel()).replace("{subcommand}", args[0].toLowerCase() + " " + biome.name()));
+            int taskID = ThreadLocalRandom.current().nextInt(10, 50000 + 1);
+            Object[] data = new Object[2];
+            data[0] = taskID;
+            /* custom data */
+            data[1] = player.getLocation();
+            /* end custom data */
+            this.confirmTask.put(player.getUniqueId(), data);
+            this.plugin.getServer().getScheduler().runTaskLaterAsynchronously(this.plugin, () -> {
+                if (confirmTask.containsKey(player.getUniqueId()) && (int) confirmTask.get(player.getUniqueId())[0] == taskID) {
+                    sender.sendMessage(this.plugin.getYamlManager().getLanguage().landEditConfirmTaskCancel);
+                    confirmTask.remove(player.getUniqueId());
+                }
+            }, 20L * 20);
+            return true;
+        } else {
+            this.confirmTask.remove(player.getUniqueId());
+        }
+        /* end confirm task */
 
         if (!this.isAdmin) {
             double economyValue = plugin.getYamlManager().getSettings().landChangeBiomePrice;
