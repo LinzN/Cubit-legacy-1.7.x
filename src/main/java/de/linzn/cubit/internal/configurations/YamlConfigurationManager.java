@@ -52,4 +52,8 @@ public class YamlConfigurationManager {
         return this.fileOperator.commands;
     }
 
+    public DisabledWorldCommandYaml getDisabledCommands() {
+        return this.fileOperator.disabledCommands;
+    }
+
 }

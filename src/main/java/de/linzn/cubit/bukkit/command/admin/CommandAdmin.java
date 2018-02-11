@@ -93,6 +93,7 @@ public class CommandAdmin implements CommandExecutor {
                     new RemoveMemberUniversal(this.plugin, perm.removeMemberAdminLand, CubitType.NOTYPE, true));
             this.cmdMap.put("setoffer", new OfferLand(this.plugin, perm.offerAdminLand, true));
 
+            this.cmdMap.put("create", new CreateLandAdmin(this.plugin, perm.createAdminLand));
             this.cmdMap.put("createserver", new CreateServerAdmin(this.plugin, perm.createServerAdminLand));
             this.cmdMap.put("deleteserver", new DeleteServerAdmin(this.plugin, perm.deleteServerAdminLand));
             this.cmdMap.put("createshop", new CreateShopAdmin(this.plugin, perm.createShopAdminLand));

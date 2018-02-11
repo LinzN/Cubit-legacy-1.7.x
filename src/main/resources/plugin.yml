@@ -79,6 +79,7 @@ permissions:
             cubit.command.admin.removemember: true
             cubit.command.admin.offer: true
             cubit.command.admin.createserver: true
+            cubit.command.admin.create: true
             cubit.command.admin.deleteserver: true
             cubit.command.admin.createshop: true
             cubit.command.admin.deleteshop: true
@@ -224,6 +225,9 @@ permissions:
         description: Haupt-Hilfeseite
         default: op
     cubit.command.admin.createserver:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.command.admin.create:
         description: Haupt-Hilfeseite
         default: op
     cubit.command.admin.deleteserver:

@@ -23,6 +23,7 @@ public class YamlFileSetup {
     public LimitYaml limit;
     public FlagProtectionsYaml flag;
     public CommandsYaml commands;
+    public DisabledWorldCommandYaml disabledCommands;
     private Plugin plugin;
 
     public YamlFileSetup(Plugin plugin) {
@@ -64,6 +65,9 @@ public class YamlFileSetup {
 
         CustomConfig flagConfig = new CustomConfig(this.plugin, configDirectory, "defaultProtections.yml");
         this.flag = new FlagProtectionsYaml(flagConfig);
+
+        CustomConfig disabledCommandConfig = new CustomConfig(this.plugin, configDirectory, "disabledCommandsInWorld.yml");
+        this.disabledCommands = new DisabledWorldCommandYaml(disabledCommandConfig);
 
         CustomConfig commandsConfig = new CustomConfig(this.plugin, configDirectory, "commands.yml");
         this.commands = new CommandsYaml(commandsConfig);

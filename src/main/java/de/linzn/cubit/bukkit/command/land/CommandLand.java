@@ -61,9 +61,13 @@ public class CommandLand implements CommandExecutor {
                     getCmdMap().get("help").runCmd(cmd, sender, args);
                 } else if (getCmdMap().containsKey(args[0])) {
                     String command = args[0];
-                    if (!getCmdMap().get(command).runCmd(cmd, sender, args)) {
-                        sender.sendMessage(
-                                plugin.getYamlManager().getLanguage().errorCommand.replace("{command}", command));
+                    if (!CubitBukkitPlugin.inst().getYamlManager().getDisabledCommands().disabledWorldCommandList.get(worldName).contains(command)) {
+                        if (!getCmdMap().get(command).runCmd(cmd, sender, args)) {
+                            sender.sendMessage(
+                                    plugin.getYamlManager().getLanguage().errorCommand.replace("{command}", command));
+                        }
+                    } else {
+                        sender.sendMessage(plugin.getYamlManager().getLanguage().noEnabledWorld);
                     }
                 } else {
                     sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoCommand.replace("{command}",
