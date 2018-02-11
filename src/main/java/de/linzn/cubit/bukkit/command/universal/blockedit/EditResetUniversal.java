@@ -73,6 +73,10 @@ public class EditResetUniversal implements ICommand {
         if (args.length > 1) {
             if (args[1].equalsIgnoreCase("ok") && confirmTask.containsKey(player.getUniqueId())) {
                 loc = (Location) confirmTask.get(player.getUniqueId())[1];
+            } else if (!args[1].equalsIgnoreCase("ok") && confirmTask.containsKey(player.getUniqueId())) {
+                sender.sendMessage(this.plugin.getYamlManager().getLanguage().landEditConfirmTaskCancel);
+                confirmTask.remove(player.getUniqueId());
+                return true;
             }
         }
 

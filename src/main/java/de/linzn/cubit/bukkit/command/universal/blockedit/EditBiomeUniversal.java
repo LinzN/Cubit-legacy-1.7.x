@@ -79,6 +79,10 @@ public class EditBiomeUniversal implements ICommand {
         if (args.length > 2) {
             if (args[2].equalsIgnoreCase("ok") && confirmTask.containsKey(player.getUniqueId())) {
                 loc = (Location) confirmTask.get(player.getUniqueId())[1];
+            } else if (!args[2].equalsIgnoreCase("ok") && confirmTask.containsKey(player.getUniqueId())) {
+                sender.sendMessage(this.plugin.getYamlManager().getLanguage().landEditConfirmTaskCancel);
+                confirmTask.remove(player.getUniqueId());
+                return true;
             }
         }
 
