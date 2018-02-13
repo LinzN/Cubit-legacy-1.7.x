@@ -9,7 +9,7 @@
  *
  */
 
-package de.linzn.cubit.internal.blockEdit.nmsPackets;
+package de.linzn.cubit.internal.blockEdit.normal.nmsPackets;
 
 import de.linzn.cubit.internal.blockEdit.INMSMask;
 import net.minecraft.server.v1_12_R1.IChatBaseComponent;

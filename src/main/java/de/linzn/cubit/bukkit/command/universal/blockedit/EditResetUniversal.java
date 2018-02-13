@@ -30,12 +30,14 @@ public class EditResetUniversal implements ICommand {
     private CubitBukkitPlugin plugin;
     private String permNode;
     private CubitType type;
+    private boolean isAdmin;
     private HashMap<UUID, Object[]> confirmTask;
 
-    public EditResetUniversal(CubitBukkitPlugin plugin, String permNode, CubitType type) {
+    public EditResetUniversal(CubitBukkitPlugin plugin, String permNode, CubitType type, boolean isAdmin) {
         this.plugin = plugin;
         this.permNode = permNode;
         this.type = type;
+        this.isAdmin = isAdmin;
         this.confirmTask = new HashMap<>();
     }
 
@@ -108,7 +110,7 @@ public class EditResetUniversal implements ICommand {
             return true;
         }
 
-        if (!plugin.getRegionManager().hasLandPermission(cubitLand, player.getUniqueId())) {
+        if (!plugin.getRegionManager().hasLandPermission(cubitLand, player.getUniqueId()) && !this.isAdmin) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().errorNoLandPermission.replace("{regionID}",
                     cubitLand.getLandName()));
             return true;
@@ -137,20 +139,21 @@ public class EditResetUniversal implements ICommand {
         }
         /* end confirm task */
 
-        double economyValue = plugin.getYamlManager().getSettings().landResetSnapshotPrice;
+        if (!this.isAdmin) {
+            double economyValue = plugin.getYamlManager().getSettings().landResetSnapshotPrice;
+            if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), economyValue)) {
+                sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
+                        "" + plugin.getVaultManager().formateToEconomy(economyValue)));
+                return true;
+            }
 
-        if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), economyValue)) {
-            sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
-                    "" + plugin.getVaultManager().formateToEconomy(economyValue)));
-            return true;
-        }
-
-        if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), null, economyValue)) {
-            /* If this task failed! This should never happen */
-            sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "RESET-ECONOMY"));
-            plugin.getLogger()
-                    .warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "RESET-ECONOMY"));
-            return true;
+            if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), null, economyValue)) {
+                /* If this task failed! This should never happen */
+                sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "RESET-ECONOMY"));
+                plugin.getLogger()
+                        .warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "RESET-ECONOMY"));
+                return true;
+            }
         }
 
         if (!this.plugin.getBlockManager().getSnapshotHandler().resetChunk(chunk)) {

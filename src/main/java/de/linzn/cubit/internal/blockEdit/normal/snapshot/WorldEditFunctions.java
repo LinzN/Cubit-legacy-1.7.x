@@ -9,7 +9,7 @@
  *
  */
 
-package de.linzn.cubit.internal.blockEdit.snapshot;
+package de.linzn.cubit.internal.blockEdit.normal.snapshot;
 
 import com.sk89q.worldedit.*;
 import com.sk89q.worldedit.bukkit.BukkitUtil;

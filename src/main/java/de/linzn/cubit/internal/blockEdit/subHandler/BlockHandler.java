@@ -9,9 +9,11 @@
  *
  */
 
-package de.linzn.cubit.internal.blockEdit.block;
+package de.linzn.cubit.internal.blockEdit.subHandler;
 
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.internal.blockEdit.normal.block.ChunkBlockCleaner;
+import de.linzn.cubit.internal.blockEdit.normal.block.ChunkBorder;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 
@@ -20,13 +22,32 @@ import java.util.List;
 public class BlockHandler {
 
     private CubitBukkitPlugin plugin;
+    private boolean useFAWE;
 
-    public BlockHandler(CubitBukkitPlugin plugin) {
+    public BlockHandler(CubitBukkitPlugin plugin, boolean useFAWE) {
         this.plugin = plugin;
-
+        this.useFAWE = useFAWE;
     }
 
     public boolean placeLandBorder(Chunk chunk, Material material) {
+        if (this.useFAWE) {
+            // some code
+        } else {
+            return this.placeLandBorderDefault(chunk, material);
+        }
+        return false;
+    }
+
+    public boolean removeBlockOnShopBuy(Chunk chunk, List<Material> blockList) {
+        if (this.useFAWE) {
+            // some code
+        } else {
+            return this.removeBlockOnShopBuyDefault(chunk, blockList);
+        }
+        return false;
+    }
+
+    private boolean placeLandBorderDefault(Chunk chunk, Material material) {
         try {
             new ChunkBorder(plugin, chunk, material);
         } catch (Exception e) {
@@ -36,7 +57,7 @@ public class BlockHandler {
         return true;
     }
 
-    public boolean removeBlockOnShopBuy(Chunk chunk, List<Material> blockList) {
+    private boolean removeBlockOnShopBuyDefault(Chunk chunk, List<Material> blockList) {
         try {
             if (this.plugin.getYamlManager().getSettings().useShopMaterialCleanup) {
                 new ChunkBlockCleaner(plugin, chunk, blockList);

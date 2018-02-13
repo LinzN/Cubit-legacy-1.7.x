@@ -9,7 +9,7 @@
  *
  */
 
-package de.linzn.cubit.internal.blockEdit.biome;
+package de.linzn.cubit.internal.blockEdit.normal.biome;
 
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import org.bukkit.Bukkit;

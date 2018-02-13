@@ -13,7 +13,7 @@ package de.linzn.cubit.bukkit.command.universal;
 
 import de.linzn.cubit.bukkit.command.ICommand;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
-import de.linzn.cubit.internal.blockEdit.snapshot.Snapshot;
+import de.linzn.cubit.internal.blockEdit.normal.snapshot.Snapshot;
 import de.linzn.cubit.internal.cubitRegion.CubitType;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;

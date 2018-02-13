@@ -9,7 +9,7 @@
  *
  */
 
-package de.linzn.cubit.internal.blockEdit.nmsPackets;
+package de.linzn.cubit.internal.blockEdit.normal.nmsPackets;
 
 import de.linzn.cubit.internal.blockEdit.INMSMask;
 import org.bukkit.Bukkit;
@@ -49,7 +49,7 @@ public class NMSLoader {
 
         Object obj = null;
         try {
-            obj = Class.forName("de.linzn.cubit.internal.blockEdit.nmsPackets.NMS_" + versionNumber).newInstance();
+            obj = Class.forName("de.linzn.cubit.internal.blockEdit.normal.nmsPackets.NMS_" + versionNumber).newInstance();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }

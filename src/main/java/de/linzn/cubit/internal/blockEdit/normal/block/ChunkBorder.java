@@ -9,7 +9,7 @@
  *
  */
 
-package de.linzn.cubit.internal.blockEdit.block;
+package de.linzn.cubit.internal.blockEdit.normal.block;
 
 import org.bukkit.Chunk;
 import org.bukkit.Location;

@@ -9,22 +9,34 @@
  *
  */
 
-package de.linzn.cubit.internal.blockEdit.biome;
+package de.linzn.cubit.internal.blockEdit.subHandler;
 
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
+import de.linzn.cubit.internal.blockEdit.normal.biome.ChangeBiome;
 import org.bukkit.Chunk;
 import org.bukkit.block.Biome;
 
 public class BiomeHandler {
 
     private CubitBukkitPlugin plugin;
+    private boolean useFAWE;
 
-    public BiomeHandler(CubitBukkitPlugin plugin) {
+    public BiomeHandler(CubitBukkitPlugin plugin, boolean useFAWE) {
         this.plugin = plugin;
-
+        this.useFAWE = useFAWE;
     }
 
+
     public boolean changeBiomeChunk(Chunk chunk, Biome biome) {
+        if (this.useFAWE) {
+            // some code
+        } else {
+            return this.changeBiomeChunkDefault(chunk, biome);
+        }
+        return false;
+    }
+
+    private boolean changeBiomeChunkDefault(Chunk chunk, Biome biome) {
 
         try {
             new ChangeBiome(plugin, chunk, biome).change();
