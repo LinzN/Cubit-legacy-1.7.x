@@ -35,14 +35,16 @@ public class CubitLand {
         return this.region;
     }
 
-    public void setWGRegion(ProtectedRegion region) {
+    public void setWGRegion(ProtectedRegion region, boolean setupNames) {
         this.type = CubitType.getLandType(region.getId());
         this.region = region;
-        if (this.getOwnersUUID().length > 0) {
-            this.ownerNames = CubitBukkitPlugin.inst().getCacheManager().getPlayernames(this.getOwnersUUID());
-        }
-        if (this.getMembersUUID().length > 0) {
-            this.memberNames = CubitBukkitPlugin.inst().getCacheManager().getPlayernames(this.getMembersUUID());
+        if (setupNames) {
+            if (this.getOwnersUUID().length > 0) {
+                this.ownerNames = CubitBukkitPlugin.inst().getCacheManager().getPlayernames(this.getOwnersUUID());
+            }
+            if (this.getMembersUUID().length > 0) {
+                this.memberNames = CubitBukkitPlugin.inst().getCacheManager().getPlayernames(this.getMembersUUID());
+            }
         }
     }
 

@@ -50,7 +50,7 @@ public class ManageRegions {
 
         }
         CubitLand cubitLand = new CubitLand(world);
-        cubitLand.setWGRegion(region);
+        cubitLand.setWGRegion(region, true);
         return cubitLand;
     }
 

@@ -154,7 +154,7 @@ public class ManageRegionEntities {
         for (Map.Entry<String, ProtectedRegion> entry : rm.getRegions().entrySet()) {
             if (entry.getValue().getOwners().contains(lPlayer)) {
                 CubitLand cubitLand = new CubitLand(world);
-                cubitLand.setWGRegion(entry.getValue());
+                cubitLand.setWGRegion(entry.getValue(), false);
                 if (cubitLand.getCubitType() == type || type == CubitType.NOTYPE) {
                     toReturn.add(entry.getValue());
                 }

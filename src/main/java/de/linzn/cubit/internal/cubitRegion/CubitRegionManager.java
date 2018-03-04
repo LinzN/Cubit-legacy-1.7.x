@@ -223,7 +223,7 @@ public class CubitRegionManager {
             OfflinePlayer member = Bukkit.getOfflinePlayer(playerUUID);
             for (ProtectedRegion region : mRegE.getRegionList(owner, world, type)) {
                 CubitLand data = new CubitLand(world);
-                data.setWGRegion(region);
+                data.setWGRegion(region, false);
                 list.add(data);
             }
             mRegE.addMember(list, world, member);
@@ -243,7 +243,7 @@ public class CubitRegionManager {
             OfflinePlayer member = Bukkit.getOfflinePlayer(playerUUID);
             for (ProtectedRegion region : mRegE.getRegionList(owner, world, type)) {
                 CubitLand data = new CubitLand(world);
-                data.setWGRegion(region);
+                data.setWGRegion(region, false);
                 list.add(data);
             }
             mRegE.removeMember(list, world, member);
@@ -282,7 +282,7 @@ public class CubitRegionManager {
             OfflinePlayer owner = Bukkit.getOfflinePlayer(searchUUID);
             for (ProtectedRegion region : mRegE.getRegionList(owner, world, type)) {
                 CubitLand data = new CubitLand(world);
-                data.setWGRegion(region);
+                data.setWGRegion(region, false);
                 list.add(data);
             }
         } catch (Exception e) {
@@ -295,7 +295,7 @@ public class CubitRegionManager {
         ProtectedRegion region = praseWGRegion(world, valueX, valueZ);
         CubitLand cubitLand = new CubitLand(world);
         if (region != null) {
-            cubitLand.setWGRegion(region);
+            cubitLand.setWGRegion(region, false);
         }
         return cubitLand;
     }
