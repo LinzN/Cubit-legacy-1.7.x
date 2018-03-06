@@ -295,7 +295,7 @@ public class CubitRegionManager {
         ProtectedRegion region = praseWGRegion(world, valueX, valueZ);
         CubitLand cubitLand = new CubitLand(world);
         if (region != null) {
-            cubitLand.setWGRegion(region, false);
+            cubitLand.setWGRegion(region, true);
         }
         return cubitLand;
     }
