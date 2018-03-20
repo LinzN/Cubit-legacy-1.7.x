@@ -230,8 +230,11 @@ public class InfoUniversal implements ICommand {
     private void noInfo(Player player, CubitLand cubitLand, Location loc, Chunk chunk) {
         if (this.type != CubitType.SHOP) {
             /* Buy-able region */
-            double economyValue = CubitBukkitPlugin.inst().getVaultManager().calculateLandCost(player.getUniqueId(),
-                    loc.getWorld(), true);
+            double economyValue = 0D;
+            if (!plugin.getYamlManager().getSettings().freeCubitLandWorld.contains(loc.getWorld().getName())) {
+                economyValue = CubitBukkitPlugin.inst().getVaultManager().calculateLandCost(player.getUniqueId(),
+                        loc.getWorld(), true);
+            }
             final String regionID = plugin.getRegionManager().buildLandName(loc.getWorld().getName(), chunk.getX(),
                     chunk.getZ());
             player.sendMessage(plugin.getYamlManager().getLanguage().landInfoA1
