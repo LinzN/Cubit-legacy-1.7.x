@@ -41,6 +41,7 @@ public class SettingsYaml {
     public Material landBuyMaterialBorder;
     public Material landSellMaterialBorder;
     public boolean landUseScoreboardMap;
+    public List<String> freeCubitLandWorld;
     public List<String> shopEnabledWorlds;
 
     /* Shop module */
@@ -98,6 +99,11 @@ public class SettingsYaml {
         List<String> shopsEnabledWorlds = new ArrayList<>();
         shopsEnabledWorlds.add("shops");
         this.shopEnabledWorlds = (List<String>) this.getStringList("module.shop.enabledWorlds", shopsEnabledWorlds);
+
+        List<String> freeWorlds = new ArrayList<>();
+        freeWorlds.add("aktika");
+        this.freeCubitLandWorld = (List<String>) this.getStringList("module.land.freeCubitLandWorld", freeWorlds);
+
         this.shopBasePrice = (double) this.getObjectValue("module.shop.basePrice", 300D);
         this.shopLimit = (int) this.getObjectValue("module.shop.shopLimit", 4);
 

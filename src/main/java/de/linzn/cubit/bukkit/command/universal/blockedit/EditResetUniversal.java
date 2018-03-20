@@ -140,19 +140,21 @@ public class EditResetUniversal implements ICommand {
         /* end confirm task */
 
         if (!this.isAdmin) {
-            double economyValue = plugin.getYamlManager().getSettings().landResetSnapshotPrice;
-            if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), economyValue)) {
-                sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
-                        "" + plugin.getVaultManager().formateToEconomy(economyValue)));
-                return true;
-            }
+            if (!plugin.getYamlManager().getSettings().freeCubitLandWorld.contains(loc.getWorld().getName())) {
+                double economyValue = plugin.getYamlManager().getSettings().landResetSnapshotPrice;
+                if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), economyValue)) {
+                    sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
+                            "" + plugin.getVaultManager().formateToEconomy(economyValue)));
+                    return true;
+                }
 
-            if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), null, economyValue)) {
-                /* If this task failed! This should never happen */
-                sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "RESET-ECONOMY"));
-                plugin.getLogger()
-                        .warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "RESET-ECONOMY"));
-                return true;
+                if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), null, economyValue)) {
+                    /* If this task failed! This should never happen */
+                    sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "RESET-ECONOMY"));
+                    plugin.getLogger()
+                            .warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "RESET-ECONOMY"));
+                    return true;
+                }
             }
         }
 

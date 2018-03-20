@@ -67,19 +67,21 @@ public class BuyLand implements ICommand {
             return true;
         }
 
-        double economyValue = plugin.getVaultManager().calculateLandCost(player.getUniqueId(), loc.getWorld(), true);
-        if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), economyValue)) {
-            sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
-                    "" + plugin.getVaultManager().formateToEconomy(economyValue)));
-            return true;
-        }
+        if (!plugin.getYamlManager().getSettings().freeCubitLandWorld.contains(loc.getWorld().getName())) {
+            double economyValue = plugin.getVaultManager().calculateLandCost(player.getUniqueId(), loc.getWorld(), true);
+            if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), economyValue)) {
+                sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
+                        "" + plugin.getVaultManager().formateToEconomy(economyValue)));
+                return true;
+            }
 
-        if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), null, economyValue)) {
-            /* If this task failed! This should never happen */
-            sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-ECONOMY"));
-            plugin.getLogger()
-                    .warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-ECONOMY"));
-            return true;
+            if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), null, economyValue)) {
+                /* If this task failed! This should never happen */
+                sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-ECONOMY"));
+                plugin.getLogger()
+                        .warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-ECONOMY"));
+                return true;
+            }
         }
 
         if (!plugin.getRegionManager().createRegion(loc, player.getUniqueId(), CubitType.WORLD)) {

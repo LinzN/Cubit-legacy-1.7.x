@@ -83,14 +83,16 @@ public class SellLand implements ICommand {
             return true;
         }
 
-        double economyValue = plugin.getVaultManager().calculateLandCost(player.getUniqueId(), loc.getWorld(), false);
+        if (!plugin.getYamlManager().getSettings().freeCubitLandWorld.contains(loc.getWorld().getName())) {
+            double economyValue = plugin.getVaultManager().calculateLandCost(player.getUniqueId(), loc.getWorld(), false);
 
-        if (!plugin.getVaultManager().transferMoney(null, cubitLand.getOwnersUUID()[0], economyValue)) {
-            /* If this task failed! This should never happen */
-            sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-ECONOMY"));
-            plugin.getLogger()
-                    .warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-ECONOMY"));
-            return true;
+            if (!plugin.getVaultManager().transferMoney(null, cubitLand.getOwnersUUID()[0], economyValue)) {
+                /* If this task failed! This should never happen */
+                sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-ECONOMY"));
+                plugin.getLogger()
+                        .warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-ECONOMY"));
+                return true;
+            }
         }
 
         if (!plugin.getRegionManager().removeLand(cubitLand, loc.getWorld())) {

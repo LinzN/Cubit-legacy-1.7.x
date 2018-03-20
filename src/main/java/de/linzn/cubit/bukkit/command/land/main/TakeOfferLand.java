@@ -91,31 +91,33 @@ public class TakeOfferLand implements ICommand {
         OfferData offerData = plugin.getDataAccessManager().databaseType.get_offer(cubitLand.getLandName(),
                 loc.getWorld());
 
-        double basePrice = plugin.getVaultManager().calculateLandCost(player.getUniqueId(), loc.getWorld(), true);
-        double buyPrice = offerData.getValue() + basePrice;
+        if (!plugin.getYamlManager().getSettings().freeCubitLandWorld.contains(loc.getWorld().getName())) {
+            double basePrice = plugin.getVaultManager().calculateLandCost(player.getUniqueId(), loc.getWorld(), true);
+            double buyPrice = offerData.getValue() + basePrice;
 
-        if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), buyPrice)) {
-            sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
-                    "" + plugin.getVaultManager().formateToEconomy(offerData.getValue()) + " + Base: " + plugin.getVaultManager().formateToEconomy(basePrice)));
-            return true;
-        }
+            if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), buyPrice)) {
+                sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
+                        "" + plugin.getVaultManager().formateToEconomy(offerData.getValue()) + " + Base: " + plugin.getVaultManager().formateToEconomy(basePrice)));
+                return true;
+            }
 
-        if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), cubitLand.getOwnersUUID()[0],
-                offerData.getValue())) {
-            /* If this task failed! This should never happen */
-            sender.sendMessage(
-                    plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "TAKEOFFER-ECONOMY"));
-            plugin.getLogger()
-                    .warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "TAKEOFFER-ECONOMY"));
-            return true;
-        }
+            if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), cubitLand.getOwnersUUID()[0],
+                    offerData.getValue())) {
+                /* If this task failed! This should never happen */
+                sender.sendMessage(
+                        plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "TAKEOFFER-ECONOMY"));
+                plugin.getLogger()
+                        .warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "TAKEOFFER-ECONOMY"));
+                return true;
+            }
 
-        if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), null, basePrice)) {
-            /* If this task failed! This should never happen */
-            sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-ECONOMY"));
-            plugin.getLogger()
-                    .warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-ECONOMY"));
-            return true;
+            if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), null, basePrice)) {
+                /* If this task failed! This should never happen */
+                sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-ECONOMY"));
+                plugin.getLogger()
+                        .warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "CREATE-ECONOMY"));
+                return true;
+            }
         }
         /* Change owner and clear Memberlist */
         if (!plugin.getRegionManager().restoreDefaultSettings(cubitLand, loc.getWorld(), player.getUniqueId())) {

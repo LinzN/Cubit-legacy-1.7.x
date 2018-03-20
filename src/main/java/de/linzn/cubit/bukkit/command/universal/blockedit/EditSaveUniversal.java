@@ -93,20 +93,22 @@ public class EditSaveUniversal implements ICommand {
             return true;
         }
 
-        double economyValue = plugin.getYamlManager().getSettings().landSaveSnapshotPrice;
+        if (!plugin.getYamlManager().getSettings().freeCubitLandWorld.contains(loc.getWorld().getName())) {
+            double economyValue = plugin.getYamlManager().getSettings().landSaveSnapshotPrice;
 
-        if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), economyValue)) {
-            sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
-                    "" + plugin.getVaultManager().formateToEconomy(economyValue)));
-            return true;
-        }
+            if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), economyValue)) {
+                sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
+                        "" + plugin.getVaultManager().formateToEconomy(economyValue)));
+                return true;
+            }
 
-        if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), null, economyValue)) {
-            /* If this task failed! This should never happen */
-            sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SAVE-ECONOMY"));
-            plugin.getLogger()
-                    .warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SAVE-ECONOMY"));
-            return true;
+            if (!plugin.getVaultManager().transferMoney(player.getUniqueId(), null, economyValue)) {
+                /* If this task failed! This should never happen */
+                sender.sendMessage(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SAVE-ECONOMY"));
+                plugin.getLogger()
+                        .warning(plugin.getYamlManager().getLanguage().errorInTask.replace("{error}", "SAVE-ECONOMY"));
+                return true;
+            }
         }
 
         if (!this.plugin.getBlockManager().getSnapshotHandler().createSnapshot(player.getUniqueId(), chunk,
