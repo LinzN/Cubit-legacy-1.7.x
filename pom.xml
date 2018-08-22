@@ -18,15 +18,11 @@
         <repository>
             <id>sk89q-snapshots</id>
             <url>http://maven.sk89q.com/artifactory/repo</url>
-            <releases>
-                <enabled>true</enabled> <!-- releases enabled: this specific repository also hosts release versions -->
-            </releases>
-            <snapshots>
-                <enabled>true</enabled> <!-- snapshots enabled: we declare a SNAPSHOT repository because we need
-					to download a SNAPSHOT dependency -->
-            </snapshots>
         </repository>
-
+        <repository>
+            <id>codemc-repo</id>
+            <url>https://repo.codemc.org/repository/maven-public/</url>
+        </repository>
         <repository>
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
@@ -46,6 +42,10 @@
         <repository>
             <id>spigot-server-repo</id>
             <url>http://maven.elmakers.com/repository/</url>
+        </repository>
+        <repository>
+            <id>enigmar-repo</id>
+            <url>https://repository.enigmar.de/</url>
         </repository>
     </repositories>
     <dependencies>
