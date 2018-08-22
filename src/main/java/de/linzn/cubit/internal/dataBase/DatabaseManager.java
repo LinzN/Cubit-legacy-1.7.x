@@ -23,7 +23,7 @@ public class DatabaseManager {
     private boolean useMysql;
 
     public DatabaseManager(CubitBukkitPlugin plugin) {
-        plugin.getLogger().info("Loading DatabaseManager");
+        plugin.getLogger().info("[Setup] DatabaseManager");
         this.plugin = plugin;
         this.useMysql = this.plugin.getYamlManager().getSettings().sqlUse;
 

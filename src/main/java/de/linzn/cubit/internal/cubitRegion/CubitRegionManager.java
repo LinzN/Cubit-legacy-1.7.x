@@ -43,7 +43,7 @@ public class CubitRegionManager {
     private SaveRegions saveMrg;
 
     public CubitRegionManager(CubitBukkitPlugin plugin) {
-        plugin.getLogger().info("Loading CubitRegionManager");
+        plugin.getLogger().info("[Setup] CubitRegionManager");
         this.plugin = plugin;
         this.mReg = new ManageRegions();
         this.mRegE = new ManageRegionEntities();

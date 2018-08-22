@@ -97,7 +97,7 @@ public class BuyShop implements ICommand {
 
         if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), offerData.getValue())) {
             sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
-                    "" + plugin.getVaultManager().formateToEconomy(offerData.getValue())));
+                    "" + plugin.getVaultManager().formattingToEconomy(offerData.getValue())));
             return true;
         }
 

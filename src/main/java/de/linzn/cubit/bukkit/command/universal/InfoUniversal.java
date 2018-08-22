@@ -184,12 +184,12 @@ public class InfoUniversal implements ICommand {
             if (plugin.getDataAccessManager().databaseType.get_is_offer(cubitLand.getLandName(),
                     cubitLand.getWorld())) {
                 player.sendMessage(plugin.getYamlManager().getLanguage().landInfoA2.replace("{value}",
-                        "" + plugin.getVaultManager().formateToEconomy(plugin.getDataAccessManager().databaseType
+                        "" + plugin.getVaultManager().formattingToEconomy(plugin.getDataAccessManager().databaseType
                                 .get_offer(cubitLand.getLandName(), cubitLand.getWorld()).getValue())));
             }
 
         } else {
-            String value = plugin.getVaultManager().formateToEconomy(plugin.getDataAccessManager().databaseType
+            String value = plugin.getVaultManager().formattingToEconomy(plugin.getDataAccessManager().databaseType
                     .get_offer(cubitLand.getLandName(), cubitLand.getWorld()).getValue());
 
             player.sendMessage(
@@ -238,7 +238,7 @@ public class InfoUniversal implements ICommand {
             final String regionID = plugin.getRegionManager().buildLandName(loc.getWorld().getName(), chunk.getX(),
                     chunk.getZ());
             player.sendMessage(plugin.getYamlManager().getLanguage().landInfoA1
-                    .replace("{cost}", "" + plugin.getVaultManager().formateToEconomy(economyValue))
+                    .replace("{cost}", "" + plugin.getVaultManager().formattingToEconomy(economyValue))
                     .replace("{regionID}", regionID));
             return;
         } else {

@@ -30,14 +30,11 @@ public class EconomyHook {
     }
 
     public boolean hasEnoughToBuy(UUID playerUUID, double value) {
-
         OfflinePlayer player = Bukkit.getOfflinePlayer(playerUUID);
         return (econ.getBalance(player) - value) >= 0;
     }
 
-    @SuppressWarnings("deprecation")
-    public void transferMoney(UUID senderUUID, UUID recieverUUID, double value) {
-
+    public void transferMoney(UUID senderUUID, UUID receiverUUID, double value) {
         if (senderUUID != null) {
             OfflinePlayer sender = Bukkit.getOfflinePlayer(senderUUID);
             if (sender.getName() != null) {
@@ -46,22 +43,18 @@ public class EconomyHook {
                 econ.withdrawPlayer(this.plugin.getCacheManager().getPlayername(senderUUID), value);
             }
         }
-        if (recieverUUID != null) {
-            OfflinePlayer receiver = Bukkit.getOfflinePlayer(recieverUUID);
+        if (receiverUUID != null) {
+            OfflinePlayer receiver = Bukkit.getOfflinePlayer(receiverUUID);
             if (receiver.getName() != null) {
                 econ.depositPlayer(receiver, value);
             } else {
-                econ.depositPlayer(this.plugin.getCacheManager().getPlayername(recieverUUID), value);
+                econ.depositPlayer(this.plugin.getCacheManager().getPlayername(receiverUUID), value);
             }
-
         }
-
     }
 
-    public String formateToEconomy(double value) {
-
+    public String formatToEconomy(double value) {
         return econ.format(value);
-
     }
 
 }

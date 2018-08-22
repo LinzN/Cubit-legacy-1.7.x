@@ -32,7 +32,7 @@ public class EntityManager {
     private Plugin plugin;
 
     public EntityManager(Plugin plugin) {
-        plugin.getLogger().info("Loading EntityManager");
+        plugin.getLogger().info("[Setup] EntityManager");
         this.plugin = plugin;
         if (CubitBukkitPlugin.inst().getYamlManager().getSettings().entityLimiterUse) {
             loadLimiter();

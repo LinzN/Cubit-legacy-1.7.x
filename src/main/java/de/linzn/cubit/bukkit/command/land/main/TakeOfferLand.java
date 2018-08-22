@@ -97,7 +97,7 @@ public class TakeOfferLand implements ICommand {
 
             if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), buyPrice)) {
                 sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
-                        "" + plugin.getVaultManager().formateToEconomy(offerData.getValue()) + " + Base: " + plugin.getVaultManager().formateToEconomy(basePrice)));
+                        "" + plugin.getVaultManager().formattingToEconomy(offerData.getValue()) + " + Base: " + plugin.getVaultManager().formattingToEconomy(basePrice)));
                 return true;
             }
 

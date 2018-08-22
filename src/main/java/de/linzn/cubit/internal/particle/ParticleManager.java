@@ -18,13 +18,13 @@ import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-@SuppressWarnings("deprecation")
+
 public class ParticleManager {
 
     private CubitBukkitPlugin plugin;
 
     public ParticleManager(CubitBukkitPlugin plugin) {
-        plugin.getLogger().info("Loading ParticleManager");
+        plugin.getLogger().info("[Setup] ParticleManager");
         if (Bukkit.getPluginManager().getPlugin("ParticleLIB") != null) {
             plugin.getLogger().info("Using ParticleLIB as provider");
         } else if (isSpigot()) {

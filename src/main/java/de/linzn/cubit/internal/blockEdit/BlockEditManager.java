@@ -27,7 +27,7 @@ public class BlockEditManager {
     private BlockHandler blockHandler;
 
     public BlockEditManager(CubitBukkitPlugin plugin) {
-        plugin.getLogger().info("Loading BlockEditManager");
+        plugin.getLogger().info("[Setup] BlockEditManager");
         boolean useFAWE = Bukkit.getPluginManager().getPlugin("") != null;
         this.plugin = plugin;
         this.nmsloader = new NMSLoader(this.plugin);

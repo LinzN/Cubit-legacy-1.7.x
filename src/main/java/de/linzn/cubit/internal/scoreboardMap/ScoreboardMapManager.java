@@ -24,7 +24,7 @@ public class ScoreboardMapManager {
     public ScoreboardMapManager(CubitBukkitPlugin plugin) {
         this.plugin = plugin;
         this.scoreboardMaps = new HashMap<>();
-        plugin.getLogger().info("Loading ScoreboardMapManager");
+        plugin.getLogger().info("[Setup] ScoreboardMapManager");
         if (CubitBukkitPlugin.inst().getYamlManager().getSettings().landUseScoreboardMap) {
             this.plugin.getServer().getPluginManager().registerEvents(new CubitMapListener(this), this.plugin);
         }

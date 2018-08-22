@@ -94,7 +94,7 @@ public class BuyupLand implements ICommand {
             double economyValue = plugin.getVaultManager().calculateLandCost(player.getUniqueId(), loc.getWorld(), true);
             if (!plugin.getVaultManager().hasEnougToBuy(player.getUniqueId(), economyValue)) {
                 sender.sendMessage(plugin.getYamlManager().getLanguage().notEnoughMoney.replace("{cost}",
-                        "" + plugin.getVaultManager().formateToEconomy(economyValue)));
+                        "" + plugin.getVaultManager().formattingToEconomy(economyValue)));
                 return true;
             }
 

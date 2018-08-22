@@ -15,7 +15,7 @@ import de.linzn.cubit.internal.blockEdit.INMSMask;
 import org.bukkit.Chunk;
 import org.bukkit.entity.Player;
 
-public class NMS_v0_R1 implements INMSMask {
+public class NMS_default implements INMSMask {
 
     @SuppressWarnings("deprecation")
     @Override

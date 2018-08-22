@@ -20,7 +20,7 @@ public class CacheManager {
     private NameCache nameCache;
 
     public CacheManager(CubitBukkitPlugin plugin) {
-        plugin.getLogger().info("Loading CacheManager");
+        plugin.getLogger().info("[Setup] CacheManager");
         this.nameCache = new NameCache();
     }
 

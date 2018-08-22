@@ -121,7 +121,7 @@ public class OfferLand implements ICommand {
                 }
                 sender.sendMessage(plugin.getYamlManager().getLanguage().offerAddSuccess
                         .replace("{regionID}", cubitLand.getLandName())
-                        .replace("{value}", plugin.getVaultManager().formateToEconomy(value)));
+                        .replace("{value}", plugin.getVaultManager().formattingToEconomy(value)));
             }
         }
 

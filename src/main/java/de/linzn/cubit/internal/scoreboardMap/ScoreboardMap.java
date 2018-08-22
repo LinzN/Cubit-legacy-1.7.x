@@ -39,7 +39,6 @@ public class ScoreboardMap {
         this.mapViewer = p;
         this.currChunk = p.getLocation().getChunk();
         this.currDir = getPlayerDirection(mapViewer);
-
         this.schedulerId = new BukkitRunnable() {
             public void run() {
                 if (!currDir.equals(getPlayerDirection(mapViewer))

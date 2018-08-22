@@ -28,32 +28,48 @@ public class VaultManager {
     private EconomyHook ecoMrg = null;
 
     public VaultManager(CubitBukkitPlugin plugin) {
-        plugin.getLogger().info("Loading DynmapManager");
+        plugin.getLogger().info("[Setup] VaultManager");
         this.plugin = plugin;
         if (setupEconomy()) {
             this.ecoMrg = new EconomyHook(plugin, econ);
         }
-
     }
 
     private boolean setupEconomy() {
         if (!CubitBukkitPlugin.inst().getYamlManager().getSettings().landEnableEconomy) {
-            this.plugin.getLogger().info("Economy is in config disabled!");
+            this.plugin.getLogger().info("Economy is disabled in settings.yml!");
             return false;
         }
+        return hookEconomy(true);
+    }
+
+    private boolean hookEconomy(boolean withInfo) {
         if (plugin.getServer().getPluginManager().getPlugin("Vault") == null) {
+            if (withInfo) {
+                this.plugin.getLogger().warning("Vault not found. Economy is disabled.");
+            }
             return false;
         }
         RegisteredServiceProvider<Economy> rsp = plugin.getServer().getServicesManager().getRegistration(Economy.class);
         if (rsp == null) {
-            this.plugin.getLogger().info("No valid economy plugin found. Economy is disabled.");
+            if (withInfo) {
+                this.plugin.getLogger().warning("No valid economy plugin found. Economy is disabled.");
+            }
             return false;
+        } else {
+            this.plugin.getLogger().info("Hooked into economy plugin!");
         }
         econ = rsp.getProvider();
         return econ != null;
     }
 
     public boolean hasEnougToBuy(UUID playerUUID, double value) {
+        if (CubitBukkitPlugin.inst().getYamlManager().getSettings().landEnableEconomy && econ == null) {
+            if (hookEconomy(false)) {
+                this.ecoMrg = new EconomyHook(plugin, econ);
+            }
+        }
+
         if (this.econ != null) {
             return this.ecoMrg.hasEnoughToBuy(playerUUID, Math.abs(value));
         }
@@ -62,6 +78,12 @@ public class VaultManager {
     }
 
     public boolean transferMoney(UUID senderUUID, UUID recieverUUID, double value) {
+        if (CubitBukkitPlugin.inst().getYamlManager().getSettings().landEnableEconomy && econ == null) {
+            if (hookEconomy(false)) {
+                this.ecoMrg = new EconomyHook(plugin, econ);
+            }
+        }
+
         if (this.econ != null) {
             try {
                 ecoMrg.transferMoney(senderUUID, recieverUUID, Math.abs(value));
@@ -74,6 +96,12 @@ public class VaultManager {
     }
 
     public double calculateLandCost(UUID uuid, World world, boolean buyTask) {
+        if (CubitBukkitPlugin.inst().getYamlManager().getSettings().landEnableEconomy && econ == null) {
+            if (hookEconomy(false)) {
+                this.ecoMrg = new EconomyHook(plugin, econ);
+            }
+        }
+
         double landBasePrice = CubitBukkitPlugin.inst().getYamlManager().getSettings().landBasePrice;
         double landTaxAddition = CubitBukkitPlugin.inst().getYamlManager().getSettings().landTaxAddition;
         double landMaxPrice = CubitBukkitPlugin.inst().getYamlManager().getSettings().landMaxPrice;
@@ -97,13 +125,17 @@ public class VaultManager {
             }
             price = (sellValue * landSellPercent);
         }
-
         return price;
     }
 
-    public String formateToEconomy(double value) {
+    public String formattingToEconomy(double value) {
+        if (CubitBukkitPlugin.inst().getYamlManager().getSettings().landEnableEconomy && econ == null) {
+            if (hookEconomy(false)) {
+                this.ecoMrg = new EconomyHook(plugin, econ);
+            }
+        }
         if (this.econ != null) {
-            return ecoMrg.formateToEconomy(value);
+            return ecoMrg.formatToEconomy(value);
         }
         return "0.00";
     }

@@ -22,7 +22,7 @@ public class YamlConfigurationManager {
     private Plugin plugin;
 
     public YamlConfigurationManager(JavaPlugin plugin) {
-        plugin.getLogger().info("Loading YamlConfigurationManager");
+        plugin.getLogger().info("[Setup] YamlConfigurationManager");
         this.plugin = plugin;
         this.fileOperator = new YamlFileSetup(this.plugin);
     }
