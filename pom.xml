@@ -36,10 +36,6 @@
             <url>http://nexus.hc.to/content/repositories/pub_releases</url>
         </repository>
         <repository>
-            <id>inventive-repo</id>
-            <url>https://repo.inventivetalent.org/content/groups/public/</url>
-        </repository>
-        <repository>
             <id>spigot-server-repo</id>
             <url>http://maven.elmakers.com/repository/</url>
         </repository>
@@ -80,9 +76,9 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>com.sk89q.worldguard</groupId>
-            <artifactId>worldguard-legacy</artifactId>
-            <version>6.2</version>
+            <groupId>com.sk89q</groupId>
+            <artifactId>worldguard</artifactId>
+            <version>6.0.0-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <artifactId>bukkit</artifactId>
@@ -96,7 +92,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
-            <version>1.12.2-R0.1-SNAPSHOT</version>
+            <version>1.7.8-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

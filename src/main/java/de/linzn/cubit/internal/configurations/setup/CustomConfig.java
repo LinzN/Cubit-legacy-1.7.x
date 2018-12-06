@@ -60,13 +60,13 @@ public class CustomConfig extends YamlConfiguration {
             load(file);
 
             if (defaults != null) {
-                InputStreamReader reader = new InputStreamReader(this.plugin.getResource(defaults));
-                FileConfiguration defaultsConfig = YamlConfiguration.loadConfiguration(reader);
+
+                FileConfiguration defaultsConfig = YamlConfiguration.loadConfiguration(this.plugin.getResource(defaults));
 
                 setDefaults(defaultsConfig);
                 options().copyDefaults(true);
 
-                reader.close();
+
                 save();
             }
 

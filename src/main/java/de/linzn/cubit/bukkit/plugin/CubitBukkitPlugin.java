@@ -21,13 +21,13 @@ import de.linzn.cubit.internal.cacheSystem.CacheManager;
 import de.linzn.cubit.internal.configurations.YamlConfigurationManager;
 import de.linzn.cubit.internal.cubitRegion.CubitRegionManager;
 import de.linzn.cubit.internal.dataBase.DatabaseManager;
-import de.linzn.cubit.internal.entityManage.EntityManager;
+
 import de.linzn.cubit.internal.particle.ParticleManager;
 import de.linzn.cubit.internal.scoreboardMap.ScoreboardMapManager;
 import de.linzn.cubit.internal.vault.VaultManager;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.inventivetalent.update.spiget.SpigetUpdateCheck;
+
 
 public class CubitBukkitPlugin extends JavaPlugin {
 
@@ -39,13 +39,12 @@ public class CubitBukkitPlugin extends JavaPlugin {
     private ParticleManager particleMrg;
     private VaultManager vaultMrg;
     private DatabaseManager dataAccessMgr;
-    private EntityManager entityMrg;
+
     private ScoreboardMapManager scoreboardMapMgr;
     private PermissionNodes permNodes;
     private YamlConfigurationManager yamlConfiguration;
     private CacheManager cacheManager;
-    private Metrics metrics;
-    private SpigetUpdateCheck spigetUpdateCheck;
+
 
     public static CubitBukkitPlugin inst() {
         return inst;
@@ -70,7 +69,7 @@ public class CubitBukkitPlugin extends JavaPlugin {
         if (this.getYamlManager().getSettings().physicWaterLavaFlowLand) {
             this.getServer().getPluginManager().registerEvents(new AdditionalPhysicsListener(), this);
         }
-        runOutgoingStreams();
+
 
         getLogger().info("Cubit startup finish");
 
@@ -105,14 +104,7 @@ public class CubitBukkitPlugin extends JavaPlugin {
         return true;
     }
 
-    private void runOutgoingStreams() {
-        getLogger().info("Run updater and metrics");
-        this.metrics = new Metrics(this);
-        if (this.yamlConfiguration.getSettings().updateCheck) {
-            this.spigetUpdateCheck = new SpigetUpdateCheck(this);
-        }
 
-    }
 
     private boolean setupManagers() {
         this.yamlConfiguration = new YamlConfigurationManager(this);
@@ -123,7 +115,7 @@ public class CubitBukkitPlugin extends JavaPlugin {
         this.vaultMrg = new VaultManager(this);
         this.permNodes = new PermissionNodes(this);
         this.dataAccessMgr = new DatabaseManager(this);
-        this.entityMrg = new EntityManager(this);
+
         this.scoreboardMapMgr = new ScoreboardMapManager(this);
         return true;
 
@@ -153,9 +145,6 @@ public class CubitBukkitPlugin extends JavaPlugin {
         return this.vaultMrg;
     }
 
-    public EntityManager getEntityManager() {
-        return this.entityMrg;
-    }
 
     public ScoreboardMapManager getScoreboardMapManager() {
         return scoreboardMapMgr;
@@ -173,13 +162,6 @@ public class CubitBukkitPlugin extends JavaPlugin {
         return this.wePl;
     }
 
-    public Metrics getMetrics() {
-        return this.metrics;
-    }
-
-    public SpigetUpdateCheck getSpigetUpdateCheck() {
-        return this.spigetUpdateCheck;
-    }
 
     public YamlConfigurationManager getYamlManager() {
         return this.yamlConfiguration;

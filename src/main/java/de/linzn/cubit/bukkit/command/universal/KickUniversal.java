@@ -87,7 +87,8 @@ public class KickUniversal implements ICommand {
             if (!(entity instanceof Player)) {
                 continue;
             }
-            if (entity.hasPermission(plugin.getPermNodes().kickAdminBypass)) {
+            Player ePlayer = (Player)entity;
+            if (ePlayer.hasPermission(plugin.getPermNodes().kickAdminBypass)) {
                 continue;
             }
             if (plugin.getRegionManager().hasLandPermission(cubitLand, entity.getUniqueId())) {

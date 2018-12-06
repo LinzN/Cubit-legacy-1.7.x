@@ -40,9 +40,6 @@ public class YamlConfigurationManager {
         return this.fileOperator.language;
     }
 
-    public LimitYaml getLimit() {
-        return this.fileOperator.limit;
-    }
 
     public FlagProtectionsYaml getFlag() {
         return this.fileOperator.flag;

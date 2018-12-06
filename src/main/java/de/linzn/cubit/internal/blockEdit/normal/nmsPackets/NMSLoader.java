@@ -43,8 +43,6 @@ public class NMSLoader {
             versionNumber = getVersion();
             plugin.getLogger().info("Using " + getVersion() + " for NMS Class");
         } else {
-            plugin.getLogger().info(
-                    "No version found for " + getVersion() + "! Fallback to nonNMS. Chunk-Refresh will maybe not work!");
         }
 
         Object obj = null;

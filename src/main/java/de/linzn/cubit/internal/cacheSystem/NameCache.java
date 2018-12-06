@@ -13,7 +13,7 @@ package de.linzn.cubit.internal.cacheSystem;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.mojang.util.UUIDTypeAdapter;
+//import com.mojang.util.UUIDTypeAdapter;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -27,12 +27,12 @@ import java.util.Map;
 import java.util.UUID;
 
 public class NameCache {
-    private final String NAME_URL = "https://api.mojang.com/user/profiles/%s/names";
-    private Gson gson = new GsonBuilder().registerTypeAdapter(UUID.class, new UUIDTypeAdapter()).create();
+    //private final String NAME_URL = "https://api.mojang.com/user/profiles/%s/names";
+    //private Gson gson = new GsonBuilder().registerTypeAdapter(UUID.class, new UUIDTypeAdapter()).create();
     private Map<UUID, String> playerCache = new HashMap<>();
-    private String name;
+    //private String name;
 
-    private String fetchMojangName(UUID uuid) {
+   /* private String fetchMojangName(UUID uuid) {
         try {
             HttpURLConnection connection = (HttpURLConnection) new URL(
                     String.format(NAME_URL, UUIDTypeAdapter.fromUUID(uuid))).openConnection();
@@ -46,7 +46,7 @@ public class NameCache {
             return null;
         }
 
-    }
+    }*/
 
     private String fetchBukkitName(UUID uuid) {
         try {
@@ -86,9 +86,9 @@ public class NameCache {
             playerName = fetchBukkitName(uuid);
         }
 
-        if (playerName == null) {
-            playerName = fetchMojangName(uuid);
-        }
+        //if (playerName == null) {
+        //    playerName = fetchMojangName(uuid);
+        //}
 
         if (playerName == null) {
             playerName = "Unknown";

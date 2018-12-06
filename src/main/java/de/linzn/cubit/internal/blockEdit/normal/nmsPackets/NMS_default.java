@@ -28,8 +28,7 @@ public class NMS_default implements INMSMask {
     @SuppressWarnings("deprecation")
     @Override
     public void sendTitle(Player paramPlayer, String paramString) {
-        // TODO Auto-generated method stub
-        paramPlayer.sendTitle(paramString, "");
+
 
     }
 

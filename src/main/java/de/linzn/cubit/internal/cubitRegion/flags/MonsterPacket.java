@@ -41,17 +41,9 @@ public class MonsterPacket implements ICubitPacket {
                 add(EntityType.CAVE_SPIDER);
                 add(EntityType.SPIDER);
                 add(EntityType.WITCH);
-                add(EntityType.ENDERMITE);
-                add(EntityType.GUARDIAN);
-                add(EntityType.ZOMBIE_VILLAGER);
-                add(EntityType.HUSK);
-                add(EntityType.POLAR_BEAR);
-                add(EntityType.EVOKER);
-                add(EntityType.SHULKER);
+
                 add(EntityType.MAGMA_CUBE);
-                add(EntityType.STRAY);
-                add(EntityType.VEX);
-                add(EntityType.VINDICATOR);
+
             }
         });
         return cubitLand;

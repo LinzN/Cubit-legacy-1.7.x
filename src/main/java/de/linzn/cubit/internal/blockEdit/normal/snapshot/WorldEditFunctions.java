@@ -18,7 +18,7 @@ import com.sk89q.worldedit.bukkit.adapter.BukkitImplAdapter;
 import com.sk89q.worldedit.data.DataException;
 import com.sk89q.worldedit.schematic.SchematicFormat;
 import de.linzn.cubit.bukkit.plugin.CubitBukkitPlugin;
-import org.apache.commons.io.FileUtils;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -135,14 +135,7 @@ public class WorldEditFunctions {
 
     public void removeFile(final UUID uuid, final String snapshotName) {
         if (this.hasValidAdapter) {
-            final File snapshotDirectory = getSnapshotDirectoryLocation(uuid, snapshotName);
-            Bukkit.getScheduler().runTask(CubitBukkitPlugin.inst(), () -> {
-                try {
-                    FileUtils.deleteDirectory(snapshotDirectory);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
+
         }
     }
 

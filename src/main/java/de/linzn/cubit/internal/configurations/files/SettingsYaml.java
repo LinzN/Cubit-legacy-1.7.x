@@ -51,7 +51,6 @@ public class SettingsYaml {
     public List<Material> shopMaterialCleanup;
     /* Particle module */
     public boolean particleUse;
-    public boolean entityLimiterUse;
     public boolean physicWaterLavaFlowLand;
     /* Database module */
     public boolean sqlUse;
@@ -127,8 +126,6 @@ public class SettingsYaml {
         this.sqlPort = (int) getObjectValue("module.database.port", 3306);
         this.sqlUser = (String) getObjectValue("module.database.userName", "mysqlUsername");
         this.sqlPassword = (String) getObjectValue("module.database.password", "mysqlPassword");
-
-        this.entityLimiterUse = (boolean) getObjectValue("module.entityLimiter.use", false);
 
         this.physicWaterLavaFlowLand = (boolean) getObjectValue("module.physicWaterLavaFlowLand.use", false);
 

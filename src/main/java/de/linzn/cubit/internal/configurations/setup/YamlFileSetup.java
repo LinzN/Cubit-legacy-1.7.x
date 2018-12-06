@@ -20,7 +20,6 @@ public class YamlFileSetup {
 
     public SettingsYaml settings;
     public LanguageYaml language;
-    public LimitYaml limit;
     public FlagProtectionsYaml flag;
     public CommandsYaml commands;
     public DisabledWorldCommandYaml disabledCommands;
@@ -59,9 +58,6 @@ public class YamlFileSetup {
 
         CustomConfig languageConfig = new CustomConfig(this.plugin, languageDirectory, "language.yml");
         this.language = new LanguageYaml(languageConfig);
-
-        CustomConfig limitConfig = new CustomConfig(this.plugin, configDirectory, "entityLimiter.yml");
-        this.limit = new LimitYaml(limitConfig);
 
         CustomConfig flagConfig = new CustomConfig(this.plugin, configDirectory, "defaultProtections.yml");
         this.flag = new FlagProtectionsYaml(flagConfig);
